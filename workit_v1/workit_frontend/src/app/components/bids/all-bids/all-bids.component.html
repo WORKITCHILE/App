@@ -1,0 +1,104 @@
+<div class="row mb-4">
+  <div class="col-md-6 mb-3">
+<!--    <form>
+      <div class="row">
+      <div class="col-md-4">
+        <input  [(ngModel)]="name" name="name" autocomplete="off" class="form-control" placeholder="Search By Keyword"/>
+      </div>
+      <div class="col-md-3">
+        <span><button class="btn btn-sm btn-primary" style="float: left">Reset Filter</button></span>
+      </div>
+      </div>
+    </form>-->
+  </div>
+  <div class="col-md-12 mb-3">
+    <div class="card text-left">
+      <div class="card-body">
+        <div class="card-title mb-3 text-center">
+          <b>BIDS</b>
+        </div>
+        <div class="row">
+          <div class="col-md-2 mb-3 text-right" style="float: right">
+            <input type="text" class="form-control" placeholder="Search By Keyword">
+          </div>
+          <span class="mt-2"> <h6><b>Filter By Date :</b></h6></span>
+          <div class="col-md-2 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="From : 02/06/2019">
+          </div>
+          <div class="col-md-2 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="To : 02/12/2019">
+          </div>
+          <span class="mr-3"><button type="button" class="btn btn-primary btn-sm">Search</button></span>
+          <div style="position: relative; float: right; margin-right: 10px ">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" type="button">
+              Filter By Vendor Status
+            </button>
+            <div class="dropdown-menu">
+              <a (click)='getFilter("")' href="javascript:void(0)" class="dropdown-item">All</a>
+              <a (click)='getFilter(1)' href="javascript:void(0)" class="dropdown-item">Posted</a>
+              <a (click)='getFilter(2)' href="javascript:void(0)" class="dropdown-item">Accepted</a>
+              <a (click)='getFilter(3)' href="javascript:void(0)" class="dropdown-item">Started</a>
+              <a (click)='getFilter(4)' href="javascript:void(0)" class="dropdown-item">Finished</a>
+              <a (click)='getFilter(5)' href="javascript:void(0)" class="dropdown-item">Canceled</a>
+              <a (click)='getFilter(6)' href="javascript:void(0)" class="dropdown-item">Paid</a>
+            </div>
+          </div>
+          <div style="position: relative; float: right; margin-right: 10px ">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" type="button">
+              Filter By Owner Status
+            </button>
+            <div class="dropdown-menu">
+              <a (click)='getFilter("")' href="javascript:void(0)" class="dropdown-item">All</a>
+              <a (click)='getFilter(1)' href="javascript:void(0)" class="dropdown-item">Posted</a>
+              <a (click)='getFilter(2)' href="javascript:void(0)" class="dropdown-item">Accepted</a>
+              <a (click)='getFilter(3)' href="javascript:void(0)" class="dropdown-item">Started</a>
+              <a (click)='getFilter(4)' href="javascript:void(0)" class="dropdown-item">Finished</a>
+              <a (click)='getFilter(5)' href="javascript:void(0)" class="dropdown-item">Canceled</a>
+              <a (click)='getFilter(6)' href="javascript:void(0)" class="dropdown-item">Paid</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col"> Bid ID </th>
+              <th scope="col"> Job</th>
+              <th scope="col"> Description</th>
+              <th scope="col"> Job Location</th>
+<!--              <th scope="col"> Initial Amount</th>-->
+              <th scope="col">Counter Offer</th>
+              <th scope="col">Job Time</th>
+              <th scope="col">Owner Status</th>
+              <th scope="col">Vendor Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bids of allBids  | filter : name let i =index">
+              <td  data-title="'{{bids.bid_id}}'"> {{(bids.bid_id.length > 4) ? (bids.bid_id | slice:0:4) + '...' : (bids.bid_id)}}<!--
+                <i class="fas fa-close"  ngxClipboard [cbContent]="bids.bid_id" (click)="copied(bids.bid_id)"></i>
+                <div *ngIf="alerting == true" class="alert alert-success" role="alert"> <strong>Copied!</strong> </div>-->
+              </td>
+              <td><a routerLink="../single-job/{{bids.job_id}}">{{bids.job_name}}</a></td>
+              <td>{{bids.job_description}}</td>
+              <td>{{bids.job_address}}</td>
+<!--              <td>{{bids.job_initial_amount}}</td>-->
+              <td>{{bids.counteroffer_amount}}</td>
+              <td>{{bids.job_time}}</td>
+              <td>{{bids.owner_status}}</td>
+              <td>{{bids.vendor_status}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="calling == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div *ngIf="!allBids[0] && calling == false" class="col-md-12 text-center">
+          <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+          <h3 class="not-found">Not Found</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

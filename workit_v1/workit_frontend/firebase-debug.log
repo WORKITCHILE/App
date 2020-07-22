@@ -1,0 +1,47 @@
+[debug] [2020-02-20T13:40:46.897Z] ----------------------------------------------------------------------
+[debug] [2020-02-20T13:40:46.900Z] Command:       /home/sam/.nvm/versions/node/v10.16.0/bin/node /home/sam/.nvm/versions/node/v10.16.0/bin/firebase serve
+[debug] [2020-02-20T13:40:46.900Z] CLI Version:   7.13.1
+[debug] [2020-02-20T13:40:46.900Z] Platform:      linux
+[debug] [2020-02-20T13:40:46.900Z] Node Version:  v10.16.0
+[debug] [2020-02-20T13:40:46.900Z] Time:          Thu Feb 20 2020 19:10:46 GMT+0530 (India Standard Time)
+[debug] [2020-02-20T13:40:46.900Z] ----------------------------------------------------------------------
+[debug] [2020-02-20T13:40:46.901Z] 
+[debug] [2020-02-20T13:40:46.910Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-20T13:40:46.910Z] > authorizing via signed-in user
+[debug] [2020-02-20T13:40:46.910Z] [iam] checking project workit-de544 for permissions ["firebase.projects.get"]
+[debug] [2020-02-20T13:40:46.912Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/workit-de544:testIamPermissions  
+
+[debug] [2020-02-20T13:40:48.746Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-20T13:40:48.748Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/workit-de544  
+ 
+[debug] [2020-02-20T13:40:49.354Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/opt/lampp/htdocs/workit-admin'...
+[info] 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "/opt/lampp/htdocs/workit-admin/functions" for Cloud Functions...
+[debug] [2020-02-20T13:40:49.396Z] [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-02-20T13:40:49.396Z] [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-02-20T13:40:49.397Z] [worker-pool] submitWork(triggerId=)
+[debug] [2020-02-20T13:40:49.397Z] [worker-~diagnostic~-99b725ae-2edb-40f8-93b7-0570dc435cbd]: Assigning socketPath: /tmp/fire_emu_29675.sock
+[debug] [2020-02-20T13:40:49.398Z] [worker-~diagnostic~-99b725ae-2edb-40f8-93b7-0570dc435cbd]: BUSY
+[debug] [2020-02-20T13:40:50.097Z] [runtime-status] [29675] Functions runtime initialized. {"cwd":"/opt/lampp/htdocs/workit-admin/functions","node_version":"10.16.0"}
+[debug] [2020-02-20T13:40:50.100Z] [runtime-status] [29675] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-20T13:40:50.103Z] [runtime-status] [29675] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"/opt/lampp/htdocs/workit-admin/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-02-20T13:40:50.104Z] [runtime-status] [29675] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/opt/lampp/htdocs/workit-admin/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-02-20T13:40:50.105Z] [runtime-status] [29675] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/opt/lampp/htdocs/workit-admin/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  Error: Cannot find module '/opt/lampp/htdocs/workit-admin/functions'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:690:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /home/sam/.nvm/versions/node/v10.16.0/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:719:33
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sam/.nvm/versions/node/v10.16.0/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[warn] ⚠  We were unable to load your functions code. (see above)
+   - It appears your code is written in Typescript, which must be compiled before emulation.
+   - You may be able to run "npm run build" in your functions directory to resolve this.
+[debug] [2020-02-20T13:40:50.156Z] [worker-~diagnostic~-99b725ae-2edb-40f8-93b7-0570dc435cbd]: exited
+[debug] [2020-02-20T13:40:50.156Z] [worker-~diagnostic~-99b725ae-2edb-40f8-93b7-0570dc435cbd]: FINISHED

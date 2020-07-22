@@ -1,0 +1,88 @@
+<div class="row mb-4">
+  <div class="col-md-12 mb-3">
+    <div class="card text-left">
+      <div class="card-body">
+        <div class="card-title mb-3 text-center">
+          <b>CATEGORIES</b>
+          <span> <a routerLink="/dashboard/add-category" class="btn btn-primary btn-sm float-right">Add Categories</a></span>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3 text-right" style="float: right">
+            <input type="text" class="form-control" placeholder="Search By Keyword">
+          </div>
+        <!--  <span class="mt-2"> <h6><b>Filter By Date :</b></h6></span>
+          <div class="col-md-3 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="From : 02/06/2019">
+          </div>
+          <div class="col-md-3 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="To : 02/12/2019">
+          </div>
+          <span class="mr-3"><button type="button" class="btn btn-primary btn-sm">Search</button></span>-->
+      <!--    <div style="position: relative; float: right; margin-right: 10px ">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" type="button">
+              Filter By
+            </button>
+            <div class="dropdown-menu">
+              <a (click)='getFilter("")' href="javascript:void(0)" class="dropdown-item">All</a>
+              <a (click)='getFilter(1)' href="javascript:void(0)" class="dropdown-item">Posted</a>
+              <a (click)='getFilter(2)' href="javascript:void(0)" class="dropdown-item">Accepted</a>
+              <a (click)='getFilter(3)' href="javascript:void(0)" class="dropdown-item">Started</a>
+              <a (click)='getFilter(4)' href="javascript:void(0)" class="dropdown-item">Finished</a>
+              <a (click)='getFilter(5)' href="javascript:void(0)" class="dropdown-item">Canceled</a>
+              <a (click)='getFilter(6)' href="javascript:void(0)" class="dropdown-item">Paid</a>
+            </div>
+          </div>-->
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Category ID</th>
+              <th scope="col">Category </th>
+              <th scope="col">Image</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of allCategories |
+                paginate: { itemsPerPage: 10, currentPage: categoryPage ,totalItems:total ,id:'category'} let i =index">
+              <td  data-title="'{{user.doc_id}}'"> {{(user.doc_id.length > 4) ? (user.doc_id | slice:0:4) + '...' : (user.doc_id)}}
+           <!--     <i class="fas fa-close"  ngxClipboard [cbContent]="user.doc_id" (click)="copied(user.doc_id)"></i>
+                <div *ngIf="alerting == true" class="alert alert-success" role="alert"> <strong>Copied!</strong> </div>-->
+              </td>
+              <td >{{user.category_name}}</td>
+              <td *ngIf="user.category_image"><img src="{{user.category_image}}" width="100" height="75"></td>
+              <td *ngIf="!user.category_image">NA</td>
+              <td>
+                <div class="btn-group">
+                  <button type="button" class="btn bg-white _r_btn" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                    <span class="_dot _r_block-dot bg-success"></span>
+                    <span class="_dot _r_block-dot bg-success"></span>
+                    <span class="_dot _r_block-dot bg-success"></span>
+                  </button>
+                  <div class="dropdown-menu">
+<!--                    <a class="dropdown-item" routerLink="../single-category/{{user.doc_id}}"><i class="nav-icon i-Eye mr-1"></i>View</a>-->
+                    <a class="dropdown-item" routerLink="../edit-category/{{user.doc_id}}"> <i class="nav-icon i-Pen-2 mr-1"></i>Edit</a>
+                    <a class="dropdown-item"  href="javascript:void(0)" (click)="deleteCategory(user.doc_id)"> <i class="nav-icon i-Remove mr-1"></i>Delete</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <pagination-controls *ngIf="allCategories[0]" (pageChange)=pageChangedCategory($event) id='category'></pagination-controls>
+        </div>
+        <div *ngIf="calling == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div *ngIf="!allCategories[0] && calling == false" class="col-md-12 text-center">
+          <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+          <h3 class="not-found">Not Found</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,210 @@
+<div class="row mb-4">
+  <div class="col-md-12 mb-3">
+    <a (click)="goBack()" class="btn btn-primary" href="javascript:void(0)"> <i class="nav-icon i-Back1"></i> Back
+    </a>
+    <div class="breadcrumb mt-3">
+      <ul>
+        <li><a (click)="goBack()"> All Jobs </a></li>
+        <li>{{singleJob.job_name}}</li>
+      </ul>
+      <div class="col-md-12 text-center"><h5><b> JOB DETAILS </b></h5>
+        <span> <a class="btn btn-danger btn-sm float-right text-white">Disable This Job</a></span>
+      </div>
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+    <div class="card text-left mt-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Job Name</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter; ">{{singleJob.job_name }}</div>
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Job Date and Time</div>
+          <div class="col-">:</div>
+          <div class="col-md-3"
+               style="font-weight: lighter; ">{{singleJob.job_date }} {{ singleJob.job_time | date: 'hh:mm a'}}</div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Initial Amount</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter">{{singleJob.initial_amount}} </div>
+
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Service Amount</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter"
+               *ngIf="singleJob.service_amount">{{singleJob.service_amount}} </div>
+          <div class="col-md-3" style="font-weight: lighter" *ngIf="!singleJob.service_amount">NA</div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Category</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter; ">{{singleJob.category_name}}</div>
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Subcategory</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter; ">{{singleJob.subcategory_name}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Status</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" style="font-weight: lighter; "><p *ngIf="singleJob.status">{{singleJob.status}}</p>
+            <p *ngIf="!singleJob.status">NA</p></div>
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Description</div>
+          <div class="col-">:</div>
+          <div class="col-md-4" style="font-weight: lighter; ">{{singleJob.job_description}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Owner (Posted By)</div>
+          <div class="col-">:</div>
+          <div class="col-md-3">
+            <a href="javascript:void(0)"
+               routerLink="../../../dashboard/single-user/{{singleJob.user_id}}">{{singleJob.bids[0].user_name}}</a>
+          </div>
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Vendor</div>
+          <div class="col-">:</div>
+          <div class="col-md-3" *ngIf="singleJob.status == 'POSTED'">
+            <p>Not Assigned To Any Vendor Yet</p>
+          </div>
+          <div class="col-md-3" *ngIf="singleJob.status != 'POSTED'">
+            <a href="javascript:void(0)"
+               routerLink="../../../dashboard/single-user/{{singleJob.job_vendor_id}}">{{singleJob.vendor_name}}</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Created On</div>
+          <div class="col-">:</div>
+          <div class="col-md-3">
+            <a>{{singleJob.created_at | date:'MMM d, y HH:mm'}}</a>
+          </div>
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Job Address</div>
+          <div class="col-">:</div>
+          <div class="col-md-3">{{singleJob.job_address}} </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Job Id</div>
+          <div class="col-">:</div>
+          <div class="col-md-3">
+            <p>{{singleJob.doc_id}}</p>
+          </div>
+         <!-- <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Job Id</div>
+          <div class="col-">:</div>
+          <div class="col-md-3">
+            <a>{{singleJob.doc_id}}</a>
+          </div>-->
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Images</div>
+          <div class="col-">:</div>
+          <div class="col-md-9" *ngIf="singleJob.images[0]">
+            <div class="row">
+              <div class="col-md-1" *ngFor="let allImg of singleJob.images">
+                <img class="mr-4 jobImage" src="{{allImg}}" width="200">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!singleJob.images[0]" class="col-md-3" style="font-weight: lighter; ">NA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card text-left mt-4" *ngIf="singleJob.bids[0]">
+  <div class="card-body">
+    <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="workTab" data-toggle="tab" href="#bid" role="tab"
+           aria-controls="workBasic" aria-selected="true">Bid Details</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="hire-tab" data-toggle="tab" href="#timeline" role="tab"
+           aria-controls="hireBasic" aria-selected="false">Timeline</a>
+      </li>
+    </ul>
+    <!-- User Tab-->
+    <div class="tab-content" id="mainTabsContent">
+      <div class="tab-pane fade show active" id="bid" role="tabpanel" aria-labelledby="bidTab">
+        <h2><b>Bid Details </b> <span> (Total Bids: {{singleJob.bid_count}})</span></h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"> Vendor Name</th>
+              <th scope="col"> Bid At</th>
+              <th scope="col"> Counter Amount</th>
+<!--              <th scope="col"> Vendor Status</th>-->
+<!--              <th scope="col"> Owner Status</th>-->
+              <th scope="col"> Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let project of singleJob.bids; let i =index">
+              <td>{{i + 1}}</td>
+              <td><a routerLink="../../../dashboard/single-user/{{project.vendor_id}}">{{project.vendor_name}}</a></td>
+              <td>{{project.created_at | date}} </td>
+              <td>{{project.counteroffer_amount}} </td>
+<!--              <td>{{project.vendor_status}} </td>-->
+<!--              <td>{{project.owner_status}} </td>-->
+              <td>{{project.comment}} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="calling == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div class="card text-left mt-4" *ngIf="!singleJob.bids[0] && calling == false">
+          <div class="card-body text-center">
+            <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+            <h3 class="not-found">No Bids Yet</h3>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade show" id="timeline" role="tabpanel" aria-labelledby="timelineTab">
+        <h2><b>Bid Details </b> <span> (Total Bids: {{singleJob.bid_count}})</span></h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"> Vendor Name</th>
+              <th scope="col"> Status At</th>
+              <th scope="col">Initial Amount</th>
+              <th scope="col"> Counter Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>Sam</td>
+              <td>Accepted At 12/04/2019 </td>
+              <td> 2256</td>
+              <td> 3469</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sam</td>
+              <td>Accepted At 12/04/2019 </td>
+              <td> 2256</td>
+              <td> 3469</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="calling == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div class="card text-left mt-4" *ngIf="!singleJob.bids[0] && calling == false">
+          <div class="card-body text-center">
+            <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+            <h3 class="not-found">No Bids Yet</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

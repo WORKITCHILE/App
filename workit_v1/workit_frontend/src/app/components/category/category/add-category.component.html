@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <a class="btn btn-primary" routerLink="../categories"> <i class="nav-icon i-Back1"></i> Back </a> <br>
+        <div class="card-title text-center mb-3"><h5><b>ADD CATEGORY</b></h5></div>
+        <br>
+        <form ngNativeValidate [formGroup]="addCategoryFormGroup" (submit)="addCategory()">
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="job-cat"> Category Name</label>
+              <input type="text" class="form-control" id="job-cat" placeholder="Enter News Category"
+                     formControlName="category_name" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="img" class="custom-file-upload">
+                <img alt="" class="p-1" src="./assets/images/icon/export.png" width="18">Upload Category Image</label>
+              <input type="file" (change)="addCategoryImage($event)" class="form-control" access=".png,.jpg,.jpeg"
+                     id="img" placeholder="" formControlName="category_image" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+            </div>
+            <div class="col-md-6 form-group mb-3" *ngIf="image">
+              <div class="card cardSize">
+                <div class="card-body">
+                  <img alt="" class="imgSize" [src]="image" >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

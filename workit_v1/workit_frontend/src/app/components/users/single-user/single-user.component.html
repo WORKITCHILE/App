@@ -1,0 +1,374 @@
+<div class="row mb-4">
+  <div class="col-md-12 mb-3">
+    <a (click)="goBack()" class="btn btn-primary" href="javascript:void(0)"> <i class="nav-icon i-Back1"></i> Back
+    </a>
+    <div class="breadcrumb mt-3">
+      <ul>
+        <li><a (click)="goBack()" href="javascript: void(0)"> All Users </a></li>
+        <li>{{singleUser.name}}</li>
+      </ul>
+      <div class="col-md-12 text-center"><h5><b> USER PROFILE </b></h5>
+      <span *ngIf="singleUser.status == 'ACTIVE'"> <a (click)="disableUser('INACTIVE')" class="btn btn-danger btn-sm float-right text-white">Deactivate This User</a></span>
+      <span  *ngIf="singleUser.status == 'INACTIVE'"> <a (click)="enableUser( 'ACTIVE')" class="btn btn-success btn-sm float-right text-white">Activate This User</a></span>
+      </div>
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+    <div class="card text-left mt-4">
+      <div class="card-body">
+        <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="workTab" data-toggle="tab" href="#work" role="tab"
+               aria-controls="workBasic" aria-selected="true">Profile As Vendor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="hire-tab" data-toggle="tab" href="#hire" role="tab"
+               aria-controls="hireBasic" aria-selected="false">Profile As Owner</a>
+          </li>
+        </ul>
+        <!-- User Tab-->
+        <div class="tab-content" id="mainTabsContent">
+          <div class="tab-pane fade show active" id="work" role="tabpanel" aria-labelledby="workTab">
+            <!--profile_picture: "http://storage.googleapis.com/workit-de544.appspot.com/id_images/id_image2/1580387104087.png"
+            nationality: "Indian"
+            date_of_birth: "1581918007220"
+            contact_number: "+919090909012"
+            credits: "120"
+            email: "david123@mailinator.com"
+            name: "David"
+            profile_description: "profile_description"
+            id_image1: "http://storage.googleapis.com/workit-de544.appspot.com/id_images/id_image2/1580387104087.png"
+            created_at: 1581918007220
+            updated_at: 1582176693335
+            id_number: "1k2k123k"
+            type: "HIRE"
+            father_last_name: "reil"
+            mother_last_name: "reil"
+            address: "Super Sport Park,Johansburg"
+            doc_id:-->
+
+            <div *ngIf="!singleUser.profile_picture" class="user-info d-block mb-4">
+              <img alt=""
+                   class="noprofile-picture avatar-lg mt-2 mb-2" src="./assets/images/icon/noPhotoFound.png">
+              <a routerLink="../../edit-user/{{singleUser.doc_id}}"><sup class="editSingleUser"><i
+                class="nav-icon i-Pen-2"></i></sup></a>
+              <p class="m-0 text-24">{{singleUser.name }}</p>
+              <p *ngIf="singleUser.profile_description">({{singleUser.profile_description }})</p>
+            </div>
+            <div *ngIf="singleUser.profile_picture" class="user-info d-block mb-4">
+              <img [src]="singleUser.profile_picture" alt="" class="profile-picture avatar-lg mt-2 mb-2">
+              <a routerLink="../../edit-user/{{singleUser.doc_id}}"><sup class="editSingleUser"><i
+                class="nav-icon i-Pen-2"></i></sup></a>
+              <p class="m-0 text-24">{{singleUser.name }} </p>
+              <p *ngIf="singleUser.profile_description">({{singleUser.profile_description }})</p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> DOB</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.date_of_birth | date:'MMM d, y'}}</div>
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Type</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter">WORK</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Phone</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.contact_number}}</div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Email</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.email}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Nationality</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic "><p
+                *ngIf="singleUser.nationality">{{singleUser.nationality}}</p>
+                <p *ngIf="!singleUser.nationality">NA</p></div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Address</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.address}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Father's Last Name</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic "><p
+                *ngIf="singleUser.father_last_name">{{singleUser.father_last_name}}</p>
+                <p *ngIf="!singleUser.father_last_name">NA</p></div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Mother's Last Name</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.mother_last_name}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Credits</div>
+              <div class="col-">:</div>
+              <div *ngIf="singleUser.credits" class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.credits}}</div>
+              <div *ngIf="!singleUser.credits" class="col-md-3" style="font-weight: lighter; font-style: italic ">0
+              </div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Occupation</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.occupation}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Created On</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.created_at | date:'MMM d, y HH:mm'}}</div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Updated On</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.updated_at | date:'MMM d, y HH:mm'}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> User Id</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.doc_id}}</div>
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Id Number</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.id_number}}</div>
+            </div>
+            <br><br>
+            <!--Rides Detail-->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a aria-controls="homeBasic" aria-selected="true" class="nav-link active" data-toggle="tab"
+                   href="#accepted"
+                   id="home-basic-tab" role="tab">Job Received</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div aria-labelledby="home-basic-tab" class="tab-pane fade show active" id="accepted" role="tabpanel">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">Job Id</th>
+                    <th scope="col">Job</th>
+                    <th scope="col"> Job Description</th>
+                    <th scope="col"> Category</th>
+                    <th scope="col"> Subcategory</th>
+                    <th scope="col"> Address</th>
+                    <th scope="col"> Date and Time</th>
+                    <th scope="col"> Initial Amount</th>
+                    <th scope="col"> Vendor</th>
+                    <th scope="col"> Service Amount</th>
+                    <th scope="col"> Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let project of singleUser.projects; let i =index">
+                    <td>{{project.project_id}}</td>
+                    <td><a routerLink="../../../dashboard/single-job/{{project.project_id}}">{{project.job_name}}</a>
+                    </td>
+                    <td
+                      data-title="'{{project.job_description}}'">{{(project.job_description.length > 15) ? (project.job_description | slice:0:20) + '...' : (project.job_description)}} </td>
+                    <td>{{project.category_name}} </td>
+                    <td>{{project.subcategory_name}} </td>
+                    <td>{{project.job_address}}</td>
+                    <td>{{project.job_date}} {{project.job_time}}</td>
+                    <td>{{project.initial_amount}}</td>
+                    <td *ngIf="project.vendor_name"><a
+                      routerLink="../../../dashboard/single-user/{{project.job_vendor_id}}">{{project.vendor_name}}</a>
+                    </td>
+                    <td *ngIf="!project.vendor_name">Not Assigned To Any Vendor Yet</td>
+                    <td *ngIf="project.service_amount">{{project.service_amount}}</td>
+                    <td *ngIf="!project.service_amount">Not Decided Yet</td>
+                    <td *ngIf="project.status == 'POSTED'"><span
+                      class="badge badge-pill badge-outline-info">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'FINISHED'"><span
+                      class="badge badge-pill badge-success">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'STARTED'"><span
+                      class="badge badge-pill badge-dark">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'ACCEPTED'"><span
+                      class="badge badge-pill badge-outline-success">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'CANCELED'"><span
+                      class="badge badge-pill badge-outline-danger">{{project.status}}</span></td>
+                    <td *ngIf="!project.status">NA</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="calling == true" class="col-md-12 text-center">
+                  <img src="./assets/images/91.gif">
+                </div>
+                <div *ngIf="!singleUser.projects[0] && calling == false" class="col-md-12 text-center">
+                  <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+                  <h3 class="not-found">Not Found</h3>
+                </div>
+              </div>
+              </div>
+          </div>
+
+
+
+<!--          // HIRE-->
+
+
+          <div class="tab-pane fade show " id="hire" role="tabpanel" aria-labelledby="hire-tab">
+            <div *ngIf="!singleUser.profile_picture" class="user-info d-block mb-4">
+              <img alt=""
+                   class="noprofile-picture avatar-lg mt-2 mb-2" src="./assets/images/icon/noPhotoFound.png">
+              <a routerLink="../../edit-user/{{singleUser.doc_id}}"><sup class="editSingleUser"><i
+                class="nav-icon i-Pen-2"></i></sup></a>
+              <p class="m-0 text-24">{{singleUser.name }}</p>
+              <p *ngIf="singleUser.profile_description">({{singleUser.profile_description }})</p>
+            </div>
+            <div *ngIf="singleUser.profile_picture" class="user-info d-block mb-4">
+              <img [src]="singleUser.profile_picture" alt="" class="profile-picture avatar-lg mt-2 mb-2">
+              <a routerLink="../../edit-user/{{singleUser.doc_id}}"><sup class="editSingleUser"><i
+                class="nav-icon i-Pen-2"></i></sup></a>
+              <p class="m-0 text-24">{{singleUser.name }} </p>
+              <p *ngIf="singleUser.profile_description">({{singleUser.profile_description }})</p>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> DOB</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.date_of_birth | date:'MMM d, y'}}</div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Type</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter">HIRE</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Phone</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.contact_number}}</div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Email</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.email}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder">Nationality</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic "><p
+                *ngIf="singleUser.nationality">{{singleUser.nationality}}</p>
+                <p *ngIf="!singleUser.nationality">NA</p></div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Address</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.address}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Credits</div>
+              <div class="col-">:</div>
+              <div *ngIf="singleUser.credits" class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.credits}}</div>
+              <div *ngIf="!singleUser.credits" class="col-md-3" style="font-weight: lighter; font-style: italic ">0
+              </div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Occupation</div>
+              <div class="col-">:</div>
+              <div class="col-md-3" style="font-weight: lighter; font-style: italic ">{{singleUser.occupation}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Created On</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.created_at | date:'MMM d, y HH:mm'}}</div>
+
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> Updated On</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.updated_at | date:'MMM d, y HH:mm'}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 mb-3 text-left" style="font-weight: bolder"> User Id</div>
+              <div class="col-">:</div>
+              <div class="col-md-3"
+                   style="font-weight: lighter; font-style: italic ">{{singleUser.doc_id}}</div>
+
+            </div>
+            <br><br>
+            <!--Rides Detail-->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a aria-controls="homeBasic" aria-selected="true" class="nav-link active" data-toggle="tab"
+                   href="#accepted"
+                   id="home-basic-tab" role="tab">Job Posted</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div aria-labelledby="home-basic-tab" class="tab-pane fade show active" id="accepted" role="tabpanel">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">Job Id</th>
+                    <th scope="col">Job</th>
+                    <th scope="col"> Job Description</th>
+                    <th scope="col"> Category</th>
+                    <th scope="col"> Subcategory</th>
+                    <th scope="col"> Address</th>
+                    <th scope="col"> Date and Time</th>
+                    <th scope="col"> Initial Amount</th>
+                    <th scope="col"> Vendor</th>
+                    <th scope="col"> Service Amount</th>
+                    <th scope="col"> Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let project of singleUser.projects; let i =index">
+                    <td>{{project.project_id}}</td>
+                    <td><a routerLink="../../../dashboard/single-job/{{project.project_id}}">{{project.job_name}}</a>
+                    </td>
+                    <td
+                      data-title="'{{project.job_description}}'">{{(project.job_description.length > 15) ? (project.job_description | slice:0:20) + '...' : (project.job_description)}} </td>
+                    <td>{{project.category_name}} </td>
+                    <td>{{project.subcategory_name}} </td>
+                    <td>{{project.job_address}}</td>
+                    <td>{{project.job_date}} {{project.job_time}}</td>
+                    <td>{{project.initial_amount}}</td>
+                    <td *ngIf="project.vendor_name"><a
+                      routerLink="../../../dashboard/single-user/{{project.job_vendor_id}}">{{project.vendor_name}}</a>
+                    </td>
+                    <td *ngIf="!project.vendor_name">Not Assigned To Any Vendor Yet</td>
+                    <td *ngIf="project.service_amount">{{project.service_amount}}</td>
+                    <td *ngIf="!project.service_amount">Not Decided Yet</td>
+                    <td *ngIf="project.status == 'POSTED'"><span
+                      class="badge badge-pill badge-outline-info">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'FINISHED'"><span
+                      class="badge badge-pill badge-success">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'STARTED'"><span
+                      class="badge badge-pill badge-dark">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'ACCEPTED'"><span
+                      class="badge badge-pill badge-outline-success">{{project.status}}</span></td>
+                    <td *ngIf="project.status == 'CANCELED'"><span
+                      class="badge badge-pill badge-outline-danger">{{project.status}}</span></td>
+                    <td *ngIf="!project.status">NA</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="calling == true" class="col-md-12 text-center">
+                  <img src="./assets/images/91.gif">
+                </div>
+                <div *ngIf="!singleUser.projects[0] && calling == false" class="col-md-12 text-center">
+                  <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+                  <h3 class="not-found">Not Found</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

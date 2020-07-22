@@ -1,0 +1,58 @@
+  <div class="row mb-4">
+    <div class="col-md-12 mb-3">
+      <div class="card text-left">
+        <div class="card-body">
+          <div class="card-title mb-3 text-center">
+            <b>SUPPORT</b>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email Id </th>
+                <th scope="col">Message</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of supportMessages |
+                paginate: { itemsPerPage: 10, currentPage: supportPage ,totalItems:total ,id:'support'} let i =index">
+                <th>{{10 * (supportPage - 1) + (i + 1)}}</th>
+                <td >{{user.user_name}}</td>
+                <td *ngIf="user.email">{{user.email}}</td>
+                <td *ngIf="!user.email">NA</td>
+                <td *ngIf="user.message">{{user.message}}</td>
+                <td *ngIf="!user.message">NA</td>
+                <td *ngIf="user.status == 'UNDER_REVIEW'" >Under Review</td>
+                <td *ngIf="user.status == 'INITIATED'" >Initiated</td>
+                <td *ngIf="user.status == 'DECLINE'" >Decline</td>
+                <td *ngIf="user.status == 'RESOLVED'" >Resolved</td>
+                <td> <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" type="button">
+                  Change Status
+                </button>
+                  <div class="dropdown-menu">
+                    <a (click)="changeSupportStatus(user.doc_id, 'UNDER_REVIEW')" class="dropdown-item">Under Review</a>
+                    <a (click)="changeSupportStatus(user.doc_id,'INITIATED')" class="dropdown-item">Initiated</a>
+                    <a (click)="changeSupportStatus(user.doc_id,'DECLINE')" class="dropdown-item">Decline</a>
+                    <a (click)="changeSupportStatus(user.doc_id,'RESOLVED')" class="dropdown-item">Resolved</a>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <pagination-controls *ngIf="supportMessages[0]" (pageChange)=pageChangedSupport($event) id='support'></pagination-controls>
+          </div>
+          <div *ngIf="calling == true" class="col-md-12 text-center">
+            <img src="./assets/images/91.gif">
+          </div>
+          <div *ngIf="!supportMessages[0] && calling == false" class="col-md-12 text-center">
+            <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+            <h3 class="not-found">Not Found</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

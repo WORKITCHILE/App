@@ -1,0 +1,18 @@
+._r_btn {
+  border: 1px solid #e8ecfa;
+}
+span._r_block-dot {
+  display: block;
+  margin: 2px 0;
+}
+
+._dot {
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.bg-success {
+  background-color: #4caf50 !important;
+}

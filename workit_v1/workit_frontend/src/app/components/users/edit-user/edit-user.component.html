@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <a class="btn btn-primary" routerLink="../../users"> <i class="nav-icon i-Back1"></i> Back </a> <br>
+        <div class="card-title text-center mb-3"><h5><b>EDIT USER</b></h5></div><br>
+        <form [formGroup]="editUserFormGroup" ngNativeValidate (submit)="editUser()">
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="fname">Full Name</label>
+              <input type="text" class="form-control" id="fname" placeholder="Enter Full Name" formControlName="name" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter Email Id" formControlName="email" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="phNo">Phone Number</label>
+              <input type="text" class="form-control" id="phNo" placeholder="Enter Phone Number" formControlName="contact_number" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="add">Address</label>
+              <input type="text" class="form-control" id="add" placeholder="Enter Address" formControlName="address" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="mls">Mothers Last Name</label>
+              <input type="text" class="form-control" id="mls" placeholder="Enter Mothers Last Name" formControlName="mother_last_name" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="fls">Fathers Last Name</label>
+              <input type="text" class="form-control" id="fls" placeholder="Enter Fathers Last Name" formControlName="father_last_name" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="credits">Credits</label>
+              <input type="text" class="form-control" id="credits" placeholder="Enter Credits" formControlName="credits" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="city1">Nationality</label>
+              <select id="city1" class="form-control" formControlName="nationality" required>
+                <option value="">Select</option>
+                <option value = "Indian">Indian</option>
+                <option value = "Brazilian">Brazilian</option>
+                <option value = "Australian">Australian</option>
+                <option value = "Arabian">Arabian</option>
+                <option value = "Canadian">Canadian</option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="id">ID Number</label>
+              <input type="text" class="form-control" id="id" placeholder="Enter Identity Number" formControlName="id_number" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="dob">Date Of Birth</label>
+              <input type="date" class="form-control" id="dob" placeholder="Enter DOB" formControlName="date_of_birth" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="occupation">Occupation</label>
+              <input type="text" class="form-control" id="occupation" placeholder="Enter Occupation" formControlName="occupation" required>
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="desc">Profile Description</label>
+              <textarea type="text" class="form-control" id="desc" placeholder="Enter Profile Description" formControlName="profile_description" required></textarea>
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </form>
+        <div *ngIf="loading == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div *ngIf="!singleUser && loading == false" class="col-md-12 text-center">
+          <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+          <h3 class="not-found">Not Found</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

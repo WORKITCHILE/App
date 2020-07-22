@@ -1,0 +1,14 @@
+.layout-sidebar-large .main-header .logo {
+  width: 270px
+}
+
+.layout-sidebar-large .main-header .logo img {
+  width: 160px;
+  height: 30px;
+  margin: 0 auto;
+  display: block;
+}
+.layout-sidebar-large .main-header .menu-toggle {
+  margin-right: 0 !important;
+}
+

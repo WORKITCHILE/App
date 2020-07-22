@@ -1,0 +1,47 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Work It' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Work It
+
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwiftyCodeView'
+  pod 'Alamofire'
+  pod 'Toaster'
+  pod 'SideMenu', '~> 5.0'
+  pod 'SDWebImage'
+  pod 'AccountKit'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/RemoteConfig'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Cosmos'
+  pod 'GoogleSignIn'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FirebaseUI'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/OAuth'
+  pod 'FirebaseUI/Phone'
+
+  target 'Work ItTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Work ItUITests' do
+    # Pods for testing
+  end
+
+end

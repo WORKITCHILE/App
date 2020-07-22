@@ -1,0 +1,71 @@
+<div class="row mb-4">
+  <div class="col-md-12 mb-3">
+    <div class="card text-left">
+      <div class="card-body">
+        <div class="card-title mb-3 text-center">
+          <b>Ratings</b>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3 text-right" style="float: right">
+            <input type="text" class="form-control" placeholder="Search By Keyword">
+          </div>
+          <span class="mt-2"> <h6><b>Filter By Date :</b></h6></span>
+          <div class="col-md-3 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="From : 02/06/2019">
+          </div>
+          <div class="col-md-3 mb-3 text-right">
+            <input type="text" class="form-control" placeholder="To : 02/12/2019">
+          </div>
+          <span class="mr-3"><button type="button" class="btn btn-primary btn-sm">Search</button></span>
+         <!-- <div style="position: relative; float: right; margin-right: 10px ">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" type="button">
+              Filter By
+            </button>
+            <div class="dropdown-menu">
+              <a (click)='getFilter("")' href="javascript:void(0)" class="dropdown-item">All</a>
+              <a (click)='getFilter(1)' href="javascript:void(0)" class="dropdown-item">Posted</a>
+              <a (click)='getFilter(2)' href="javascript:void(0)" class="dropdown-item">Accepted</a>
+              <a (click)='getFilter(3)' href="javascript:void(0)" class="dropdown-item">Started</a>
+              <a (click)='getFilter(4)' href="javascript:void(0)" class="dropdown-item">Finished</a>
+              <a (click)='getFilter(5)' href="javascript:void(0)" class="dropdown-item">Canceled</a>
+              <a (click)='getFilter(6)' href="javascript:void(0)" class="dropdown-item">Paid</a>
+            </div>
+          </div>-->
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Job Name </th>
+              <th scope="col">Rating Given By</th>
+              <th scope="col">Rating Received To</th>
+              <th scope="col">Achieved</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rate of allRatings; let i =index">
+              <th>{{i + 1}}</th>
+              <td >{{rate.job_name}}</td>
+              <td *ngIf="rate.rate_from_name">{{rate.rate_from_name}}</td>
+              <td *ngIf="!rate.rate_from_name">NA</td>
+              <td *ngIf="rate.rate_to_name">{{rate.rate_to_name}}</td>
+              <td *ngIf="!rate.rate_to_name">NA</td>
+              <td> {{rate.rating | number: '1.0-1' }} /  5 </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="calling == true" class="col-md-12 text-center">
+          <img src="./assets/images/91.gif">
+        </div>
+        <div *ngIf="!allRatings[0] && calling == false" class="col-md-12 text-center">
+          <img alt="" class="mb-3" height="150" src="./assets/images/not-found.png">
+          <h3 class="not-found">Not Found</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
