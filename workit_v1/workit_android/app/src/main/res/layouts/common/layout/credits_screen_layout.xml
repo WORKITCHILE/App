@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:padding="@dimen/padding_large">
+
+    <LinearLayout
+            android:id="@+id/container_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/available_credits"
+                android:textAppearance="@style/WorkItApp.Header"
+                android:textColor="@color/colorBlack"/>
+
+        <TextView
+                android:id="@+id/available_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/available_credits"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/container_middle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_top">
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_height"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@color/colorBlack"/>
+
+        <LinearLayout
+                android:id="@+id/add_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/credit"
+                    android:tint="@color/colorBlack"/>
+
+            <TextView
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/add_credits"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_height"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@color/colorBlack"/>
+
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/recents"
+            android:textAppearance="@style/WorkItApp.Header"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_middle"/>
+
+    <RelativeLayout android:layout_width="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_header"
+                    android:layout_height="0dp">
+        <com.app.workit.view.ui.customview.BaseRecyclerView
+                android:layout_marginTop="@dimen/margin_large"
+                android:id="@+id/recent_credits"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_credit"/>
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/empty_view"
+                  android:layout_centerInParent="true"
+                  android:text="@string/no_data_found"
+                  android:textColor="@color/colorGrey"
+                  android:textAppearance="@style/WorkItApp.SubHeader"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

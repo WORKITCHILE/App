@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/padding_large"
+            android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView android:layout_width="48dp"
+                                                      android:id="@+id/avatar"
+                                                      app:layout_constraintBottom_toBottomOf="parent"
+                                                      app:layout_constraintTop_toTopOf="parent"
+                                                      app:layout_constraintStart_toStartOf="parent"
+                                                      tools:src="@drawable/ic_profile_dummy"
+                                                      android:layout_height="48dp"/>
+        <LinearLayout
+                app:layout_constraintStart_toEndOf="@id/avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:id="@+id/userName"
+                          android:textColor="@color/colorBlack"
+                          android:layout_height="wrap_content"
+                          tools:text="@string/profile"
+                          android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/date"
+                          android:textColor="@color/colorGrey"
+                          android:layout_height="wrap_content"
+                          tools:text="@string/profile"
+                          android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/message"
+                      android:layout_marginTop="@dimen/margin_small"
+                      android:textColor="@color/colorGrey"
+                      android:layout_height="wrap_content"
+                      tools:text="@string/profile"
+                      android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

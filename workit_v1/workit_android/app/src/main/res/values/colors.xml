@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/colorBlue</color>
+    <color name="colorPrimaryDark">@color/colorPurple</color>
+    <color name="colorAccent">@color/colorBlue</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteDisabled">#CCFFFFFF</color>
+    <color name="edit_text_border_color">#666666</color>
+    <color name="edit_text_color_white_bg">@color/colorWhite</color>
+    <color name="text_hint">@color/edit_text_border_color</color>
+    <color name="textNormalState">@color/text_hint</color>
+    <color name="colorGrey">#757575</color>
+    <color name="colorToggleGrey">#555555</color>
+    <color name="textNormalStateWithOpacity">#7A94C454</color>
+    <color name="colorControlActivated">@color/colorWhite</color>
+    <color name="colorControlNormal">#d4cbc7</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorLightGrey">#EBEBEB</color>
+    <color name="colorBlue">#0567DF</color>
+
+    <color name="colorPurple">#00248C</color>
+    <color name="colorDarkPurple">#000937</color>
+    <color name="colorDarkPurpleDisabled">#CC000937</color>
+    <color name="colorDarkPurpleWithOpacity">#CC000937</color>
+    <color name="colorToggle">#458C92</color>
+    <color name="colorLightPurple">#35C0CE</color>
+    <color name="colorWorkItWhite">#F3F3F3</color>
+    <!--    <color name="colorWorkItBlue">#69BDCD</color>-->
+    <color name="colorShadow">#E3E6E6</color>
+    <color name="colorGreen">#00E676</color>
+    <color name="colorFacebook">#3854A4</color>
+    <color name="colorGoogle">#F34A38</color>
+    <color name="colorSeparator">@color/colorLightGrey</color>
+    <color name="colorTransparent">#00FFFFFF</color>
+
+    <!--Text Color-->
+    <color name="textColorRed">@color/colorGoogle</color>
+    <color name="textNormalWhiteStateWithOpacity">#80FFFFFF</color>
+    <color name="textColorGrey">#666666</color>
+    <color name="textColorWhite">@color/colorWhite</color>
+    <color name="textColorBlack">@color/colorBlack</color>
+    <color name="textColorPurple">@color/colorPurple</color>
+    <!--Color -->
+    <color name="switchTrack">#ffd600</color>
+    <color name="switchTrackDisable">#90caf9</color>
+    <color name="switchTrackActive">#1565c0</color>
+    <color name="switchTrackNormal">#90caf9</color>
+    <color name="switchThumbBgActive">#1b5e20</color>
+    <color name="switchThumbActive">#ad1457</color>
+    <color name="switchThumbkNormal">#64b5f6</color>
+</resources>
+
+

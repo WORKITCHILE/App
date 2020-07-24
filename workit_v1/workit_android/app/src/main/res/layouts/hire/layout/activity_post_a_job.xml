@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/btn_post_job"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:orientation="vertical">
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_name_of_the_work"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/name_of_the_work"
+                    android:inputType="text"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_job_desc"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:gravity="start"
+                    android:hint="@string/job_description"
+                    android:inputType="textMultiLine"
+                    android:maxLines="@integer/max_comment_lines"
+                    android:minHeight="@dimen/comment_height"
+                    app:workit_maxCharacters="@integer/max_comment_character"
+                    app:workit_minCharacters="@integer/min_comment_character"/>
+
+            <!--            <com.qualwebs.workit.view.ui.customview.edittext.WorkItEditText-->
+            <!--                android:id="@+id/et_address"-->
+            <!--                style="@style/WorkItTextInputLayout.EditText.Corner"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/margin_large"-->
+            <!--                android:hint="@string/address"-->
+            <!--                android:inputType="textPostalAddress" />-->
+
+
+            <com.app.workit.view.ui.customview.edittext.WorkItAutoCompleteTextView
+                    android:id="@+id/et_address"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="5"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/address"
+                    app:workit_clearButton="true"/>
+
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/map_view"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large">
+
+                <fragment
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/max_map_height"
+
+                        tools:context=".MapsActivity"/>
+
+                <ImageButton
+                        android:id="@+id/btn_zoom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:layout_marginBottom="@dimen/margin_large"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_zoom_out_map_black_24dp"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                        android:id="@+id/spinner_categories"
+                        style="@style/Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/hint_category"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                        android:id="@+id/spinner_sub_categories"
+                        style="@style/Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                        android:id="@+id/spinner_job_approach"
+                        style="@style/Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:layout_weight="1"
+                        android:text="@string/add_photo"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                        android:textColor="@color/colorBlack"/>
+
+                <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_add_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:text="@string/add_image"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                        android:textColor="@color/colorLightPurple"/>
+            </LinearLayout>
+
+            <ViewSwitcher android:layout_width="match_parent"
+                          android:layout_marginTop="@dimen/margin_large"
+                          android:id="@+id/switcher_upload_photo"
+                          android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/upload_document_photo"
+                        android:layout_gravity="center"
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_camera"/>
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_images"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/item_image"
+                            tools:visibility="gone"/>
+
+                    <com.app.workit.view.ui.customview.ProgressWheel
+                            android:id="@+id/image_loading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/progress_wheel_radius"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"
+                            app:matProg_barColor="@color/colorDarkPurple"
+                            app:matProg_circleRadius="@dimen/progress_wheel_radius"
+                            tools:visibility="visible"/>
+
+                </RelativeLayout>
+            </ViewSwitcher>
+
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/work_date"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_work_date"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:hint="@string/work_date"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/work_time"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_work_time"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:hint="@string/work_time"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/payment_for_the_service"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_amount"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:hint="@string/payment_for_the_service"
+                    android:inputType="numberDecimal"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@color/colorWorkItWhite"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_small"
+                    android:text="@string/workit_comission"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+            android:id="@+id/btn_post_job"
+            style="@style/ButtonPurpleNoOutline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:text="@string/post"
+            android:textAppearance="@style/WorkItApp.Header"
+            android:textColor="@color/colorLightPurple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

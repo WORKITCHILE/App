@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding_large"
+    android:paddingEnd="@dimen/padding_large">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_large"
+        android:background="@drawable/container_background_round"
+        android:padding="@dimen/padding_x_large"
+        android:src="@drawable/ic_photo_camera" />
+
+    <EditText
+        android:id="@+id/et_profile_desc"
+        style="@style/WorkItTextInputLayout.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xxxx_large"
+        android:gravity="top"
+        android:hint="@string/profile_description"
+        android:inputType="textMultiLine"
+        android:minHeight="@dimen/comment_height"
+        android:padding="@dimen/padding_medium" />
+
+    <EditText
+        android:id="@+id/et_name"
+        style="@style/WorkItTextInputLayout.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="top"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_medium" />
+
+    <EditText
+        android:id="@+id/et_father_name"
+        style="@style/WorkItTextInputLayout.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="top"
+        android:hint="@string/father_name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_medium" />
+
+    <EditText
+        android:id="@+id/et_mother_name"
+        style="@style/WorkItTextInputLayout.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="top"
+        android:hint="@string/mother_name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_medium" />
+
+    <EditText
+        android:id="@+id/et_id_number"
+        style="@style/WorkItTextInputLayout.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="top"
+        android:hint="@string/id_number"
+        android:inputType="numberSigned"
+        android:padding="@dimen/padding_medium" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/date_of_birth"
+        android:textAppearance="@style/WorkItApp.SubHeader"
+        android:textColor="@color/textColorBlack" />
+
+    <Button
+        style="@style/ButtonBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:text="@string/next"
+        android:textAppearance="@style/WorkItApp.Title.Button"
+        android:textColor="@color/colorWhite" />
+
+</LinearLayout>

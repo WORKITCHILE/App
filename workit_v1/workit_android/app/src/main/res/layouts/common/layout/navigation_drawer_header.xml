@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/RlViewProfile"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorDarkPurple"
+              android:minHeight="@dimen/drawer_header_height"
+              android:orientation="vertical"
+              android:padding="@dimen/padding_large">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_profile_dummy"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_large"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding_medium"
+                    android:text="@string/dummy_name"
+                    android:textAppearance="@style/WorkItApp.Header"
+                    android:textColor="@color/colorLightPurple"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rb_user_rating"
+                    style="@android:style/Widget.Material.Light.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:theme="@style/AppThemeRatingBar"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hire"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorWhite"/>
+
+        <Switch
+                android:id="@+id/switch_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:thumb="@drawable/ic_workit_thumb"
+                android:track="@drawable/ic_workit_track"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/work"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</LinearLayout>

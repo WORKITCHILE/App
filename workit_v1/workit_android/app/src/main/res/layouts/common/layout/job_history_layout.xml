@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/orders_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/toolbar_elevation"
+        app:tabBackground="@color/colorShadow"
+        app:tabIndicatorColor="@color/colorLightPurple"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorBlack"
+        app:tabTextAppearance="@style/WorkItApp.TextAppearanceSmall"
+        app:tabTextColor="@color/textColorGrey">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_on_the_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/posted_jobs" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_delivered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/received_jobs" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/toolbar_elevation"-->
+    <!--        android:background="@drawable/tab_drawable" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager_orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <com.factory_price.app.constants.utils.ProgressWheel
+            android:id="@+id/progress_wheel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:visibility="gone"
+            app:matProg_barColor="@color/colorDarkPurple"
+            app:matProg_circleRadius="@dimen/progress_wheel_radius" />
+    </RelativeLayout>
+
+
+</LinearLayout>

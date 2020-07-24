@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/padding_small">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/user_icon"/>
+
+    <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/crediter_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/date"
+                android:textSize="@dimen/text_size_small"
+                android:textAppearance="@style/WorkItApp.SubHeader.Bold"
+                android:textColor="@color/colorBlack"
+                tools:text="@string/profile"/>
+
+        <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/crediter_name"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/textColorGrey"
+                tools:text="@string/profile"/>
+
+        <TextView
+                android:id="@+id/credit_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/crediter_name"
+                android:layout_toStartOf="@id/credit_value"
+                android:textSize="@dimen/text_size_small"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/textColorGrey"
+                tools:text="@string/profile"/>
+
+        <TextView
+                android:id="@+id/credit_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/crediter_name"
+                android:layout_alignParentEnd="true"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorLightPurple"
+                tools:text="@string/dummy_price"/>
+
+    </RelativeLayout>
+</LinearLayout>

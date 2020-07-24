@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+    <ImageView
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:src="@drawable/workit_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <ProgressBar
+            android:translationY="-5dp"
+            android:indeterminate="true"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>

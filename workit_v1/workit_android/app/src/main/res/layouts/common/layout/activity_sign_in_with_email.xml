@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/container_background_with_gradient"
+        android:minHeight="148dp"
+        android:paddingTop="@dimen/padding_medium">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_left_arrow" />
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textAppearance="@style/WorkItApp.Header"
+            android:textColor="@color/textColorWhite" />
+
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/WorkItTextInputLayout.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_header"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_xxxx_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@drawable/edittext_no_background_with_white_border"
+            android:hint="@string/enter_your_email"
+            android:padding="@dimen/padding_medium"
+            android:textColorHint="@color/colorWhite" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_container"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_x_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:background="@drawable/contianer_background_with_corner"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_medium">
+
+        <TextView
+            android:id="@+id/tv_header_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/enter_your_password"
+            android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+            android:textColor="@color/textColorBlack" />
+
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/WorkItTextInputLayout.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_header_2"
+            android:layout_marginTop="@dimen/margin_large"
+            android:hint="@string/enter_your_email"
+            android:inputType="textPassword"
+            android:padding="@dimen/padding_medium"
+            android:textColorHint="@color/colorWhite" />
+
+        <Button
+            style="@style/ButtonBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_password"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:text="@string/continue_"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:text="@string/did_you_forget_your_password"
+            android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+            android:textColor="@color/textColorGrey" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

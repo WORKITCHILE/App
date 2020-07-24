@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginStart="@dimen/margin_large"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_gravity="center"
+                android:id="@+id/header"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/job_details"
+                android:textAppearance="@style/WorkItApp.Header"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_background_with_corner_purple"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_large">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_title"
+                    android:textAppearance="@style/WorkItApp.SubHeader"/>
+
+            <TextView
+                    android:id="@+id/job_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/job_details"
+                    android:textAppearance="@style/WorkItApp.Header"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@color/colorWhite"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_details"
+                    android:textAppearance="@style/WorkItApp.SubHeader.Bold"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/posted_by"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/posted_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/awarded_to"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/accepted_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/offered_amount"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/offered_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/category"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sub_category"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/sub_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/job_approach"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/job_approach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/job_description"
+                    android:textAppearance="@style/WorkItApp.SubHeader.Bold"/>
+
+            <TextView
+                    android:id="@+id/job_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/job_description"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/vendor_description"
+                    android:textAppearance="@style/WorkItApp.SubHeader.Bold"/>
+
+
+            <EditText
+                    android:id="@+id/bid_description"
+                    android:layout_width="match_parent"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:text="@string/bid_comment"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorWhite"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/job_schedule"
+                    android:textAppearance="@style/WorkItApp.SubHeader.Bold"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/posted_on"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/posted_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/start_date"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/time"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+
+                <TextView
+                        android:id="@+id/start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/job_details"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@color/colorWhite"/>
+            <TextView
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_details"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:id="@+id/container_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+            <Button
+                    android:id="@+id/confirm_job"
+                    style="@style/ButtonPurpleNoOutline"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confirm_job"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+
+            <Button
+                    android:id="@+id/message"
+                    style="@style/ButtonPurpleNoOutline"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_height="wrap_content"
+                    android:text="@string/message"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+
+            <!--            <com.ebanx.swipebtn.SwipeButton-->
+            <!--                    android:id="@+id/btn_job_start_finish"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="20dp"-->
+            <!--                    android:layout_marginEnd="20dp"-->
+            <!--                    app:inner_text="SWIPE"-->
+            <!--                    app:inner_text_color="@android:color/white"-->
+            <!--                    app:inner_text_size="16sp"-->
+            <!--                    app:inner_text_top_padding="18dp"-->
+            <!--                    app:inner_text_bottom_padding="18dp"-->
+            <!--                    app:inner_text_background="@drawable/swipe_btn_bg"-->
+            <!--                    app:button_image_height="60dp"-->
+            <!--                    app:button_image_width="100dp"-->
+            <!--                    app:button_image_disabled="@drawable/arrow"-->
+            <!--                    app:button_image_enabled="@drawable/arrow"-->
+            <!--                    app:button_left_padding="20dp"-->
+            <!--                    app:button_right_padding="20dp"-->
+            <!--                    app:button_top_padding="20dp"-->
+            <!--                    app:button_bottom_padding="20dp"-->
+            <!--                    app:button_background="@drawable/swipe_shape_rounded"-->
+            <!--                    app:initial_state="disabled"-->
+            <!--                    android:visibility="gone"-->
+            <!--                    tools:visibility="visible"-->
+            <!--                    app:has_activate_state="false"-->
+            <!--            />-->
+            <Button
+                    android:id="@+id/btn_job_start_finish"
+                    style="@style/ButtonPurpleNoOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_job"
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+            <Button
+                    android:id="@+id/accept_bid"
+                    style="@style/ButtonPurpleNoOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accept"
+                    tools:visibility="gone"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+
+            <Button
+                    android:id="@+id/reject_bid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:text="@string/reject"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"/>
+
+            <Button
+                    android:visibility="gone"
+                    android:id="@+id/cance_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:text="@string/cancel_job"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"/>
+
+            <Button
+                    android:visibility="gone"
+                    android:id="@+id/release_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:text="@string/release_payment"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

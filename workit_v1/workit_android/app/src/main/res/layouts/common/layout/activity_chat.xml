@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/toolbar_chat"
+             android:id="@+id/toolbar"/>
+    <ViewSwitcher android:layout_width="0dp"
+                  android:layout_height="0dp"
+                  android:id="@+id/view_switcher"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@id/toolbar"
+                  app:layout_constraintBottom_toTopOf="@id/bottom_view">
+
+        <include layout="@layout/progress_view"/>
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+            <com.app.workit.view.ui.customview.BaseRecyclerView
+                    android:id="@+id/chat_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            <TextView
+                    android:text="@string/start_sending_message"
+                    android:id="@+id/empty_view"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorGrey"
+                    style="@style/WorkItApp.SubHeader"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </ViewSwitcher>
+    <LinearLayout android:layout_width="0dp"
+                  android:padding="@dimen/padding_medium"
+                  android:id="@+id/bottom_view"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:orientation="horizontal"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  android:layout_height="wrap_content">
+
+        <ImageButton android:layout_width="wrap_content"
+                     android:id="@+id/send_attachment"
+                     android:padding="@dimen/padding_medium"
+                     android:adjustViewBounds="true"
+                     android:scaleType="fitCenter"
+                     android:src="@drawable/ic_attachement_clip"
+                     android:background="@drawable/button_bg_with_border"
+                     android:layout_height="match_parent"/>
+
+        <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/input_chat"
+                style="@style/WorkItTextInputLayout.EditText"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_weight="1"
+                android:maxLines="4"
+                android:layout_height="wrap_content"
+                android:hint="@string/typing_here"
+                android:inputType="textMultiLine"/>
+        <ImageButton
+                android:id="@+id/send_chat"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@drawable/button_purple_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_send_chat"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

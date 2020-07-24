@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_user_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/margin_large"
+            android:src="@drawable/user_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/container_background_with_corner"
+            android:padding="@dimen/padding_medium"
+            android:translationY="-25dp"
+            android:translationZ="-1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_icon">
+
+        <RelativeLayout
+                android:id="@+id/container_first"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/container_middle"
+                app:layout_constraintHorizontal_weight="1.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/user_rating"
+                    style="@style/AppThemeSmallRatingBar"
+                    android:isIndicator="true"
+                    android:layout_above="@id/tv_date"
+                    android:stepSize="1"
+                    android:progressBackgroundTint="@color/colorWhite"
+                    android:progressTint="@color/colorLightPurple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_xx_small"
+                    tools:text="@string/profile_description"/>
+
+            <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:id="@+id/tv_bids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_xx_small"
+                    tools:text="@string/profile_description"/>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:id="@+id/container_middle"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:gravity="center|start"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@id/separator"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toEndOf="@id/container_first"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                    android:id="@+id/tv_owner_name"
+                    android:maxLines="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"
+                    tools:text="@string/profile_description"/>
+
+            <TextView
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:id="@+id/tv_job_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorWhite"
+                    tools:text="@string/profile_description"/>
+
+
+            <TextView
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:id="@+id/tv_job_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorLightPurple"
+                    android:textSize="12sp"
+                    tools:text="@string/profile_description"/>
+        </LinearLayout>
+
+        <View
+                android:id="@+id/separator"
+                android:layout_width="@dimen/separator_height"
+                android:layout_height="64dp"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:background="@color/colorLightPurple"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/container_last"
+                app:layout_constraintStart_toEndOf="@id/container_middle"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+                android:id="@+id/container_last"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1.3"
+                app:layout_constraintStart_toEndOf="@id/separator"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                    android:id="@+id/tv_job_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tools:text="@string/work"
+                    android:textSize="@dimen/text_size_small"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorLightPurple"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

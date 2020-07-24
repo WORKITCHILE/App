@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorDarkPurple"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_large">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_profile_dummy" />
+
+    <TextView
+        android:id="@+id/tv_nav_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:fontFamily="@font/robotomono_medium"
+        android:textAppearance="@style/WorkItApp.SubHeader"
+        android:textColor="@color/colorWhite"
+        tools:text="@string/dummy_name" />
+
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_default_corner" />
+            <solid android:color="@color/colorPurple" />
+            <padding android:bottom="@dimen/padding_small" android:left="@dimen/padding_large" android:right="@dimen/padding_large" android:top="@dimen/padding_small" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_default_corner" />
+            <solid android:color="@color/colorShadow" />
+            <padding android:bottom="@dimen/padding_small" android:left="@dimen/padding_large" android:right="@dimen/padding_large" android:top="@dimen/padding_small" />
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_default_corner" />
+            <solid android:color="@color/colorDarkPurple" />
+            <padding android:bottom="@dimen/padding_small" android:left="@dimen/padding_large" android:right="@dimen/padding_large" android:top="@dimen/padding_small" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_default_corner" />
+            <stroke android:width="@dimen/default_stroke_width" android:color="@color/colorShadow" />
+            <padding android:bottom="@dimen/padding_small" android:left="@dimen/padding_large" android:right="@dimen/padding_large" android:top="@dimen/padding_small" />
+        </shape>
+    </item>
+</selector>

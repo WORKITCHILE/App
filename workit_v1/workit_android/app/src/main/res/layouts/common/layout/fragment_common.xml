@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.app.workit.view.ui.customview.BaseRecyclerView
+        android:layout_width="match_parent"
+                                                             android:layout_marginEnd="@dimen/margin_large"
+                                                             android:layout_marginStart="@dimen/margin_large"
+                                                             android:id="@+id/base_recycler_view"
+                                                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                                             android:layout_height="match_parent"/>
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/empty_view"
+              android:layout_marginEnd="@dimen/margin_large"
+              android:layout_marginStart="@dimen/margin_large"
+              android:textColor="@color/colorGrey"
+              android:textAppearance="@style/WorkItApp.SubHeader"
+              android:layout_centerInParent="true"
+              android:text="@string/no_data_found"
+              android:layout_height="wrap_content"/>
+</RelativeLayout>

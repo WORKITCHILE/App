@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     tools:layout_marginTop="0dp">
+
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_marginBottom="@dimen/margin_small"
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+                android:id="@+id/top_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
+                android:orientation="vertical">
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_credits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/credit"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/email_"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_id_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/email_"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_nationality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/nationality"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                        android:id="@+id/spinner_countries"
+                        style="@style/Spinner"
+                        android:textAlignment="textStart"
+                        android:gravity="start"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/id_picture_both_side"/>
+
+            <ImageButton
+                    android:id="@+id/iv_id_pic"
+                    android:layout_width="128dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:adjustViewBounds="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_camera"/>
+
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/address"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItAutoCompleteTextView
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:enabled="false"
+                    android:inputType="textAutoComplete"
+                    app:workit_hideUnderline="true"
+                    android:hint="@string/address"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/father_name"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_father_name"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:hint="@string/father_name"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/mother_name"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_mother_name"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:hint="@string/mother_name"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/occupation_"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_occupation"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:hint="@string/occupation_"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/about"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_profile_desc"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:enabled="false"
+                    android:gravity="start"
+                    app:workit_maxCharacters="@integer/max_comment_character"
+                    android:hint="@string/profile_description"
+                    android:minHeight="@dimen/comment_height"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_profile"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

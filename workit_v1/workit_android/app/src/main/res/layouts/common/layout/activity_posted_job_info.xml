@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_common"/>
+
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/bottom_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <LinearLayout
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorDarkPurple"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_user_icon"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/user_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                    <LinearLayout
+                            android:id="@+id/container_middle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/tv_owner_name"
+                                android:maxLines="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/WorkItApp.SubHeader"
+                                android:textColor="@color/colorLightPurple"
+                                tools:text="@string/profile_description"/>
+
+                        <TextView
+                                android:id="@+id/tv_job_name"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="@dimen/margin_small"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                                android:textColor="@color/colorWhite"
+                                tools:text="@string/profile_description"/>
+
+                        <TextView
+                                android:id="@+id/tv_job_address"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="@dimen/margin_small"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                                android:textColor="@color/colorWhite"
+                                tools:text="@string/profile_description"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_marginTop="@dimen/margin_medium"
+                              android:layout_height="wrap_content">
+                    <LinearLayout
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                        <TextView
+                                android:id="@+id/tv_posted_on"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="@dimen/text_size_xx_small"
+                                tools:text="@string/profile_description"/>
+
+                        <TextView
+                                android:layout_marginTop="@dimen/margin_small"
+                                android:id="@+id/tv_posted_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="@dimen/text_size_xx_small"
+                                tools:text="@string/profile_description"/>
+
+                    </LinearLayout>
+                    <TextView
+                            android:id="@+id/tv_price"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:text="@string/profile_description"/>
+
+                    <TextView
+                            android:id="@+id/bid_status"
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/WorkItApp.SubHeader"
+                            android:textColor="@color/colorLightPurple"
+                            tools:text="@string/profile_description"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_work_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/work_schedule"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/job_category"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/job_category"/>
+
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/job_sub_category"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/job_sub_category"/>
+            <com.app.workit.view.ui.customview.magictext.MagicText
+                    android:id="@+id/tv_full_job_description"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorBlack"
+                    tools:text="@string/details_of_the_offer_job"/>
+
+
+            <ViewSwitcher android:layout_width="match_parent"
+                          android:id="@+id/view_switcher"
+                          android:layout_marginEnd="@dimen/margin_large"
+                          android:layout_marginStart="@dimen/margin_large"
+                          android:layout_height="match_parent">
+                <include layout="@layout/job_info_hire_view"/>
+                <include layout="@layout/job_info_work_view"/>
+            </ViewSwitcher>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout android:layout_width="0dp"
+                  android:id="@+id/bottom_view"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        <Button
+                android:id="@+id/btn_cancel_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:background="?selectableItemBackgroundBorderless"
+                android:text="@string/cancel_job"
+                android:textAppearance="@style/WorkItApp.Header"
+                android:textColor="@color/colorBlack"
+                tools:visibility="gone"/>
+
+
+        <Button
+                android:id="@+id/btn_post_bid"
+                style="@style/ButtonPurpleNoOutline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="@string/place_bid"
+                tools:visibility="visible"
+                android:textColor="@color/colorLightPurple"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+        />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

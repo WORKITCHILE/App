@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_marginBottom="@dimen/margin_small"
+              android:layout_marginTop="@dimen/margin_small"
+              android:padding="@dimen/padding_large"
+              android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_icon"/>
+
+    <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/sender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/date"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorBlack"
+                tools:text="@string/profile"/>
+
+        <TextView
+                android:id="@+id/date"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/textColorGrey"
+                tools:text="@string/profile"/>
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_below="@id/sender"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/textColorGrey"
+                tools:text="@string/profile"/>
+
+    </RelativeLayout>
+</LinearLayout>

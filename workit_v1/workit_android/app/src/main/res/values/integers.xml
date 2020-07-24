@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="max_comment_lines">5</integer>
+    <integer name="max_comment_character">500</integer>
+    <integer name="min_comment_character">0</integer>
+    <integer name="transition_value">300</integer>
+</resources>

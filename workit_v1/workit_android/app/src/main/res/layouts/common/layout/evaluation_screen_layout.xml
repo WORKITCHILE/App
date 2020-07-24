@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:padding="@dimen/padding_large">
+
+    <LinearLayout
+            android:id="@+id/container_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_xxx_large"
+            android:layout_marginEnd="@dimen/margin_xxx_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/how_many_stars_you_give_to"
+                android:textAppearance="@style/WorkItApp.TextAppearanceLarge"
+                android:textColor="@color/colorBlack"/>
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rating_bar"
+                android:stepSize="1"
+                android:rating="1"
+                android:isIndicator="false"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_large"
+                android:theme="@style/AppThemeRatingBar"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:gravity="center"
+                android:text="@string/did_the_client_tried_to_contact"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorBlack"/>
+
+        <RadioGroup
+                android:id="@+id/rg_contact_outside"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_large"
+                android:checkedButton="@id/rb_no"
+                android:minWidth="160dp"
+                android:minHeight="32dp"
+                android:orientation="horizontal">
+
+            <RadioButton
+                    android:id="@+id/rb_yes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_btn_yes_no_statelist"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/yes"
+                    android:textColor="@color/radio_btn_statelist"/>
+
+            <RadioButton
+                    android:id="@+id/rb_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_btn_yes_no_statelist"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/no"
+                    android:textColor="@color/radio_btn_statelist"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_top">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/leave_us_a_comment"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorBlack"/>
+
+        <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/comment"
+                style="@style/WorkItTextInputLayout.EditText.Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="start"
+                android:hint="@string/leave_us_a_comment"
+                android:minHeight="@dimen/comment_height"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="0dp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:orientation="vertical"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:layout_height="wrap_content">
+        <Button
+                android:id="@+id/btnSubmit"
+                style="@style/ButtonPurpleNoOutline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorLightPurple"/>
+        <Button
+                android:id="@+id/btnSkip"
+                style="@style/ButtonPurpleNoOutline"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="?selectableItemBackgroundBorderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/skip"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

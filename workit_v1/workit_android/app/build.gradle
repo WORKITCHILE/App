@@ -1,0 +1,132 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.app.workit"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/common',
+                            'src/main/res/layouts/hire',
+                            'src/main/res/layouts/work',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+
+def dagger_version = 2.26;
+
+
+
+dependencies {
+
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //Material Design
+    implementation 'com.google.android.material:material:1.1.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //Dagger
+    api "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    api "com.google.dagger:dagger-android:$dagger_version"
+    api "com.google.dagger:dagger-android-support:$dagger_version"
+    // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Google Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //ButterKnife
+    implementation "com.jakewharton:butterknife:10.2.1"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.2.1"
+    //LifeCycle and ViewModel
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    //Retrofit
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.6.2'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
+    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.2.2'
+    implementation(group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.3.0') {
+        exclude module: 'okhttp'
+    }
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //RxJava
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    //FireBase
+    // Add the SDK for Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    //Toast
+    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+    //Timber Logger
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    //PickImage
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    //Upload Profile
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    //Picker
+    implementation 'com.github.florent37:singledateandtimepicker:2.2.3'
+    //Progress Button
+    implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
+    //CCP
+    implementation 'com.hbb20:ccp:2.3.8'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //Places
+    implementation 'com.google.android.libraries.places:places:2.3.0'
+    //OTP View
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.0'
+    //Permission
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    //Swipe Button
+    implementation 'com.ebanx:swipe-button:0.8.3'
+    //Calendar Picker
+    implementation 'com.whiteelephant:monthandyearpicker:1.3.0'
+    //Google Auth
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    //Facebook
+    implementation 'com.facebook.android:facebook-login:5.15.3'
+    //Masked Edit Text
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
+
+}
+repositories {
+    mavenCentral()
+}

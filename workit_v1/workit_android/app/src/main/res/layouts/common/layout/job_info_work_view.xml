@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/margin_large"
+              android:textAppearance="@style/WorkItApp.SubHeader"
+              android:textColor="@color/colorBlack"
+              android:text="@string/counter_offer"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/counter_offer"
+                style="@style/WorkItTextInputLayout.EditText.Corner"
+                android:layout_width="wrap_content"
+                android:minWidth="@dimen/min_editext_field"
+                android:hint="@string/counter_offer"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:inputType="numberSigned"/>
+        <ImageButton
+                android:id="@+id/increase_offer"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_up_drawable"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="@dimen/margin_large"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="24dp"
+                android:maxHeight="24dp"
+                android:background="?selectableItemBackground"/>
+        <ImageButton
+                android:id="@+id/decrease_offer"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_down_arrow_drawable"
+                android:scaleType="fitCenter"
+                android:maxWidth="24dp"
+                android:maxHeight="24dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"/>
+
+    </LinearLayout>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/photos"
+            android:textAppearance="@style/WorkItApp.SubHeader"
+            android:textColor="@color/colorBlack"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_images_worker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_image"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="@style/WorkItApp.SubHeader"
+              android:layout_marginTop="@dimen/margin_large"
+              android:textColor="@color/colorBlack"
+              android:text="@string/your_comment"/>
+    <com.app.workit.view.ui.customview.edittext.WorkItEditText
+            android:id="@+id/et_comment"
+            style="@style/WorkItTextInputLayout.EditText.Corner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="start"
+            android:hint="@string/type_here"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:minHeight="@dimen/comment_height"
+            android:padding="@dimen/padding_small"
+            app:workit_hideUnderline="true"
+            app:workit_maxCharacters="@integer/max_comment_character"
+            app:workit_minCharacters="@integer/min_comment_character"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_height="wrap_content">
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.SubHeader"
+                  android:textColor="@color/colorBlack"
+                  android:text="@string/job_location"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:id="@+id/view_full_screen"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                  android:textColor="@color/colorLightPurple"
+                  android:text="@string/view_full_screen"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small">
+
+        <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/max_map_height"
+
+                tools:context=".MapsActivity"/>
+
+        <ImageButton
+                android:id="@+id/btn_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_zoom_out_map_black_24dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

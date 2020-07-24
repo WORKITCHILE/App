@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_marginStart="@dimen/margin_xxx_large"
+                                                   android:layout_marginEnd="@dimen/margin_xxx_large"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:background="@drawable/container_white_background_with_corner"
+                                                   android:padding="@dimen/padding_xxx_large">
+
+    <RelativeLayout android:layout_width="0dp"
+                    android:id="@+id/container_top"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content">
+        <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/iv_tick"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                tools:visibility="gone"
+                android:src="@drawable/ic_correct"/>
+
+        <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/iv_credit"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/credit"/>
+
+        <ImageView
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:id="@+id/iv_warning"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_info_grey_24dp"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:textAppearance="@style/WorkItApp.TextAppearanceSmall.Bold"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_top"
+            tools:text="@string/finish"/>
+
+    <TextView
+            android:id="@+id/tv_sub_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+            android:textColor="@color/colorBlack"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_header"
+            tools:text="@string/finish"/>
+
+    <com.app.workit.view.ui.customview.edittext.WorkItEditText
+            android:id="@+id/edit_text"
+            style="@style/WorkItTextInputLayout.EditText.Corner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_header"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:hint="@string/name_of_the_work"
+            android:inputType="numberDecimal"/>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text">
+
+        <Button
+                android:id="@+id/btn_ok"
+                style="@style/ButtonPurpleNoOutline"
+                android:layout_width="match_parent"
+                android:textColor="@color/button_purple_text"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/ok"
+                android:textAppearance="@style/WorkItApp.Title.Button"/>
+
+        <Button
+                android:id="@+id/btn_cancel"
+                style="@style/ButtonPurpleNoOutline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/no"
+                android:textAppearance="@style/WorkItApp.Title.Button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_header"
+                tools:visibility="gone"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

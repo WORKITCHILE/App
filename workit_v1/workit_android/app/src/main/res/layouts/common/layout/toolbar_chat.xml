@@ -1,0 +1,75 @@
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="?actionBarSize"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+    <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       android:id="@+id/toolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:background="@color/colorDarkPurple"
+                                       android:minHeight="?attr/actionBarSize"
+                                       android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                                       app:contentInsetLeft="0dp"
+                                       app:contentInsetStart="0dp"
+                                       app:contentInsetStartWithNavigation="0dp"
+                                       app:elevation="@dimen/toolbar_elevation"
+                                       app:layout_scrollFlags="scroll|enterAlways"
+                                       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                                       app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageButton
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_back"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/chat_avatar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toEndOf="@id/iv_back"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:src="@drawable/no_image_available"/>
+
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_marginStart="@dimen/margin_medium"
+                          android:layout_centerInParent="true"
+                          android:layout_toEndOf="@id/chat_avatar"
+                          android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/chat_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/WorkItApp.SubHeader"
+                        android:textColor="@color/colorLightPurple"
+                        android:text="@string/profile_description"/>
+
+                <TextView
+                        android:id="@+id/chat_user_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                        android:textColor="@color/colorWhite"
+                        tools:text="@string/profile_description"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.AppBarLayout>
+
+

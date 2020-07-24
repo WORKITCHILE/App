@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:adjustViewBounds="true"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_left_arrow" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:gravity="center"
+            android:text="@string/enter_your_bank_details"
+            android:textAppearance="@style/WorkItApp.Header"
+            android:textColor="@color/colorBlack" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:orientation="vertical">
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/et_full_name"
+                style="@style/WorkItTextInputLayout.EditText.Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName" />
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/et_id_number"
+                style="@style/WorkItTextInputLayout.EditText.Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/rut_id_number"
+                android:inputType="number" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/container_background_with_border_corner"
+                android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                    android:id="@+id/spinner_banks"
+                    style="@style/Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/container_background_with_border_corner"
+                android:minHeight="@dimen/spinner_height">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_account_type"
+                    style="@style/Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                android:id="@+id/et_account_number"
+                style="@style/WorkItTextInputLayout.EditText.Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/account_number"
+                android:inputType="number" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@color/colorWorkItWhite"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/this_information_must_be"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/ButtonPurpleNoOutline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="@string/save"
+        android:textAppearance="@style/WorkItApp.Header"
+        android:textColor="@color/colorLightPurple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

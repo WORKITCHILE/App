@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+            android:background="@color/colorDarkPurple"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_large"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      tools:text="@string/profile"
+                      android:id="@+id/bankName"
+                      android:textColor="@color/colorLightPurple"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/WorkItApp.SubHeader"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/edit_bank_details"
+                    app:fabCustomSize="@dimen/fab_common_size"
+                    android:layout_width="wrap_content"
+                    app:maxImageSize="14dp"
+                    android:scaleType="center"
+                    app:backgroundTint="@color/colorWhite"
+                    android:src="@drawable/ic_pencil"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="@string/profile"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/userName"
+                  android:textColor="@color/colorWhite"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.SubHeader"/>
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="@string/profile"
+                  android:id="@+id/accountNumber"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:textColor="@color/colorWhite"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.SubHeader"/>
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="@string/profile"
+                  android:id="@+id/accountType"
+                  android:textColor="@color/colorWhite"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:textAppearance="@style/WorkItApp.SubHeader"/>
+
+        <TextView android:layout_width="wrap_content"
+                  tools:text="@string/profile"
+                  android:id="@+id/rutNumber"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:textColor="@color/colorWhite"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.SubHeader"/>
+        <TextView android:layout_width="wrap_content"
+                  tools:text="@string/profile"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/addedOn"
+                  android:textColor="@color/colorWhite"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="@style/WorkItApp.SubHeader"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

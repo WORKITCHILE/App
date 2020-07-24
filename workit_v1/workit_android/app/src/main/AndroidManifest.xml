@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.app.workit">
+
+    <uses-permission
+            android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission
+            android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <application
+            android:name="com.app.workit.WorkItApp"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:networkSecurityConfig="@xml/network_security_config"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
+
+
+        <activity android:name="com.app.workit.view.ui.common.SplashActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.signup.SignUpActivity"
+                android:screenOrientation="portrait"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.MainActivity"
+                android:screenOrientation="portrait"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.login.LogInActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.roleselection.RoleSelectActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.HomeActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.notification.NotificationActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.inbox.InboxActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.evaluation.EvaluationActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.runningjob.RunningJobActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.history.HistoryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.support.SupportActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.credits.CreditsActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@style/Base.Theme.AppCompat"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.common.profile.ProfileActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
+
+        <activity
+                android:name="com.app.workit.view.ui.hire.postjob.PostJobActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.app.workit.view.ui.common.map.MapActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:name="com.app.workit.view.ui.hire.singlejob.SingleJobActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustPan|stateAlwaysHidden"/>
+        <activity
+                android:name="com.app.workit.view.ui.common.emailverification.EmailVerificationActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:name="com.app.workit.view.ui.work.search.SubCategoryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:name="com.app.workit.view.ui.work.search.SearchActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+                android:name="com.app.workit.view.ui.work.bids.BidsActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:name="com.app.workit.view.ui.hire.bid.BidInfoActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:name="com.app.workit.view.ui.common.chat.ChatActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="adjustPan|stateAlwaysHidden"/>
+        <activity
+                android:name="com.app.workit.view.ui.common.evaluation.ratereview.RateReviewActivity"
+                android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+                android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:name="com.app.workit.view.ui.hire.workschedule.WorkScheduleActivity"
+                android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+                android:name="com.app.workit.view.ui.common.termsofservice.TermsOfServiceActivity"/> <!-- optional (needed if default theme has no action bar) -->
+
+        <service
+                android:name="com.app.workit.FirebaseMessagingService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/ic_stat_workit"/>
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/colorAccent"/>
+
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="@string/default_notification_channel_id"/>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+                   android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges=
+                          "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:label="@string/app_name"/>
+        <activity
+                android:name="com.facebook.CustomTabActivity"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.ui.work.accountsettings.AccountSettingsActivity"
+                  android:configChanges=
+                          "keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@drawable/container_background_with_corner"
+        android:padding="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+            android:id="@+id/container_middle"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/separator"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:id="@+id/date"
+                android:maxLines="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorLightPurple"
+                tools:text="@string/profile_description"/>
+
+        <TextView
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:layout_marginTop="@dimen/margin_small"
+                android:id="@+id/time"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorLightPurple"
+                android:text="@string/empty_time"/>
+
+
+    </LinearLayout>
+
+    <View
+            android:id="@+id/separator"
+            android:layout_width="@dimen/separator_height"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:background="@color/colorLightPurple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/container_last"
+            app:layout_constraintStart_toEndOf="@id/container_middle"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+            android:id="@+id/container_last"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/separator"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        <ViewSwitcher android:layout_width="match_parent"
+                      android:id="@+id/view_switcher"
+                      android:layout_height="match_parent">
+            <TextView
+                    android:id="@+id/empty_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_jobs_scheduled"
+                    android:textSize="@dimen/text_size_small"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textColor="@color/colorWhite"/>
+
+            <ViewSwitcher android:layout_width="match_parent"
+                          android:id="@+id/view_switcher_job_info"
+                          android:layout_height="wrap_content">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:id="@+id/noOfJobs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            tools:text="@string/no_jobs_scheduled"
+                            android:textSize="@dimen/text_size_small"
+                            android:textAppearance="@style/WorkItApp.SubHeader"
+                            android:textColor="@color/colorGreen"/>
+                    <TextView
+                            android:id="@+id/jobMoreInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|start"
+                            tools:text="@string/no_jobs_scheduled"
+                            android:textAppearance="@style/WorkItApp.SubHeader"
+                            android:textColor="@color/colorLightPurple"/>
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:id="@+id/jobStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            tools:text="@string/no_jobs_scheduled"
+                            android:textSize="@dimen/text_size_small"
+                            android:textAppearance="@style/WorkItApp.SubHeader"
+                            android:textColor="@color/textColorRed"/>
+                    <TextView
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:id="@+id/jobName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/no_jobs_scheduled"
+                            android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                            android:textColor="@color/colorLightPurple"/>
+                    <TextView
+                            android:id="@+id/jobAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/work"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:textSize="@dimen/text_size_small"
+                            android:textAppearance="@style/WorkItApp.TextAppearanceXXSmall"
+                            android:textColor="@color/colorLightPurple"/>
+
+                </LinearLayout>
+            </ViewSwitcher>
+
+        </ViewSwitcher>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Padding-->
+    <dimen name="padding_x_small">2dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_medium_large">12dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_x_large">20dp</dimen>
+    <dimen name="padding_xxx_large">32dp</dimen>
+    <dimen name="padding_xxxx_large">40dp</dimen>
+    <dimen name="padding_xxxxx_large">64dp</dimen>
+    <!--Margin-->
+    <dimen name="margin_x_small">@dimen/padding_x_small</dimen>
+    <dimen name="margin_small">@dimen/padding_small</dimen>
+    <dimen name="margin_medium">@dimen/padding_medium</dimen>
+    <dimen name="margin_medium_large">@dimen/padding_medium_large</dimen>
+    <dimen name="margin_large">@dimen/padding_large</dimen>
+    <dimen name="margin_x_large">@dimen/padding_x_large</dimen>
+    <dimen name="margin_xxx_large">@dimen/padding_xxx_large</dimen>
+    <dimen name="margin_xxxx_large">@dimen/padding_xxxx_large</dimen>
+    <dimen name="margin_xxxxx_large">@dimen/padding_xxxxx_large</dimen>
+
+    <dimen name="edit_text_border_width">1dp</dimen>
+    <dimen name="edit_text_border_radius">20dp</dimen>
+    <dimen name="edit_text_height">40dp</dimen>
+    <!--Logo -->
+    <dimen name="logo_width">256dp</dimen>
+    <dimen name="logo_height">64dp</dimen>
+    <dimen name="min_logo_width">128dp</dimen>
+    <dimen name="min_logo_height">64dp</dimen>
+    <!--Text Size-->
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_larger">22sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_medium_large">18sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_x_large">24sp</dimen>
+    <dimen name="text_size_x_small">13sp</dimen>
+    <dimen name="text_size_xx_large">30sp</dimen>
+    <dimen name="text_size_xx_small">12sp</dimen>
+    <dimen name="text_size_xxx_large">36sp</dimen>
+    <dimen name="text_size_xxxx_large">40sp</dimen>
+
+    <dimen name="default_padding_top">8dp</dimen>
+    <dimen name="default_padding_bottom">8dp</dimen>
+    <dimen name="inner_padding_left">0dp</dimen>
+    <dimen name="inner_padding_right">0dp</dimen>
+    <dimen name="floating_label_text_size">12sp</dimen>
+    <dimen name="bottom_text_size">12sp</dimen>
+    <dimen name="inner_components_spacing">8dp</dimen>
+    <dimen name="bottom_ellipsis_height">4dp</dimen>
+    <!--Toolbar-->
+    <dimen name="toolbar_max_height">164dp</dimen>
+    <dimen name="toolbar_profile_max_height">196dp</dimen>
+    <!--Button-->
+    <dimen name="button_min_height">45dp</dimen>
+    <dimen name="button_min_width">200dp</dimen>
+    <dimen name="btn_default_corner">20dp</dimen>
+    <dimen name="default_stroke_width">2dp</dimen>
+    <dimen name="separator_height">1dp</dimen>
+    <!--Container-->
+    <dimen name="spinner_height">40dp</dimen>
+    <dimen name="comment_height">128dp</dimen>
+    <dimen name="container_radius">32dp</dimen>
+    <dimen name="max_map_height">128dp</dimen>
+    <dimen name="drawer_header_height">148dp</dimen>
+    <!--CommonSizes-->
+    <dimen name="chat_bubble_width">256dp</dimen>
+    <dimen name="fab_common_size">24dp</dimen>
+    <dimen name="min_icon_size">32dp</dimen>
+    <!--Elevation-->
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <!--ProgressWheel-->
+    <dimen name="progress_wheel_radius">24dp</dimen>
+    <dimen name="progress_wheel_radius_x">48dp</dimen>
+    <dimen name="min_editext_field">96dp</dimen>
+</resources>

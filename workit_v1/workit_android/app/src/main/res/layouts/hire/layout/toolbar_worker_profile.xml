@@ -1,0 +1,140 @@
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="240dp"
+                                                 android:background="@color/colorDarkPurple">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorDarkPurple"
+            app:expandedTitleGravity="top"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?actionBarSize"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/avatar"
+                        android:layout_gravity="center"
+                        android:layout_width="64dp"
+                        android:layout_centerInParent="true"
+                        android:layout_height="64dp"
+                        android:src="@drawable/user_icon"/>
+                <TextView
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:id="@+id/repost_job"
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/colorLightPurple"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@string/repost_job"/>
+
+                <TextView
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:id="@+id/rate_user"
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/colorLightPurple"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@string/rate_user"/>
+
+
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    tools:text="@string/continue_"/>
+
+            <TextView
+                    android:id="@+id/occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textSize="@dimen/text_size_small"
+                    tools:text="@string/continue_"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rating_bar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:theme="@style/AppThemeRatingBar"/>
+
+            <TextView
+                    android:id="@+id/view_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorLightPurple"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:textAppearance="@style/WorkItApp.SubHeader"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@string/view_reviews"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageButton
+                        android:id="@+id/iv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_back"/>
+
+                <TextView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/profile"
+                        android:textAppearance="@style/WorkItApp.Header"
+                        android:textColor="@color/colorLightPurple"/>
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

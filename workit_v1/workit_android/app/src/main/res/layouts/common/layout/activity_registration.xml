@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/toolbar_registration"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_large">
+
+            <ImageButton
+                    android:id="@+id/btn_upload_profile"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="@dimen/padding_medium"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_user_drawable"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_profile_desc"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:gravity="start"
+                    android:hint="@string/profile_description"
+                    android:inputType="textImeMultiLine"
+                    android:maxLines="4"
+                    android:minHeight="@dimen/comment_height"
+                    android:padding="@dimen/padding_small"
+                    app:workit_hideUnderline="true"
+                    app:workit_maxCharacters="@integer/max_comment_character"
+                    app:workit_minCharacters="@integer/min_comment_character"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_name"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_father_name"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/father_name"
+                    android:inputType="textPersonName"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_mother_name"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/mother_name"
+                    android:inputType="textPersonName"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_occupation"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/occupation"
+                    android:inputType="text"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_id_number"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:maxLength="11"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/id_number"
+
+                    android:inputType="number"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_dob"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/date_of_birth"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItAutoCompleteTextView
+                    android:id="@+id/et_address"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/address"
+                    app:workit_clearButton="true"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:orientation="horizontal">
+
+                <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        app:ccp_defaultNameCode="CL"
+                        android:layout_width="wrap_content"
+                        app:ccp_customMasterCountries="CL"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+
+                <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                        android:id="@+id/et_mobile"
+                        style="@style/WorkItTextInputLayout.EditText.Empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:hint="@string/mobile_number"
+                        android:maxLength="10"
+                        android:inputType="phone"
+                        app:workit_hideUnderline="true"/>
+            </LinearLayout>
+
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_email"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_password"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/password"
+
+                    android:inputType="textPassword"/>
+
+            <com.app.workit.view.ui.customview.edittext.WorkItEditText
+                    android:id="@+id/et_confirm_password"
+                    style="@style/WorkItTextInputLayout.EditText.Corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"/>
+
+            <!--            <com.app.workit.view.ui.customview.edittext.WorkItEditText-->
+            <!--                    android:id="@+id/et_nationality"-->
+            <!--                    style="@style/WorkItTextInputLayout.EditText.Corner"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="@dimen/margin_large"-->
+            <!--                    android:hint="@string/nationality"-->
+            <!--                    android:inputType="textAutoComplete"/>-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:minHeight="@dimen/spinner_height">
+
+                <Spinner
+                        android:id="@+id/spinner_countries"
+                        style="@style/Spinner"
+                        android:textAlignment="textStart"
+                        android:gravity="start"
+                        android:background="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/id_picture_both_side"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                    android:textColor="@color/textColorBlack"/>
+
+            <LinearLayout
+                    android:id="@+id/btn_upload_document_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_background_with_border_corner"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_small">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:adjustViewBounds="true"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_camera"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:text="@string/add_id_picture"
+                        android:textAppearance="@style/WorkItApp.SubHeader"
+                        android:textColor="@color/colorBlack"/>
+
+                <ImageButton
+                        android:id="@+id/btn_upload_document_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="@dimen/padding_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_picture_drawable"
+                        android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <ImageView
+                    android:id="@+id/iv_id_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone"/>
+
+
+            <CheckBox
+                    android:id="@+id/cb_terms_and_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/accept_terms_and_conditions"/>
+
+
+            <Button
+                    android:id="@+id/btn_finish"
+                    style="@style/ButtonPurpleNoOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:text="@string/finish"
+                    android:textAppearance="@style/WorkItApp.SubTitle.Button"
+                    android:textColor="@color/colorLightPurple"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

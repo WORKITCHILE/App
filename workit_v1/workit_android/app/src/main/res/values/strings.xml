@@ -1,0 +1,325 @@
+<resources>
+    <string name="app_name">WorkIt</string>
+    <string name="default_notification_channel_id">1</string>
+    <!--    <string name="google_maps_key">AIzaSyBN4jC9UZBFnvbu-PX3A5HXue9crXS56ZQ</string>-->
+    <string name="google_maps_key">AIzaSyAFNJwycb9jul04lJHbJyXV7prNO3utPDU</string>
+    <string name="facebook_app_id">491447791527809</string>
+    <string name="google_sign_in_token">863747706156-g9fb00k4f3ckr3m3pfv7rm9f6ii0f2f1.apps.googleusercontent.com
+    </string>
+    <string name="fb_login_protocol_scheme">fb491447791527809</string>
+
+    <!--Login-->
+    <string name="email">Email</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="workit">Work It</string>
+    <string name="log_in_with_email">Log in with Email</string>
+    <string name="log_in">Login</string>
+    <string name="or">OR</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="new_at_work">New at WorkIT</string>
+    <string name="facebook_error">Couldn\'t connect to facebook</string>
+    <string name="create_an_account">
+        <u>Create account</u>
+    </string>
+    <string name="sign_in">Sign In</string>
+    <string name="msg_google_login_success">Sign In with google successfully</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="continue_">Continue</string>
+    <string name="continue_with_your_email">Continue with your Email</string>
+    <string name="did_you_forget_your_password">
+        <u>Did you forget your password?</u>
+    </string>
+    <!--SignUp-->
+    <string name="create_your_profile">Create your Profile</string>
+    <string name="profile_description">Profile Description</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="father_name">Father Last Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="mother_name">Mother Last Name</string>
+    <string name="id_number">ID Number</string>
+    <string name="id_picture_both_side">ID Picture</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="occupation">Occupation</string>
+    <string name="occupation_">Occupation / Speciality</string>
+    <string name="mobile_number">Mobile</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="next">Next</string>
+    <string name="nationality">Nationality</string>
+    <string name="finish">Finish</string>
+    <string name="password">Password</string>
+    <string name="accept_terms_and_conditions">Accept <u>terms</u> &amp;
+        <u>conditions</u>
+    </string>
+    <!--Verify Email-->
+    <string name="resend_otp">
+        <u>Resend OTP</u>
+    </string>
+    <string name="verify_email">Verify Email</string>
+    <string name="didnot_receive_your_otp">Didn\'t receive your OTP?</string>
+    <string name="we_have_sent_an_otp_to_verify">We have sent an OTP to your Email.</string>
+    <!--Validations-->
+    <string name="loading">Loading…</string>
+    <string name="password_mismatch">Password mismatch</string>
+    <string name="check_our_terms_and_conditions">Please check our terms and conditions</string>
+    <string name="field_required">%1$s field is required</string>
+    <string name="please_enter_valid_email">Please enter valid email</string>
+    <string name="enter_valid_password">Enter valid password</string>
+    <string name="please_connect_to_your_network">Please connect to your network and try again</string>
+    <!--Dummy Names-->
+    <string name="dummy_name">John Smith</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <!--Drawer Names-->
+    <string name="history">History</string>
+    <string name="inbox">Inbox</string>
+    <string name="share_app">Share App</string>
+    <string name="notifications">Notifications</string>
+    <string name="support">Support</string>
+    <string name="credits">Credits</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="accounts">Accounts</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="logout">Logout</string>
+    <!--Bank Info-->
+    <string name="this_information_must_be">**This information must be completed only the first one that will provide a
+        service
+        ,then this information will be saved in your profile and you can edit it in your profile if necessary
+    </string>
+    <string name="save">Save</string>
+    <string name="account_number">Account number</string>
+    <string name="account_type">Account type</string>
+    <string name="select_your_bank">Select your bank</string>
+    <string name="rut_id_number">RUT(id number)</string>
+    <string name="full_name">Full Name</string>
+    <string name="enter_your_bank_details">Enter your bank account details for the deposit of your service</string>
+    <!--Common-->
+    <string name="evaluation_your_service">Evaluate Your Service</string>
+    <string name="msg_rate_successfully">Rated Successfully</string>
+    <string name="msg_social_signup">Few more details and your account is ready.</string>
+    <string name="msg_are_you_sure_you_want">Are you sure you want to pay from wallet for this job?</string>
+    <string name="msg_are_you_logout">Are you sure you want to logout.</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="please_press_back_again_to_exit">Please click BACK again to exit.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="float_value">%1$.2f</string>
+    <string name="email_">Email: %1$s</string>
+    <string name="credit">Credits: %1$s</string>
+    <string name="work">Work</string>
+    <string name="job_name">Job Name: %1$s</string>
+    <string name="cancel_job">Cancel Job</string>
+    <string name="cancel_bid">Cancel Bid</string>
+    <string name="work_schedule">Work Schedule\n%1$s</string>
+    <string name="work_schedule_title">Work Schedule</string>
+    <string name="job_category">Job Category\n%1$s</string>
+    <string name="job_sub_category">Job Subcategory\n%1$s</string>
+    <string name="details_of_the_offer_job">Details of the offered Job\n%1$s</string>
+    <string name="hire">Hire</string>
+    <string name="select_option">Select an Option</string>
+    <string name="ok">Ok</string>
+    <string name="no_credits_found">No credits found.</string>
+    <string name="no_accounts_found">No accounts found.</string>
+    <string name="no_bids_found">No bids found.</string>
+    <string name="no_reviews_found">No Reviews found</string>
+    <string name="no_notifications_found">No Notifications found</string>
+    <string name="no_jobs_found">No Jobs Found</string>
+    <string name="no_scheduled_work">No Scheduled Work</string>
+    <string name="no_messages_found">No Active Messages found.</string>
+    <string name="no_evaluations_found">No Evaluations found.</string>
+    <string name="some_error">Something went wrong</string>
+    <!--Profile-->
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <!--Post  A Job-->
+    <string name="post_a_job_now">Post a Job Now</string>
+    <string name="post_a_job">Post a Job</string>
+    <string name="post_job">Post Job</string>
+    <string name="offered_amount">Offered Amount</string>
+    <string name="accepted_by">Accepted By</string>
+    <string name="awarded_to">Awarded To</string>
+    <string name="posted_by">Posted By</string>
+    <string name="msg_job_posted">Job Posted Successfully</string>
+    <string name="msg_job_edited">Job Edited Successfully</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
+    <string name="confirm_job">Confirm Job</string>
+    <string name="start_job">Start Job</string>
+    <string name="finish_job">Finish Job</string>
+    <string name="job_details">Job Details</string>
+    <string name="job_title">Job Title</string>
+    <string name="photos">Photos</string>
+    <string name="workit_comission">**WORKIT commission will be deducted, approx 8%</string>
+    <string name="payment_for_the_service">Payment for the service($)</string>
+    <string name="work_date">Work Date</string>
+    <string name="work_time">Work Time</string>
+    <string name="add_id_picture">Add ID Picture</string>
+    <string name="add_photo">Add Photos(optional)</string>
+    <string name="add_image">+Add Image</string>
+    <string name="sub_category">Subcategory</string>
+    <string name="hint_category">*Minimum 1</string>
+    <string name="category">Category</string>
+    <string name="hint_message">Write Message</string>
+    <string name="job_approach">Job Approach</string>
+    <string name="map_view">Map View</string>
+    <string name="time">Time</string>
+    <string name="start_date">Start Date</string>
+    <string name="posted_on">Posted On</string>
+    <string name="posted_job">Posted Job</string>
+    <string name="job_schedule">Job Schedule</string>
+    <string name="bid_comment">Bid Comment</string>
+    <string name="vendor_description">Vendor Description</string>
+    <string name="job_description">Job Description</string>
+    <string name="name_of_the_work">Name of the work</string>
+    <string name="post">Post</string>
+    <!--Posted Jobs-->
+    <string name="message">Message</string>
+    <string name="job_started">Job Started</string>
+    <string name="job_rejected">Job Rejected</string>
+    <string name="job_accepted">Job Accepted</string>
+    <string name="bid_rejected">Bid Rejected by %1$s</string>
+    <string name="job_canceled_successfully">Job Cancelled Successfully</string>
+    <string name="job_reposted_successfully">Job Reposted Successfully</string>
+    <string name="place_bid">Place Bid</string>
+    <string name="job_location">Job Location</string>
+    <string name="view_full_screen">
+        <u>View Full Screen</u>
+    </string>
+    <string name="type_here">Type here</string>
+    <string name="your_comment">Your Comment</string>
+    <string name="txt_job_date">Posted On %1$s</string>
+    <string name="txt_job_amount">$%1$s</string>
+    <string name="txt_job_amount_in_dollar">$%1$2.f</string>
+    <string name="txt_job_price">Price($)\n$%1$s</string>
+    <string name="txt_no_of_bids">Bid(s): %1$d</string>
+    <string name="counter_offer">Counter offer</string>
+    <!--Profile-->
+    <string name="txt_credits">Credits: %1$s</string>
+    <string name="txt_email">Email: %1$s</string>
+    <string name="txt_id_number">ID Number: %1$s</string>
+    <string name="txt_nationality">Nationality\n%1$s</string>
+    <string name="txt_address">Address\n%1$s</string>
+    <string name="txt_age">%1$d years</string>
+    <!--Filter-->
+    <string name="location">Location</string>
+    <string name="price">Price</string>
+    <string name="distance">Distance</string>
+    <string name="to_be_done">To be done</string>
+    <string name="select_month_and_year">Select month and year</string>
+    <string name="filter">Filter</string>
+    <string name="from_0_km">From 0 KM</string>
+    <string name="upto_100_km">Up to 100 KM</string>
+    <string name="from_0_dollar">From $0</string>
+    <string name="upto_100_dollar">Up to $100</string>
+    <!--My Bids-->
+    <string name="my_bids">My Bids</string>
+    <string name="dummy_price">5000</string>
+    <string name="recents">Recents</string>
+    <string name="evaluations">Evaluations</string>
+    <string name="add_credits">
+        <u>Add Credits</u>
+    </string>
+    <string name="running_job">Running Jobs</string>
+    <string name="bids_placed">Bids Placed</string>
+    <string name="active_bids">Active Bids</string>
+    <string name="rejected_bids">Rejected Bids</string>
+    <string name="bid_placed">Bid Placed</string>
+    <string name="available_credits">Available Credits</string>
+    <string name="available_bal">Aval. Balance: $%1$s</string>
+    <string name="add_credts">
+        <u>Add Credits</u>
+    </string>
+    <!--History-->
+    <string name="posted_jobs">Posted Jobs</string>
+    <string name="received_jobs">Received Jobs</string>
+    <!--Job Approach-->
+    <string name="all">All</string>
+    <string name="in_person">In Person</string>
+    <string name="come_and_get_id">Come and get it</string>
+    <string name="take_it_to_workplace">Take it to workplace</string>
+    <!--Evaluation -->
+    <string name="skip">Skip</string>
+    <string name="submit">Submit</string>
+    <string name="leave_us_a_comment">Leave us a comment</string>
+    <string name="did_the_client_tried_to_contact">Did the client tried to contact you outside WORKIT?</string>
+    <string name="how_many_stars_you_give_to">How many stars you give to the customer</string>
+    <!--Dialog-->
+    <string name="msg_repost_job">%1$s has retracted his offer. Do you want to repost with the new time or want to
+        cancel the complete job?
+    </string>
+    <string name="msg_job_time_warning">Job Time should be 2 hour ahead of current time.</string>
+    <string name="msg_cancel_job">Do you want to cancel the job?</string>
+    <string name="msg_job_cancel_warning">Job cancellation will be punished with 15% of the posted job amount. Still you
+        want to cancel the job?
+    </string>
+    <string name="bids_placed_successfully">Bid Placed Successfully\nPlease wait for the owner to accept.</string>
+    <string name="bids_canceled_successfully">Bid Canceled Successfully</string>
+    <string name="thank_you_your_account_has_been_created">Thanks, your account has been successfully created.</string>
+    <string name="locate_on_map">Locate on Map</string>
+    <string name="are_you_sure_edit_job">Are you sure you want to Edit job?</string>
+    <string name="are_you_sure_cancel_job">Are you sure you want to cancel the job?</string>
+    <string name="are_you_sure_cancel_bid">Are you sure you want to cancel the bid?</string>
+    <!--Search-->
+    <string name="zero_value">0</string>
+    <string name="progress">%1$d</string>
+    <string name="jobs">Jobs</string>
+    <!--Permission-->
+    <string name="try_again">Try Again</string>
+    <string name="cancel">Cancel</string>
+    <string name="allow_to_access_your_location">Allow to access your location.</string>
+    <string name="we_need_your_location_to_perform_search">We need your location to perform search.</string>
+    <!--Bid-->
+    <string name="release_payment">Release Payment</string>
+    <string name="your_job_has_been_starte">Your job has been started</string>
+    <string name="your_job_has_been_finished">Your job has been finished</string>
+    <string name="job_finished_successfully">Job Finished Successfully</string>
+    <string name="job_finished">Job Finished</string>
+    <string name="job_canceled">Job Canceled</string>
+    <string name="job_finished_release_payment">Job Finished, Release Payment</string>
+    <string name="please_add_you_bank_account">Please add your bank account before proceeding further.</string>
+    <string name="please_confirm_to_start_job">Please confirm to Start Job</string>
+    <string name="waiting_for_client_to_confirm">Waiting for client to confirm job</string>
+    <string name="waiting_for_vendor_to_confirm">Waiting for vendor to start job</string>
+    <string name="waiting_for_client_to_release_amount">Waiting for client to release amount</string>
+    <string name="owner">Owner</string>
+    <string name="you">you</string>
+    <string name="repost_job">Repost Job</string>
+    <string name="rate_user">Rate User</string>
+    <string name="repost">Repost</string>
+    <string name="reviews">Reviews</string>
+    <string name="view_reviews">View Reviews</string>
+    <string name="bid_rejected_by_owner">Bid Rejected by owner</string>
+    <string name="bid_rejected_by">Bid Rejected by %1$s</string>
+    <string name="user_occupation">User Occupation: %1$s</string>
+    <string name="countered_bid">Countered Bid: $%1$.2f</string>
+    <!--Payment-->
+    <string name="pay_via_wallet">
+        <u>Pay via wallet</u>
+    </string>
+    <string name="choose_payment_method">Please select payment method</string>
+    <!--Credit-->
+    <string name="not_enough_credits">Not enough credits in your wallet</string>
+    <string name="price_in_dollar">$%1$s</string>
+    <string name="enter_min_credit_amount">Enter min credit amount</string>
+    <!--Chat-->
+    <string name="start_sending_message">Start sending message</string>
+    <string name="typing_here">Start Typing Here…</string>
+    <!--Support-->
+    <string name="msg_support_success">Thanks for connecting with WORKIT, One of the consumer representative will
+        connect with you within the next 48 hours
+    </string>
+    <string name="send">Send</string>
+    <!--Work Schedule-->
+    <string name="no_jobs_scheduled">No Jobs Scheduled</string>
+    <string name="empty_time">--:--</string>
+    <string name="txt_no_of_jobs_scheduled">%1$d jobs scheduled.</string>
+    <string name="txt_click_here">Click here to view more</string>
+    <!--Account Settings-->
+    <string name="txt_added_on">Added On: %1$s</string>
+    <string name="txt_rut_number">RUT: %1$s</string>
+    <string name="add_account">+ Add Account</string>
+    <string name="txt_bank_username">Username: %1$s</string>
+    <string name="txt_account_type">Account Type: %1$s</string>
+    <string name="txt_account_number">Account Number: %1$s</string>
+</resources>

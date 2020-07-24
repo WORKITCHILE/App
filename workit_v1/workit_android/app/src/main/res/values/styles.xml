@@ -1,0 +1,248 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+
+    <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">85%</item>
+        <item name="android:windowMinWidthMinor">85%</item>
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme"
+           parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+           parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_rounded</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="WorkItApp"></style>
+
+    <style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:windowIsFloating">false</item>
+        <!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+    </style>
+    <!--Animations-->
+    <style name="dialog_slide_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_start</item>
+        <item name="android:windowExitAnimation">@anim/slide_end</item>
+    </style>
+    <!--EditText-->
+    <style name="WorkItTextInputLayout">
+        <item name="android:textColorPrimary">@color/textNormalState</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:fontFamily">@font/robotomono_regular</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="colorControlHighlight">@color/textNormalStateWithOpacity</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="android:minHeight">@dimen/edit_text_height</item>
+    </style>
+
+    <style name="WorkItTextInputLayout.EditText">
+
+        <item name="workit_hideUnderline">true</item>
+        <item name="android:background">@drawable/edittext_background_with_border</item>
+        <item name="android:textColor">@color/edit_text_border_color</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <style name="WorkItTextInputLayout.EditText.Corner" parent="WorkItTextInputLayout.EditText">
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="workit_hideUnderline">true</item>
+        <item name="android:background">@drawable/edittext_background_border_with_corner</item>
+    </style>
+
+    <style name="TextInputLayout.EditText.Corner" parent="WorkItTextInputLayout.EditText">
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:background">@drawable/edittext_background_border_with_corner</item>
+    </style>
+
+    <style name="WorkItTextInputLayout.EditText.Empty" parent="WorkItTextInputLayout.EditText">
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="workit_hideUnderline">true</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="WorkItTextInputLayout.EditText.Corner.Blue" parent="WorkItTextInputLayout.EditText.Corner">
+        <item name="android:background">@drawable/editext_no_background_with_blue_corner</item>
+    </style>
+
+    <!--RatingBar-->
+    <!--    <style name="WorkItRatingBar" parent="Widget.AppCompat.RatingBar">-->
+    <!--        <item name="android:progressDrawable">@drawable/workit_rating_bar</item>-->
+    <!--        <item name="colorControlNormal">#f57c00</item>-->
+    <!--        <item name="colorControlActivated">#c51162</item>-->
+    <!--    </style>-->
+
+    <style name="AppThemeSmallRatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorAccent">@color/colorLightPurple</item>
+        <item name="android:colorControlNormal">@color/colorLightPurple</item>
+    </style>
+
+    <style name="AppThemeRatingBar" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="colorAccent">@color/colorLightPurple</item>
+        <item name="android:colorControlNormal">@color/colorLightPurple</item>
+    </style>
+
+    <!--Rating-->
+    <style name="Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:padding">0dp</item>
+    </style>
+    <!--TextView-->
+    <style name="WorkItApp.TextAppearanceSmall">
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="WorkItApp.TextAppearanceXSmall">
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">@dimen/text_size_x_small</item>
+    </style>
+
+    <style name="WorkItApp.TextAppearanceXXSmall">
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">@dimen/text_size_xx_small</item>
+    </style>
+
+    <style name="FactoryPrice.TabAppearance" parent="WorkItApp.TextAppearanceSmall">
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="WorkItApp.TextAppearanceSmall.Bold" parent="WorkItApp.TextAppearanceSmall">
+        <item name="android:fontFamily">@font/verdana_bold</item>
+    </style>
+
+    <style name="WorkItApp.TextAppearanceMedium">
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="WorkItApp.TextAppearanceLarge">
+        <item name="fontFamily">@font/verdana</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="WorkItApp.Header">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/textColorWhite</item>
+        <item name="android:fontFamily">@font/robotomono_medium</item>
+    </style>
+
+    <style name="WorkItApp.SubHeader" parent="WorkItApp.Header">
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/verdana</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="WorkItApp.SubHeader.Bold" parent="WorkItApp.SubHeader">
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/verdana_bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="WorkItApp.SubTitle">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:letterSpacing">0.17</item>
+    </style>
+
+    <style name="WorkItApp.Title">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="WorkItApp.Title.Button">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:letterSpacing">0.17</item>
+    </style>
+
+
+    <style name="WorkItApp.SubTitle.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_xx_small</item>
+        <item name="android:fontFamily">@font/verdana</item>
+        <item name="android:letterSpacing">0.17</item>
+    </style>
+
+
+    <!--Button-->
+    <style name="ButtonBlue">
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:textColor">@color/button_purple_text</item>
+        <item name="android:theme">@android:style/ThemeOverlay.Material.Dark</item>
+        <!--        <item name="android:background">@drawable/button_purple_bg</item>-->
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonPurple">
+        <item name="textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:textColor">@color/button_purple_text</item>
+        <item name="android:theme">@android:style/ThemeOverlay.Material.Dark</item>
+        <item name="android:background">@drawable/btn_dark_purple_bg</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonPurpleNoOutline">
+        <item name="textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:textColor">@color/button_purple_text</item>
+        <item name="android:theme">@android:style/ThemeOverlay.Material.Dark</item>
+        <item name="android:background">@drawable/btn_dark_purple_no_outline_bg</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonNoBackgroundWithBorder">
+        <item name="textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:textColor">@color/button_purple_text</item>
+        <item name="android:theme">@android:style/ThemeOverlay.Material.Dark</item>
+        <item name="android:background">@drawable/btn_with_no_background_with_corner</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <!--CheckBox-->
+    <style name="CheckboxStyle" parent="AppTheme">
+        <item name="colorAccent">@color/colorPurple</item>
+        <item name="android:textColorSecondary">@color/colorBlack</item>
+    </style>
+
+    <!--Chip Style-->
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAppearance">@style/WorkItApp.SubHeader</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+</resources>

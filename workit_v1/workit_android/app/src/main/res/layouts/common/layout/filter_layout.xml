@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:orientation="vertical"
+                                                   android:padding="@dimen/padding_large">
+
+    <LinearLayout
+            android:id="@+id/container_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/filter"
+                android:textAppearance="@style/WorkItApp.Header"
+                android:textColor="@color/colorBlack"/>
+
+        <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_clear_drawable"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/container_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_top">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to_be_done"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorDarkPurple"/>
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+        <!--            tools:itemCount="5"-->
+        <!--            tools:listitem="@layout/item_filter_chip" />-->
+        <com.google.android.material.chip.ChipGroup
+                android:id="@+id/category_group"
+                android:layout_width="match_parent"
+                app:singleSelection="true"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/container_distance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_category">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/distance"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorDarkPurple"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/distance_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="0"
+                android:progressTint="@color/colorLightPurple"
+                android:thumb="@drawable/seekbar_thumb"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/from_0_km"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceXXSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <TextView
+                    android:id="@+id/distance_progress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall.Bold"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/zero_value"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/upto_100_km"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceXXSmall"
+                    android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/container_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_distance">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorDarkPurple"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/price_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="0"
+                android:progressTint="@color/colorLightPurple"
+                android:thumb="@drawable/seekbar_thumb"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/from_0_dollar"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceXXSmall"
+                    android:textColor="@color/colorBlack"/>
+
+            <TextView
+                    android:id="@+id/price_progress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceSmall.Bold"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/zero_value"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/upto_100_dollar"
+                    android:textAppearance="@style/WorkItApp.TextAppearanceXXSmall"
+                    android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:id="@+id/container_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_price">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location"
+                android:textAppearance="@style/WorkItApp.TextAppearanceSmall"
+                android:textColor="@color/colorDarkPurple"/>
+
+        <AutoCompleteTextView
+                style="@style/TextInputLayout.EditText.Corner"
+                android:id="@+id/search_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/address"/>
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/btn_continue"
+            style="@style/ButtonPurpleNoOutline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/continue_"
+            android:textAppearance="@style/WorkItApp.SubHeader"
+            android:textColor="@color/colorLightPurple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_location"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="@string/reviews"
+              android:padding="@dimen/padding_medium"
+              android:gravity="center"
+              android:textColor="@color/colorBlack"
+              android:textAppearance="@style/WorkItApp.Header"/>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/colorSeparator"
+          android:layout_height="@dimen/separator_height"/>
+
+    <ViewSwitcher
+            android:id="@+id/view_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <include layout="@layout/progress_view"/>
+        <include layout="@layout/common_recyclerview_layout"/>
+    </ViewSwitcher>
+</LinearLayout>

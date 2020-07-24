@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "863747706156",
+    "firebase_url": "https://workit-de544.firebaseio.com",
+    "project_id": "workit-de544",
+    "storage_bucket": "workit-de544.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863747706156:android:ecde1538cc70e6f62c7089",
+        "android_client_info": {
+          "package_name": "com.app.workit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863747706156-28ro4q5fvn6kqn81pso3l9u7dqiicsh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.workit",
+            "certificate_hash": "5f3bcdc1e6b1c83fce860a27395c3bffe810164c"
+          }
+        },
+        {
+          "client_id": "863747706156-0qbf0dq980jk219b0g9j7l7ljiablnvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFNJwycb9jul04lJHbJyXV7prNO3utPDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863747706156-g9fb00k4f3ckr3m3pfv7rm9f6ii0f2f1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "863747706156-ps4oak8f2hpm997uau2h9m97ovlo31pb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "workit.Work-It"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
