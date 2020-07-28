@@ -126,16 +126,6 @@ func selectedDate(date: Int) {
            self.distanceSliderValue.text = "\(sender.value)"
     }
     
-    @IBAction func backAction(_ sender: Any) {
-       let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.pushViewController(myVC, animated: true)
-    }
     
     @IBAction func filterAction(_ sender: Any) {
         let myVC = self.storyboard?.instantiateViewController(withIdentifier: "FilterViewController") as! FilterViewController
@@ -143,6 +133,9 @@ func selectedDate(date: Int) {
         self.navigationController?.present(myVC, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        debugPrint(segue.destination)
+    }
     
 }
 

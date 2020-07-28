@@ -91,13 +91,6 @@
             }
         }
         
-        //MARK: IBAction
-        @IBAction func postJobAction(_ sender: Any) {
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-            //self.storyboard?.instantiateViewController(identifier: "PostJobViewController") as! PostJobViewController
-            self.navigationController?.pushViewController(myVC, animated: true)
-        }
-        
         @IBAction func sideMenuAction(_ sender: Any) {
             self.menu()
         }

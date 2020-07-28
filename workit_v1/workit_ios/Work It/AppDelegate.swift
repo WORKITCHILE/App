@@ -117,7 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             initialViewController = storyboard.instantiateViewController(withIdentifier:"WelcomeViewController") as! WelcomeViewController
         }
         //}
-        navigationController.pushViewController(initialViewController, animated: true)
+        
+        navigationController.pushViewController(initialViewController, animated: false)
+        navigationController.viewControllers.remove(at: 0)
     }
     
 }

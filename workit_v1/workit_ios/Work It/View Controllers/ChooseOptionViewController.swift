@@ -17,6 +17,9 @@ class ChooseOptionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "workit_color")
+        
         remoteConfig = RemoteConfig.remoteConfig()
         let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
         remoteConfig.configSettings = remoteConfigSettings
@@ -56,10 +59,10 @@ class ChooseOptionViewController: UIViewController {
     func selectUserRole(type: String){
         ActivityIndicator.show(view: self.view)
         self.view.isUserInteractionEnabled = true
-        let param = [
-            "type":type,
-            "uid":Singleton.shared.userInfo.user_id
-        ] as? [String:Any]
+        let param: [String : Any] = [
+            "type": type,
+            "uid": Singleton.shared.userInfo.user_id!
+        ]
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_CHANGE_USER_ROLE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CHANGE_USER_ROLE) { (response) in
             K_CURRENT_USER = type
             UserDefaults.standard.set(type, forKey: UD_CURRENT_USER)
@@ -96,11 +99,11 @@ class ChooseOptionViewController: UIViewController {
          }
     
     func display() {
-           var softUpdate =  "update_soft_ios"
-           var updateRequired = "force_update_required_ios"
-           var currentVersion = "force_update_current_version_ios"
-           var updateUrl = "force_update_store_url_ios"
-           let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            let softUpdate =  "update_soft_ios"
+            let updateRequired = "force_update_required_ios"
+            let currentVersion = "force_update_current_version_ios"
+            _ = "force_update_store_url_ios"
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
            if(remoteConfig[updateRequired].stringValue == "true"){
                if(remoteConfig[currentVersion].stringValue == appVersion){
                    return
@@ -146,10 +149,6 @@ class ChooseOptionViewController: UIViewController {
            exit(0);
        }
     
-    // MARK: IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
     
     @IBAction func hireAction(_ sender: Any) {
         if(responseOk){
