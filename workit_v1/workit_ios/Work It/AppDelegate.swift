@@ -154,14 +154,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //This function work when we tap on nitification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        if let data = userInfo as? [String:Any] {
+        if userInfo is [String:Any] {
             self.handleUserNotfication(info: userInfo)
            
         }
     }
     
     func handleUserNotfication(info:[AnyHashable:Any]){
-        if let token = UserDefaults.standard.value(forKey: UD_TOKEN) as? String {
+        if (UserDefaults.standard.value(forKey: UD_TOKEN) as? String) != nil {
             if let data = info as? [String:Any] {
                 let navigationController = self.window?.rootViewController as! UINavigationController
                 switch (data["gcm.notification.type"] as! String) {
@@ -250,12 +250,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 case "12":
                     initialViewController = storyboard.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
                     (initialViewController as! ViewJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "13":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
-                    Singleton.shared.jobData = []
-                    (initialViewController as! JobDetailViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
                     navigationController.pushViewController(initialViewController, animated: true)
                     break
                 case "13":

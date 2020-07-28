@@ -21,7 +21,9 @@
 #import <FirebaseAuth/FIRMultiFactorResolver.h>
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import <FirebaseAuth/FirebaseAuthVersion.h>
-#import "FirebaseCore/Sources/Private/FirebaseCoreInternal.h"
+#import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FIRLogger.h>
+#import <FirebaseCore/FIROptions.h>
 
 #import "FirebaseAuth/Sources/Auth/FIRAuthGlobalWorkQueue.h"
 #import "FirebaseAuth/Sources/Auth/FIRAuth_Internal.h"

@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		263D09B9CAE68DDAAAA6F198 /* Pods_Work_It_Work_ItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74226F328F1BB08F589941C /* Pods_Work_It_Work_ItUITests.framework */; };
 		445DD0E23E29104C9A43DF33 /* Pods_Work_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0F8541A44771AC0FDFD1B /* Pods_Work_It.framework */; };
+		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
 		D2085A4D2487693F00F58742 /* VendorReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */; };
 		D2196B2323CC9D5800DC9572 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2196B2223CC9D5800DC9572 /* ChatViewController.swift */; };
-		D21CE9AD240A66BE000E4793 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CE9AC240A66BE000E4793 /* RatingViewController.swift */; };
 		D22BAAFE23D5EAEB0060001A /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BAAFD23D5EAEB0060001A /* CreditViewController.swift */; };
 		D244A3332421D8490098B6FD /* firebaseConfigInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = D244A3322421D8480098B6FD /* firebaseConfigInfo.plist */; };
 		D24F213923E7F6DB0062BE72 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24F213823E7F6DB0062BE72 /* ImagePickerViewController.swift */; };
@@ -60,8 +59,6 @@
 		D2D7691723BE2C08001485E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D7691523BE2C08001485E1 /* Main.storyboard */; };
 		D2D7691923BE2C0C001485E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D7691823BE2C0C001485E1 /* Assets.xcassets */; };
 		D2D7691C23BE2C0C001485E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D7691A23BE2C0C001485E1 /* LaunchScreen.storyboard */; };
-		D2D7692723BE2C0C001485E1 /* Work_ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7692623BE2C0C001485E1 /* Work_ItTests.swift */; };
-		D2D7693223BE2C0C001485E1 /* Work_ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7693123BE2C0C001485E1 /* Work_ItUITests.swift */; };
 		D2D7694E23BE2CC2001485E1 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7694023BE2CC1001485E1 /* Protocol.swift */; };
 		D2D7694F23BE2CC2001485E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7694123BE2CC2001485E1 /* Extensions.swift */; };
 		D2D7695023BE2CC2001485E1 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7694223BE2CC2001485E1 /* Singleton.swift */; };
@@ -85,36 +82,18 @@
 		D2E2EEB023E2D865006315C3 /* verdana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E2EEAC23E2D865006315C3 /* verdana.ttf */; };
 		D2EF187E244B07B7001DCDC5 /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EF187D244B07B7001DCDC5 /* AccountSettingViewController.swift */; };
 		D2F2D1AC23BF40B50086E13D /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2D1AB23BF40B50086E13D /* ForgotPasswordViewController.swift */; };
-		D3D83A6067DDAD6CEBBB495F /* Pods_Work_ItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418BF597A529C9DE5591B939 /* Pods_Work_ItTests.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D2D7692323BE2C0C001485E1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2D7690423BE2C08001485E1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2D7690B23BE2C08001485E1;
-			remoteInfo = "Work It";
-		};
-		D2D7692E23BE2C0C001485E1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2D7690423BE2C08001485E1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2D7690B23BE2C08001485E1;
-			remoteInfo = "Work It";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		40DA953440E833DE0F746DA9 /* Pods-Work It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It.release.xcconfig"; path = "Target Support Files/Pods-Work It/Pods-Work It.release.xcconfig"; sourceTree = "<group>"; };
 		418BF597A529C9DE5591B939 /* Pods_Work_ItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_ItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		6D1E1216FCCEE2253C09C6C2 /* Pods-Work ItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work ItTests.debug.xcconfig"; path = "Target Support Files/Pods-Work ItTests/Pods-Work ItTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9450EEEFFF54782AAAE05F88 /* Pods-Work It-Work ItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It-Work ItUITests.release.xcconfig"; path = "Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests.release.xcconfig"; sourceTree = "<group>"; };
 		96F8BBA278F9B9376E26FBFD /* Pods-Work It-Work ItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It-Work ItUITests.debug.xcconfig"; path = "Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A74226F328F1BB08F589941C /* Pods_Work_It_Work_ItUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_It_Work_ItUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorReviewsViewController.swift; sourceTree = "<group>"; };
 		D2196B2223CC9D5800DC9572 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		D21CE9AC240A66BE000E4793 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RatingViewController.swift; path = "/Users/qw/Desktop/Projects/Work It/Work It/View Controllers/RatingViewController.swift"; sourceTree = "<absolute>"; };
 		D22BAAFD23D5EAEB0060001A /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		D244A3322421D8480098B6FD /* firebaseConfigInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = firebaseConfigInfo.plist; path = "Firebase config/firebaseConfigInfo.plist"; sourceTree = "<group>"; };
 		D24F213723E7DB6E0062BE72 /* Work It.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Work It.entitlements"; sourceTree = "<group>"; };
@@ -166,12 +145,6 @@
 		D2D7691823BE2C0C001485E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2D7691B23BE2C0C001485E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2D7691D23BE2C0C001485E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2D7692223BE2C0C001485E1 /* Work ItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Work ItTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2D7692623BE2C0C001485E1 /* Work_ItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_ItTests.swift; sourceTree = "<group>"; };
-		D2D7692823BE2C0C001485E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2D7692D23BE2C0C001485E1 /* Work ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Work ItUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2D7693123BE2C0C001485E1 /* Work_ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Work_ItUITests.swift; sourceTree = "<group>"; };
-		D2D7693323BE2C0C001485E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2D7694023BE2CC1001485E1 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocol.swift; path = "Helper Files/Protocol.swift"; sourceTree = "<group>"; };
 		D2D7694123BE2CC2001485E1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "Helper Files/Extensions.swift"; sourceTree = "<group>"; };
 		D2D7694223BE2CC2001485E1 /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Singleton.swift; path = "Helper Files/Singleton.swift"; sourceTree = "<group>"; };
@@ -206,22 +179,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				445DD0E23E29104C9A43DF33 /* Pods_Work_It.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2D7691F23BE2C0C001485E1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D3D83A6067DDAD6CEBBB495F /* Pods_Work_ItTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2D7692A23BE2C0C001485E1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				263D09B9CAE68DDAAAA6F198 /* Pods_Work_It_Work_ItUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,8 +276,8 @@
 				D28BD95D23BF547F0012ADDC /* Dashboard */,
 				D266D11623BF35D40026FE3A /* Registration */,
 				D25B8B8123CD7BAF00F35416 /* AccountDetailViewController.swift */,
-				D21CE9AC240A66BE000E4793 /* RatingViewController.swift */,
 				D2BBC54523CD8DFA007D85B5 /* PaymentViewController.swift */,
+				4F908E9524C9E7AB008F524C /* RatingViewController.swift */,
 				D25DEA3D2410C67900924557 /* SuccessMsgViewController.swift */,
 				D2B4D4AB24633A260025CD0F /* MapViewController.swift */,
 			);
@@ -380,8 +337,6 @@
 			isa = PBXGroup;
 			children = (
 				D2D7690E23BE2C08001485E1 /* Work It */,
-				D2D7692523BE2C0C001485E1 /* Work ItTests */,
-				D2D7693023BE2C0C001485E1 /* Work ItUITests */,
 				D2D7690D23BE2C08001485E1 /* Products */,
 				8C20DD959B3B0A12AE4D969D /* Pods */,
 				5ACA4779BE5D7C951B7990A7 /* Frameworks */,
@@ -392,8 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				D2D7690C23BE2C08001485E1 /* Work It.app */,
-				D2D7692223BE2C0C001485E1 /* Work ItTests.xctest */,
-				D2D7692D23BE2C0C001485E1 /* Work ItUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,24 +370,6 @@
 				D2D7691D23BE2C0C001485E1 /* Info.plist */,
 			);
 			path = "Work It";
-			sourceTree = "<group>";
-		};
-		D2D7692523BE2C0C001485E1 /* Work ItTests */ = {
-			isa = PBXGroup;
-			children = (
-				D2D7692623BE2C0C001485E1 /* Work_ItTests.swift */,
-				D2D7692823BE2C0C001485E1 /* Info.plist */,
-			);
-			path = "Work ItTests";
-			sourceTree = "<group>";
-		};
-		D2D7693023BE2C0C001485E1 /* Work ItUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D2D7693123BE2C0C001485E1 /* Work_ItUITests.swift */,
-				D2D7693323BE2C0C001485E1 /* Info.plist */,
-			);
-			path = "Work ItUITests";
 			sourceTree = "<group>";
 		};
 		D2D7693F23BE2CAE001485E1 /* Helper Files */ = {
@@ -520,46 +455,6 @@
 			productReference = D2D7690C23BE2C08001485E1 /* Work It.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D2D7692123BE2C0C001485E1 /* Work ItTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2D7693923BE2C0C001485E1 /* Build configuration list for PBXNativeTarget "Work ItTests" */;
-			buildPhases = (
-				D4D80E84A2370F7D34246C30 /* [CP] Check Pods Manifest.lock */,
-				D2D7691E23BE2C0C001485E1 /* Sources */,
-				D2D7691F23BE2C0C001485E1 /* Frameworks */,
-				D2D7692023BE2C0C001485E1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D2D7692423BE2C0C001485E1 /* PBXTargetDependency */,
-			);
-			name = "Work ItTests";
-			productName = "Work ItTests";
-			productReference = D2D7692223BE2C0C001485E1 /* Work ItTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D2D7692C23BE2C0C001485E1 /* Work ItUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2D7693C23BE2C0C001485E1 /* Build configuration list for PBXNativeTarget "Work ItUITests" */;
-			buildPhases = (
-				61B34DE86AEDDA0077768091 /* [CP] Check Pods Manifest.lock */,
-				D2D7692923BE2C0C001485E1 /* Sources */,
-				D2D7692A23BE2C0C001485E1 /* Frameworks */,
-				D2D7692B23BE2C0C001485E1 /* Resources */,
-				247346BCDB8202BCF4DCDC5F /* [CP] Embed Pods Frameworks */,
-				2326FE7385707E269321EFA3 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D2D7692F23BE2C0C001485E1 /* PBXTargetDependency */,
-			);
-			name = "Work ItUITests";
-			productName = "Work ItUITests";
-			productReference = D2D7692D23BE2C0C001485E1 /* Work ItUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -572,14 +467,6 @@
 				TargetAttributes = {
 					D2D7690B23BE2C08001485E1 = {
 						CreatedOnToolsVersion = 11.2.1;
-					};
-					D2D7692123BE2C0C001485E1 = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = D2D7690B23BE2C08001485E1;
-					};
-					D2D7692C23BE2C0C001485E1 = {
-						CreatedOnToolsVersion = 11.2.1;
-						TestTargetID = D2D7690B23BE2C08001485E1;
 					};
 				};
 			};
@@ -597,8 +484,6 @@
 			projectRoot = "";
 			targets = (
 				D2D7690B23BE2C08001485E1 /* Work It */,
-				D2D7692123BE2C0C001485E1 /* Work ItTests */,
-				D2D7692C23BE2C0C001485E1 /* Work ItUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -622,57 +507,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2D7692023BE2C0C001485E1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2D7692B23BE2C0C001485E1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2326FE7385707E269321EFA3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		247346BCDB8202BCF4DCDC5F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		508A52F57B13D572950AB8C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -689,28 +526,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Work It-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61B34DE86AEDDA0077768091 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Work It-Work ItUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -751,28 +566,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Work It/Pods-Work It-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D4D80E84A2370F7D34246C30 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Work ItTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -786,6 +579,7 @@
 				D25BFAA523C0486200CBB4DE /* ReceivedJobViewController.swift in Sources */,
 				D2E124BB240948A9009DF90A /* SlidingButton.swift in Sources */,
 				D2D7695523BE2CC2001485E1 /* Router.swift in Sources */,
+				4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */,
 				D25DEA3E2410C67A00924557 /* SuccessMsgViewController.swift in Sources */,
 				D28BD95C23BF528D0012ADDC /* SignupViewController.swift in Sources */,
 				D2E124B624091BC4009DF90A /* RunningJobViewController.swift in Sources */,
@@ -809,7 +603,6 @@
 				D266D11A23BF35F90026FE3A /* LoginViewController.swift in Sources */,
 				D2D7694F23BE2CC2001485E1 /* Extensions.swift in Sources */,
 				D28BD95A23BF4A3E0012ADDC /* ResetPasswordViewController.swift in Sources */,
-				D21CE9AD240A66BE000E4793 /* RatingViewController.swift in Sources */,
 				D2D7695023BE2CC2001485E1 /* Singleton.swift in Sources */,
 				D2B714F124A716370023CFC2 /* CalendarDetailViewController.swift in Sources */,
 				D2A173CB249B5C5C0077FA50 /* ScheduleCalenderViewController.swift in Sources */,
@@ -846,36 +639,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2D7691E23BE2C0C001485E1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2D7692723BE2C0C001485E1 /* Work_ItTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2D7692923BE2C0C001485E1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2D7693223BE2C0C001485E1 /* Work_ItUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D2D7692423BE2C0C001485E1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2D7690B23BE2C08001485E1 /* Work It */;
-			targetProxy = D2D7692323BE2C0C001485E1 /* PBXContainerItemProxy */;
-		};
-		D2D7692F23BE2C0C001485E1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2D7690B23BE2C08001485E1 /* Work It */;
-			targetProxy = D2D7692E23BE2C0C001485E1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2D7691523BE2C08001485E1 /* Main.storyboard */ = {
@@ -1065,94 +829,6 @@
 			};
 			name = Release;
 		};
-		D2D7693A23BE2C0C001485E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D1E1216FCCEE2253C09C6C2 /* Pods-Work ItTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6W7VB43FV;
-				INFOPLIST_FILE = "Work ItTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-ItTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Work It.app/Work It";
-			};
-			name = Debug;
-		};
-		D2D7693B23BE2C0C001485E1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF7BCB50A2AFF590E1FF66E7 /* Pods-Work ItTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6W7VB43FV;
-				INFOPLIST_FILE = "Work ItTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-ItTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Work It.app/Work It";
-			};
-			name = Release;
-		};
-		D2D7693D23BE2C0C001485E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96F8BBA278F9B9376E26FBFD /* Pods-Work It-Work ItUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6W7VB43FV;
-				INFOPLIST_FILE = "Work ItUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-ItUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Work It";
-			};
-			name = Debug;
-		};
-		D2D7693E23BE2C0C001485E1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9450EEEFFF54782AAAE05F88 /* Pods-Work It-Work ItUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6W7VB43FV;
-				INFOPLIST_FILE = "Work ItUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-ItUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Work It";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1170,24 +846,6 @@
 			buildConfigurations = (
 				D2D7693723BE2C0C001485E1 /* Debug */,
 				D2D7693823BE2C0C001485E1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2D7693923BE2C0C001485E1 /* Build configuration list for PBXNativeTarget "Work ItTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2D7693A23BE2C0C001485E1 /* Debug */,
-				D2D7693B23BE2C0C001485E1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2D7693C23BE2C0C001485E1 /* Build configuration list for PBXNativeTarget "Work ItUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2D7693D23BE2C0C001485E1 /* Debug */,
-				D2D7693E23BE2C0C001485E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

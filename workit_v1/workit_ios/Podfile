@@ -9,7 +9,7 @@ target 'Work It' do
 
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftyCodeView'
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.9.1'
   pod 'Toaster'
   pod 'SideMenu', '~> 5.0'
   pod 'SDWebImage'
@@ -34,14 +34,5 @@ target 'Work It' do
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth'
   pod 'FirebaseUI/Phone'
-
-  target 'Work ItTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'Work ItUITests' do
-    # Pods for testing
-  end
 
 end

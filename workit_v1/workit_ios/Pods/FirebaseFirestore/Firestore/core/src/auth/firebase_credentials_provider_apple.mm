@@ -16,12 +16,14 @@
 
 #include "Firestore/core/src/auth/firebase_credentials_provider_apple.h"
 
-#import "FirebaseCore/Sources/Private/FirebaseCoreInternal.h"
-#import "Interop/Auth/Public/FIRAuthInterop.h"
+#import <FirebaseAuthInterop/FIRAuthInterop.h>
+#import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FIRAppInternal.h>
+#import <FirebaseCore/FIRComponentContainer.h>
+#import <FirebaseCore/FIROptionsInternal.h>
 
 #include "Firestore/core/src/util/error_apple.h"
 #include "Firestore/core/src/util/hard_assert.h"
-#include "Firestore/core/src/util/log.h"
 #include "Firestore/core/src/util/string_apple.h"
 
 namespace firebase {
@@ -95,8 +97,8 @@ void FirebaseCredentialsProvider::GetToken(TokenListener completion) {
       // Cancel the request since the user changed while the request was
       // outstanding so the response is likely for a previous user (which
       // user, we can't be sure).
-      LOG_DEBUG("GetToken aborted due to token change.");
-      return GetToken(completion);
+      completion(util::Status(Error::kErrorAborted,
+                              "GetToken aborted due to token change."));
     } else {
       if (error == nil) {
         if (token != nil) {

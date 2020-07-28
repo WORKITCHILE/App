@@ -19,6 +19,8 @@ class SessionManager: NSObject {
         print("METHOD: \(method)")
         print("PARAMETERS: \(parameter)")
         print("TOKEN: \(getHeader(reqCode: requestCode))")
+        
+     
 
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { (dataResponse) in
 
@@ -90,7 +92,7 @@ class SessionManager: NSObject {
                 }
 
             }, usingThreshold: UInt64.init(), to: url, method: .post, headers: getHeader(reqCode: U_IMAGE_UPLOAD)) { (encodingResult) in
-
+            
                 switch encodingResult {
                 case .success(let response,_,_):
                     response.responseString(completionHandler: { (dataResponse) in
@@ -110,6 +112,7 @@ class SessionManager: NSObject {
     UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Error", message: error.localizedDescription, action1Name: "Ok", action2Name: nil)
                     break
                 }
+            
             }
         }
 
@@ -127,7 +130,7 @@ class SessionManager: NSObject {
     }
 
     func getHeader(reqCode: String) -> HTTPHeaders? {
-        var token = UserDefaults.standard.string(forKey: UD_TOKEN)
+        let token = UserDefaults.standard.string(forKey: UD_TOKEN)
         if (reqCode != U_LOGIN){
             if(token == nil){
                 return nil

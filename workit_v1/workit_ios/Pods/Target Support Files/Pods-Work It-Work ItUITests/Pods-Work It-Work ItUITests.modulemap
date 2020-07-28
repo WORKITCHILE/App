@@ -1,6 +1,0 @@
-framework module Pods_Work_It_Work_ItUITests {
-  umbrella header "Pods-Work It-Work ItUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

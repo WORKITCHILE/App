@@ -13,17 +13,17 @@ open class SwiftyCodeItemView: UIView {
     override open func awakeFromNib() {
         super.awakeFromNib()
         textField.text = ""
-        //applyBorderedShadow()
+        applyBorderedShadow()
         
         isUserInteractionEnabled = false
     }
     
     private func applyBorderedShadow() {
-        layer.shadowOpacity = 0
-       // layer.shadowColor = UIColor(red: 27/255.0, green: 30/255.0, blue: 230/255.0, alpha: 0).cgColor
-       // layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowRadius = 0
-        //layer.masksToBounds = false
+        layer.shadowOpacity = 1
+        layer.shadowColor = UIColor(red: 227/255.0, green: 230/255.0, blue: 230/255.0, alpha: 1).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowRadius = 8
+        layer.masksToBounds = false
         layer.cornerRadius = 4
     }
     

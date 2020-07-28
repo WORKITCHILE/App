@@ -105,7 +105,7 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
                 let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
                 ActivityIndicator.show(view: self.view)
                 let param:[String:Any] = [
-                    "user_id":Singleton.shared.userInfo.user_id,
+                    "user_id": Singleton.shared.userInfo.user_id,
                     "bank_detail_id":self.accountDetail.bank_detail_id ?? "",
                     "RUT":self.idNumber.text ?? "",
                     "full_name":self.userName.text ?? "",

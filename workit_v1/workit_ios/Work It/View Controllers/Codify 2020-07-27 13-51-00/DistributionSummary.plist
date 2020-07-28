@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Codify</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>x86_64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>BDFD2F8D76B93654E37AD4204595532AFDF17794</string>
+				<key>dateExpires</key>
+				<string>09-03-21</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>com.apple.security.cs.disable-library-validation</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>Codify.app</string>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>2E2EMRJ7QY</string>
+				<key>name</key>
+				<string>Banco de Credito e Inversiones</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

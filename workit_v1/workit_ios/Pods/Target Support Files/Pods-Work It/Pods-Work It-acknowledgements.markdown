@@ -4756,11 +4756,11 @@ Copyright 2020 Google
 
 ## GoogleMaps
 
-Copyright 2019 Google
+Copyright 2020 Google
 
 ## GooglePlaces
 
-Copyright 2019 Google
+Copyright 2020 Google
 
 ## GoogleSignIn
 
