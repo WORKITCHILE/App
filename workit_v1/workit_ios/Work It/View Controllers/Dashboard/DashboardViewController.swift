@@ -33,7 +33,7 @@ class DashboardViewController: UIViewController {
                 ActivityIndicator.hide()
             })
         }else {
-          self.categoriesData = Singleton.shared.getCategories
+            self.categoriesData = Singleton.shared.getCategories
             dashboard.reloadData()
         }
     }
@@ -43,6 +43,13 @@ class DashboardViewController: UIViewController {
     @IBAction func sideMenuAction(_ sender: Any) {
         self.view.gestureRecognizers?.removeAll()
         self.menu()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let myVC = segue.destination as! SubCategoryViewController
+        
+        myVC.categoryId = self.categoriesData[dashboard.indexPathsForSelectedItems![0].row].category_id ?? ""
+        myVC.titleHeading = self.categoriesData[dashboard.indexPathsForSelectedItems![0].row].category_name ?? ""
     }
     
 }
@@ -63,10 +70,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SubCategoryViewController") as! SubCategoryViewController
-        myVC.categoryId = self.categoriesData[indexPath.row].category_id ?? ""
-        myVC.titleHeading = self.categoriesData[indexPath.row].category_name ?? ""
-        self.navigationController?.pushViewController(myVC, animated: true)
+       
     }
    
     

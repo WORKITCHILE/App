@@ -33,8 +33,8 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //self.navigationController?.isNavigationBarHidden = true
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         //self.view.backgroundColor = darkBlue
         if(jobDetail?.job_id != nil){
             if(Singleton.shared.userInfo.user_id == self.jobDetail?.job_vendor_id){

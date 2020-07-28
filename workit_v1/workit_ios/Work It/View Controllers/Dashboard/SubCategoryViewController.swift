@@ -15,8 +15,6 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var selecteCategoryTable: UITableView!
     @IBOutlet weak var noDataLabel: DesignableUILabel!
     @IBOutlet weak var nextButton: View!
-    @IBOutlet weak var titleLabel: DesignableUILabel!
-    
     
     var subcategoryData = [GetSubcategoryResponse]()
     var categoryId = String()
@@ -26,7 +24,8 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getSubCategoryData()
-        self.titleLabel.text = titleHeading
+        
+        //self.titleLabel.text = titleHeading
         
     }
     
@@ -54,6 +53,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func nextAction(_ sender: Any) {
+        /*
         if(self.selectedSubcategories.count == 0){
             Singleton.shared.showToast(text: "Select category")
         }else {
@@ -61,6 +61,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
             myVC.subcategoryId = Array(self.selectedSubcategories)
             self.navigationController?.pushViewController(myVC, animated: true)
         }
+        */
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

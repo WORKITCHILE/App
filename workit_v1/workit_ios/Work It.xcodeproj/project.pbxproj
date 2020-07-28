@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		445DD0E23E29104C9A43DF33 /* Pods_Work_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0F8541A44771AC0FDFD1B /* Pods_Work_It.framework */; };
+		4F5DC1BE24CFB4780076FCDF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */; };
 		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
 		D2085A4D2487693F00F58742 /* VendorReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */; };
 		D2196B2323CC9D5800DC9572 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2196B2223CC9D5800DC9572 /* ChatViewController.swift */; };
@@ -87,6 +88,7 @@
 /* Begin PBXFileReference section */
 		40DA953440E833DE0F746DA9 /* Pods-Work It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It.release.xcconfig"; path = "Target Support Files/Pods-Work It/Pods-Work It.release.xcconfig"; sourceTree = "<group>"; };
 		418BF597A529C9DE5591B939 /* Pods_Work_ItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_ItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		6D1E1216FCCEE2253C09C6C2 /* Pods-Work ItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work ItTests.debug.xcconfig"; path = "Target Support Files/Pods-Work ItTests/Pods-Work ItTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9450EEEFFF54782AAAE05F88 /* Pods-Work It-Work ItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It-Work ItUITests.release.xcconfig"; path = "Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F5DC1BB24CFB45E0076FCDF /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				4F5DC1BC24CFB4690076FCDF /* storyboards */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		4F5DC1BC24CFB4690076FCDF /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */,
+			);
+			name = storyboards;
+			sourceTree = "<group>";
+		};
 		5ACA4779BE5D7C951B7990A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +372,7 @@
 		D2D7690E23BE2C08001485E1 /* Work It */ = {
 			isa = PBXGroup;
 			children = (
+				4F5DC1BB24CFB45E0076FCDF /* ui */,
 				D244A3322421D8480098B6FD /* firebaseConfigInfo.plist */,
 				D2E124B9240947ED009DF90A /* Animation */,
 				D2E124AD24090D7E009DF90A /* Map View */,
@@ -498,6 +517,7 @@
 				D277A8852436162F0010A5F5 /* Verdana Bold.ttf in Resources */,
 				D255720524027A5B008444E1 /* GoogleService-Info.plist in Resources */,
 				D244A3332421D8490098B6FD /* firebaseConfigInfo.plist in Resources */,
+				4F5DC1BE24CFB4780076FCDF /* Storyboard.storyboard in Resources */,
 				D2E2EEB023E2D865006315C3 /* verdana.ttf in Resources */,
 				D2801C3823D6F227001AD735 /* RobotoMono-Bold.ttf in Resources */,
 				D2D7691923BE2C0C001485E1 /* Assets.xcassets in Resources */,

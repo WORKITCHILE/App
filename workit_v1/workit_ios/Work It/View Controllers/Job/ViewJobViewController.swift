@@ -236,8 +236,10 @@ extension ViewJobViewController: UICollectionViewDelegate, UICollectionViewDataS
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         newImageView.addGestureRecognizer(tap)
         self.view.addSubview(newImageView)
-        self.navigationController?.isNavigationBarHidden = true
+        
+        //self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
+        
     }
     
     @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
