@@ -67,8 +67,8 @@ class ChooseOptionViewController: UIViewController {
             K_CURRENT_USER = type
             UserDefaults.standard.set(type, forKey: UD_CURRENT_USER)
             if(type == K_POST_JOB){
-              let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostedJobViewController") as! PostedJobViewController
-              self.navigationController?.pushViewController(myVC, animated: true)
+                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "main")
+                self.view.window?.rootViewController = myVC
             }else if(type == K_WANT_JOB){
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
                 self.navigationController?.pushViewController(myVC, animated: true)
@@ -88,7 +88,6 @@ class ChooseOptionViewController: UIViewController {
              
              remoteConfig.fetch(withExpirationDuration: TimeInterval(expirationDuration)) { (status, error) -> Void in
                  if status == .success {
-                     print("Config fetched!")
                      self.remoteConfig.activateFetched()
                  } else {
                      print("Config not fetched")
@@ -104,7 +103,7 @@ class ChooseOptionViewController: UIViewController {
             let currentVersion = "force_update_current_version_ios"
             _ = "force_update_store_url_ios"
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-           if(remoteConfig[updateRequired].stringValue == "true"){
+            if(remoteConfig[updateRequired].stringValue == "true"){
                if(remoteConfig[currentVersion].stringValue == appVersion){
                    return
                }else{
@@ -114,9 +113,9 @@ class ChooseOptionViewController: UIViewController {
                        self.showPopup(title: "Update", msg:  "New Version is available on App Store",action: 1)
                    }
                }
-           }else {
+            }else {
                return
-           }
+            }
        }
        
        func showPopup(title: String, msg: String,action:Int?) {

@@ -15,18 +15,11 @@ class SessionManager: NSObject {
     var createWallet: Bool = true
 
     func methodForApiCalling<T: Codable>(url: String, method: HTTPMethod, parameter: Parameters?, objectClass: T.Type, requestCode: String,completionHandler: @escaping (T) -> Void) {
-        print("URL: \(url)")
-        print("METHOD: \(method)")
-        print("PARAMETERS: \(parameter)")
-        print("TOKEN: \(getHeader(reqCode: requestCode))")
-        
-     
 
+     
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { (dataResponse) in
 
             let statusCode = dataResponse.response?.statusCode
-            print("statusCode: ",dataResponse.response?.statusCode)
-            print("dataResponse: \(dataResponse)")
 
             switch dataResponse.result {
             case .success(_):

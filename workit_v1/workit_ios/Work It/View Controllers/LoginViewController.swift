@@ -25,18 +25,18 @@ class LoginViewController: UIViewController {
         self.emailAddress.text = self.email
     }
     
-    //MARK: IBActions
-    @IBAction func backButton(_ sender: Any) {
-        self.back()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func sendFcmToken(userId: String){
         DispatchQueue.global(qos: .background).async {
             let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
-            let param = [
-                "user_id":userId,
-                "fcm_token":fcmToken
-                ] as? [String:Any]
+            let param : [String: String] = [
+                "user_id": userId,
+                "fcm_token": fcmToken! as String
+            ]
             
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
                 
@@ -54,10 +54,14 @@ class LoginViewController: UIViewController {
                     myVC.isNewuser = true
                     self.navigationController?.pushViewController(myVC, animated: true)
                 }else {
+                    
                     Singleton.shared.showToast(text: "Successfully Logged In")
-                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ChooseOptionViewController") as! ChooseOptionViewController
-                    self.navigationController?.pushViewController(myVC, animated: true)
+                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "main")
+                    self.view.window?.rootViewController = myVC
+                    
+                    
                 }
+                
                 ActivityIndicator.hide()
             }
     }
@@ -67,12 +71,18 @@ class LoginViewController: UIViewController {
         self.password.resignFirstResponder()
         
         K_CURRENT_USER = K_POST_JOB
+        
         if(self.password.text!.isEmpty){
             Singleton.shared.showToast(text: "Enter your password")
         }else {
+            
+            
             ActivityIndicator.show(view: self.view)
             Auth.auth().signIn(withEmail: self.emailAddress.text ?? "", password: self.password.text ?? "") { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
+                
+                debugPrint(error as Any)
+                
+                guard self != nil else { return }
                 if(authResult == nil){
                     Singleton.shared.showToast(text: "Wrong credentials")
                     ActivityIndicator.hide()
@@ -94,8 +104,6 @@ class LoginViewController: UIViewController {
                     authResult?.user.getIDToken(completion: { (token, error) in
                         if(error == nil){
                             UserDefaults.standard.setValue(token ?? "", forKey: UD_TOKEN)
-                        }else {
-                            print(error)
                         }
                     })
                     ActivityIndicator.hide()

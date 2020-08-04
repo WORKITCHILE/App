@@ -24,21 +24,11 @@ class NotificationViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_NOTIFICATION +  (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetNotification.self, requestCode: U_GET_NOTIFICATION) { (response) in
             self.notificationData = response.data
-            if(self.notificationData?.count == 0){
-                self.noDataLabel.isHidden = false
-            }else {
-                self.noDataLabel.isHidden = true
-            }
+            self.noDataLabel.isHidden = self.notificationData?.count != 0
             self.notificationTable.reloadData()
             ActivityIndicator.hide()
         }
     }
-    
-    //MARK: IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
-    
     
 }
 

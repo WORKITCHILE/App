@@ -70,7 +70,7 @@ func selectedDate(date: Int) {
         }
         
         ActivityIndicator.show(view: self.view)
-        let param = [
+        let param : [String:Any] = [
             "subcategory_id": self.subcategoryId,
             "user_id": Singleton.shared.userInfo.user_id ?? "",
             "address":address,
@@ -83,7 +83,7 @@ func selectedDate(date: Int) {
             "distance":distane,
             "search": searchText,
             "date_filter":(date == 0 ? "":date)
-            ] as? [String:Any]
+            ]
            SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_WORKER_POSTED_JOB , method: .post, parameter: param, objectClass: GetJob.self, requestCode: U_GET_WORKER_POSTED_JOB) { (response) in
                
             self.jobData = []

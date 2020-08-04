@@ -96,30 +96,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setInitialController(){
-        let navigationController = self.window?.rootViewController as! UINavigationController
-        Singleton.shared.userInfo = Singleton.getUserInfo()
-        // self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        //                if !(initialViewController.hasLocationPermission()){
-        //                   initialViewController = storyboard.instantiateViewController(withIdentifier: "EnableLocationViewController") as! EnableLocationViewController
-        //         }else {
-        if let myVC = UserDefaults.standard.value(forKey: UD_TOKEN) as? String {
-            if(Singleton.shared.userInfo.status == "ACTIVE"){
-                initialViewController = storyboard.instantiateViewController(withIdentifier: "ChooseOptionViewController") as! ChooseOptionViewController
-                K_CURRENT_USER = UserDefaults.standard.value(forKey: UD_CURRENT_USER) as? String
-            }else if(Singleton.shared.userInfo.status == "INACTIVE"){
-                initialViewController = storyboard.instantiateViewController(withIdentifier:"WelcomeViewController") as! WelcomeViewController
-            }else {
-                initialViewController = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
-            }
+        let initial_controller: UIViewController
+        Singleton.shared.userInfo = Singleton.getUserInfo()
+      
+        if UserDefaults.standard.value(forKey: UD_TOKEN) as? String != nil && Singleton.shared.userInfo.status == "ACTIVE" {
+            
+            K_CURRENT_USER = UserDefaults.standard.value(forKey: UD_CURRENT_USER) as? String
+            initial_controller = storyboard.instantiateViewController(withIdentifier: "main")
+            
+
         }else {
             
-            initialViewController = storyboard.instantiateViewController(withIdentifier:"WelcomeViewController") as! WelcomeViewController
+            let signup_storyboard  = UIStoryboard(name: "signup", bundle: nil)
+            initial_controller = signup_storyboard.instantiateViewController(withIdentifier:"WelcomeViewController")
         }
         //}
         
-        navigationController.pushViewController(initialViewController, animated: false)
-        navigationController.viewControllers.remove(at: 0)
+        self.window?.rootViewController = initial_controller
+  
     }
     
 }

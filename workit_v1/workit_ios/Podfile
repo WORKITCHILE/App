@@ -11,7 +11,6 @@ target 'Work It' do
   pod 'SwiftyCodeView'
   pod 'Alamofire', '~> 4.9.1'
   pod 'Toaster'
-  pod 'SideMenu', '~> 5.0'
   pod 'SDWebImage'
   pod 'AccountKit'
   pod 'Firebase/Core'

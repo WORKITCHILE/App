@@ -18,7 +18,6 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var codeMainView: UIView!
     @IBOutlet weak var sendOTPView: View!
     @IBOutlet weak var headingLabel: DesignableUILabel!
-    @IBOutlet weak var backButtonView: UIView!
     
     var emailAdd = String()
     var isNewuser = false
@@ -43,29 +42,27 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func sendOtpAction(_ sender: Any) {
-        if(self.email.text!.isEmpty){
+        if self.email.text!.isEmpty {
             Singleton.shared.showToast(text: "Enter email address")
         }else if !(self.isValidEmail(emailStr: self.email.text ?? "")){
             Singleton.shared.showToast(text: "Enter valid email sddress")
-        }else{
-            if(self.isNewuser){
-                ActivityIndicator.show(view: self.view)
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_VERIFY_MAIL, method: .post, parameter: ["email": self.email.text ?? ""], objectClass: Response.self, requestCode: U_VERIFY_MAIL) { (response) in
-                    Singleton.shared.showToast(text: "An OTP is sent to above email")
-                    self.email.isUserInteractionEnabled = false
-                    self.codeMainView.isHidden = false
-                    self.sendOTPView.isHidden = true
-                    ActivityIndicator.hide()
-                }
-            }else{
-                ActivityIndicator.show(view: self.view)
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_FORGOT_PASS, method: .post, parameter:["email":self.email.text ?? ""], objectClass: Response.self, requestCode: U_FORGOT_PASS) { (response) in
-                    self.email.isUserInteractionEnabled = false
-                    self.codeMainView.isHidden = false
-                    self.sendOTPView.isHidden = true
-                    Singleton.shared.showToast(text: "A verification code is sent to above email")
-                    ActivityIndicator.hide()
-                }
+        } else if(self.isNewuser){
+            ActivityIndicator.show(view: self.view)
+            SessionManager.shared.methodForApiCalling(url: U_BASE + U_VERIFY_MAIL, method: .post, parameter: ["email": self.email.text ?? ""], objectClass: Response.self, requestCode: U_VERIFY_MAIL) { (response) in
+                Singleton.shared.showToast(text: "An OTP is sent to above email")
+                self.email.isUserInteractionEnabled = false
+                self.codeMainView.isHidden = false
+                self.sendOTPView.isHidden = true
+                ActivityIndicator.hide()
+            }
+        } else {
+            ActivityIndicator.show(view: self.view)
+            SessionManager.shared.methodForApiCalling(url: U_BASE + U_FORGOT_PASS, method: .post, parameter:["email":self.email.text ?? ""], objectClass: Response.self, requestCode: U_FORGOT_PASS) { (response) in
+                self.email.isUserInteractionEnabled = false
+                self.codeMainView.isHidden = false
+                self.sendOTPView.isHidden = true
+                Singleton.shared.showToast(text: "A verification code is sent to above email")
+                ActivityIndicator.hide()
             }
         }
     }
@@ -103,19 +100,17 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func changePasswordAction(_ sender: Any) {
         if(self.email.text!.isEmpty){
             Singleton.shared.showToast(text: "Enter email address")
-        }else if !(self.isValidEmail(emailStr: self.email.text ?? "")){
+        } else if !(self.isValidEmail(emailStr: self.email.text ?? "")){
             Singleton.shared.showToast(text: "Enter valid email sddress")
-        }else{
-            if(self.isNewuser){
-                self.sendOtpAction(self)
-            }else {
-                ActivityIndicator.show(view: self.view)
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_FORGOT_PASS, method: .post, parameter:["email":self.email.text ?? ""], objectClass: Response.self, requestCode: U_FORGOT_PASS) { (response) in
-                    self.codeMainView.isHidden = false
-                    Singleton.shared.showToast(text: "A verification code is send again to above email")
-                    ActivityIndicator.hide()
-                    
-                }
+        } else if(self.isNewuser){
+            self.sendOtpAction(self)
+        } else {
+            ActivityIndicator.show(view: self.view)
+            SessionManager.shared.methodForApiCalling(url: U_BASE + U_FORGOT_PASS, method: .post, parameter:["email":self.email.text ?? ""], objectClass: Response.self, requestCode: U_FORGOT_PASS) { (response) in
+                self.codeMainView.isHidden = false
+                Singleton.shared.showToast(text: "A verification code is send again to above email")
+                ActivityIndicator.hide()
+                
             }
         }
     }

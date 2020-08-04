@@ -38,7 +38,7 @@
             //        }else{
             //            self.addJobStack.isHidden = false
             //        }
-            self.viewTopBar.isHidden = isTopbarHidden
+            //self.viewTopBar.isHidden = isTopbarHidden
             //        if(isHistory){
             //            self.addJobStack.isHidden = true
             //        }else{

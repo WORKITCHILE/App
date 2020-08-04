@@ -86,6 +86,12 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+       self.navigationController?.navigationBar.isHidden = false
+    }
+       
+    
     func geImagePath(image: UIImage,imagePath: String, imageData: Data) {
         if(currentImage == 2){
             
@@ -259,26 +265,27 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
             ActivityIndicator.show(view: self.view)
             let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
             
-            let param = [
-                "name":self.username.text,
-                "email":self.email.text ?? "",
-                "password":self.password.text,
-                "date_of_birth":Int(datePicker.date.timeIntervalSince1970),
-                "contact_number":self.mobileNumber.text,
-                "address":self.address.text,
-                "nationality":self.nationality.text,
-                "father_last_name":self.fatherName.text,
-                "mother_last_name":self.motherName.text,
-                "id_number":self.idNumber.text,
-                "id_image1":self.imagePath2,
-                "profile_picture":imagePath1,
+            let param : [String:Any] = [
+                "name": self.username.text,
+                "email": self.email.text ?? "",
+                "password": self.password.text,
+                "date_of_birth": Int(datePicker.date.timeIntervalSince1970),
+                "contact_number": self.mobileNumber.text,
+                "address": self.address.text,
+                "nationality": self.nationality.text,
+                "father_last_name": self.fatherName.text,
+                "mother_last_name": self.motherName.text,
+                "id_number": self.idNumber.text,
+                "id_image1": self.imagePath2,
+                "profile_picture": imagePath1,
                 "credits": "0.00",
-                "fcm_token":fcmToken,
-                "profile_description":self.userDescription.text,
+                "fcm_token": fcmToken,
+                "profile_description": self.userDescription.text,
                 "occupation": self.occupation.text,
                 "google_handle": self.googleId,
                 "facebook_handle": self.facebookId
-                ] as? [String:Any]
+            ]
+            
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_SIGN_UP, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
                 ActivityIndicator.hide()
                 self.getAccessToken(email:self.email.text ?? "", pass: self.password.text ?? "")
@@ -309,26 +316,17 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
         self.imagePath2 = nil
     }
     
-    @IBAction func idImageAction(_ sender: Any) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.currentImage = 2
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "CaptureIdCardViewController") as! CaptureIdCardViewController
-        myVC.captureDelegate = self
-        self.navigationController?.present(myVC, animated: true, completion: nil)
-        // self.navigationController?.present(myVC, animated: true, completion: nil)
-        //
-        // self.imageDelegate = self
-        // self.uploadImage()
+        let myVC = segue.destination as! CaptureIdCardViewController
+         myVC.captureDelegate = self
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(textField == mobileNumber){
             if let char = string.cString(using: String.Encoding.utf8) {
                 let isBackSpace = strcmp(char, "\\b")
-                if (isBackSpace == -92 || textField.text!.count <= 11) {
-                    return true
-                }else {
-                    return false
-                }
+                return isBackSpace == -92 || textField.text!.count <= 11
             }
         }else if(textField == idNumber){
             if let char = string.cString(using: String.Encoding.utf8) {
@@ -348,16 +346,17 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         if(self.userDescription.text == "Profile Description"){
             self.userDescription.text = ""
-            self.userDescription.textColor = .black
-        }else {
-            self.userDescription.textColor = .black
         }
+        
+        self.userDescription.textColor = .black
+        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if(self.userDescription.text == ""){
+        if self.userDescription.text == "" {
             self.userDescription.text = "Profile Description"
             self.userDescription.textColor = .lightGray
         }else {
@@ -365,27 +364,20 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
         }
     }
     
-    
-    // Handle the user's selection.
+
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.address.text = place.formattedAddress
-        print("Place name: \(place.name)")
-        print("Place ID: \(place.placeID)")
-        print("Place attributions: \(place.attributions)")
         dismiss(animated: true, completion: nil)
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        // TODO: handle the error.
-        print("Error: ", error.localizedDescription)
+    
     }
     
-    // User canceled the operation.
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
     }
     
-    // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }

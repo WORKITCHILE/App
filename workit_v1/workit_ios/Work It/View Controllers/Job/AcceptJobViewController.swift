@@ -18,7 +18,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
         if(isPopupForPaymentSelection == 1){
             let myTime = Int(Date().timeIntervalSince1970)
             self.isPopupForPaymentSelection = 2
-            let param = [
+            let param : [String:Any] = [
                 "user_id":self.jobData?.user_id,
                 "job_id":self.jobData?.job_id,
                 "job_amount": self.bidDetail?.counteroffer_amount,
@@ -26,7 +26,8 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                 "bank_detail_id": paymentOptionDetail["id"] as? String,
                 "transaction_id":paymentOptionDetail["id"]! == nil ? "W\(myTime)":"B\(myTime)",
                 "vendor_name": self.bidDetail?.vendor_name ?? self.jobData?.vendor_name ?? ""
-                ] as? [String:Any]
+            ]
+            
             DispatchQueue.global(qos: .background).async {
                 SessionManager.shared.methodForApiCalling(url: U_BASE + U_OWNER_JOB_PAYMENT, method: .post, parameter: param, objectClass: Response.self, requestCode: U_OWNER_JOB_PAYMENT) { (response) in
                     ActivityIndicator.hide()
@@ -34,7 +35,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                     self.callJobAPI(action: K_ACCEPT)
                 }
             }
-        }else if(isPopupForPaymentSelection == 3){
+        } else if(isPopupForPaymentSelection == 3){
             
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
             myVC.jobDetail = self.jobData
@@ -48,12 +49,13 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                 }
             })
             
-        }else {
+        } else {
             ActivityIndicator.show(view: self.view)
-            let param = [
+            let param: [String:Any] = [
                 "job_id":self.jobData?.job_id,
                 "user_id":Singleton.shared.userInfo.user_id
-                ] as? [String:Any]
+            ]
+            
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_CANCEL_JOB, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CANCEL_JOB) { (response) in
                 ActivityIndicator.hide()
                 self.openSuccessPopup(img:#imageLiteral(resourceName: "tick") , msg: "Job Cancelled Successfully", yesTitle: nil, noTitle: nil, isNoHidden: true)

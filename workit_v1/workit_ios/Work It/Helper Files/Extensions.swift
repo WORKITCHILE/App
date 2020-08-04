@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SideMenu
+//import SideMenu
 import CoreLocation
 import FirebaseStorage
 
@@ -127,6 +127,7 @@ extension UIViewController {
     }
     
     func menu() {
+        /*
         SideMenuManager.default.menuFadeStatusBar = false
         guard let sideMenuNavController =  SideMenuManager.defaultManager.menuLeftNavigationController else {
             let sideMenuController = storyboard?.instantiateViewController(withIdentifier: "SideDrawerViewController") as! SideDrawerViewController
@@ -137,6 +138,7 @@ extension UIViewController {
             return
         }
         present(sideMenuNavController, animated: true, completion: nil)
+        */
     }
 
     
@@ -149,14 +151,12 @@ extension UIViewController {
     
     func changeColor(string:String,colorString: String,color: UIColor,field:UILabel){
         let main_string = string
-        var string_to_color = colorString
-        //colorString.font
-        var range = (main_string as NSString).range(of: string_to_color)
+        let range = (main_string as NSString).range(of: colorString)
         
         let attribute = NSMutableAttributedString.init(string: main_string)
         if let font = UIFont(name: "Raleway-SemiBold", size: 20) {
             let fontAttributes = [NSAttributedString.Key.font: font]
-            let size = (string_to_color as NSString).size(withAttributes: fontAttributes)
+            let size = (colorString as NSString).size(withAttributes: fontAttributes)
         }
     attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: range)
         field.attributedText = attribute

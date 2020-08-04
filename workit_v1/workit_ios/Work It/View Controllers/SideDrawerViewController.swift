@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import SideMenu
 import SDWebImage
 import FirebaseAuth
 import Cosmos
@@ -19,11 +18,6 @@ class SideDrawerViewController: UIViewController {
     @IBOutlet weak var tableViewMenu: UITableView!
     @IBOutlet weak var userImage: ImageView!
     @IBOutlet weak var userName: DesignableUILabel!
-    //  @IBOutlet weak var switchButton: UISwitch!
-    @IBOutlet weak var switchImage: ImageView!
-    @IBOutlet weak var switchView: View!
-    @IBOutlet weak var switchButton: UIButton!
-    @IBOutlet weak var switchCenterView: View!
     @IBOutlet weak var userRating: CosmosView!
     
     var arrayMenu: [MenuObject]?
@@ -31,65 +25,56 @@ class SideDrawerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.switchView.layer.shadowRadius = 2
-        
-        //switchButton.onTintColor = lightBlue
-        // switchButton.tintColor = lightBlue
-        // switchButton.layer.cornerRadius = switchButton.frame.height / 2
-        // switchButton.backgroundColor = lightBlue
-        // switchButton.thumbTintColor = UIColor(patternImage: UIImage(named: "AppIcon")!)
+        self.populateTableView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.tableViewMenu.setContentOffset(CGPoint.zero, animated:false)
-        self.tableViewMenu.scrollsToTop = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.view.isUserInteractionEnabled = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if(K_CURRENT_USER == K_WANT_JOB){
-            DispatchQueue.main.async {
-                if(self.switchImage.center.x < 50){
-                    self.switchImage.center = CGPoint(x: self.switchImage.center.x + 65, y: self.switchImage.center.y)
-                    self.switchCenterView.layer.opacity = 0.5
-                }
-            }
-        }else if(K_CURRENT_USER == K_POST_JOB) {
-            DispatchQueue.main.async {
-                if(self.switchImage.center.x > 50){
-                    self.switchImage.center = CGPoint(x: self.switchImage.center.x - 65, y: self.switchImage.center.y)
-                    self.switchCenterView.layer.opacity = 0.5
-                }
-            }
-        }
+    func populateTableView(){
         
-        tableViewMenu.isUserInteractionEnabled = true
-        self.view.isUserInteractionEnabled = true
-        self.userName.text = Singleton.shared.userInfo.name
-        self.userImage.sd_setImage(with: URL(string: Singleton.shared.userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-        self.userRating.rating = Double(Singleton.shared.userInfo.average_rating ?? "0")!
-        tableViewMenu.scrollsToTop = true
-        if(K_CURRENT_USER == K_WANT_JOB){
-            arrayMenu = [MenuObject(image: #imageLiteral(resourceName: "noun_notification_1304313"), name: "Notifications")
-                ,MenuObject(image: #imageLiteral(resourceName: " mycalendar"), name: "Work Schedule"),MenuObject(image: #imageLiteral(resourceName: "noun_evaluation_808166-1"), name: "Evaluations"),MenuObject(image: #imageLiteral(resourceName: "Bids (1)"), name: "My Bids"),MenuObject(image: #imageLiteral(resourceName: "icons8-new-job-100"), name: "Running Jobs"),MenuObject(image: #imageLiteral(resourceName: "noun_History_2375219-1"), name: "History"),MenuObject(image: #imageLiteral(resourceName: "noun_Inbox_1844754-1"), name: "Inbox"),MenuObject(image: #imageLiteral(resourceName: "share"), name: "Share App"),MenuObject(image: #imageLiteral(resourceName: "support(1)"), name: "Support"),MenuObject(image: #imageLiteral(resourceName: "Account settings"), name: "Account Settings"),MenuObject(image: #imageLiteral(resourceName: "noun_task_2700413-1"), name: "Terms of Service"),MenuObject(image: #imageLiteral(resourceName: "noun_logout_1272077"), name: "Logout")]
-        }else if(K_CURRENT_USER == K_POST_JOB){
-            // self.switchButton.isOn = false
-            arrayMenu = [MenuObject(image: #imageLiteral(resourceName: "noun_notification_1304313"), name: "Notifications"),MenuObject(image: #imageLiteral(resourceName: " mycalendar"), name: "Work Schedule"),MenuObject(image: #imageLiteral(resourceName: "icons8-new-job-100"), name: "Running Jobs"),MenuObject(image: #imageLiteral(resourceName: "noun_History_2375219-1"), name: "History"),MenuObject(image: #imageLiteral(resourceName: "noun_Inbox_1844754-1"), name: "Inbox"),MenuObject(image: #imageLiteral(resourceName: "share"), name: "Share App"),MenuObject(image: #imageLiteral(resourceName: "support(1)"), name: "Support"),MenuObject(image: #imageLiteral(resourceName: "Account settings"), name: "Account Settings"),MenuObject(image: #imageLiteral(resourceName: "noun_task_2700413-1"), name: "Terms of Service"),MenuObject(image: #imageLiteral(resourceName: "noun_logout_1272077"), name: "Logout")]
-        }
+        self.tableViewMenu.delegate = self
+        self.tableViewMenu.dataSource = self
+        let userInfo = Singleton.shared.userInfo
         
-        tableViewMenu.reloadData()
+        self.userName.text = userInfo.name
+        self.userImage.sd_setImage(with: URL(string: userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        self.userRating.rating = Double(userInfo.average_rating ?? "0")!
+         
+        if K_CURRENT_USER == K_WANT_JOB {
+            arrayMenu = [
+                 MenuObject(image: #imageLiteral(resourceName: "noun_evaluation_808166-1"), name: "Evaluations"),
+                 MenuObject(image: #imageLiteral(resourceName: "Bids (1)"), name: "My Bids"),
+                 MenuObject(image: #imageLiteral(resourceName: "icons8-new-job-100"), name: "Running Jobs"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_History_2375219-1"), name: "History"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_Inbox_1844754-1"), name: "Inbox"),
+                 MenuObject(image: #imageLiteral(resourceName: "share"), name: "Share App"),
+                 MenuObject(image: #imageLiteral(resourceName: "support(1)"), name: "Support"),
+                 MenuObject(image: #imageLiteral(resourceName: "Account settings"), name: "Account Settings"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_task_2700413-1"), name: "Terms of Service"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_logout_1272077"), name: "Logout")
+            ]
+             
+         } else {
+            arrayMenu = [
+                 MenuObject(image: #imageLiteral(resourceName: "icons8-new-job-100"), name: "Running Jobs"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_History_2375219-1"), name: "History"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_Inbox_1844754-1"), name: "Inbox"),
+                 MenuObject(image: #imageLiteral(resourceName: "share"), name: "Share App"),
+                 MenuObject(image: #imageLiteral(resourceName: "support(1)"), name: "Support"),
+                 MenuObject(image: #imageLiteral(resourceName: "Account settings"), name: "Account Settings"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_task_2700413-1"), name: "Terms of Service"),
+                 MenuObject(image: #imageLiteral(resourceName: "noun_logout_1272077"), name: "Logout")
+            ]
+         }
+         
+         tableViewMenu.reloadData()
     }
     
     func selectUserRole(type: String){
         UIApplication.shared.beginIgnoringInteractionEvents()
         ActivityIndicator.show(view: self.view)
-        let param = [
+        let param: [String:Any] = [
             "type":type,
             "uid":Singleton.shared.userInfo.user_id
-            ] as? [String:Any]
+            ]
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_CHANGE_USER_ROLE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CHANGE_USER_ROLE) { (response) in
             
             K_CURRENT_USER = type
@@ -105,8 +90,7 @@ class SideDrawerViewController: UIViewController {
             ActivityIndicator.hide()
         }
     }
-    
-    
+
     //MARK: IBActions
     @IBAction func profileAction(_ sender: Any) {
         let controller = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
@@ -114,42 +98,7 @@ class SideDrawerViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    @IBAction func switchAction(_ sender: Any) {
-        self.view.isUserInteractionEnabled = false
-        if(K_CURRENT_USER == K_WANT_JOB){
-            K_CURRENT_USER = K_POST_JOB
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                
-                self.switchButton.isHighlighted = false
-                self.switchCenterView.alpha = 0
-                self.switchCenterView.layer.shadowColor = UIColor.clear.cgColor
-                self.switchView.layer.shadowColor = UIColor.white.cgColor
-                self.switchView.layer.shadowRadius = 2
-                self.switchCenterView.layer.shadowRadius = 2
-                self.switchImage.transform = CGAffineTransform(rotationAngle: 360)
-                self.switchImage.center = CGPoint(x: self.switchImage.center.x - 65, y: self.switchImage.center.y)
-            }, completion: { (val) in
-                self.selectUserRole(type: K_POST_JOB)
-            })
-        }else {
-            K_CURRENT_USER = K_WANT_JOB
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                
-                self.switchCenterView.alpha = 0.5
-                self.switchButton.isHighlighted = true
-                self.switchCenterView.layer.shadowColor = UIColor.white.cgColor
-                self.switchView.layer.shadowColor = lightBlue.cgColor
-                self.switchView.layer.shadowRadius = 2
-                self.switchCenterView.layer.shadowRadius = 2
-                
-                self.switchImage.transform = CGAffineTransform(rotationAngle: -360)
-                self.switchImage.center = CGPoint(x: self.switchImage.center.x + 65, y: self.switchImage.center.y)
-                self.switchView.backgroundColor = .darkGray
-            }, completion: { (val) in
-                self.selectUserRole(type: K_WANT_JOB)
-            })
-        }
-    }
+   
 }
 extension SideDrawerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -158,7 +107,7 @@ extension SideDrawerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
-        var menuObject = arrayMenu?[indexPath.row] as? MenuObject
+        let menuObject = arrayMenu?[indexPath.row]
         if(menuObject?.name! == "Send Feedback"){
             
             let text = menuObject?.name
@@ -184,10 +133,10 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
         let myVC = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
         let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
         ActivityIndicator.show(view: self.view)
-        let param = [
+        let param : [String:Any] = [
             "user_id":Singleton.shared.userInfo.user_id ?? "",
             "fcm_token":fcmToken
-            ] as? [String:Any]
+            ]
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_DELETE_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_DELETE_FCM_TOKEN) { (response) in
             UserDefaults.standard.removeObject(forKey: UD_TOKEN)
             UserDefaults.standard.removeObject(forKey: UD_CURRENT_USER)
@@ -203,32 +152,22 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch (arrayMenu?[indexPath.row])?.name {
-        case "Home":
-            tableViewMenu.isUserInteractionEnabled = false
-            self.dismiss(animated: true, completion: nil)
-            return
-        case "Notifications":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
+      
+        let selectedMenu : String = (arrayMenu?[indexPath.row].name ?? "") as String
+        
+        debugPrint(selectedMenu)
+        
+        switch selectedMenu {
         case "Evaluations":
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "EvaluationViewController") as! EvaluationViewController
             tableViewMenu.isUserInteractionEnabled = false
             self.navigationController?.pushViewController(myVC, animated: true)
-            return
-        case "Work Schedule":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleCalenderViewController") as! ScheduleCalenderViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
         case "My Bids":
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
             tableViewMenu.isUserInteractionEnabled = false
             K_CURRENT_TAB = K_MYBID_TAB
             self.navigationController?.pushViewController(myVC, animated: true)
-            return
+
         case "Running Jobs":
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
             tableViewMenu.isUserInteractionEnabled = false
@@ -277,26 +216,29 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
                 myVC.isBackButtonHidden = false
                 tableViewMenu.isUserInteractionEnabled = false
                 self.navigationController?.pushViewController(myVC, animated: true)
-            }else {
+            } else {
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountsViewController") as! AccountsViewController
                 tableViewMenu.isUserInteractionEnabled = false
                 self.navigationController?.pushViewController(myVC, animated: true)
             }
-            return
+
         case "Terms of Service":
+            
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
             myVC.heading = "Terms of Service"
             tableViewMenu.isUserInteractionEnabled = false
             self.navigationController?.pushViewController(myVC, animated: true)
-            return
+
         case "Privacy Policy":
+            
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
             myVC.heading = "Privacy Policy"
             tableViewMenu.isUserInteractionEnabled = false
             self.navigationController?.pushViewController(myVC, animated: true)
-            return
+
         case "Logout":
             
+
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
             myVC.image = #imageLiteral(resourceName: "information-button copy")
             myVC.titleLabel = "Are you sure you want to Logout?"
@@ -307,10 +249,9 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
             myVC.modalPresentationStyle = .overFullScreen
             self.navigationController?.present(myVC, animated: true, completion: nil)
             
-            return
+ 
         default:
             tableViewMenu.isUserInteractionEnabled = true
-            print("default")
         }
     }
 }

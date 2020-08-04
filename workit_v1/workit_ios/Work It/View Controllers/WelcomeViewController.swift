@@ -20,27 +20,31 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        //self.logOut()
         self.emailField.placeholderTextColor = .black
         
     }
     
-    func callSocialLoginAPI(type: Int,gId: String?,fId: String?, email: String){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func callSocialLoginAPI(type: Int, gId: String?,fId: String?, email: String){
+        
         ActivityIndicator.show(view: self.view)
-        var url = String()
-        if(type == 1){
-            url = U_BASE + U_SOCIAL_LOGIN + "\(type)&social_handle=" + (gId ?? "")
-        }else if(type == 2){
-            url = U_BASE + U_SOCIAL_LOGIN + "\(type)&social_handle=" + (fId ?? "")
-        }
+        let url = U_BASE + U_SOCIAL_LOGIN + "\(type)&social_handle=" + ( (type == 1 ? gId : fId) ?? "")
+       
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: SocialLogin.self, requestCode: U_SOCIAL_LOGIN) { (response) in
             if(response.data?.user_id == nil){
+                
                 self.openSuccessPopup(img: #imageLiteral(resourceName: "information-button copy"), msg: "New user, please create account on workit and continue", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 myVC.googleId = gId ?? ""
                 myVC.facebookId = fId ?? ""
                 myVC.userEmail = email
+                
                 if(type == 1){
                     var components = self.googleData.profile.name.components(separatedBy: " ")
                     if(components.count > 0){
@@ -53,6 +57,7 @@ class WelcomeViewController: UIViewController {
                     myVC.fName = self.fbData["first_name"] as? String ?? ""
                     myVC.lName = self.fbData["last_name"] as? String ?? ""
                 }
+                
                 self.navigationController?.pushViewController(myVC, animated: true)
             }else{
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
@@ -71,10 +76,11 @@ class WelcomeViewController: UIViewController {
                 print("Failed to login: \(error.localizedDescription)")
                 return
             }
-            guard let accessToken = AccessToken.current else {
-                print("Failed to get access token")
+            
+            guard AccessToken.current != nil else {
                 return
             }
+            
             self.getFBUserData()
         }
     }
@@ -83,44 +89,15 @@ class WelcomeViewController: UIViewController {
         if((AccessToken.current) != nil){
             GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil){
-                    print(result)
                     if let data = result as? [String:Any]{
                         self.fbData = data
-                        self.callSocialLoginAPI(type: 2, gId: nil, fId: data["id"] as! String, email: data["email"] as! String)
+                        self.callSocialLoginAPI(type: 2, gId: nil, fId: (data["id"] as! String), email: data["email"] as! String)
                     }
                 }
             })
         }
     }
-    
-    
-    //    func handleNavigation(response: SignUp) {
-    //        //              let userData = try! JSONEncoder().encode(response.response)
-    //        //              UserDefaults.standard.set(userData, forKey:UD_USER_DETAIl)
-    //        //              Singleton.shared.userDetail = response.response
-    //        //              UserDefaults.standard.set(response.response.token, forKey: UD_TOKEN)
-    //        //              if (Singleton.shared.selectedLocation.id != nil){
-    //        //                  if(self.popFromOrderPage){
-    //        //                      let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as! PaymentViewController
-    //        //                      self.navigationController?.pushViewController(myVC, animated: true)
-    //        //                  }else {
-    //        //                      if(self.popUpView){
-    //        //                       self.navigationController?.popViewController(animated: true)
-    //        //                      }else {
-    //        //                       NavigationController.shared.pushHome(controller: self)
-    //        //                      }
-    //        //                  }
-    //        //              }else {
-    //        //                  let myVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-    //        //                  currentPageView = K_MAP_PAGE_VIEW
-    //        //                  myVC.hideCrossView = true
-    //        //                  self.navigationController?.pushViewController(myVC, animated: true)
-    //        //              }
-    //    }
-    //
-    
-    
-    
+
     //MARK: IBActions
     @IBAction func loginAction(_ sender: Any) {
         if(emailField.text!.isEmpty){
@@ -133,11 +110,6 @@ class WelcomeViewController: UIViewController {
         
     }
     
-    @IBAction private func logOut() {
-        let loginManager = LoginManager()
-        loginManager.logOut()
-    }
-    
     @IBAction func fbAction(_ sender: Any) {
         loginFrom = 1
         self.getFacebookUserInfo()
@@ -148,13 +120,13 @@ class WelcomeViewController: UIViewController {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signIn()
     }
-    
-    
-    @IBAction func createAccountAction(_ sender: Any){
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
-        self.navigationController?.pushViewController(myVC, animated: true)
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "signin" {
+            let loginVC = segue.destination as! LoginViewController
+            loginVC.email = self.emailField.text ?? ""
+        }
     }
-    
     
 }
 

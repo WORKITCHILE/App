@@ -469,7 +469,6 @@ PODS:
   - SDWebImage (5.8.4):
     - SDWebImage/Core (= 5.8.4)
   - SDWebImage/Core (5.8.4)
-  - SideMenu (5.0.3)
   - SwiftyCodeView (0.3.6):
     - SwiftyCodeView/Core (= 0.3.6)
   - SwiftyCodeView/Core (0.3.6)
@@ -500,7 +499,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - SDWebImage
-  - SideMenu (~> 5.0)
   - SwiftyCodeView
   - Toaster
 
@@ -552,7 +550,6 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SDWebImage
-    - SideMenu
     - SwiftyCodeView
     - Toaster
 
@@ -603,10 +600,9 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
-  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SwiftyCodeView: 0252e3520749a3fda1a9b141873401f8e6c570ad
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: cd6a846a5207b2e6a62f12bc5d89544b337b6e42
+PODFILE CHECKSUM: 1d20afb96c42ed6c54b4ae3f80dbcb79d426cd4c
 
 COCOAPODS: 1.9.3

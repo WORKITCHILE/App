@@ -35,9 +35,12 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
         self.captureSession.startRunning()
-        var myButton = UIButton()
+        
+        let myButton = UIButton()
         myButton.setTitle("Capture", for: .normal)
         myButton.frame = CGRect(x: self.view.center.x-40, y: self.view.frame.maxY-55, width: 80, height: 45)
         myButton.setTitleColor(lightBlue, for: .normal)
@@ -76,12 +79,7 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
         let output = UIImage(cgImage: cgImage!)
         self.captureDelegate?.showCaptureImage(img: output)
         self.dismiss(animated: true, completion: nil)
-       // self.navigationController?.popViewController(animated: true)
-        //UIImageWriteToSavedPhotosAlbum(output, nil, nil, nil)
-        
-        // let secondVC = TextExtractorVC()
-       // secondVC.scannedImage = output
-       // self.navigationController?.pushViewController(secondVC, animated: false)
+
         
     }
     
@@ -190,15 +188,13 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     }
     
     func removeMask() {
-            maskLayer.removeFromSuperlayer()
-
+        maskLayer.removeFromSuperlayer()
     }
 }
 
 extension CGPoint {
    func scaled(to size: CGSize) -> CGPoint {
-       return CGPoint(x: self.x * size.width,
-                      y: self.y * size.height)
+       return CGPoint(x: self.x * size.width, y: self.y * size.height)
    }
 }
 
