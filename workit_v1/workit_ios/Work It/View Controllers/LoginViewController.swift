@@ -56,7 +56,8 @@ class LoginViewController: UIViewController {
                 }else {
                     
                     Singleton.shared.showToast(text: "Successfully Logged In")
-                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "main")
+                    let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+                    let myVC = storyboard.instantiateViewController(withIdentifier: "main")
                     self.view.window?.rootViewController = myVC
                     
                     
@@ -113,9 +114,10 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func forgotPasswordAction(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let myVC = segue.destination as! ForgotPasswordViewController
         myVC.emailAdd = self.email
-        self.navigationController?.pushViewController(myVC, animated: true)
     }
+    
+   
 }

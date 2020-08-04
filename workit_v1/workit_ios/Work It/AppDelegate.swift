@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             K_CURRENT_USER = UserDefaults.standard.value(forKey: UD_CURRENT_USER) as? String
             initial_controller = storyboard.instantiateViewController(withIdentifier: "main")
-            
+        
 
         }else {
             

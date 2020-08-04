@@ -495,7 +495,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Do you forgot your password?">
                                                     <attributes>
-                                                        <font key="NSFont" metaFont="system"/>
+                                                        <font key="NSFont" metaFont="label" size="13"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         <integer key="NSUnderline" value="1"/>
                                                     </attributes>

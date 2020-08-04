@@ -130,14 +130,14 @@ extension SideDrawerViewController: UITableViewDataSource {
 }
 extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
     func yesAction() {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+       
         let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
         ActivityIndicator.show(view: self.view)
         let param : [String:Any] = [
             "user_id":Singleton.shared.userInfo.user_id ?? "",
             "fcm_token":fcmToken
             ]
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_DELETE_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_DELETE_FCM_TOKEN) { (response) in
+        SessionManager.shared.methodForApiCalling(url: U_BASE + U_DELETE_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_DELETE_FCM_TOKEN) { resonse in
             UserDefaults.standard.removeObject(forKey: UD_TOKEN)
             UserDefaults.standard.removeObject(forKey: UD_CURRENT_USER)
             UserDefaults.standard.removeObject(forKey: UD_USERINFO)
@@ -146,7 +146,11 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
             Singleton.shared.initialiseValue()
             self.isFirstTIme = true
             ActivityIndicator.hide()
-            self.navigationController?.pushViewController(myVC, animated: true)
+            
+            let storyboard  = UIStoryboard(name: "signup", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController")
+            debugPrint(myVC)
+            self.view.window?.rootViewController = myVC
         }
     }
     
@@ -154,8 +158,7 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
         
       
         let selectedMenu : String = (arrayMenu?[indexPath.row].name ?? "") as String
-        
-        debugPrint(selectedMenu)
+    
         
         switch selectedMenu {
         case "Evaluations":
@@ -247,8 +250,9 @@ extension SideDrawerViewController: UITableViewDelegate, SuccessPopup {
             myVC.cancelBtnHidden = false
             myVC.successDelegate = self
             myVC.modalPresentationStyle = .overFullScreen
-            self.navigationController?.present(myVC, animated: true, completion: nil)
             
+            self.present(myVC, animated: true, completion: nil)
+          
  
         default:
             tableViewMenu.isUserInteractionEnabled = true
