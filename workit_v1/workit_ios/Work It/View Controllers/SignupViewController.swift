@@ -213,7 +213,8 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     }
     
     @IBAction func selectnationality(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.modalPresentationStyle = .overFullScreen
         myVC.pickerData = self.countries
         myVC.pickerDelegate = self

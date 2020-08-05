@@ -12,12 +12,12 @@ class SessionManager: NSObject {
 
     static var shared = SessionManager()
 
-    var createWallet: Bool = true
+    let createWallet: Bool = true
 
     func methodForApiCalling<T: Codable>(url: String, method: HTTPMethod, parameter: Parameters?, objectClass: T.Type, requestCode: String,completionHandler: @escaping (T) -> Void) {
 
      
-        Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { (dataResponse) in
+        Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
 
             let statusCode = dataResponse.response?.statusCode
 
@@ -27,30 +27,20 @@ class SessionManager: NSObject {
                 let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
                
                 
-                if (statusCode == 200 || statusCode == 201) && object != nil
-                    //                    && (requestCode != U_VALIDATE_USER)
-                {
+                if (statusCode == 200 || statusCode == 201) && object != nil {
                     completionHandler(object!)
-                    
-                }else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
+                } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
                     
                     NotificationCenter.default.post(name: NSNotification.Name(N_USER_UNAUTHORIZED), object: nil)
                 } else if statusCode == 404  {
                     
                     self.showAlert(msg:errorObject?.message)
 
-                    //                    if (UserDefaults.standard.string(forKey: K_TOKEN) == nil) &&
-                    //                        if requestCode == U_VALIDATE_USER {
-                    //                        completionHandler(object!)
-                    //                    } else {
-                    //                        //Showing error message on alert
-                    //                        //                        UIApplication.shared.keyWindow?.rootViewController?.showAlert(message: message!, title: "Error", isPopBack: false)
-                    //                    }
-                    //                    self.webServiceDelegate?.dataNotFound!(msg: message)
-                }else if(statusCode == 400) {
+                } else if(statusCode == 400) {
                     
                     self.showAlert(msg: errorObject?.message)
                 }
+                
                 ActivityIndicator.hide()
                 break
             case .failure(_):

@@ -3917,124 +3917,55 @@
             </objects>
             <point key="canvasLocation" x="-521" y="6076"/>
         </scene>
-        <!--Privacy Policy View Controller-->
+        <!--Term & Conditions-->
         <scene sceneID="kmM-Re-9qi">
             <objects>
-                <viewController storyboardIdentifier="PrivacyPolicyViewController" id="5dj-kz-8h8" customClass="PrivacyPolicyViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5dj-kz-8h8" customClass="PrivacyPolicyViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XXl-Hh-tq3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-a9-2CJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-Sb-nmS" customClass="View" customModule="Work_It" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yV6-CH-Yrh">
-                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="KaX-TS-idW">
-                                                        <rect key="frame" x="7.5" y="7.5" width="30" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="FXb-if-4sg"/>
-                                                            <constraint firstAttribute="width" secondItem="KaX-TS-idW" secondAttribute="height" id="q0g-dQ-6wo"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cv8-Dh-d9J">
-                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                        <connections>
-                                                            <action selector="backAction:" destination="5dj-kz-8h8" eventType="touchUpInside" id="RHW-xQ-gKv"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="KaX-TS-idW" firstAttribute="centerY" secondItem="yV6-CH-Yrh" secondAttribute="centerY" id="CTz-ao-J1g"/>
-                                                    <constraint firstItem="cv8-Dh-d9J" firstAttribute="height" secondItem="yV6-CH-Yrh" secondAttribute="height" id="O9q-pM-Bez"/>
-                                                    <constraint firstItem="KaX-TS-idW" firstAttribute="centerX" secondItem="yV6-CH-Yrh" secondAttribute="centerX" id="VZD-qC-P9C"/>
-                                                    <constraint firstItem="cv8-Dh-d9J" firstAttribute="width" secondItem="yV6-CH-Yrh" secondAttribute="width" id="gQP-bv-6RJ"/>
-                                                    <constraint firstItem="cv8-Dh-d9J" firstAttribute="centerX" secondItem="yV6-CH-Yrh" secondAttribute="centerX" id="kvp-D3-6Kz"/>
-                                                    <constraint firstItem="cv8-Dh-d9J" firstAttribute="centerY" secondItem="yV6-CH-Yrh" secondAttribute="centerY" id="ovy-k4-n9k"/>
-                                                    <constraint firstAttribute="width" secondItem="yV6-CH-Yrh" secondAttribute="height" id="v71-rA-TY6"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmP-nC-ho6" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                <rect key="frame" x="121" y="15.5" width="78.5" height="14.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="mmP-nC-ho6" firstAttribute="centerX" secondItem="KtI-Sb-nmS" secondAttribute="centerX" id="Aps-OJ-QTd"/>
-                                            <constraint firstAttribute="height" constant="45" id="EdB-yS-4EV"/>
-                                            <constraint firstItem="yV6-CH-Yrh" firstAttribute="centerY" secondItem="KtI-Sb-nmS" secondAttribute="centerY" id="N1h-iE-3nn"/>
-                                            <constraint firstItem="mmP-nC-ho6" firstAttribute="centerY" secondItem="KtI-Sb-nmS" secondAttribute="centerY" id="b33-2h-CBT"/>
-                                            <constraint firstItem="yV6-CH-Yrh" firstAttribute="height" secondItem="KtI-Sb-nmS" secondAttribute="height" id="j4E-nQ-uVm"/>
-                                            <constraint firstItem="yV6-CH-Yrh" firstAttribute="leading" secondItem="KtI-Sb-nmS" secondAttribute="leading" id="tKb-Ki-cOI"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkU-0B-afk" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="65" width="288" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTu-tr-4uT">
-                                        <rect key="frame" x="0.0" y="45" width="320" height="523"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <wkWebViewConfiguration key="configuration">
-                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                            <wkPreferences key="preferences"/>
-                                        </wkWebViewConfiguration>
-                                    </wkWebView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstItem="KtI-Sb-nmS" firstAttribute="top" secondItem="O4w-a9-2CJ" secondAttribute="top" id="6TH-dD-4Ey"/>
-                                    <constraint firstItem="sTu-tr-4uT" firstAttribute="centerX" secondItem="O4w-a9-2CJ" secondAttribute="centerX" id="ARE-HA-v9f"/>
-                                    <constraint firstItem="WkU-0B-afk" firstAttribute="width" secondItem="O4w-a9-2CJ" secondAttribute="width" multiplier="0.9" id="D4N-wH-Ulq"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WkU-0B-afk" secondAttribute="bottom" constant="20" id="NcJ-j7-1q3"/>
-                                    <constraint firstItem="KtI-Sb-nmS" firstAttribute="width" secondItem="O4w-a9-2CJ" secondAttribute="width" id="P2J-ZB-xa7"/>
-                                    <constraint firstItem="KtI-Sb-nmS" firstAttribute="centerX" secondItem="O4w-a9-2CJ" secondAttribute="centerX" id="PfC-Gq-xxE"/>
-                                    <constraint firstAttribute="bottom" secondItem="sTu-tr-4uT" secondAttribute="bottom" id="Wvc-ib-JKo"/>
-                                    <constraint firstItem="WkU-0B-afk" firstAttribute="top" secondItem="KtI-Sb-nmS" secondAttribute="bottom" constant="20" id="cXF-fg-san"/>
-                                    <constraint firstItem="sTu-tr-4uT" firstAttribute="top" secondItem="KtI-Sb-nmS" secondAttribute="bottom" id="gIQ-wV-lja"/>
-                                    <constraint firstItem="WkU-0B-afk" firstAttribute="centerX" secondItem="O4w-a9-2CJ" secondAttribute="centerX" id="hle-Hv-F40"/>
-                                    <constraint firstItem="sTu-tr-4uT" firstAttribute="width" secondItem="O4w-a9-2CJ" secondAttribute="width" id="lvt-pk-Rji"/>
-                                </constraints>
-                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTu-tr-4uT">
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="AeK-WS-Koz" firstAttribute="trailing" secondItem="O4w-a9-2CJ" secondAttribute="trailing" id="SeA-8J-ZnS"/>
-                            <constraint firstItem="O4w-a9-2CJ" firstAttribute="leading" secondItem="AeK-WS-Koz" secondAttribute="leading" id="Vn0-ID-Im8"/>
-                            <constraint firstItem="O4w-a9-2CJ" firstAttribute="top" secondItem="AeK-WS-Koz" secondAttribute="top" id="Yjj-N2-DNR"/>
-                            <constraint firstItem="AeK-WS-Koz" firstAttribute="bottom" secondItem="O4w-a9-2CJ" secondAttribute="bottom" id="taF-6e-0Wi"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="bottom" secondItem="AeK-WS-Koz" secondAttribute="bottom" id="CA8-gs-ASs"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="trailing" secondItem="AeK-WS-Koz" secondAttribute="trailing" id="Qrf-sm-adX"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="top" secondItem="AeK-WS-Koz" secondAttribute="top" id="UFO-mt-ffv"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="leading" secondItem="AeK-WS-Koz" secondAttribute="leading" id="WAU-AC-eaf"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="bottom" secondItem="AeK-WS-Koz" secondAttribute="bottom" id="dxt-8h-IZs"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="top" secondItem="AeK-WS-Koz" secondAttribute="top" id="lXy-LY-nXj"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="leading" secondItem="AeK-WS-Koz" secondAttribute="leading" id="vRb-Gn-Ys5"/>
+                            <constraint firstItem="sTu-tr-4uT" firstAttribute="trailing" secondItem="AeK-WS-Koz" secondAttribute="trailing" id="vnW-rq-6NU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AeK-WS-Koz"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Term &amp; Conditions" id="C7G-FQ-apL">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="qdf-N3-jFk">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oLP-6g-isk">
+                                <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Acept"/>
+                                <connections>
+                                    <action selector="aceptWithSender:" destination="5dj-kz-8h8" eventType="touchUpInside" id="oyi-bi-zAm"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="termsCondition" destination="WkU-0B-afk" id="Nnn-qa-4ZQ"/>
-                        <outlet property="titleLabel" destination="mmP-nC-ho6" id="KHB-eI-WtV"/>
                         <outlet property="webView" destination="sTu-tr-4uT" id="2Ul-uV-MIo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6QX-Lu-n7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2507" y="1797"/>
+            <point key="canvasLocation" x="3386.25" y="1796.8309859154929"/>
         </scene>
         <!--Support View Controller-->
         <scene sceneID="KgS-6T-Myb">
@@ -4202,7 +4133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3Y-86-apE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3242" y="1797"/>
+            <point key="canvasLocation" x="4239.375" y="1796.8309859154929"/>
         </scene>
         <!--Inbox View Controller-->
         <scene sceneID="xtq-uP-KZw">
@@ -4485,7 +4416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSH-3F-MoJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4089" y="1797"/>
+            <point key="canvasLocation" x="5085" y="1796.8309859154929"/>
         </scene>
         <!--Publication View Controller-->
         <scene sceneID="aX9-a0-njF">
@@ -4992,7 +4923,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5dk-s7-MaF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4940.625" y="1796.8309859154929"/>
+            <point key="canvasLocation" x="5938.125" y="1796.8309859154929"/>
         </scene>
         <!--Payment View Controller-->
         <scene sceneID="Epc-BR-pBN">
@@ -10365,7 +10296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kke-xC-Beg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5790" y="1797"/>
+            <point key="canvasLocation" x="6787.5" y="1796.8309859154929"/>
         </scene>
         <!--Bid Placed View Controller-->
         <scene sceneID="mdM-EV-vSm">
@@ -11147,10 +11078,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ru-xo-2MJ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ru-xo-2MJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1x-1q-Y4O">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e1x-1q-Y4O">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="473"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEF-Hi-E6K">
@@ -11206,10 +11137,10 @@
                                                     <constraint firstItem="6YD-Mf-77G" firstAttribute="centerY" secondItem="TEF-Hi-E6K" secondAttribute="centerY" id="ghC-aV-wFk"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-ht-FcT">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-ht-FcT">
                                                 <rect key="frame" x="24" y="65" width="272" height="388"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSp-nR-rQ4">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hSp-nR-rQ4">
                                                         <rect key="frame" x="0.0" y="0.0" width="272" height="91.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many stars you give to the customer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-Wr-K9K" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -11223,7 +11154,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-ff-Yhu" customClass="CosmosView" customModule="Cosmos">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-ff-Yhu" customClass="CosmosView" customModule="Cosmos">
                                                                 <rect key="frame" x="26" y="51" width="220" height="40.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -11266,7 +11197,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="StL-CB-1hm">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="StL-CB-1hm">
                                                         <rect key="frame" x="0.0" y="111.5" width="272" height="106.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did the client tried to contact you outside WORKIT?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-dJ-wAQ" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -11388,7 +11319,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-dB-vlP">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5a5-dB-vlP">
                                                         <rect key="frame" x="0.0" y="238" width="272" height="150"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave us a comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbY-0f-Q4a" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -11616,7 +11547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QGl-6k-rzc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7697" y="1797"/>
+            <point key="canvasLocation" x="8694.375" y="1796.8309859154929"/>
         </scene>
         <!--Accept Job View Controller-->
         <scene sceneID="mKt-qE-hwn">
@@ -11629,10 +11560,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETi-7A-SSe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RV2-yo-DPL">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RV2-yo-DPL">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1006"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HSN-Rb-1CB">
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HSN-Rb-1CB">
                                                 <rect key="frame" x="16" y="220" width="288" height="20.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQz-2Z-flg" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -11659,7 +11590,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjt-ez-Zr2" customClass="View" customModule="Work_It" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wjt-ez-Zr2" customClass="View" customModule="Work_It" customModuleProvider="target">
                                                 <rect key="frame" x="32" y="250.5" width="256" height="585.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="E5c-sM-AXR">
@@ -12206,7 +12137,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqS-wy-q0p">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fqS-wy-q0p">
                                                 <rect key="frame" x="16" y="856" width="288" height="130"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc6-aG-fdi" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -12333,7 +12264,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Se2-xU-h8n">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Se2-xU-h8n">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHj-o0-oc5" customClass="View" customModule="Work_It" customModuleProvider="target">
@@ -12361,8 +12292,8 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="circle" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="s1C-Ex-54P">
-                                                        <rect key="frame" x="16" y="120" width="288" height="80"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="s1C-Ex-54P">
+                                                        <rect key="frame" x="16" y="120" width="288" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42B-er-BUH" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                 <rect key="frame" x="119" y="0.0" width="50" height="20"/>
@@ -12392,8 +12323,8 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WT1-ht-4WF" customClass="CosmosView" customModule="Cosmos">
-                                                                <rect key="frame" x="59" y="50" width="170" height="30"/>
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WT1-ht-4WF" customClass="CosmosView" customModule="Cosmos">
+                                                                <rect key="frame" x="59" y="50" width="170" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="starSize">
@@ -12419,7 +12350,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jL0-FY-xMk">
-                                                                <rect key="frame" x="97" y="80" width="94" height="30"/>
+                                                                <rect key="frame" x="97" y="100" width="94" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="e1P-EU-zW0"/>
                                                                 </constraints>
@@ -12669,10 +12600,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE2-ul-Kzj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6V-7N-fxY">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g6V-7N-fxY">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1006"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Df-6c-qWj">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Df-6c-qWj">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zE-8e-hbL" customClass="View" customModule="Work_It" customModuleProvider="target">
@@ -12700,8 +12631,8 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="circle" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="veX-XK-6vD">
-                                                        <rect key="frame" x="16" y="120" width="288" height="80"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="veX-XK-6vD">
+                                                        <rect key="frame" x="16" y="120" width="288" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZf-c3-lsb" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="20"/>
@@ -12731,8 +12662,8 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WP5-HU-2EF" customClass="CosmosView" customModule="Cosmos">
-                                                                <rect key="frame" x="59" y="50" width="170" height="30"/>
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WP5-HU-2EF" customClass="CosmosView" customModule="Cosmos">
+                                                                <rect key="frame" x="59" y="50" width="170" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="starSize">
@@ -12821,7 +12752,7 @@
                                                     <action selector="rateUserAction:" destination="pbn-hl-jKj" eventType="touchUpInside" id="hyn-EC-qXr"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FV-LT-xqG" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Job Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FV-LT-xqG" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="220" width="288" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -12832,7 +12763,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBb-pL-xXo" customClass="View" customModule="Work_It" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RBb-pL-xXo" customClass="View" customModule="Work_It" customModuleProvider="target">
                                                 <rect key="frame" x="32" y="250.5" width="256" height="585.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="C3f-7v-ffX">
@@ -13379,7 +13310,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gG-RM-Yye">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gG-RM-Yye">
                                                 <rect key="frame" x="16" y="856" width="288" height="130"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilQ-Gy-Ecu" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
@@ -14423,7 +14354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ok9-B3-ht2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6780" y="1797"/>
+            <point key="canvasLocation" x="7777.5" y="1796.8309859154929"/>
         </scene>
         <!--Vendor Reviews View Controller-->
         <scene sceneID="G8I-ye-QKd">
@@ -15036,7 +14967,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kla-0C-yHm">
                                                                     <rect key="frame" x="0.0" y="11" width="110" height="51"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2Q-BH-euj" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2Q-BH-euj" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -15047,7 +14978,7 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkW-LJ-SSE" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkW-LJ-SSE" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="30.5" width="110" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -15184,7 +15115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RiX-1B-9dc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9206" y="1797"/>
+            <point key="canvasLocation" x="10201.875" y="1796.8309859154929"/>
         </scene>
         <!--Item-->
         <scene sceneID="v0q-UI-1eg">
@@ -15223,6 +15154,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CmH-mH-4h2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1590" y="6077"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wPh-oe-tAJ">
+            <objects>
+                <navigationController storyboardIdentifier="PrivacyPolicyViewController" automaticallyAdjustsScrollViewInsets="NO" id="7RL-Wk-lG3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vrQ-ku-Sin">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5dj-kz-8h8" kind="relationship" relationship="rootViewController" id="EcE-LB-RB4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omb-hf-yYM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2388.75" y="1796.8309859154929"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -1,0 +1,678 @@
+
+/* Class = "UILabel"; text = "Job Schedule"; ObjectID = "0PO-d5-nw0"; */
+"0PO-d5-nw0.text" = "Job Schedule";
+
+/* Class = "UILabel"; text = "Job Approach"; ObjectID = "0QU-rH-g4D"; */
+"0QU-rH-g4D.text" = "Job Approach";
+
+/* Class = "UILabel"; text = "Accounts"; ObjectID = "0Ya-gJ-v5K"; */
+"0Ya-gJ-v5K.text" = "Accounts";
+
+/* Class = "UIButton"; normalTitle = "Rate User"; ObjectID = "106-Rk-rUv"; */
+"106-Rk-rUv.normalTitle" = "Rate User";
+
+/* Class = "UILabel"; text = "Job Details"; ObjectID = "1FV-LT-xqG"; */
+"1FV-LT-xqG.text" = "Job Details";
+
+/* Class = "UILabel"; text = "10.00am - 5.00pm"; ObjectID = "1Xl-H0-BGe"; */
+"1Xl-H0-BGe.text" = "10.00am - 5.00pm";
+
+/* Class = "UILabel"; text = "Offered amount"; ObjectID = "1bb-Pn-9dS"; */
+"1bb-Pn-9dS.text" = "Offered amount";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "1tO-qs-zXu"; */
+"1tO-qs-zXu.title" = "Item";
+
+/* Class = "UILabel"; text = "Work Schedule"; ObjectID = "25T-76-0pH"; */
+"25T-76-0pH.text" = "Work Schedule";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "26r-Mj-wmG"; */
+"26r-Mj-wmG.text" = "Address";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "29o-9m-5ti"; */
+"29o-9m-5ti.text" = "Address";
+
+/* Class = "UILabel"; text = "Start Date"; ObjectID = "2RX-Yr-qno"; */
+"2RX-Yr-qno.text" = "Start Date";
+
+/* Class = "UITextField"; placeholder = "Account type"; ObjectID = "2Tn-eD-SD8"; */
+"2Tn-eD-SD8.placeholder" = "Account type";
+
+/* Class = "UILabel"; text = "Larry ellison"; ObjectID = "2eI-Zv-tg7"; */
+"2eI-Zv-tg7.text" = "Larry ellison";
+
+/* Class = "UILabel"; text = "worker"; ObjectID = "2rD-lF-vMU"; */
+"2rD-lF-vMU.text" = "worker";
+
+/* Class = "UILabel"; text = "20/02/20"; ObjectID = "2xk-PT-hss"; */
+"2xk-PT-hss.text" = "20/02/20";
+
+/* Class = "UILabel"; text = "Username: John Smith\\"; ObjectID = "2yu-gX-TZd"; */
+"2yu-gX-TZd.text" = "Username: John Smith\\";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "34V-DW-TBx"; */
+"34V-DW-TBx.title" = "Item";
+
+/* Class = "UITextField"; placeholder = "Card Holder Number"; ObjectID = "3Or-da-O1M"; */
+"3Or-da-O1M.placeholder" = "Card Holder Number";
+
+/* Class = "UILabel"; text = "Account Settings"; ObjectID = "3dh-n4-f5r"; */
+"3dh-n4-f5r.text" = "Account Settings";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5DT-NW-mZP"; */
+"5DT-NW-mZP.text" = "Label";
+
+/* Class = "UILabel"; text = "Job Description"; ObjectID = "5Jf-9j-CSZ"; */
+"5Jf-9j-CSZ.text" = "Job Description";
+
+/* Class = "UILabel"; text = "Bid Rejected"; ObjectID = "5be-Zw-x2N"; */
+"5be-Zw-x2N.text" = "Bid Rejected";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "5uG-az-bBB"; */
+"5uG-az-bBB.text" = "Time";
+
+/* Class = "UIButton"; normalTitle = "Save "; ObjectID = "64l-Iv-cCj"; */
+"64l-Iv-cCj.normalTitle" = "Save ";
+
+/* Class = "UILabel"; text = "20/02/2020  "; ObjectID = "6DV-Wx-9qQ"; */
+"6DV-Wx-9qQ.text" = "20/02/2020  ";
+
+/* Class = "UITextField"; text = "Santiago"; ObjectID = "6Rj-WW-AJE"; */
+"6Rj-WW-AJE.text" = "Santiago";
+
+/* Class = "UIButton"; normalTitle = "+ Add Account"; ObjectID = "6Wx-2C-YvG"; */
+"6Wx-2C-YvG.normalTitle" = "+ Add Account";
+
+/* Class = "UILabel"; text = "Job Title"; ObjectID = "6ci-E4-aYk"; */
+"6ci-E4-aYk.text" = "Job Title";
+
+/* Class = "UILabel"; text = "ACCEPTED"; ObjectID = "6mL-ed-Ff6"; */
+"6mL-ed-Ff6.text" = "ACCEPTED";
+
+/* Class = "UILabel"; text = "No Review Available"; ObjectID = "6pT-Yy-1M3"; */
+"6pT-Yy-1M3.text" = "No Review Available";
+
+/* Class = "UILabel"; text = "Profile"; ObjectID = "7V5-Zh-Btb"; */
+"7V5-Zh-Btb.text" = "Profile";
+
+/* Class = "UITextField"; placeholder = "Address"; ObjectID = "7p0-sV-0Ek"; */
+"7p0-sV-0Ek.placeholder" = "Address";
+
+/* Class = "UILabel"; text = "Credits"; ObjectID = "7qL-A3-Bae"; */
+"7qL-A3-Bae.text" = "Credits";
+
+/* Class = "UILabel"; text = "Job Subcategory"; ObjectID = "8GM-mD-btH"; */
+"8GM-mD-btH.text" = "Job Subcategory";
+
+/* Class = "UILabel"; text = "xyz address"; ObjectID = "8e3-BQ-daZ"; */
+"8e3-BQ-daZ.text" = "xyz address";
+
+/* Class = "UILabel"; text = "No Data Found"; ObjectID = "8fj-Mc-lY0"; */
+"8fj-Mc-lY0.text" = "No Data Found";
+
+/* Class = "UILabel"; text = "History"; ObjectID = "8hA-ot-ZTC"; */
+"8hA-ot-ZTC.text" = "History";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "8kB-vs-2GU"; */
+"8kB-vs-2GU.normalTitle" = "Next";
+
+/* Class = "UITextField"; placeholder = "Subcategory"; ObjectID = "8pV-Nq-GLQ"; */
+"8pV-Nq-GLQ.placeholder" = "Subcategory";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "943-0T-K8R"; */
+"943-0T-K8R.text" = "Time";
+
+/* Class = "UILabel"; text = "Or"; ObjectID = "9EA-Gp-yUd"; */
+"9EA-Gp-yUd.text" = "Or";
+
+/* Class = "UILabel"; text = "Payment"; ObjectID = "9bv-SO-GqN"; */
+"9bv-SO-GqN.text" = "Payment";
+
+/* Class = "UILabel"; text = "Carpentry"; ObjectID = "A1g-HL-lKw"; */
+"A1g-HL-lKw.text" = "Carpentry";
+
+/* Class = "UILabel"; text = "Job Details"; ObjectID = "AM2-O9-GG5"; */
+"AM2-O9-GG5.text" = "Job Details";
+
+/* Class = "UILabel"; text = "Counter offer"; ObjectID = "B0s-eg-naZ"; */
+"B0s-eg-naZ.text" = "Counter offer";
+
+/* Class = "UIButton"; normalTitle = "Post"; ObjectID = "Bam-BZ-0rf"; */
+"Bam-BZ-0rf.normalTitle" = "Post";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Bw5-SX-Cu8"; */
+"Bw5-SX-Cu8.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Term & Conditions"; ObjectID = "C7G-FQ-apL"; */
+"C7G-FQ-apL.title" = "Term & Conditions";
+
+/* Class = "UITextView"; text = "Type here"; ObjectID = "CJi-aW-bVW"; */
+"CJi-aW-bVW.text" = "Type here";
+
+/* Class = "UILabel"; text = "11:00 am"; ObjectID = "CKC-Uh-uYb"; */
+"CKC-Uh-uYb.text" = "11:00 am";
+
+/* Class = "UILabel"; text = "Bids Placed"; ObjectID = "CPv-Lo-SsU"; */
+"CPv-Lo-SsU.text" = "Bids Placed";
+
+/* Class = "UILabel"; text = "Posted On"; ObjectID = "CaG-9v-F1c"; */
+"CaG-9v-F1c.text" = "Posted On";
+
+/* Class = "UILabel"; text = "BOA"; ObjectID = "Ctb-Nd-hFi"; */
+"Ctb-Nd-hFi.text" = "BOA";
+
+/* Class = "UILabel"; text = "Post Job"; ObjectID = "Dbg-Z1-l5v"; */
+"Dbg-Z1-l5v.text" = "Post Job";
+
+/* Class = "UITabBarItem"; title = "REQUEST"; ObjectID = "DfA-EQ-K5n"; */
+"DfA-EQ-K5n.title" = "REQUEST";
+
+/* Class = "UILabel"; text = "Service Charges"; ObjectID = "Dgv-8i-ciA"; */
+"Dgv-8i-ciA.text" = "Service Charges";
+
+/* Class = "UILabel"; text = "Posted By"; ObjectID = "DwW-T9-Wdw"; */
+"DwW-T9-Wdw.text" = "Posted By";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "E7W-ie-k46"; */
+"E7W-ie-k46.normalTitle" = "Send";
+
+/* Class = "UILabel"; text = "Job Approach"; ObjectID = "EFm-6Q-i0i"; */
+"EFm-6Q-i0i.text" = "Job Approach";
+
+/* Class = "UILabel"; text = "10 Days"; ObjectID = "Ekn-wm-zEn"; */
+"Ekn-wm-zEn.text" = "10 Days";
+
+/* Class = "UILabel"; text = "RUT:  123456"; ObjectID = "EuY-z6-5nW"; */
+"EuY-z6-5nW.text" = "RUT:  123456";
+
+/* Class = "UILabel"; text = "IT"; ObjectID = "FeL-FM-cEn"; */
+"FeL-FM-cEn.text" = "IT";
+
+/* Class = "UILabel"; text = "Job Location"; ObjectID = "Fg6-iG-2gu"; */
+"Fg6-iG-2gu.text" = "Job Location";
+
+/* Class = "UILabel"; text = "Job Approach"; ObjectID = "FtO-Eh-4fv"; */
+"FtO-Eh-4fv.text" = "Job Approach";
+
+/* Class = "UIButton"; normalTitle = "Post a Job Now"; ObjectID = "Ful-MQ-oAX"; */
+"Ful-MQ-oAX.normalTitle" = "Post a Job Now";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "Fzg-94-dNI"; */
+"Fzg-94-dNI.text" = "Price";
+
+/* Class = "UILabel"; text = "Awareded To"; ObjectID = "G0j-x4-IE4"; */
+"G0j-x4-IE4.text" = "Awareded To";
+
+/* Class = "UITextField"; placeholder = "CVV"; ObjectID = "G2L-em-I2Y"; */
+"G2L-em-I2Y.placeholder" = "CVV";
+
+/* Class = "UILabel"; text = "Santiago"; ObjectID = "GVY-vb-8jS"; */
+"GVY-vb-8jS.text" = "Santiago";
+
+/* Class = "UILabel"; text = "Map View"; ObjectID = "GXG-5Q-rGU"; */
+"GXG-5Q-rGU.text" = "Map View";
+
+/* Class = "UILabel"; text = "08:00 AM"; ObjectID = "GZj-eS-CUF"; */
+"GZj-eS-CUF.text" = "08:00 AM";
+
+/* Class = "UILabel"; text = "Inbox"; ObjectID = "GgC-GY-xM0"; */
+"GgC-GY-xM0.text" = "Inbox";
+
+/* Class = "UILabel"; text = "20.10.20"; ObjectID = "Gzn-Ze-rNN"; */
+"Gzn-Ze-rNN.text" = "20.10.20";
+
+/* Class = "UILabel"; text = "Job Category"; ObjectID = "HR5-zp-qLi"; */
+"HR5-zp-qLi.text" = "Job Category";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "HR8-GT-JTq"; */
+"HR8-GT-JTq.normalTitle" = "Add";
+
+/* Class = "UILabel"; text = "BOA"; ObjectID = "HW5-Lz-M32"; */
+"HW5-Lz-M32.text" = "BOA";
+
+/* Class = "UILabel"; text = "Account Number : 4444 3333 2222 1111"; ObjectID = "HZl-l3-B6g"; */
+"HZl-l3-B6g.text" = "Account Number : 4444 3333 2222 1111";
+
+/* Class = "UILabel"; text = "Leave us a comment"; ObjectID = "HbY-0f-Q4a"; */
+"HbY-0f-Q4a.text" = "Leave us a comment";
+
+/* Class = "UILabel"; text = "Offered amount"; ObjectID = "Htv-2I-3yz"; */
+"Htv-2I-3yz.text" = "Offered amount";
+
+/* Class = "UILabel"; text = "21 Jun'20"; ObjectID = "I9X-JM-C4F"; */
+"I9X-JM-C4F.text" = "21 Jun'20";
+
+/* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "IBW-xy-V6e"; */
+"IBW-xy-V6e.normalTitle" = "DONE";
+
+/* Class = "UITextField"; placeholder = "Select Month"; ObjectID = "IIh-Qm-8J8"; */
+"IIh-Qm-8J8.placeholder" = "Select Month";
+
+/* Class = "UILabel"; text = "No Jobs Found"; ObjectID = "J2k-hl-NKX"; */
+"J2k-hl-NKX.text" = "No Jobs Found";
+
+/* Class = "UILabel"; text = "Larry ellison"; ObjectID = "JUk-tW-GXx"; */
+"JUk-tW-GXx.text" = "Larry ellison";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "KI6-hN-IpN"; */
+"KI6-hN-IpN.text" = "Address";
+
+/* Class = "UILabel"; text = "20/02/2020  "; ObjectID = "M3o-I3-SuV"; */
+"M3o-I3-SuV.text" = "20/02/2020  ";
+
+/* Class = "UILabel"; text = "Payment for the service($)"; ObjectID = "MH7-0d-p4d"; */
+"MH7-0d-p4d.text" = "Payment for the service($)";
+
+/* Class = "UILabel"; text = "Awarded To"; ObjectID = "Mbj-gh-3z8"; */
+"Mbj-gh-3z8.text" = "Awarded To";
+
+/* Class = "UILabel"; text = "Evaluations"; ObjectID = "Mex-dm-vJX"; */
+"Mex-dm-vJX.text" = "Evaluations";
+
+/* Class = "UILabel"; text = "Credits"; ObjectID = "Mgy-bG-JAo"; */
+"Mgy-bG-JAo.text" = "Credits";
+
+/* Class = "UILabel"; text = "Details of the offers Job"; ObjectID = "Mlz-ff-DZq"; */
+"Mlz-ff-DZq.text" = "Details of the offers Job";
+
+/* Class = "UIButton"; normalTitle = "Cancel Job"; ObjectID = "MnN-6f-bDt"; */
+"MnN-6f-bDt.normalTitle" = "Cancel Job";
+
+/* Class = "UITextField"; placeholder = "Select your bank"; ObjectID = "MsS-rP-G0g"; */
+"MsS-rP-G0g.placeholder" = "Select your bank";
+
+/* Class = "UILabel"; text = "08:00 AM"; ObjectID = "NkW-LJ-SSE"; */
+"NkW-LJ-SSE.text" = "08:00 AM";
+
+/* Class = "UITextView"; text = "Job Description"; ObjectID = "Nnb-dR-ebb"; */
+"Nnb-dR-ebb.text" = "Job Description";
+
+/* Class = "UITextField"; placeholder = "Name of the work"; ObjectID = "Ns7-uv-q42"; */
+"Ns7-uv-q42.placeholder" = "Name of the work";
+
+/* Class = "UITextView"; text = "Type here"; ObjectID = "OHZ-vw-8o6"; */
+"OHZ-vw-8o6.text" = "Type here";
+
+/* Class = "UILabel"; text = "ID Number:"; ObjectID = "P8l-hX-nO5"; */
+"P8l-hX-nO5.text" = "ID Number:";
+
+/* Class = "UITextField"; placeholder = "Enter Amount"; ObjectID = "Pko-kT-lcE"; */
+"Pko-kT-lcE.placeholder" = "Enter Amount";
+
+/* Class = "UILabel"; text = "Job Subcategory"; ObjectID = "QLy-8v-S3v"; */
+"QLy-8v-S3v.text" = "Job Subcategory";
+
+/* Class = "UITextField"; placeholder = "Full Name"; ObjectID = "QqP-Ed-W7m"; */
+"QqP-Ed-W7m.placeholder" = "Full Name";
+
+/* Class = "UIButton"; normalTitle = "Reject"; ObjectID = "RcA-zZ-Zp4"; */
+"RcA-zZ-Zp4.normalTitle" = "Reject";
+
+/* Class = "UILabel"; text = "History"; ObjectID = "Reu-xl-OMI"; */
+"Reu-xl-OMI.text" = "History";
+
+/* Class = "UILabel"; text = "Plumbing"; ObjectID = "RfE-i6-YQw"; */
+"RfE-i6-YQw.text" = "Plumbing";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "RgR-xO-TvH"; */
+"RgR-xO-TvH.normalTitle" = "OK";
+
+/* Class = "UILabel"; text = "$5.00"; ObjectID = "Ris-Wr-Omb"; */
+"Ris-Wr-Omb.text" = "$5.00";
+
+/* Class = "UILabel"; text = "worker"; ObjectID = "Rm7-Pm-rXQ"; */
+"Rm7-Pm-rXQ.text" = "worker";
+
+/* Class = "UILabel"; text = "No Active Chats Available"; ObjectID = "RuV-I6-hCJ"; */
+"RuV-I6-hCJ.text" = "No Active Chats Available";
+
+/* Class = "UITextField"; placeholder = "Exp"; ObjectID = "S2Y-NZ-88F"; */
+"S2Y-NZ-88F.placeholder" = "Exp";
+
+/* Class = "UILabel"; text = "Work Date"; ObjectID = "SJ3-w0-SwG"; */
+"SJ3-w0-SwG.text" = "Work Date";
+
+/* Class = "UILabel"; text = "Job Details"; ObjectID = "T8d-gI-xdS"; */
+"T8d-gI-xdS.text" = "Job Details";
+
+/* Class = "UILabel"; text = "Posted on"; ObjectID = "TPD-Jm-fYQ"; */
+"TPD-Jm-fYQ.text" = "Posted on";
+
+/* Class = "UILabel"; text = "Posted Jobs"; ObjectID = "TXe-Wz-LEO"; */
+"TXe-Wz-LEO.text" = "Posted Jobs";
+
+/* Class = "UILabel"; text = "Vendor Comment"; ObjectID = "UCb-r6-sw1"; */
+"UCb-r6-sw1.text" = "Vendor Comment";
+
+/* Class = "UIButton"; normalTitle = "No"; ObjectID = "ULY-Lm-gbl"; */
+"ULY-Lm-gbl.normalTitle" = "No";
+
+/* Class = "UILabel"; text = "Father Last Name"; ObjectID = "VNl-9f-Pdv"; */
+"VNl-9f-Pdv.text" = "Father Last Name";
+
+/* Class = "UILabel"; text = "Please select payment method"; ObjectID = "VqN-hd-BUM"; */
+"VqN-hd-BUM.text" = "Please select payment method";
+
+/* Class = "UILabel"; text = "Occupation / Speciality"; ObjectID = "WT8-W1-AwB"; */
+"WT8-W1-AwB.text" = "Occupation / Speciality";
+
+/* Class = "UILabel"; text = "21 Jun'20"; ObjectID = "X2Q-BH-euj"; */
+"X2Q-BH-euj.text" = "21 Jun'20";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "XCK-Uc-xar"; */
+"XCK-Uc-xar.text" = "+";
+
+/* Class = "UILabel"; text = "Subcategory"; ObjectID = "XSB-TF-lZl"; */
+"XSB-TF-lZl.text" = "Subcategory";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "Xf1-vl-G24"; */
+"Xf1-vl-G24.text" = "Category";
+
+/* Class = "UILabel"; text = "Publications"; ObjectID = "Xxi-ip-E8x"; */
+"Xxi-ip-E8x.text" = "Publications";
+
+/* Class = "UILabel"; text = "Price($)"; ObjectID = "Xyt-O5-lN7"; */
+"Xyt-O5-lN7.text" = "Price($)";
+
+/* Class = "UILabel"; text = "No Jobs Found"; ObjectID = "YBY-V9-rXA"; */
+"YBY-V9-rXA.text" = "No Jobs Found";
+
+/* Class = "UILabel"; text = "ACCEPTED"; ObjectID = "YKX-BS-e8L"; */
+"YKX-BS-e8L.text" = "ACCEPTED";
+
+/* Class = "UILabel"; text = "Job Details"; ObjectID = "YQz-2Z-flg"; */
+"YQz-2Z-flg.text" = "Job Details";
+
+/* Class = "UITextView"; text = "Type here"; ObjectID = "YVn-uR-UlS"; */
+"YVn-uR-UlS.text" = "Type here";
+
+/* Class = "UILabel"; text = "Running Jobs"; ObjectID = "YYc-iE-OEi"; */
+"YYc-iE-OEi.text" = "Running Jobs";
+
+/* Class = "UITextField"; placeholder = "Smith"; ObjectID = "YcD-yI-Ukc"; */
+"YcD-yI-Ukc.placeholder" = "Smith";
+
+/* Class = "UILabel"; text = "Username: John Smith\\"; ObjectID = "Yqn-GU-bs2"; */
+"Yqn-GU-bs2.text" = "Username: John Smith\\";
+
+/* Class = "UILabel"; text = "How many stars you give to the customer"; ObjectID = "YyM-Wr-K9K"; */
+"YyM-Wr-K9K.text" = "How many stars you give to the customer";
+
+/* Class = "UILabel"; text = "Available Credits"; ObjectID = "ZqM-gH-OQ2"; */
+"ZqM-gH-OQ2.text" = "Available Credits";
+
+/* Class = "UITextField"; placeholder = "Account number"; ObjectID = "a24-Oz-zbO"; */
+"a24-Oz-zbO.placeholder" = "Account number";
+
+/* Class = "UILabel"; text = "Reviews"; ObjectID = "a7T-Xv-wh4"; */
+"a7T-Xv-wh4.text" = "Reviews";
+
+/* Class = "UILabel"; text = "Charly R."; ObjectID = "aFQ-Ue-Cpk"; */
+"aFQ-Ue-Cpk.text" = "Charly R.";
+
+/* Class = "UILabel"; text = "Estimated Time"; ObjectID = "ajd-WX-KWi"; */
+"ajd-WX-KWi.text" = "Estimated Time";
+
+/* Class = "UITextField"; placeholder = "Smith"; ObjectID = "beB-ZV-zfS"; */
+"beB-ZV-zfS.placeholder" = "Smith";
+
+/* Class = "UILabel"; text = "Posted on"; ObjectID = "bjZ-vj-SKX"; */
+"bjZ-vj-SKX.text" = "Posted on";
+
+/* Class = "UILabel"; text = "Contact Number:"; ObjectID = "bkC-WM-IGg"; */
+"bkC-WM-IGg.text" = "Contact Number:";
+
+/* Class = "UIButton"; normalTitle = "Message"; ObjectID = "bxX-VV-faA"; */
+"bxX-VV-faA.normalTitle" = "Message";
+
+/* Class = "UILabel"; text = "Email:"; ObjectID = "c0f-qn-3x7"; */
+"c0f-qn-3x7.text" = "Email:";
+
+/* Class = "UILabel"; text = "Job Schedule"; ObjectID = "cg0-p8-14Z"; */
+"cg0-p8-14Z.text" = "Job Schedule";
+
+/* Class = "UILabel"; text = "Charly R."; ObjectID = "cnV-1c-XrB"; */
+"cnV-1c-XrB.text" = "Charly R.";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "dBG-pi-Xuy"; */
+"dBG-pi-Xuy.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "dBd-zB-i5Z"; */
+"dBd-zB-i5Z.normalTitle" = "Ok";
+
+/* Class = "UILabel"; text = "Add Photos(optional)"; ObjectID = "dHW-ki-KO4"; */
+"dHW-ki-KO4.text" = "Add Photos(optional)";
+
+/* Class = "UIButton"; normalTitle = "Rate User"; ObjectID = "dSr-zP-GeZ"; */
+"dSr-zP-GeZ.normalTitle" = "Rate User";
+
+/* Class = "UILabel"; text = "Santiago"; ObjectID = "dY8-gG-6VI"; */
+"dY8-gG-6VI.text" = "Santiago";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "dYJ-wd-oAq"; */
+"dYJ-wd-oAq.normalTitle" = "Done";
+
+/* Class = "UITextView"; text = "Enter Message"; ObjectID = "dgR-mP-p9u"; */
+"dgR-mP-p9u.text" = "Enter Message";
+
+/* Class = "UILabel"; text = "Your Comment"; ObjectID = "duZ-iy-th3"; */
+"duZ-iy-th3.text" = "Your Comment";
+
+/* Class = "UILabel"; text = "Awarded To"; ObjectID = "e9h-kb-Hsd"; */
+"e9h-kb-Hsd.text" = "Awarded To";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "eAk-P9-TAq"; */
+"eAk-P9-TAq.text" = "About";
+
+/* Class = "UILabel"; text = "My Bids"; ObjectID = "eG7-Za-dcW"; */
+"eG7-Za-dcW.text" = "My Bids";
+
+/* Class = "UILabel"; text = "Recents"; ObjectID = "eKB-nN-YiU"; */
+"eKB-nN-YiU.text" = "Recents";
+
+/* Class = "UILabel"; text = "Job Approach"; ObjectID = "eQc-2h-TJL"; */
+"eQc-2h-TJL.text" = "Job Approach";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "esN-ip-6bN"; */
+"esN-ip-6bN.text" = "Label";
+
+/* Class = "UILabel"; text = "xyz address"; ObjectID = "f8o-IO-87K"; */
+"f8o-IO-87K.text" = "xyz address";
+
+/* Class = "UIButton"; normalTitle = "Place Bid"; ObjectID = "fNu-sa-Gld"; */
+"fNu-sa-Gld.normalTitle" = "Place Bid";
+
+/* Class = "UILabel"; text = "No Data Found"; ObjectID = "fXJ-9s-R40"; */
+"fXJ-9s-R40.text" = "No Data Found";
+
+/* Class = "UILabel"; text = "Posted By"; ObjectID = "ff2-uO-Btn"; */
+"ff2-uO-Btn.text" = "Posted By";
+
+/* Class = "UILabel"; text = "Posted Job"; ObjectID = "fg8-A3-jkw"; */
+"fg8-A3-jkw.text" = "Posted Job";
+
+/* Class = "UILabel"; text = "Price($)"; ObjectID = "fju-eS-Zrj"; */
+"fju-eS-Zrj.text" = "Price($)";
+
+/* Class = "UITextField"; placeholder = "Card Holder Name"; ObjectID = "fkn-Sd-YGe"; */
+"fkn-Sd-YGe.placeholder" = "Card Holder Name";
+
+/* Class = "UILabel"; text = "Evaluate Your Service"; ObjectID = "fyh-NA-ej3"; */
+"fyh-NA-ej3.text" = "Evaluate Your Service";
+
+/* Class = "UILabel"; text = "Job Description"; ObjectID = "g0j-ZF-8Wg"; */
+"g0j-ZF-8Wg.text" = "Job Description";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "gAZ-bB-KGk"; */
+"gAZ-bB-KGk.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "**This information must be completed only the first one that will provide a service, then this information will be saved in you profile and you can edit it in your profile if necessary."; ObjectID = "gKl-i6-avk"; */
+"gKl-i6-avk.text" = "**This information must be completed only the first one that will provide a service, then this information will be saved in you profile and you can edit it in your profile if necessary.";
+
+/* Class = "UITextField"; placeholder = "Address"; ObjectID = "h7S-25-9zZ"; */
+"h7S-25-9zZ.placeholder" = "Address";
+
+/* Class = "UILabel"; text = "Credits:"; ObjectID = "hA7-Ts-UEU"; */
+"hA7-Ts-UEU.text" = "Credits:";
+
+/* Class = "UILabel"; text = "Did the client tried to contact you outside WORKIT?"; ObjectID = "hLY-dJ-wAQ"; */
+"hLY-dJ-wAQ.text" = "Did the client tried to contact you outside WORKIT?";
+
+/* Class = "UIButton"; normalTitle = "No"; ObjectID = "hqE-KJ-JhZ"; */
+"hqE-KJ-JhZ.normalTitle" = "No";
+
+/* Class = "UILabel"; text = "Service needed on"; ObjectID = "hsI-GY-SJW"; */
+"hsI-GY-SJW.text" = "Service needed on";
+
+/* Class = "UITabBarItem"; title = "REQUEST"; ObjectID = "hxb-Zt-V30"; */
+"hxb-Zt-V30.title" = "REQUEST";
+
+/* Class = "UILabel"; text = "Vendor Comment"; ObjectID = "i7d-NZ-PMK"; */
+"i7d-NZ-PMK.text" = "Vendor Comment";
+
+/* Class = "UILabel"; text = "worker"; ObjectID = "iFF-iH-KBF"; */
+"iFF-iH-KBF.text" = "worker";
+
+/* Class = "UILabel"; text = "RUT:  123456"; ObjectID = "iG1-iv-Slq"; */
+"iG1-iv-Slq.text" = "RUT:  123456";
+
+/* Class = "UILabel"; text = "No Categories Found"; ObjectID = "iJf-b5-JGI"; */
+"iJf-b5-JGI.text" = "No Categories Found";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ihT-8y-AIV"; */
+"ihT-8y-AIV.text" = "Label";
+
+/* Class = "UILabel"; text = "Photos"; ObjectID = "ilQ-Gy-Ecu"; */
+"ilQ-Gy-Ecu.text" = "Photos";
+
+/* Class = "UIButton"; normalTitle = "View Reviews"; ObjectID = "jL0-FY-xMk"; */
+"jL0-FY-xMk.normalTitle" = "View Reviews";
+
+/* Class = "UILabel"; text = "$0"; ObjectID = "jvq-IT-pXY"; */
+"jvq-IT-pXY.text" = "$0";
+
+/* Class = "UILabel"; text = "Job Title"; ObjectID = "kPM-IR-qNT"; */
+"kPM-IR-qNT.text" = "Job Title";
+
+/* Class = "UILabel"; text = "Received Jobs"; ObjectID = "kcK-Lg-ZAb"; */
+"kcK-Lg-ZAb.text" = "Received Jobs";
+
+/* Class = "UILabel"; text = "No Subcategories Found"; ObjectID = "lcv-1K-0KN"; */
+"lcv-1K-0KN.text" = "No Subcategories Found";
+
+/* Class = "UILabel"; text = "Work Schedule"; ObjectID = "lqk-nP-w7r"; */
+"lqk-nP-w7r.text" = "Work Schedule";
+
+/* Class = "UIButton"; normalTitle = "Yes"; ObjectID = "lyq-qA-6k7"; */
+"lyq-qA-6k7.normalTitle" = "Si";
+
+/* Class = "UILabel"; text = "Mother Last Name"; ObjectID = "mUk-o4-LNU"; */
+"mUk-o4-LNU.text" = "Apellido materno";
+
+/* Class = "UILabel"; text = "**This information must be completed only the first one that will provide a service, then this information will be saved in you profile and you can edit it in your profile if necessary."; ObjectID = "maQ-kF-gYi"; */
+"maQ-kF-gYi.text" = "**This information must be completed only the first one that will provide a service, then this information will be saved in you profile and you can edit it in your profile if necessary.";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "nRp-EW-fdE"; */
+"nRp-EW-fdE.text" = "Categoria";
+
+/* Class = "UITextField"; placeholder = "RUT(id number)"; ObjectID = "nUL-xy-fEv"; */
+"nUL-xy-fEv.placeholder" = "RUT(id number)";
+
+/* Class = "UILabel"; text = "Job Title"; ObjectID = "ns2-g9-mKJ"; */
+"ns2-g9-mKJ.text" = "Job Title";
+
+/* Class = "UILabel"; text = "ID Picture"; ObjectID = "nzg-3j-MGM"; */
+"nzg-3j-MGM.text" = "ID Picture";
+
+/* Class = "UIButton"; normalTitle = "Acept"; ObjectID = "oLP-6g-isk"; */
+"oLP-6g-isk.normalTitle" = "Aceptar";
+
+/* Class = "UILabel"; text = "Start Date"; ObjectID = "oOj-K6-RqA"; */
+"oOj-K6-RqA.text" = "Fecha inicio";
+
+/* Class = "UILabel"; text = "Photos"; ObjectID = "okR-Df-7BJ"; */
+"okR-Df-7BJ.text" = "Photos";
+
+/* Class = "UILabel"; text = "**WORKIT commission will be deducted, approx 8%"; ObjectID = "oqo-ek-VEW"; */
+"oqo-ek-VEW.text" = "**WORKIT commission will be deducted, approx 8%";
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "pDV-Cm-8Lo"; */
+"pDV-Cm-8Lo.normalTitle" = "-";
+
+/* Class = "UILabel"; text = "Las Vegas"; ObjectID = "pMe-oH-dNU"; */
+"pMe-oH-dNU.text" = "Las Vegas";
+
+/* Class = "UILabel"; text = "No Tansaction History"; ObjectID = "pWc-G8-nmX"; */
+"pWc-G8-nmX.text" = "No Tansaction History";
+
+/* Class = "UITextField"; placeholder = "Category"; ObjectID = "pa0-dP-pUJ"; */
+"pa0-dP-pUJ.placeholder" = "Category";
+
+/* Class = "UILabel"; text = "Map View"; ObjectID = "qMN-Ej-IGT"; */
+"qMN-Ej-IGT.text" = "Map View";
+
+/* Class = "UILabel"; text = "Work Time"; ObjectID = "qhU-be-o0o"; */
+"qhU-be-o0o.text" = "Work Time";
+
+/* Class = "UILabel"; text = "Job Category"; ObjectID = "rSd-13-ska"; */
+"rSd-13-ska.text" = "Categoria de trabajo";
+
+/* Class = "UILabel"; text = "Account type: ABC"; ObjectID = "rdt-5n-ny3"; */
+"rdt-5n-ny3.text" = "Account type: ABC";
+
+/* Class = "UILabel"; text = "$50.00"; ObjectID = "sAG-fd-b8I"; */
+"sAG-fd-b8I.text" = "$50.00";
+
+/* Class = "UILabel"; text = "Support"; ObjectID = "sC6-P7-1lH"; */
+"sC6-P7-1lH.text" = "Soporte";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "sNX-hx-qUF"; */
+"sNX-hx-qUF.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "shx-0C-14I"; */
+"shx-0C-14I.normalTitle" = "Saltar";
+
+/* Class = "UILabel"; text = "Photos"; ObjectID = "spJ-FC-TYb"; */
+"spJ-FC-TYb.text" = "Fotos";
+
+/* Class = "UILabel"; text = "Nationality"; ObjectID = "t1F-3S-O1H"; */
+"t1F-3S-O1H.text" = "Nacionalidad";
+
+/* Class = "UILabel"; text = "Posted On"; ObjectID = "t3E-aO-GgM"; */
+"t3E-aO-GgM.text" = "Posted On";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "tz1-tV-9lB"; */
+"tz1-tV-9lB.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Account type: ABC"; ObjectID = "uAh-ht-ZOZ"; */
+"uAh-ht-ZOZ.text" = "Tipo de cuenta: ABC";
+
+/* Class = "UILabel"; text = "Photos"; ObjectID = "uc6-aG-fdi"; */
+"uc6-aG-fdi.text" = "Fotos";
+
+/* Class = "UILabel"; text = "Subcategory"; ObjectID = "uca-3k-U1A"; */
+"uca-3k-U1A.text" = "Subcategory";
+
+/* Class = "UILabel"; text = "*Minimum 1"; ObjectID = "ujF-pA-aUv"; */
+"ujF-pA-aUv.text" = "*Minimum 1";
+
+/* Class = "UILabel"; text = "Enter your bank account details for the deposit of your service"; ObjectID = "w5c-PZ-wH7"; */
+"w5c-PZ-wH7.text" = "Enter your bank account details for the deposit of your service";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "x67-S3-5TN"; */
+"x67-S3-5TN.normalTitle" = "Cancelar";
+
+/* Class = "UILabel"; text = "Account Number : 4444 3333 2222 1111"; ObjectID = "xGb-RF-0cd"; */
+"xGb-RF-0cd.text" = "Número de cuenta : 4444 3333 2222 1111";
+
+/* Class = "UILabel"; text = "Work Schedule"; ObjectID = "xdd-al-a6p"; */
+"xdd-al-a6p.text" = "Work Schedule";
+
+/* Class = "UILabel"; text = "Details of the offers Job"; ObjectID = "yQM-9E-2lf"; */
+"yQM-9E-2lf.text" = "Details of the offers Job";
+
+/* Class = "UIButton"; normalTitle = "Pay Now"; ObjectID = "yfd-o1-HPJ"; */
+"yfd-o1-HPJ.normalTitle" = "Pay Now";
+
+/* Class = "UILabel"; text = "Job Title"; ObjectID = "ynN-Su-aso"; */
+"ynN-Su-aso.text" = "Titulo trabajo";

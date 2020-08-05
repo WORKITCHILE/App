@@ -29,9 +29,7 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.setCameraInput()
         self.showCameraFeed()
         self.setCameraOutput()
-//        self.navigationController?.isNavigationBarHidden = false
-//        self.navigationController?.setNavigationBarHidden(false, animated: false)
-//        self.navigationController?.navigationBar.setItems([item], animated: false)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,11 +106,13 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     
     private func setCameraInput() {
         guard let device = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera],
-            mediaType: .video,
-            position: .back).devices.first else {
+                deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera],
+                mediaType: .video,
+                position: .back
+        ).devices.first else {
                 return
         }
+        
         let cameraInput = try! AVCaptureDeviceInput(device: device)
         self.captureSession.addInput(cameraInput)
     }

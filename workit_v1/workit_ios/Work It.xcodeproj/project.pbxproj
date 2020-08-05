@@ -11,6 +11,7 @@
 		4F5DC1BE24CFB4780076FCDF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */; };
 		4F5DC1C024D4696C0076FCDF /* signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BF24D4696C0076FCDF /* signup.storyboard */; };
 		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
+		4FF6E5D624D9DCD000867B98 /* NewSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */; };
 		D2085A4D2487693F00F58742 /* VendorReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */; };
 		D2196B2323CC9D5800DC9572 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2196B2223CC9D5800DC9572 /* ChatViewController.swift */; };
 		D22BAAFE23D5EAEB0060001A /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BAAFD23D5EAEB0060001A /* CreditViewController.swift */; };
@@ -92,6 +93,9 @@
 		4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		4F5DC1BF24D4696C0076FCDF /* signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = signup.storyboard; sourceTree = "<group>"; };
 		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignupViewController.swift; sourceTree = "<group>"; };
+		4FF6E5DE24DA2E1A00867B98 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		4FF6E5DF24DA2E1B00867B98 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		6D1E1216FCCEE2253C09C6C2 /* Pods-Work ItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work ItTests.debug.xcconfig"; path = "Target Support Files/Pods-Work ItTests/Pods-Work ItTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9450EEEFFF54782AAAE05F88 /* Pods-Work It-Work ItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It-Work ItUITests.release.xcconfig"; path = "Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests.release.xcconfig"; sourceTree = "<group>"; };
 		96F8BBA278F9B9376E26FBFD /* Pods-Work It-Work ItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It-Work ItUITests.debug.xcconfig"; path = "Target Support Files/Pods-Work It-Work ItUITests/Pods-Work It-Work ItUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +208,14 @@
 				4F5DC1BF24D4696C0076FCDF /* signup.storyboard */,
 			);
 			name = storyboards;
+			sourceTree = "<group>";
+		};
+		4FF6E5D424D9DCBB00867B98 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		5ACA4779BE5D7C951B7990A7 /* Frameworks */ = {
@@ -375,6 +387,7 @@
 		D2D7690E23BE2C08001485E1 /* Work It */ = {
 			isa = PBXGroup;
 			children = (
+				4FF6E5D424D9DCBB00867B98 /* Controllers */,
 				4F5DC1BB24CFB45E0076FCDF /* ui */,
 				D244A3322421D8480098B6FD /* firebaseConfigInfo.plist */,
 				D2E124B9240947ED009DF90A /* Animation */,
@@ -499,6 +512,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = D2D7690323BE2C08001485E1;
 			productRefGroup = D2D7690D23BE2C08001485E1 /* Products */;
@@ -639,6 +653,7 @@
 				D2196B2323CC9D5800DC9572 /* ChatViewController.swift in Sources */,
 				D25BFA9223C0478200CBB4DE /* HistoryViewController.swift in Sources */,
 				D2D7695A23BE2CC2001485E1 /* Constants.swift in Sources */,
+				4FF6E5D624D9DCD000867B98 /* NewSignupViewController.swift in Sources */,
 				D25BFA9623C047A200CBB4DE /* PrivacyPolicyViewController.swift in Sources */,
 				D25B8B8223CD7BAF00F35416 /* AccountDetailViewController.swift in Sources */,
 				D266D11823BF35EF0026FE3A /* WelcomeViewController.swift in Sources */,
@@ -670,6 +685,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D2D7691623BE2C08001485E1 /* Base */,
+				4FF6E5DE24DA2E1A00867B98 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -678,6 +694,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D2D7691B23BE2C0C001485E1 /* Base */,
+				4FF6E5DF24DA2E1B00867B98 /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -689,6 +706,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -749,6 +767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
