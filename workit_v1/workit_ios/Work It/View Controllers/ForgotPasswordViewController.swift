@@ -24,17 +24,22 @@ class ForgotPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(self.isNewuser){
+        
+        if self.isNewuser {
             self.email.isUserInteractionEnabled = true
             self.email.text = Singleton.shared.userInfo.email
             self.headingLabel.text = "Verify Email"
-        }else {
+        } else {
             self.email.text = self.emailAdd
             self.email.isUserInteractionEnabled = false
         }
         
         self.sendOTPView.isHidden = false
         self.email.placeholderTextColor = .white
+        
+        setTransparentHeader()
+        setNavigationBar()
+        
     }
     //MARK: IBActions
     @IBAction func backAction(_ sender: Any) {

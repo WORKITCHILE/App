@@ -11,9 +11,9 @@ import FirebaseUI
 import Firebase
 
 class LoginViewController: UIViewController {
+    
     //MARK: IBOutlets
     @IBOutlet weak var emailAddress: UILabel!
-    
     @IBOutlet weak var password: DesignableUITextField!
     
     var email = String()
@@ -23,12 +23,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailAddress.text = self.email
+        
+        setTransparentHeader()
+        setNavigationBar()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
     }
+    
+
     
     func sendFcmToken(userId: String){
         DispatchQueue.global(qos: .background).async {

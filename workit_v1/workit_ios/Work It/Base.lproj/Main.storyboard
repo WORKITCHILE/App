@@ -359,7 +359,7 @@
             <objects>
                 <viewController storyboardIdentifier="PostJobViewController" id="rbu-2z-UyO" customClass="PostJobViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pkp-38-lZg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zt-aK-GuZ">
@@ -528,7 +528,7 @@
                                                                             <attributedString key="attributedTitle">
                                                                                 <fragment content="View Full Screen">
                                                                                     <attributes>
-                                                                                        <font key="NSFont" metaFont="label" size="13"/>
+                                                                                        <font key="NSFont" metaFont="system"/>
                                                                                         <integer key="NSUnderline" value="1"/>
                                                                                     </attributes>
                                                                                 </fragment>
@@ -801,7 +801,7 @@
                                                                 <rect key="frame" x="0.0" y="645" width="272" height="160"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photos(optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHW-ki-KO4" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="Ef3-bq-FNP"/>
                                                                         </constraints>
@@ -1434,10 +1434,17 @@
         <scene sceneID="38z-4A-zl5">
             <objects>
                 <tabBarController storyboardIdentifier="main" id="41k-2G-QbR" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dY1-i9-eQa">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="dY1-i9-eQa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="workit_green"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" name="unselected_tabar"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="uLY-li-vmu" kind="relationship" relationship="viewControllers" id="1kM-O5-JE7"/>
@@ -1448,7 +1455,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ic-pj-6xO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2724" y="5192"/>
+            <point key="canvasLocation" x="-2858" y="5194"/>
         </scene>
         <!--Dashboard View Controller-->
         <scene sceneID="Dof-1c-GtD">
@@ -1576,16 +1583,16 @@
             </objects>
             <point key="canvasLocation" x="-839" y="967"/>
         </scene>
-        <!--Item-->
+        <!--More-->
         <scene sceneID="Z7E-Tu-l7m">
             <objects>
                 <viewController storyboardIdentifier="SideDrawerViewController" id="QnN-7O-vDM" customClass="SideDrawerViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gaT-1W-T6c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uty-2f-roK">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRF-TX-nyG">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -1717,7 +1724,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t0A-DV-tFP">
-                                <rect key="frame" x="0.0" y="130" width="320" height="389"/>
+                                <rect key="frame" x="0.0" y="81" width="320" height="438"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuTableViewCell" id="2ON-e7-46o" customClass="SideMenuTableViewCell" customModule="Work_It" customModuleProvider="target">
@@ -1809,7 +1816,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Abb-S6-oIH"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="34V-DW-TBx"/>
+                    <tabBarItem key="tabBarItem" title="More" image="ic_more" id="34V-DW-TBx">
+                        <color key="badgeColor" name="workit_color"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="tableViewMenu" destination="t0A-DV-tFP" id="SCI-lV-yLb"/>
                         <outlet property="userImage" destination="bkG-uw-mZa" id="qWa-Bf-wpp"/>
@@ -3262,7 +3271,7 @@
             <objects>
                 <viewController storyboardIdentifier="PostedJobViewController" id="JTP-1O-gUN" customClass="PostedJobViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S5u-qR-H1D">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="t1s-f3-nzz">
@@ -3728,7 +3737,7 @@
             <objects>
                 <viewController storyboardIdentifier="NotificationViewController" id="sdx-y9-yUN" customClass="NotificationViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q1c-EB-WrA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2eL-Yt-pUI">
@@ -3885,7 +3894,7 @@
                                 </connections>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXJ-9s-R40" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                <rect key="frame" x="102" y="271.5" width="116" height="20"/>
+                                <rect key="frame" x="96.5" y="271" width="127" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -8559,7 +8568,7 @@
                                                                             <attributedString key="attributedTitle">
                                                                                 <fragment content="View Full Screen">
                                                                                     <attributes>
-                                                                                        <font key="NSFont" metaFont="label" size="13"/>
+                                                                                        <font key="NSFont" metaFont="system"/>
                                                                                         <integer key="NSUnderline" value="1"/>
                                                                                     </attributes>
                                                                                 </fragment>
@@ -14595,12 +14604,12 @@
             </objects>
             <point key="canvasLocation" x="5192" y="2531"/>
         </scene>
-        <!--Item-->
+        <!--Schedules-->
         <scene sceneID="IGh-VN-A7x">
             <objects>
                 <viewController storyboardIdentifier="ScheduleCalenderViewController" id="Wj5-vI-ola" customClass="ScheduleCalenderViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XTS-WL-YhV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6r6-VI-gm1" customClass="View" customModule="Work_It" customModuleProvider="target">
@@ -14677,10 +14686,10 @@
                                                             <rect key="frame" x="5" y="10" width="110" height="73"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iOx-S7-qId">
-                                                                    <rect key="frame" x="0.0" y="11" width="110" height="51"/>
+                                                                    <rect key="frame" x="0.0" y="13" width="110" height="47"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9X-JM-C4F" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9X-JM-C4F" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -14690,8 +14699,8 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZj-eS-CUF" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="30.5" width="110" height="20.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZj-eS-CUF" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="31" width="110" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -14739,7 +14748,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Job Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ci-E4-aYk" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="25" width="157" height="24.5"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="157" height="25.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -14750,7 +14759,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="xyz address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8o-IO-87K" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="59.5" width="157" height="13.5"/>
+                                                                    <rect key="frame" x="0.0" y="60.5" width="157" height="12.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -14874,7 +14883,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JmC-Ca-mWV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="sNX-hx-qUF"/>
+                    <tabBarItem key="tabBarItem" title="Schedules" image="ic_schedule" id="sNX-hx-qUF"/>
                     <connections>
                         <outlet property="calenderView" destination="9AV-aa-1By" id="PFY-bI-Gia"/>
                         <outlet property="picker" destination="dAW-R7-5C2" id="1Mi-WZ-6NL"/>
@@ -14967,7 +14976,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kla-0C-yHm">
                                                                     <rect key="frame" x="0.0" y="11" width="110" height="51"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2Q-BH-euj" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Jun'20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2Q-BH-euj" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -14978,7 +14987,7 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkW-LJ-SSE" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:00 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkW-LJ-SSE" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="30.5" width="110" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -15117,11 +15126,11 @@
             </objects>
             <point key="canvasLocation" x="10201.875" y="1796.8309859154929"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="v0q-UI-1eg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uLY-li-vmu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="1tO-qs-zXu"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home" id="1tO-qs-zXu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="j7x-Se-How">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -15136,11 +15145,11 @@
             </objects>
             <point key="canvasLocation" x="-1657.5" y="4304.5774647887329"/>
         </scene>
-        <!--Item-->
+        <!--Notifications-->
         <scene sceneID="g3C-8x-Mek">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Pm-2s-fh4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="dBG-pi-Xuy"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="ic_notification" id="dBG-pi-Xuy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C2c-kZ-owV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -15189,6 +15198,10 @@
         <image name="dummyProfile" width="1024" height="1024"/>
         <image name="edit" width="157" height="157"/>
         <image name="help" width="16" height="16"/>
+        <image name="ic_home" width="22" height="21"/>
+        <image name="ic_more" width="20" height="19"/>
+        <image name="ic_notification" width="22" height="22"/>
+        <image name="ic_schedule" width="20" height="22"/>
         <image name="left-arrow" width="700" height="606"/>
         <image name="noun_Star_750828_1-1" width="700" height="608"/>
         <image name="noun_Star_750828_3" width="700" height="612"/>
@@ -15199,8 +15212,14 @@
         <image name="square" catalog="system" width="128" height="114"/>
         <image name="tick" width="128" height="128"/>
         <image name="top" width="64" height="64"/>
+        <namedColor name="unselected_tabar">
+            <color red="0.0078431372549019607" green="0.37647058823529411" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="workit_color">
             <color red="0.0" green="0.050980392156862744" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="workit_green">
+            <color red="0.0" green="0.68627450980392157" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

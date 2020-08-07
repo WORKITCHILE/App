@@ -11,8 +11,10 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 class WelcomeViewController: UIViewController {
+    
     //MARK: IBOUtlets
     @IBOutlet weak var emailField: DesignableUITextField!
+    @IBOutlet weak var buttonLogin: UIButton!
     
     var googleData = GIDGoogleUser()
     var fbData = [String:Any]()
@@ -24,6 +26,8 @@ class WelcomeViewController: UIViewController {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         self.emailField.placeholderTextColor = .black
         
+        self.buttonLogin.alpha = 0.5
+        self.buttonLogin.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,18 +102,6 @@ class WelcomeViewController: UIViewController {
         }
     }
 
-    //MARK: IBActions
-    @IBAction func loginAction(_ sender: Any) {
-        if(emailField.text!.isEmpty){
-            Singleton.shared.showToast(text: "Please enter Email Address")
-        }else {
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            myVC.email = self.emailField.text ?? ""
-            self.navigationController?.pushViewController(myVC, animated: true)
-        }
-        
-    }
-    
     @IBAction func fbAction(_ sender: Any) {
         loginFrom = 1
         self.getFacebookUserInfo()
@@ -119,6 +111,13 @@ class WelcomeViewController: UIViewController {
         loginFrom = 2
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @IBAction private func nameChanged(_ sender: UITextField) {
+        
+        let isEmail = sender.text!.isValidEmail()
+        self.buttonLogin.alpha = isEmail ? 1.0 : 0.5
+        self.buttonLogin.isEnabled = isEmail
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

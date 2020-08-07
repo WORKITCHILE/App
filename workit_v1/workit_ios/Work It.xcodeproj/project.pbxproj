@@ -10,6 +10,8 @@
 		445DD0E23E29104C9A43DF33 /* Pods_Work_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0F8541A44771AC0FDFD1B /* Pods_Work_It.framework */; };
 		4F5DC1BE24CFB4780076FCDF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */; };
 		4F5DC1C024D4696C0076FCDF /* signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BF24D4696C0076FCDF /* signup.storyboard */; };
+		4F8D8AF424DCE9E2006E7A68 /* UIViewControlller+Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */; };
+		4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */; };
 		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
 		4FF6E5D624D9DCD000867B98 /* NewSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */; };
 		D2085A4D2487693F00F58742 /* VendorReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */; };
@@ -92,6 +94,8 @@
 		418BF597A529C9DE5591B939 /* Pods_Work_ItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Work_ItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5DC1BD24CFB4780076FCDF /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		4F5DC1BF24D4696C0076FCDF /* signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = signup.storyboard; sourceTree = "<group>"; };
+		4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControlller+Header.swift"; sourceTree = "<group>"; };
+		4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignupViewController.swift; sourceTree = "<group>"; };
 		4FF6E5DE24DA2E1A00867B98 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -208,6 +212,15 @@
 				4F5DC1BF24D4696C0076FCDF /* signup.storyboard */,
 			);
 			name = storyboards;
+			sourceTree = "<group>";
+		};
+		4F8D8AF224DCE9D1006E7A68 /* extensionts */ = {
+			isa = PBXGroup;
+			children = (
+				4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */,
+				4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */,
+			);
+			name = extensionts;
 			sourceTree = "<group>";
 		};
 		4FF6E5D424D9DCBB00867B98 /* Controllers */ = {
@@ -387,6 +400,7 @@
 		D2D7690E23BE2C08001485E1 /* Work It */ = {
 			isa = PBXGroup;
 			children = (
+				4F8D8AF224DCE9D1006E7A68 /* extensionts */,
 				4FF6E5D424D9DCBB00867B98 /* Controllers */,
 				4F5DC1BB24CFB45E0076FCDF /* ui */,
 				D244A3322421D8480098B6FD /* firebaseConfigInfo.plist */,
@@ -614,6 +628,7 @@
 				D2D7695B23BE2CC2001485E1 /* CallAPIViewController.swift in Sources */,
 				D28BD95F23BF548C0012ADDC /* DashboardViewController.swift in Sources */,
 				D25BFAA023C047FF00CBB4DE /* SideDrawerViewController.swift in Sources */,
+				4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */,
 				D25BFAA523C0486200CBB4DE /* ReceivedJobViewController.swift in Sources */,
 				D2E124BB240948A9009DF90A /* SlidingButton.swift in Sources */,
 				D2D7695523BE2CC2001485E1 /* Router.swift in Sources */,
@@ -672,6 +687,7 @@
 				D27F08DC23CEDC15007A85E2 /* SubCategoryViewController.swift in Sources */,
 				D2E124B124090DD6009DF90A /* MapVc.swift in Sources */,
 				D2D7695423BE2CC2001485E1 /* DesignableCode.swift in Sources */,
+				4F8D8AF424DCE9E2006E7A68 /* UIViewControlller+Header.swift in Sources */,
 				D263C7F5247CE39900ED656E /* CaptureIdCardViewController.swift in Sources */,
 				D2D7694E23BE2CC2001485E1 /* Protocol.swift in Sources */,
 				D2B4D4AC24633A260025CD0F /* MapViewController.swift in Sources */,
