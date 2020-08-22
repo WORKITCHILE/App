@@ -111,9 +111,6 @@ class BidPlacedViewController: UIViewController {
         self.navigationController?.pushViewController(myVC, animated: true)
     }
 
-    @IBAction func sideMenuAction(_ sender: Any) {
-        self.back()
-    }
 
 }
 

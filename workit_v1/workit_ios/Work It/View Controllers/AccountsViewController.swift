@@ -15,7 +15,6 @@ class AccountsViewController: UIViewController, ScrollAccount {
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var receivedView: UIView!
     @IBOutlet weak var receivedLabel: UILabel!
-    @IBOutlet weak var titleLabel: DesignableUILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,6 @@ class AccountsViewController: UIViewController, ScrollAccount {
         self.postedLabel.textColor = .black
         self.postedLabel.text = "Accounts"
         self.receivedLabel.text = "Credits"
-        self.titleLabel.text = "Account Settings"
     }
     
     func scrollAccountView(index: Int) {

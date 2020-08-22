@@ -14,7 +14,6 @@ class CreditViewController: UIViewController {
     @IBOutlet weak var transactionTable: UITableView!
     @IBOutlet weak var popUpView: UIView!
     @IBOutlet weak var noTransactionLabel: DesignableUILabel!
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var amountField: UITextField!
     
     var transactionData : GetTransactionResponse?
@@ -22,7 +21,6 @@ class CreditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.backView.isHidden = self.isBackButtonHidden
         self.getWalletInfo()
     }
     
@@ -35,12 +33,6 @@ class CreditViewController: UIViewController {
             ActivityIndicator.hide()
         }
     }
-    
-    //MARK: IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
-    
     
     @IBAction func addCreditAction(_ sender: Any) {
         self.popUpView.isHidden = false
@@ -59,10 +51,10 @@ class CreditViewController: UIViewController {
             self.popUpView.isHidden = true
             self.amountField.text?.replacingOccurrences(of: "$", with: "")
             ActivityIndicator.show(view: self.view)
-            let param = [
+            let param : [String:Any] = [
                 "user_id":Singleton.shared.userInfo.user_id ?? "",
                 "amount":self.amountField.text ?? "0"
-            ] as? [String:Any]
+            ]
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_CREDIT, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_CREDIT) { (response) in
                 ActivityIndicator.hide()
                 self.amountField.text = ""
@@ -78,11 +70,7 @@ class CreditViewController: UIViewController {
 
 extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.transactionData?.transactions?.count == 0){
-            self.noTransactionLabel.isHidden = false
-        }else {
-            self.noTransactionLabel.isHidden = true
-        }
+        
         return self.transactionData?.transactions?.count ?? 0
     }
     

@@ -49,31 +49,11 @@ class SideDrawerViewController: UIViewController {
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_historial"), name: "Historial", action: .open, data: ["vc":"HistoryViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .open, data:[:]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Configuraciones Bancaria", action: .open, data:["vc":"CreditViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
         ]
-        
-      
-        
-        /*
-        if K_CURRENT_USER == K_WANT_JOB {
-            arrayMenu = [
-                 MenuObject(image: #imageLiteral(resourceName: "noun_evaluation_808166-1"), name: "Evaluations", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "Bids (1)"), name: "My Bids", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "ic_menu_work"), name: "Trabajos en ejecución", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "ic_menu_historial"), name: "Historial", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "support(1)"), name: "Support", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "Account settings"), name: "Account Settings", action: .open),
-                 MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open)
-            ]
-             
-         } else {
-            
-         }
- */
          
          tableViewMenu.reloadData()
     }
@@ -84,7 +64,8 @@ class SideDrawerViewController: UIViewController {
         let param: [String:Any] = [
             "type":type,
             "uid":Singleton.shared.userInfo.user_id
-            ]
+        ]
+        
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_CHANGE_USER_ROLE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CHANGE_USER_ROLE) { (response) in
             
             K_CURRENT_USER = type
@@ -101,7 +82,7 @@ class SideDrawerViewController: UIViewController {
         }
     }
     
-    func shareAction(){
+    @objc func shareAction(){
         let urlStr = NSURL(string: "https://itunes.apple.com/us/app/myapp/id1502685083?ls=1&mt=8")
         let objectsToShare = [urlStr]
         let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
@@ -178,13 +159,14 @@ extension SideDrawerViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let data = arrayMenu?[indexPath.row].data
+        
         switch arrayMenu?[indexPath.row].action {
             case .open:
-                let data = arrayMenu?[indexPath.row].data
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: data!["vc"]!)
                 self.navigationController?.pushViewController(myVC!, animated: true)
             case .action:
-                debugPrint("Hola")
+                self.perform(Selector(data!["action"]!))
             default:
                 return
         }
@@ -219,40 +201,10 @@ extension SideDrawerViewController: UITableViewDelegate {
             tableViewMenu.isUserInteractionEnabled = false
             self.navigationController?.pushViewController(myVC, animated: true)
             return
-        case "Inbox":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "InboxViewController") as! InboxViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
-        
-    
-        case "Account Settings":
-            if(K_CURRENT_USER  == K_POST_JOB){
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "CreditViewController") as! CreditViewController
-                myVC.isBackButtonHidden = false
-                tableViewMenu.isUserInteractionEnabled = false
-                self.navigationController?.pushViewController(myVC, animated: true)
-            } else {
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountsViewController") as! AccountsViewController
-                tableViewMenu.isUserInteractionEnabled = false
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }
 
-        case "Terms of Service":
-            
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-            myVC.heading = "Terms of Service"
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
 
-        case "Privacy Policy":
-            
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController") as! PrivacyPolicyViewController
-            myVC.heading = "Privacy Policy"
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
 
-        }
+
         */
     }
 }

@@ -55,7 +55,6 @@
 		D25BFA9623C047A200CBB4DE /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9523C047A200CBB4DE /* PrivacyPolicyViewController.swift */; };
 		D25BFA9823C047AF00CBB4DE /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9723C047AF00CBB4DE /* SupportViewController.swift */; };
 		D25BFA9A23C047BC00CBB4DE /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9923C047BC00CBB4DE /* InboxViewController.swift */; };
-		D25BFA9C23C047DA00CBB4DE /* PublicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9B23C047DA00CBB4DE /* PublicationViewController.swift */; };
 		D25BFA9E23C047E600CBB4DE /* EvaluationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9D23C047E600CBB4DE /* EvaluationViewController.swift */; };
 		D25BFAA023C047FF00CBB4DE /* SideDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9F23C047FF00CBB4DE /* SideDrawerViewController.swift */; };
 		D25BFAA323C0485800CBB4DE /* PostedJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFAA223C0485800CBB4DE /* PostedJobViewController.swift */; };
@@ -169,7 +168,6 @@
 		D25BFA9523C047A200CBB4DE /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		D25BFA9723C047AF00CBB4DE /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		D25BFA9923C047BC00CBB4DE /* InboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
-		D25BFA9B23C047DA00CBB4DE /* PublicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationViewController.swift; sourceTree = "<group>"; };
 		D25BFA9D23C047E600CBB4DE /* EvaluationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationViewController.swift; sourceTree = "<group>"; };
 		D25BFA9F23C047FF00CBB4DE /* SideDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDrawerViewController.swift; sourceTree = "<group>"; };
 		D25BFAA223C0485800CBB4DE /* PostedJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedJobViewController.swift; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 				D25BFA9323C0478C00CBB4DE /* NotificationViewController.swift */,
 				D25BFA9523C047A200CBB4DE /* PrivacyPolicyViewController.swift */,
 				D25BFA9723C047AF00CBB4DE /* SupportViewController.swift */,
-				D25BFA9B23C047DA00CBB4DE /* PublicationViewController.swift */,
 				D25BFA9D23C047E600CBB4DE /* EvaluationViewController.swift */,
 				D25BFA9F23C047FF00CBB4DE /* SideDrawerViewController.swift */,
 				D2B714F024A716370023CFC2 /* CalendarDetailViewController.swift */,
@@ -779,7 +776,6 @@
 				D25B8B8423CD7EE100F35416 /* ChooseOptionViewController.swift in Sources */,
 				D2D7691023BE2C08001485E1 /* AppDelegate.swift in Sources */,
 				D29D075123C4C3CB00401B8C /* HistoryPageViewController.swift in Sources */,
-				D25BFA9C23C047DA00CBB4DE /* PublicationViewController.swift in Sources */,
 				D2D7695823BE2CC2001485E1 /* ParentViewController.swift in Sources */,
 				D2F2D1AC23BF40B50086E13D /* ForgotPasswordViewController.swift in Sources */,
 				D25BFA9423C0478C00CBB4DE /* NotificationViewController.swift in Sources */,

@@ -13,10 +13,11 @@ import SDWebImage
 class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonDelegate, RatingFromhistory,SuccessPopup {
     func yesAction() {
         ActivityIndicator.show(view: self.view)
-        let param = [
+        let param :  [String:Any] = [
             "job_id":self.jobData?.job_id ?? "",
-            ] as? [String:Any]
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_VENDOR_CANCEL_JOB, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CANCEL_JOB) { (response) in
+            ]
+        let url = "\(U_BASE)\(U_VENDOR_CANCEL_JOB)"
+        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CANCEL_JOB) { (response) in
             ActivityIndicator.hide()
             self.openSuccessPopup(img:#imageLiteral(resourceName: "tick") , msg: "Job Cancelled Successfully", yesTitle: nil, noTitle: nil, isNoHidden: true)
             Singleton.shared.jobData = []
@@ -47,10 +48,6 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
     @IBOutlet weak var occupation: DesignableUILabel!
     @IBOutlet weak var startTime: DesignableUILabel!
     @IBOutlet weak var startDate: DesignableUILabel!
-    @IBOutlet weak var viewForAccept: View!
-    @IBOutlet weak var viewForReject: UIView!
-    @IBOutlet weak var rejectButton: UIButton!
-    @IBOutlet weak var acceptButton: CustomButton!
     @IBOutlet weak var jobAddress: DesignableUILabel!
     
     @IBOutlet weak var viewPhotos: UIView!
@@ -94,9 +91,11 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
     }
     
     func manageView() {
+        
         self.viewForCancel.isHidden = self.jobData?.status != K_ACCEPT
         
         if(self.jobData?.status == K_START){
+            
             if(self.jobData?.started_by == K_POST_JOB){
                 self.slidingButton.alpha = 1
                 self.viewforMessage.isHidden = false
@@ -108,6 +107,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
                 self.slidingButton.buttonText = "Finish Job"
                 self.jobStatus.text = "Waiting for client to Confirm Job"
             }
+            
             self.slidingButton.imageName = UIImage(named: "arrow")!
             self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
@@ -121,7 +121,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
             self.jobStatus.text = "Waiting for client to release amount"
-        }else  if(Singleton.shared.userInfo.user_id == self.jobData?.user_id){
+        } else  if(Singleton.shared.userInfo.user_id == self.jobData?.user_id){
             self.slidingButton.alpha = 1
             
             self.slidingButton.imageName = UIImage(named: "arrow")!
@@ -157,6 +157,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
         }
+        
         self.jobDescription.text =   self.jobData?.job_description ?? ""
         self.postedByName.text = self.jobData?.user_name ?? "-"
         self.acceptedByName.text = self.jobData?.vendor_name ?? "-"
@@ -170,33 +171,30 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
         self.jobImage = (self.jobData?.images!)!
         self.jobTitle.text = self.jobData?.job_name
         self.offerValue.text = "$" + (self.jobData?.counteroffer_amount ?? self.jobData?.my_bid?.counteroffer_amount ?? "0")
-        if(self.jobImage.count == 0){
-            self.viewPhotos.isHidden = true
-        }else {
-            self.viewPhotos.isHidden = false
-        }
+        
+        self.viewPhotos.isHidden = self.jobImage.count == 0
         self.jobSubcategory.text = self.jobData?.subcategory_name
         
         self.photoCollection.reloadData()
     }
     
     func buttonStatus(status: String, sender: MMSlidingButton) {
-        print("status")
+    
         if(status == "Unlocked"){
             ActivityIndicator.show(view: self.view)
             self.slidingButton.reset()
-            var param = [String:Any]()
+            var param :  [String:Any] = [:]
             if(slidingButton.buttonText == "Start Job"){
                 param = [
                     "job_id":self.jobData?.job_id,
-                    "status":"STARTED",
+                    "status": "STARTED",
                     "vendor_id":self.jobData?.job_vendor_id
                 ]
                 
             }else if(slidingButton.buttonText == "Finish Job"){
                 param = [
                     "job_id":self.jobData?.job_id,
-                    "status":"FINISHED",
+                    "status": "FINISHED",
                     "vendor_id":self.jobData?.job_vendor_id
                 ]
             }
@@ -288,7 +286,6 @@ extension StartJobViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let imageView = UIImageView()
         let newImageView = UIImageView()
         newImageView.sd_setImage(with: URL(string: self.jobImage[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "camera"))
         newImageView.frame = UIScreen.main.bounds
