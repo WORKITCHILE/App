@@ -49,6 +49,11 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+              
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
@@ -67,16 +72,19 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             self.initialiseView()
             
         }
+        
+        self.address.text = "General Bustamante 1015, Providencia, Chile"
     }
     
     func initialiseView(){
         if(isRepostJob){
-            self.headingLabel.text = "Repost Job"
-            self.postJobButton.setTitle("Repost", for: .normal)
+            //self.headingLabel.text = "Repost Job"
+            //self.postJobButton.setTitle("Repost", for: .normal)
         }else{
-            self.headingLabel.text = "Edit Job"
-            self.postJobButton.setTitle("Save", for: .normal)
+            //self.headingLabel.text = "Edit Job"
+            //self.postJobButton.setTitle("Save", for: .normal)
         }
+        
         self.workName.text = self.jobDetail?.job_name
         self.workDate.text = self.jobDetail?.job_date
         self.workTime.text = self.convertTimestampToDate(self.jobDetail?.job_time ?? 0, to: "h:mm a")
@@ -199,7 +207,10 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     @IBAction func categoryAction(_ sender: Any) {
         currentPicker = 3
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+        let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = mainStoryboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+        
+ 
         myVC.pickerDelegate = self
         if(self.categoryData.count == 0){
             ActivityIndicator.show(view: self.view)
@@ -228,7 +239,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     @IBAction func subCategoryAction(_ sender: Any) {
         currentPicker = 4
         if(self.subcategoryData.count > 0){
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+            let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = mainStoryboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
             myVC.pickerDelegate = self
             for val in self.subcategoryData {
                 myVC.pickerData.append(val.subcategory_name ?? "")
@@ -240,7 +252,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     @IBAction func jobApproachAction(_ sender: Any) {
         currentPicker = 5
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+         let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = mainStoryboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.pickerDelegate = self
         myVC.pickerData = ["All", "In Person", "Come and get it", "Take it to workplace" ]
         myVC.modalPresentationStyle = .overFullScreen
@@ -249,7 +262,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     @IBAction func dateAction(_ sender: Any) {
         currentDatePicker = 1
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as! DatePickerViewController
+        let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = mainStoryboard.instantiateViewController(withIdentifier: "DatePickerViewController") as! DatePickerViewController
         myVC.pickerMode = 1
         myVC.dateDelegate = self
         myVC.minDate = Date()
@@ -258,7 +272,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     @IBAction func timeAction(_ sender: Any) {
            currentDatePicker = 2
-           let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as! DatePickerViewController
+        let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+           let myVC = mainStoryboard.instantiateViewController(withIdentifier: "DatePickerViewController") as! DatePickerViewController
            myVC.pickerMode = 2
         
         if(self.workDate.text!.isEmpty){
@@ -280,7 +295,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     
     @IBAction func mapFullScreenAction(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = mainStoryboard.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         myVC.latitude = self.latitude
         myVC.longitude = self.longitude
         
@@ -385,6 +401,10 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             }
         }
         
+    }
+    
+    @IBAction func dissmissAction(_ sender : AnyObject){
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

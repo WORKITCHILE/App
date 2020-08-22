@@ -14,6 +14,7 @@ target 'Work It' do
   pod 'SDWebImage'
   pod 'AccountKit'
   pod 'Eureka'
+  pod 'lottie-ios'
   pod 'PostalAddressRow'
   pod 'ImageRow'
   pod 'Firebase/Core'

@@ -7,31 +7,43 @@
 //
 
 import UIKit
+import Lottie
 
 class InboxViewController: UIViewController {
     //MARK: IBOutlets
     
     @IBOutlet weak var inboxTable: UITableView!
-    @IBOutlet weak var noDataLabel: DesignableUILabel!
+    @IBOutlet weak var animation: AnimationView?
     
     var inboxData = [InboxResponse]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let starAnimation = Animation.named("chat")
+        animation!.animation = starAnimation
+        
+        animation?.loopMode = .loop
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.getMessageList()
+        animation?.play()
     }
+    
+ 
     
     func getMessageList(){
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_INBOX + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetInbox.self, requestCode: U_GET_INBOX) { (response) in
             self.inboxData = response.data
             if(self.inboxData.count == 0){
-                       self.noDataLabel.isHidden = false
+                       //self.noDataLabel.isHidden = false
                    }else {
-                       self.noDataLabel.isHidden = true
+                       //self.noDataLabel.isHidden = true
                    }
             self.inboxTable.reloadData()
             ActivityIndicator.hide()
@@ -56,11 +68,11 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         let val = self.inboxData[indexPath.row]
         if(val.sender == Singleton.shared.userInfo.user_id){
             cell.userImage.sd_setImage(with: URL(string: val.receiver_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = (val.receiver_name ?? "").formatName(name:val.receiver_name ?? "")
+            cell.userName.text = val.receiver_name!.formatName()
                 
         }else {
             cell.userImage.sd_setImage(with: URL(string: val.sender_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = (val.sender_name ?? "").formatName(name:val.sender_name ?? "")
+            cell.userName.text = val.sender_name!.formatName()
             
         }
         cell.jobAddress.text = val.last_message

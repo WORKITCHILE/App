@@ -27,6 +27,7 @@ extension UIViewController {
 
            let leftBarButtonItem = UIBarButtonItem(customView: view )
            self.navigationItem.leftBarButtonItem = leftBarButtonItem
+        
        }
 
        @objc func backToMain() {

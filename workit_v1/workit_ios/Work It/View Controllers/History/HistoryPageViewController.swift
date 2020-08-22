@@ -1,7 +1,4 @@
-
-
 import UIKit
-
 
 protocol ScrollView {
     func scrollHistoryView(index: Int)
@@ -10,7 +7,6 @@ protocol ScrollView {
 class HistoryPageViewController: UIPageViewController
 {
     static var dataSource: UIPageViewControllerDataSource?
-    
     static var indexDelegate:ScrollView? = nil
     
     var historyViewControllers: [UIViewController] = []
@@ -23,11 +19,13 @@ class HistoryPageViewController: UIPageViewController
         handleView()
         setControllers()
         HistoryPageViewController.dataSource = self
-        for view in self.view.subviews {
-            if let subView = view as? UIScrollView {
+        self.view.subviews.forEach {
+            if let subView = $0 as? UIScrollView {
                 subView.isScrollEnabled = false
             }
         }
+    
+      
     }
     
     func setControllers() {
@@ -44,8 +42,10 @@ class HistoryPageViewController: UIPageViewController
     }
     
     func handleView() {
-        historyViewControllers = [ self.newColoredViewController(controller:"BidPlacedViewController"),
-                                   self.newColoredViewController(controller: "RunningJobViewController"),]
+        historyViewControllers = [
+            self.newColoredViewController(controller:"BidPlacedViewController"),
+            self.newColoredViewController(controller: "RunningJobViewController")
+        ]
         
     }
     
@@ -83,7 +83,7 @@ extension HistoryPageViewController: UIPageViewControllerDataSource
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = historyViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = historyViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         let previousIndex = viewControllerIndex - 1
@@ -99,7 +99,7 @@ extension HistoryPageViewController: UIPageViewControllerDataSource
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = historyViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = historyViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         let nextIndex = viewControllerIndex + 1
@@ -116,7 +116,7 @@ extension HistoryPageViewController: UIPageViewControllerDataSource
 extension HistoryPageViewController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0]
-        self.pageControl.currentPage = historyViewControllers.index(of: pageContentViewController)!
+        self.pageControl.currentPage = historyViewControllers.firstIndex(of: pageContentViewController)!
         HistoryPageViewController.self.indexDelegate!.scrollHistoryView(index:self.pageControl.currentPage)
     }
 }

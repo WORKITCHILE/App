@@ -22,39 +22,32 @@ class SessionManager: NSObject {
             let statusCode = dataResponse.response?.statusCode
 
             switch dataResponse.result {
-            case .success(_):
-                let object = self.convertDataToObject(response: dataResponse.data, T.self)
-                let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
-               
-                
-                if (statusCode == 200 || statusCode == 201) && object != nil {
-                    completionHandler(object!)
-                } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
+                case .success(_):
+                    let object = self.convertDataToObject(response: dataResponse.data, T.self)
+                    let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
+                   
+                    if (statusCode == 200 || statusCode == 201) && object != nil {
+                        completionHandler(object!)
+                    } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
+                        NotificationCenter.default.post(name: NSNotification.Name(N_USER_UNAUTHORIZED), object: nil)
+                    } else if statusCode == 404  {
+                        self.showAlert(msg:errorObject?.message)
+                    } else if(statusCode == 400) {
+                        self.showAlert(msg: errorObject?.message)
+                    }
                     
-                    NotificationCenter.default.post(name: NSNotification.Name(N_USER_UNAUTHORIZED), object: nil)
-                } else if statusCode == 404  {
-                    
-                    self.showAlert(msg:errorObject?.message)
-
-                } else if(statusCode == 400) {
-                    
-                    self.showAlert(msg: errorObject?.message)
+                    break
+                case .failure(_):
+                    let error = dataResponse.error?.localizedDescription
+                    if error == "The Internet connection appears to be offline." {
+                        //Showing error message on alert
+                        self.showAlert(msg: error)
+                    } else {
+                        //Showing error message on alert
+                        self.showAlert(msg: error)
+                    }
+                    break
                 }
-                
-                ActivityIndicator.hide()
-                break
-            case .failure(_):
-                ActivityIndicator.hide()
-                let error = dataResponse.error?.localizedDescription
-                if error == "The Internet connection appears to be offline." {
-                    //Showing error message on alert
-                    self.showAlert(msg: error)
-                } else {
-                    //Showing error message on alert
-                    self.showAlert(msg: error)
-                }
-                break
-            }
         }
     }
 
@@ -92,7 +85,7 @@ class SessionManager: NSObject {
                     break
                 case .failure(let error):
                     //Showing error message on alert
-    UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Error", message: error.localizedDescription, action1Name: "Ok", action2Name: nil)
+                    UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Error", message: error.localizedDescription, action1Name: "Ok", action2Name: nil)
                     break
                 }
             

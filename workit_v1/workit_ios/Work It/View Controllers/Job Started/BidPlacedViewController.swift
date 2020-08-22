@@ -13,7 +13,7 @@ import UIKit
 
 class BidPlacedViewController: UIViewController {
     //IBOUtlets
-    @IBOutlet weak var viewTopBar: View!
+   
     @IBOutlet weak var jobTable: UITableView!
     @IBOutlet weak var noJobsFound: UILabel!
 
@@ -23,30 +23,28 @@ class BidPlacedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewTopBar.isHidden = isTopBarHidden
+  
         refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControl.Event.valueChanged)
         jobTable.tableFooterView = UIView()
         jobTable.addSubview(refreshControl)
-
+        self.jobTable.delegate = self
+        self.jobTable.dataSource = self
     }
 
-
-    override func viewWillAppear(_ animated: Bool) {
-
-    }
 
     override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
         if(K_CURRENT_TAB == K_HISTORY_TAB || K_CURRENT_TAB == K_RUNNING_JOB_TAB){
             self.noJobsFound.text = "No Jobs Founds"
         }else if(K_CURRENT_TAB == K_CURRENT_JOB_TAB){
             self.noJobsFound.text = "No Bids Placed"
         }
+        
         if(K_CURRENT_TAB == K_HISTORY_TAB){
             if(Singleton.shared.postedHistoryData.count == 0){
                 self.getPostedJob()
             }else {
-                self.jobTable.delegate = self
-                self.jobTable.dataSource = self
                 self.jobData = Singleton.shared.postedHistoryData
                 self.jobTable.reloadData()
             }
@@ -56,8 +54,6 @@ class BidPlacedViewController: UIViewController {
             if(Singleton.shared.vendorAcceptedBids.count == 0){
                 self.getAllBids()
             }else {
-                self.jobTable.delegate = self
-                self.jobTable.dataSource = self
                 self.jobData = Singleton.shared.vendorAcceptedBids
                 self.jobTable.reloadData()
             }
@@ -77,11 +73,11 @@ class BidPlacedViewController: UIViewController {
 
     func getAllBids(){
         ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_ALL_BID + (Singleton.shared.userInfo.user_id ?? "") + "&type=POSTED", method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) { (response) in
-            self.jobData = response.data
-            Singleton.shared.vendorAcceptedBids = response.data
-            self.jobTable.delegate = self
-            self.jobTable.dataSource = self
+        let url = "\(U_BASE)\(U_GET_ALL_BID)\(Singleton.shared.userInfo.user_id ?? "")&type=POSTED"
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) { 
+            self.jobData = $0.data
+            Singleton.shared.vendorAcceptedBids = $0.data
+
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -92,8 +88,7 @@ class BidPlacedViewController: UIViewController {
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_OWNER_COMPLETED_JOBS + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_COMPLETED_JOBS) { (response) in
             self.jobData = response.data
             Singleton.shared.postedHistoryData = response.data
-            self.jobTable.delegate = self
-            self.jobTable.dataSource = self
+            
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -101,11 +96,9 @@ class BidPlacedViewController: UIViewController {
 
     func getRunningJob(){
         ActivityIndicator.show(view: self.view)
-        var url = U_BASE + U_GET_OWNER_RUNNING_JOB + (Singleton.shared.userInfo.user_id ?? "")
+        let url = "\(U_BASE)\(U_GET_OWNER_RUNNING_JOB)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) { (response) in
             self.jobData = response.data
-            self.jobTable.delegate = self
-            self.jobTable.dataSource = self
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -176,18 +169,16 @@ extension BidPlacedViewController: UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (isHistory == false){
-            if((self.jobData[indexPath.row].status == K_ACCEPT || self.jobData[indexPath.row].owner_status == K_ACCEPT) && K_CURRENT_USER == K_WANT_JOB){
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "StartJobViewController") as! StartJobViewController
-                myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
-                myVC.isNavigateFromtab = K_CURRENT_TAB
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }else {
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
-                myVC.isNavigateFromtab = K_CURRENT_TAB
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }
+        if((self.jobData[indexPath.row].status == K_ACCEPT || self.jobData[indexPath.row].owner_status == K_ACCEPT) && K_CURRENT_USER == K_WANT_JOB){
+            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "StartJobViewController") as! StartJobViewController
+            myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
+            myVC.isNavigateFromtab = K_CURRENT_TAB
+            self.navigationController?.pushViewController(myVC, animated: true)
+        }else {
+            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
+            myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
+            myVC.isNavigateFromtab = K_CURRENT_TAB
+            self.navigationController?.pushViewController(myVC, animated: true)
         }
     }
 }

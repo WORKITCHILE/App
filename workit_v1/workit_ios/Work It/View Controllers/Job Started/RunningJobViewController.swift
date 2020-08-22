@@ -14,7 +14,6 @@ class RunningJobViewController: UIViewController {
 
     //IBOUtlets
     @IBOutlet weak var addJobStack: UIStackView!
-    @IBOutlet weak var viewTopBar: View!
     @IBOutlet weak var jobTable: UITableView!
     @IBOutlet weak var noJobsFound: UILabel!
 
@@ -29,62 +28,54 @@ class RunningJobViewController: UIViewController {
         jobTable.addSubview(refreshControl)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        if(K_CURRENT_TAB == K_HISTORY_TAB){
-            if(Singleton.shared.receivedHistoryData.count == 0){
-                self.getReceivedJob()
-            }else {
-                self.jobTable.delegate = self
-                self.jobTable.dataSource = self
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.jobTable.delegate = self
+        self.jobTable.dataSource = self
+        
+        switch K_CURRENT_TAB {
+            case K_HISTORY_TAB:
                 self.jobData = Singleton.shared.receivedHistoryData
-                self.jobTable.reloadData()
-            }
-            self.viewTopBar.isHidden = true
-        }else if(K_CURRENT_TAB == K_MYBID_TAB) {
-            self.viewTopBar.isHidden = true
-            if(Singleton.shared.vendorRejectedBids.count == 0){
-                self.getAllBids()
-            }else {
-                self.jobTable.delegate = self
-                self.jobTable.dataSource = self
+                self.getReceivedJob()
+            case K_MYBID_TAB:
                 self.jobData = Singleton.shared.vendorRejectedBids
-                self.jobTable.reloadData()
-            }
-        }else if(K_CURRENT_TAB == K_RUNNING_JOB_TAB){
-            self.viewTopBar.isHidden = true
-            self.getRunningJob()
-        }else if(K_CURRENT_TAB == K_CURRENT_JOB_TAB) {
-            if(Singleton.shared.runningJobData.count == 0){
+                self.getAllBids()
+            case K_RUNNING_JOB_TAB:
                 self.getRunningJob()
-            }else {
-                self.jobTable.delegate = self
-                self.jobTable.dataSource = self
+            case K_CURRENT_JOB_TAB:
                 self.jobData = Singleton.shared.runningJobData
-                self.jobTable.reloadData()
-            }
+                self.getRunningJob()
+            default:
+                return
         }
+        
+        self.jobTable.reloadData()
     }
 
     @objc func refresh() {
         refreshControl.endRefreshing()
-        if(K_CURRENT_TAB == K_HISTORY_TAB){
-            self.getReceivedJob()
-        }else if(K_CURRENT_TAB == K_MYBID_TAB){
-            getAllBids()
-        }else if(K_CURRENT_TAB == K_CURRENT_JOB_TAB) {
-            self.getRunningJob()
-        }else {
-            self.getRunningJob()
+        
+        switch K_CURRENT_TAB {
+            case K_HISTORY_TAB:
+                 self.getReceivedJob()
+            case K_MYBID_TAB:
+                self.getAllBids()
+            case K_CURRENT_JOB_TAB:
+                self.getRunningJob()
+            default:
+                self.getRunningJob()
         }
+        
     }
 
     func getAllBids(){
           ActivityIndicator.show(view: self.view)
-          SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_ALL_BID + (Singleton.shared.userInfo.user_id ?? "") + "&type=REJECTED", method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) { (response) in
-              self.jobData = response.data
-              Singleton.shared.vendorRejectedBids = response.data
-              self.jobTable.delegate = self
-              self.jobTable.dataSource = self
+          let url = "\(U_BASE)\(U_GET_ALL_BID)\(Singleton.shared.userInfo.user_id ?? "")&type=REJECTED"
+          SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) {
+              self.jobData = $0.data
+              Singleton.shared.vendorRejectedBids = $0.data
+              
               self.jobTable.reloadData()
               ActivityIndicator.hide()
           }
@@ -92,12 +83,10 @@ class RunningJobViewController: UIViewController {
 
     func getRunningJob(){
         ActivityIndicator.show(view: self.view)
-        var url =  U_BASE + U_GET_VENDOR_RUNNING_JOB + (Singleton.shared.userInfo.user_id ?? "")
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) { (response) in
-            self.jobData = response.data
-            Singleton.shared.runningJobData = response.data
-            self.jobTable.delegate = self
-            self.jobTable.dataSource = self
+        let url =  "\(U_BASE)\(U_GET_VENDOR_RUNNING_JOB)\(Singleton.shared.userInfo.user_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) {
+            self.jobData = $0.data
+            Singleton.shared.runningJobData = $0.data
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -105,11 +94,10 @@ class RunningJobViewController: UIViewController {
 
     func getReceivedJob(){
         ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_VENDOR_COMPLETED_JOB + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_VENDOR_COMPLETED_JOB) { (response) in
-            self.jobData = response.data
-            Singleton.shared.receivedHistoryData = response.data
-            self.jobTable.delegate = self
-            self.jobTable.dataSource = self
+        let url = "\(U_BASE)\(U_GET_VENDOR_COMPLETED_JOB)\(Singleton.shared.userInfo.user_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_VENDOR_COMPLETED_JOB) {
+            self.jobData = $0.data
+            Singleton.shared.receivedHistoryData = $0.data
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -121,40 +109,34 @@ class RunningJobViewController: UIViewController {
         self.navigationController?.pushViewController(myVC, animated: true)
     }
 
-    @IBAction func sideMenuAction(_ sender: Any) {
-        self.back()
-    }
-
 }
 
 extension RunningJobViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.jobData.count == 0){
-            self.noJobsFound.isHidden = false
-        }else {
-            self.noJobsFound.isHidden = true
-        }
         return self.jobData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "JobTableView") as! JobTableView
         let val = self.jobData[indexPath.row]
-        cell.jobPrice.text = "$" + (val.job_amount ?? val.service_amount ?? "\(val.initial_amount ?? 0)" ?? "")
+        let isMyJob = Singleton.shared.userInfo.user_id == val.job_vendor_id
+        let rating = isMyJob ? val.user_average_rating : val.vendor_average_rating
+        let image = isMyJob ? val.user_image : val.vendor_image
+        
+        cell.userImage.sd_setImage(with: URL(string: image ?? "" ),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         cell.jobName.text = val.job_name
-        if(Singleton.shared.userInfo.user_id == val.job_vendor_id){
-            cell.userImage.sd_setImage(with: URL(string: val.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-                   cell.userName.text = (val.user_name ?? "").formatName(name:val.user_name ?? "")
-            cell.userRating.rating = Double(val.user_average_rating ?? "0")!
-        }else {
-            cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = (val.vendor_name ?? Singleton.shared.userInfo.name ?? "").formatName(name:val.vendor_name ?? Singleton.shared.userInfo.name ?? "")
-            cell.userRating.rating = Double(val.vendor_average_rating ?? "0")!
-        }
+        
+        /*
+         cell.userRating.rating = Double(rating ?? "0")!
+         cell.jobPrice.text = "$" + (val.job_amount ?? val.service_amount ?? "\(val.initial_amount ?? 0)" )
+        
         cell.jobDate.text = val.job_date
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-        //cell.totalBids.text = ""
         cell.jobDescription.text = val.job_description
+        */
+        
+        /*
         cell.editJob = {
             let alert = UIAlertController(title: "Edit job", message: "Are you sure?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (val) in
@@ -171,6 +153,7 @@ extension RunningJobViewController: UITableViewDelegate,UITableViewDataSource {
             alert.addAction(noAction)
             self.present(alert, animated: true, completion: nil)
         }
+        */
         return cell
     }
 
@@ -180,7 +163,6 @@ extension RunningJobViewController: UITableViewDelegate,UITableViewDataSource {
          myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
         self.navigationController?.pushViewController(myVC, animated: true)
         }else {
-        if (isHistory == false){
             if(K_CURRENT_USER == K_POST_JOB){
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
                 myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
@@ -203,7 +185,6 @@ extension RunningJobViewController: UITableViewDelegate,UITableViewDataSource {
                 }
 
             }
-        }
         }
     }
 }

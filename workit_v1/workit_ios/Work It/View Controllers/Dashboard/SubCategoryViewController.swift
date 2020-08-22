@@ -26,7 +26,10 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         self.getSubCategoryData()
         
         //self.titleLabel.text = titleHeading
+        setNavigationBar()
         
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
     }
     
     func getSubCategoryData(){

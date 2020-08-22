@@ -93,9 +93,10 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderViewCell") as! CalenderViewCell
-        let currentTime = Int(Date().timeIntervalSince1970)
-        cell.jobDate.text = "\(indexPath.row + 1) " + (self.selectedMonth.text ?? "")
+
+        cell.jobDate.text = "\(indexPath.row + 1) \(self.selectedMonth.text ?? "")"
         
         if(self.isFutureDate){
             cell.jobTime.text = "--:--"
@@ -170,11 +171,12 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! CalenderViewCell
+       
         if(self.isFutureDate){
-            if(cell.jobStatus.text == "POST A JOB NOW"){
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }
+            
+            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
+            self.navigationController?.pushViewController(myVC, animated: true)
+            
         }else {
             let val = self.calenderData[indexPath.row]
             var jobCount:[GetJobResponse]?

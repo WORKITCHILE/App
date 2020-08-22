@@ -33,14 +33,11 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        //self.navigationController?.isNavigationBarHidden = true
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
-        //self.view.backgroundColor = darkBlue
         if(jobDetail?.job_id != nil){
             if(Singleton.shared.userInfo.user_id == self.jobDetail?.job_vendor_id){
                 userImage.sd_setImage(with:
                     URL(string:self.jobDetail?.user_image ?? ""), placeholderImage: UIImage(named: ""))
-                self.lblUserName.text = (jobDetail?.user_name ?? "").formatName(name:jobDetail?.user_name ?? "")
+                self.lblUserName.text = jobDetail?.user_name!.formatName()
                 self.occupation.text = jobDetail?.job_name ?? ""
                 self.senderID =  jobDetail?.user_id ?? ""
                 self.receiverID = jobDetail?.job_vendor_id ?? ""
@@ -49,7 +46,7 @@ class ChatViewController: UIViewController {
                 
             }else {
                 userImage.sd_setImage(with:URL(string:self.jobDetail?.vendor_image ?? ""), placeholderImage: UIImage(named: ""))
-                self.lblUserName.text = (jobDetail?.vendor_name ?? "").formatName(name:jobDetail?.vendor_name ?? "")
+                self.lblUserName.text = jobDetail?.vendor_name!.formatName()
                 self.occupation.text = jobDetail?.job_name ?? ""
                 self.senderID =  jobDetail?.job_vendor_id ?? ""
                 self.receiverID = jobDetail?.user_id ?? ""
@@ -61,55 +58,13 @@ class ChatViewController: UIViewController {
             self.addChatObserver()
             
         }
-        //            postedByMe = true
-        //        if(chatDetail.accepted_by == nil){
-        ////            if(chatDetail.receiver_id != nil){
-        ////              if(postedByMe)
-        ////            }
-        //        }else {
-        //            if let id = chatDetail.accepted_by {
-        //                self.chatId = id + "_" + "\(chatDetail.request_id ?? 0)" + "_" + "\(chatDetail.requested_by ?? 0)"
-        
-        //            }
-        //        }
-        //
-        //        if let name = chatDetail.sender_id {
-        //            self.userId.
-        //        }
-        //
-        //        if  (Singleton.shared.userInfo.id != nil && Singleton.shared.driverDetails.driver_id != nil){
-        //            self.lblUserName.text = "\(Singleton.shared.driverDetails.driver_name ?? "")"
-        //
-        //            self.userId = Singleton.shared.userInfo.id!
-        //            self.driverId = Singleton.shared.driverDetails.driver_id!
-        //            chatId = "\(self.userId)" + "_" + "\(self.driverId)"
-        //
-        //        }
+     
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //  self.navigationController?.isNavigationBarHidden = false
-        //     self.navigationController?.setNavigationBarHidden(false, animated: false)
+        super.viewWillDisappear(animated)
     }
-    
-    //    func getCurrentMsg() {
-    ////        ref.child("messages/" + self.chatId).observeSingleEvent(of: .value, with: { (snapshot) in
-    //            // Get user value
-    //        ref.child("messages/" + self.chatId).queryOrdered(byChild: "createdAt").observeSingleEvent(of: .value) { (snapshot) in
-    //            for child in snapshot.children.allObjects as! [DataSnapshot] {
-    //                print(child)
-    //
-    //                let myVal = child.value as! [String:Any]
-    //                self.chatData.append(ChatResponse(id: myVal["id"] as! String, message: myVal["message"] as! String, read_satus: myVal["read_status"] as! Int, receiver_id: myVal["receiver_id"] as! String, sender_id: myVal["sender_id"] as! String, time: myVal["time"] as! Int, type: myVal["type"] as! Int))
-    //
-    //                DispatchQueue.main.async {
-    //                    self.chatTable.reloadData()
-    //                }
-    //
-    //                        }
-    //                }
-    //    }
     
     func addChatObserver() {
         ref.child("messages/" + "\(self.chatId)").observe(.childAdded, with: { (snapshot) in

@@ -82,14 +82,14 @@ class ViewJobViewController: UIViewController, SuccessPopup, AddAccount {
             
             if(Singleton.shared.userInfo.user_id == self.jobDetail?.user_id){
                 
-                self.postedByName.text = (self.jobDetail?.vendor_name ?? self.jobDetail?.user_name ?? "").formatName(name:self.jobDetail?.vendor_name ?? self.jobDetail?.user_name ?? "")
+                self.postedByName.text = (self.jobDetail?.vendor_name ?? self.jobDetail?.user_name ?? "").formatName()
                 
                 
                 self.userImage.sd_setImage(with: URL(string: self.jobDetail?.vendor_image ?? Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
             }else {
                 self.postedByOccupation.text =  "Job Name: " +  (self.jobDetail?.job_name ?? "")
                 
-                self.postedByName.text = (self.jobDetail?.user_name ?? "").formatName(name:self.jobDetail?.user_name ?? "")
+                self.postedByName.text = self.jobDetail?.user_name!.formatName()
                 
                 self.userImage.sd_setImage(with: URL(string: self.jobDetail?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
                 

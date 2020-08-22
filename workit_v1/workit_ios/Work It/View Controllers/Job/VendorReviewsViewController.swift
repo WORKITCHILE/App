@@ -46,7 +46,7 @@ class VendorReviewsViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
             let val = self.evaluationData[indexPath.row]
             cell.userImage.sd_setImage(with: URL(string: val.rate_from_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = (val.rate_from_name ?? "").formatName(name: val.rate_from_name ?? "")
+            cell.userName.text = val.rate_from_name!.formatName()
             cell.timeLabel.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
             cell.rateView.rating = Double(val.rating ?? "0")!
             cell.jobAddress.text = val.comment

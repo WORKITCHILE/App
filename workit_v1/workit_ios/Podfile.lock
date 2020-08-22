@@ -462,6 +462,7 @@ PODS:
     - Eureka (~> 5.0)
   - IQKeyboardManagerSwift (6.5.5)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.8)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -505,6 +506,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - ImageRow
   - IQKeyboardManagerSwift
+  - lottie-ios
   - PostalAddressRow
   - SDWebImage
   - SwiftyCodeView
@@ -556,6 +558,7 @@ SPEC REPOS:
     - ImageRow
     - IQKeyboardManagerSwift
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PostalAddressRow
     - PromisesObjC
@@ -609,6 +612,7 @@ SPEC CHECKSUMS:
   ImageRow: e65b2e1a33f89062bf2a553a2aad61d975eb7428
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PostalAddressRow: 00b1ee182a0fcb741f5f7ea4a91b6fd59de9083d
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -617,6 +621,6 @@ SPEC CHECKSUMS:
   SwiftyCodeView: 0252e3520749a3fda1a9b141873401f8e6c570ad
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: ee718c8e77b04c1016c46cf49f625ee55a2ad040
+PODFILE CHECKSUM: 427db2ad37f3f83d44330c5ea42d2d734550be88
 
 COCOAPODS: 1.9.3

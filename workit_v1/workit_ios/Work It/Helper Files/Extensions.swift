@@ -116,7 +116,8 @@ extension UIViewController {
        }
     
     func openSuccessPopup(img: UIImage, msg: String, yesTitle: String?, noTitle: String?, isNoHidden : Bool?){
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
+        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
         myVC.image = img
         myVC.titleLabel = msg
         myVC.okBtnTtl = yesTitle
@@ -274,12 +275,12 @@ extension String {
         return pureNumber
     }
     
-    func formatName(name: String) -> String{
+    func formatName() -> String{
         let nameFormatter = PersonNameComponentsFormatter()
-        if let nameComps  = nameFormatter.personNameComponents(from: name), let firstLetter = nameComps.givenName, let lastName = nameComps.familyName?.first {
+        if let nameComps  = nameFormatter.personNameComponents(from: self), let firstLetter = nameComps.givenName, let lastName = nameComps.familyName?.first {
             return "\(firstLetter) \(lastName)."
-    }
-        return name
+        }
+        return self
    }
         
 }

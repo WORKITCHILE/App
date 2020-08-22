@@ -7,23 +7,34 @@
 //
 
 import UIKit
+import Lottie
 
 class SupportViewController: UIViewController,UITextViewDelegate {
     //MARK: IBOUtlets
     @IBOutlet weak var comment: UITextView!
-    
+    @IBOutlet weak var animation : AnimationView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+       
+        self.setNavigationBar()
+        
         self.comment.text = "Write Message"
         self.comment.delegate = self
+        
+        let starAnimation = Animation.named("support")
+        animation!.animation = starAnimation
+        
+        animation?.loopMode = .loop
+        animation?.play()
     }
   
     
     //MARK: IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
+
     
     @IBAction func sendAction(_ sender: Any) {
         if(self.comment.text == "Write Message" || self.comment.text == ""){

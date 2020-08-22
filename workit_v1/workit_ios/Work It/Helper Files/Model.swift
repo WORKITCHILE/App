@@ -13,9 +13,16 @@ struct Response: Codable {
     var status: Int?
 }
 
+enum MenuAction {
+    case open
+    case action
+}
+
 struct MenuObject {
     var image: UIImage?
     var name: String?
+    var action: MenuAction?
+    var data : [String: String]
 }
 
 struct LoginResponse: Codable {

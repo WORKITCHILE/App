@@ -94,11 +94,8 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
     }
     
     func manageView() {
-        if(self.jobData?.status == K_ACCEPT){
-            self.viewForCancel.isHidden = false
-        }else{
-            self.viewForCancel.isHidden = true
-        }
+        self.viewForCancel.isHidden = self.jobData?.status != K_ACCEPT
+        
         if(self.jobData?.status == K_START){
             if(self.jobData?.started_by == K_POST_JOB){
                 self.slidingButton.alpha = 1
@@ -112,16 +109,14 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
                 self.jobStatus.text = "Waiting for client to Confirm Job"
             }
             self.slidingButton.imageName = UIImage(named: "arrow")!
-            self.workerName.text =
-                (self.jobData?.user_name ?? "").formatName(name: self.jobData?.user_name ?? "")
+            self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
         }else if(self.jobData?.status == K_FINISH){
             self.slidingButton.isHidden = true
             self.viewforMessage.isHidden = true
-            self.workerName.text =
-                (self.jobData?.user_name ?? "").formatName(name: self.jobData?.user_name ?? "")
+            self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
@@ -130,7 +125,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             self.slidingButton.alpha = 1
             
             self.slidingButton.imageName = UIImage(named: "arrow")!
-            self.workerName.text = (self.jobData?.vendor_name ?? self.jobData?.user_name ?? "").formatName(name: self.jobData?.vendor_name ?? self.jobData?.user_name ?? "")
+            self.workerName.text = (self.jobData?.vendor_name ?? self.jobData?.user_name ?? "").formatName()
             
             self.occupation.text = self.jobData?.vendor_occupation
             self.userRating.rating = Double(self.jobData?.vendor_average_rating ?? "0")!
@@ -140,8 +135,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             self.viewforMessage.isHidden = true
             self.jobStatus.text = "Job FINISHED"
             self.slidingButton.imageName = UIImage(named: "arrow")!
-            self.workerName.text =
-                (self.jobData?.user_name ?? "").formatName(name: self.jobData?.user_name ?? "")
+            self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
@@ -150,19 +144,15 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             self.viewforMessage.isHidden = true
             self.jobStatus.text = "Job Cancelled"
             self.slidingButton.imageName = UIImage(named: "arrow")!
-            self.workerName.text =
-                (self.jobData?.user_name ?? "").formatName(name: self.jobData?.user_name ?? "")
+            self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
         }else {
             self.slidingButton.alpha = 1
             self.slidingButton.isHidden = false
-            // self.viewforMessage.isHidden = true
-            // self.jobStatus.text = "Job FINISHED"
             self.slidingButton.imageName = UIImage(named: "arrow")!
-            self.workerName.text =
-                (self.jobData?.user_name ?? "").formatName(name: self.jobData?.user_name ?? "")
+            self.workerName.text = self.jobData?.user_name!.formatName()
             self.occupation.text = self.jobData?.user_occupation
             self.userRating.rating = Double(self.jobData?.user_average_rating ?? "0")!
             self.workerImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
@@ -219,10 +209,6 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
                     self.getJobDetail()
                     self.removeChatId()
                     self.navigationController?.popViewController(animated: true)
-                    //                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "RatingViewController") as! RatingViewController
-                    //                    myVC.jobData = self.jobData
-                    //
-                    //                    self.navigationController?.pushViewController(myVC, animated: true)
                 }else {
                     self.openSuccessPopup(img: #imageLiteral(resourceName: "information-button copy"), msg: "Your job has been Started", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
                     self.viewforMessage.isHidden = false

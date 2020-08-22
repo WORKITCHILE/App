@@ -42,7 +42,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
         let data = self.notificationData?[indexPath.row]
         cell.jobName.text = data?.notification_body
-        cell.userName.text = (data?.sender_name ?? "").formatName(name:data?.sender_name ?? "") 
+        cell.userName.text = data?.sender_name!.formatName() 
         cell.userImage.sd_setImage(with: URL(string: data?.sender_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         cell.timeLabel.text = self.convertTimestampToDate(data?.created_at ?? 0, to: "MMM dd, h:mm a")
         return cell

@@ -170,11 +170,13 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         if (isHistory == false){
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
             myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
             self.navigationController?.pushViewController(myVC, animated: true)
         }
+        */
     }
     
     
