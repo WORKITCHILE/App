@@ -69,7 +69,6 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
     
     //MARK: IBOutelets
     @IBOutlet weak var viewReviewButton: UIButton!
-    @IBOutlet weak var jobStatus: DesignableUILabel!
     @IBOutlet weak var workerDescription: DesignableUILabel!
     @IBOutlet weak var offerValue: DesignableUILabel!
     @IBOutlet weak var occupation: DesignableUILabel!
@@ -80,7 +79,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
     @IBOutlet weak var photoCollection: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var timeLabel  : UILabel!
-    @IBOutlet weak var dateLabel  : UILabel!
+    @IBOutlet weak var jobStatus  : UILabel!
     @IBOutlet weak var userRating : CosmosView!
     @IBOutlet weak var viewForAccept: UIView!
     @IBOutlet weak var viewForReject: UIView!
@@ -99,13 +98,17 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
     var evaluationText = String()
     var evaluationRating = String()
     var isVendorCancelJob = false
-    var jobDataProperties : [[String:String]] = []
+    var jobDataProperties : [[String:Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        let nib = UINib(nibName: "CustomSectionHeader", bundle: nil)
+        self.tableView.register(nib, forHeaderFooterViewReuseIdentifier: "customSectionHeader")
+        
         getJobDetail()
     }
     
@@ -137,25 +140,115 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
     }
     
     func populateView(){
-    
+        
+      
+        
+        let workDetails : [String : Any] = [
+            "title":"Detalles de trabajo",
+            "data": [
+                [
+                    "title": "Nombre del trabajo",
+                    "type": "description",
+                    "value" : self.jobData?.job_name!
+                ],
+                [
+                    "title": "Publicado por",
+                    "type": "description",
+                    "value" : self.jobData?.user_name!
+                ],
+                [
+                    "title": "Trabajo acaptado por",
+                    "type": "description",
+                    "value" : self.jobData?.vendor_name!
+                ],
+                [
+                    "title": "Enfoque",
+                    "type": "description",
+                    "value" : self.jobData?.job_approach!
+                ],
+                [
+                    "title": "Categoria",
+                    "type": "description",
+                    "value" : self.jobData?.category_name!
+                ],
+                [
+                    "title": "Subcategoria",
+                    "type": "description",
+                    "value" : self.jobData?.subcategory_name!
+                ]
+            ]
+        ]
+        
+
+        
+        let calendarDetails : [String : Any] = [
+            "title":"Calendario",
+            "data": [
+                [
+                    "title": "Publicado",
+                    "type": "description",
+                    "value" : self.convertTimestampToDate(self.jobData?.created_at ?? 0, to: "dd.MM.yyyy")
+                ],
+                [
+                    "title": "Fecha de inicio",
+                    "type": "description",
+                    "value" : self.jobData?.job_date ?? ""
+                ],
+                [
+                    "title": "Tiempo",
+                    "type": "description",
+                    "value" : self.convertTimestampToDate(self.jobData?.job_time ?? 0, to: "h:mm a")
+                ]
+            ]
+        ]
+        
+        let descriptionDetails : [String : Any] = [
+            "title":"Descripción del trabajo",
+            "data": [
+                [
+                    "title": self.jobData?.job_description ?? "" ,
+                    "type": "text",
+                    "value" : ""
+                ]
+            ]
+        ]
+        
+        let addressDetails : [String : Any] = [
+            "title":"Ubicación",
+            "data": [
+                [
+                    "title": self.jobData?.job_address ?? "",
+                    "type": "text",
+                    "value" : "" ]
+            ]
+        ]
+        
+        self.jobDataProperties.append(workDetails)
+        self.jobDataProperties.append(calendarDetails)
+        self.jobDataProperties.append(descriptionDetails)
+        self.jobDataProperties.append(addressDetails)
+        
+        /*
+        
         self.jobDataProperties.append(["title": "Nombre del trabajo", "value" : self.jobData?.job_name ?? "" ])
-        self.jobDataProperties.append(["title": "Dirección", "value" : self.jobData?.job_address ?? ""])
-        self.jobDataProperties.append(["title": "Categoria", "value" : self.jobData?.category_name ?? ""])
-        self.jobDataProperties.append(["title": "Subcategoria", "value" : self.jobData?.subcategory_name ?? ""])
- 
-        self.jobDataProperties.append(["title": "Publicado", "value" : self.convertTimestampToDate(self.jobData?.created_at ?? 0, to: "dd.MM.yyyy")])
-        self.jobDataProperties.append(["title": "Publicado por", "value" : self.jobData?.user_name ?? "-" ])
-        self.jobDataProperties.append(["title": "Trabajo acaptado por", "value" : self.jobData?.vendor_name ?? "-"])
-        self.jobDataProperties.append(["title": "Descripción", "value" : self.jobData?.job_description ?? ""])
-        self.jobDataProperties.append(["title": "Enfoque", "value" : self.jobData?.job_approach ?? ""])
+        */
         
         if(self.isEvaluationScreen){
-            self.jobDataProperties.append(["title": "Comentario", "value" : evaluationText ])
+
+            let addressDetails : [String : Any] = [
+                "title":"Comentario",
+                "data": [
+                    [
+                        "title": evaluationText,
+                        "type":"text",
+                        "value" :  ""
+                    ]
+                ]
+            ]
+            
             self.userRating.rating = Double(self.evaluationRating)!
         }
 
-        self.timeLabel.text =  self.convertTimestampToDate(self.jobData?.job_time ?? 0, to: "h:mm a")
-        self.dateLabel.text = self.jobData?.job_date ?? ""
         
         let isUserId = Singleton.shared.userInfo.user_id == self.jobData?.user_id
         let userImage = (jobData?.status == K_POSTED ||  isUserId) ? self.jobData?.vendor_image : self.jobData?.user_image
@@ -174,7 +267,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                     self.viewForAccept.isHidden = bidDetail?.owner_status == "REJECTED"
                     
                     if(bidDetail?.owner_status == "REJECTED"){
-                        //self.jobStatus.text = "Bid Rejected by you"
+                        self.jobStatus.text = "Oferta rechazada por ti"
                         self.viewForReject.isHidden = true
                     }else{
                         self.viewForAccept.isHidden = false
@@ -185,17 +278,16 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                     //self.viewReviewButton.isHidden = true
                     if(bidDetail?.owner_status == "REJECTED"){
                         self.viewForAccept.isHidden = true
-                        //self.jobStatus.text = "Bid Rejected"
+                        self.jobStatus.text = "Oferta Rechazada"
                         self.viewForReject.isHidden = true
                     }else if(bidDetail?.owner_status == "ACCEPTED"){
                         self.viewForAccept.isHidden = true
-                        //self.jobStatus.text = "Bid Accepted"
+                        self.jobStatus.text = "Oferta Aceptada"
                         self.viewForReject.isHidden = true
                     }
                 }
             case K_ACCEPT:
-                
-                //self.jobStatus.text = "Job Accepted"
+                self.jobStatus.text = "Trabajo aceptado"
                 self.viewForAccept.isHidden = true
                 
                 if(K_CURRENT_USER == K_POST_JOB){
@@ -212,17 +304,16 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                 self.viewReviewButton.isHidden = false
                 self.viewForAccept.isHidden = false
                 
+                self.jobStatus.text = self.jobData?.started_by == K_WANT_JOB ? "Confirma para comenzar" : "Trabajo iniciado"
+                
                 if(self.jobData?.started_by == K_WANT_JOB){
-                    //self.jobStatus.text = "Please confirm to Start Job"
                     self.acceptButton.setTitle("Confirm", for: .normal)
                     self.viewForReject.isHidden = false
                     self.rejectButton.setTitle("Cancel Job", for: .normal)
                 }else if(self.jobData?.started_by == K_POST_JOB){
-                    //self.jobStatus.text = "Job Started"
                     self.acceptButton.setTitle("Message", for: .normal)
                     self.viewForReject.isHidden = true
                 }else {
-                    //self.jobStatus.text = "Job Started"
                     self.acceptButton.setTitle("Message", for: .normal)
                     self.viewForReject.isHidden = true
                 }
@@ -231,13 +322,13 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                 self.viewForAccept.isHidden = true
                 self.viewForReject.isHidden = false
                 self.rejectButton.setTitle("Release Payment", for: .normal)
-                //self.jobStatus.text = "Job finished, release payment"
+                self.jobStatus.text = "Job finished, release payment"
             case K_PAID:
                 //self.rateUserButton.isHidden = !((self.jobData?.owner_rated == 0) && (K_CURRENT_USER == K_POST_JOB))
                 //(self.viewReviewButton.isHidden = true
                 self.viewForAccept.isHidden = true
                 self.viewForReject.isHidden = true
-                //self.jobStatus.text = "Job Finished"
+                self.jobStatus.text = "Trabajo finalizado"
             case K_CANCEL:
                 //self.viewReviewButton.isHidden = true
                 self.viewForAccept.isHidden = true
@@ -246,7 +337,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
                     //self.rateUserButton.setTitle("Repost Job", for: .normal)
                     //self.rateUserButton.isHidden = false
                 }
-                //self.jobStatus.text = "Job Cancelled"
+                self.jobStatus.text = "Trabajo Cancelado"
             case .none:
                 break
             case .some(_):
@@ -440,17 +531,40 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
 }
 
 extension AcceptJobViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+         let val : [String: String] = (jobDataProperties[indexPath.section]["data"] as! Array<Any>)[indexPath.row] as! [String : String]
+        return val["type"] == "text" ? 115.0 : 50.0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.jobDataProperties.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (self.jobDataProperties[section]["data"] as! Array<Any> ).count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+          
+        let sectionData = self.jobDataProperties[section]
+        let header = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "customSectionHeader") as! CustomSectionHeader
+        header.titleLabel.text = (sectionData["title"] as! String).uppercased()
+           
+        return header
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DataJobViewCell") as! DataJobViewCell
-        let val = jobDataProperties[indexPath.row]
-        
-        cell.title.text = val["title"]
-        cell.subtitle.text = val["value"]
+         let val : [String: String] = (jobDataProperties[indexPath.section]["data"] as! Array<Any>)[indexPath.row] as! [String : String]
+        let cellIdentifier = val["type"] == "text" ? "DataJobViewCellText" : "DataJobViewCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! DataJobViewCell
        
+
+        cell.title.text = val["title"]?.uppercased()
+        if  val["type"] == "description"{
+            cell.subtitle.text = val["value"]
+        }
+
         return cell
     }
 

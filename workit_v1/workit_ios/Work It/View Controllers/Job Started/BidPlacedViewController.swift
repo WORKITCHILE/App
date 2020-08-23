@@ -12,8 +12,8 @@
 import UIKit
 
 class BidPlacedViewController: UIViewController {
+    
     //IBOUtlets
-   
     @IBOutlet weak var jobTable: UITableView!
     @IBOutlet weak var noJobsFound: UILabel!
 
@@ -36,38 +36,38 @@ class BidPlacedViewController: UIViewController {
         
         super.viewDidAppear(animated)
         if(K_CURRENT_TAB == K_HISTORY_TAB || K_CURRENT_TAB == K_RUNNING_JOB_TAB){
-            self.noJobsFound.text = "No Jobs Founds"
+            self.noJobsFound.text = "No hay trabajos"
         }else if(K_CURRENT_TAB == K_CURRENT_JOB_TAB){
-            self.noJobsFound.text = "No Bids Placed"
+            self.noJobsFound.text = "No hay ofertas"
         }
         
-        if(K_CURRENT_TAB == K_HISTORY_TAB){
-            if(Singleton.shared.postedHistoryData.count == 0){
-                self.getPostedJob()
-            }else {
+        switch K_CURRENT_TAB {
+            case K_HISTORY_TAB:
                 self.jobData = Singleton.shared.postedHistoryData
-                self.jobTable.reloadData()
-            }
-        }else if(K_CURRENT_TAB == K_RUNNING_JOB_TAB){
-            self.getRunningJob()
-        }else if(K_CURRENT_TAB == K_MYBID_TAB) {
-            if(Singleton.shared.vendorAcceptedBids.count == 0){
-                self.getAllBids()
-            }else {
+                self.getPostedJob()
+            case K_RUNNING_JOB_TAB:
+                self.getRunningJob()
+            case K_MYBID_TAB:
                 self.jobData = Singleton.shared.vendorAcceptedBids
-                self.jobTable.reloadData()
-            }
+                self.getAllBids()
+            default:
+                return
         }
+        
+        self.jobTable.reloadData()
     }
 
     @objc func refresh() {
         refreshControl.endRefreshing()
-        if(K_CURRENT_TAB == K_HISTORY_TAB){
-            self.getPostedJob()
-        }else if(K_CURRENT_TAB == K_RUNNING_JOB_TAB){
-            getRunningJob()
-        }else if(K_CURRENT_TAB == K_MYBID_TAB) {
-            self.getAllBids()
+        switch K_CURRENT_TAB {
+            case K_HISTORY_TAB:
+                self.getPostedJob()
+            case K_RUNNING_JOB_TAB:
+                self.getRunningJob()
+            case K_MYBID_TAB:
+                self.getAllBids()
+            default:
+                return
         }
     }
 
@@ -77,7 +77,7 @@ class BidPlacedViewController: UIViewController {
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) { 
             self.jobData = $0.data
             Singleton.shared.vendorAcceptedBids = $0.data
-
+            self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -85,10 +85,11 @@ class BidPlacedViewController: UIViewController {
 
     func getPostedJob(){
         ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_OWNER_COMPLETED_JOBS + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_COMPLETED_JOBS) { (response) in
+        let url = "\(U_BASE)\(U_GET_OWNER_COMPLETED_JOBS)\(Singleton.shared.userInfo.user_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_COMPLETED_JOBS) { (response) in
             self.jobData = response.data
             Singleton.shared.postedHistoryData = response.data
-            
+            self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -99,6 +100,7 @@ class BidPlacedViewController: UIViewController {
         let url = "\(U_BASE)\(U_GET_OWNER_RUNNING_JOB)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) { (response) in
             self.jobData = response.data
+            self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()
         }
@@ -107,7 +109,6 @@ class BidPlacedViewController: UIViewController {
     //MARK: IBAction
     @IBAction func postJobAction(_ sender: Any) {
         let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-        //self.storyboard?.instantiateViewController(identifier: "PostJobViewController") as! PostJobViewController
         self.navigationController?.pushViewController(myVC, animated: true)
     }
 
@@ -116,11 +117,6 @@ class BidPlacedViewController: UIViewController {
 
 extension BidPlacedViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.jobData.count == 0){
-            self.noJobsFound.isHidden = false
-        }else {
-            self.noJobsFound.isHidden = true
-        }
         return self.jobData.count
     }
 
@@ -147,20 +143,10 @@ extension BidPlacedViewController: UITableViewDelegate,UITableViewDataSource {
         //cell.totalBids.text = ""
         cell.jobDescription.text = val.job_description
         cell.editJob = {
-            let alert = UIAlertController(title: "Edit job", message: "Are you sure?", preferredStyle: .alert)
-            let yesAction = UIAlertAction(title: "Yes", style: .default) { (val) in
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-                myVC.jobDetail = self.jobData[indexPath.row]
-                myVC.isEditJob = true
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }
-            let noAction = UIAlertAction(title: "No", style: .default) { (val) in
-                self.dismiss(animated: true, completion: nil)
-            }
-
-            alert.addAction(yesAction)
-            alert.addAction(noAction)
-            self.present(alert, animated: true, completion: nil)
+            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
+            myVC.jobDetail = self.jobData[indexPath.row]
+            myVC.isEditJob = true
+            self.navigationController?.pushViewController(myVC, animated: true)
         }
         return cell
     }

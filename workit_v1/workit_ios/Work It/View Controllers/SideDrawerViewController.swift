@@ -50,36 +50,11 @@ class SideDrawerViewController: UIViewController {
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Configuraciones Bancaria", action: .open, data:["vc":"CreditViewController"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_config"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
         ]
          
          tableViewMenu.reloadData()
-    }
-    
-    func selectUserRole(type: String){
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        ActivityIndicator.show(view: self.view)
-        let param: [String:Any] = [
-            "type":type,
-            "uid":Singleton.shared.userInfo.user_id
-        ]
-        
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_CHANGE_USER_ROLE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_CHANGE_USER_ROLE) { (response) in
-            
-            K_CURRENT_USER = type
-            UserDefaults.standard.set(type, forKey: UD_CURRENT_USER)
-            UIApplication.shared.endIgnoringInteractionEvents()
-            if(type == K_POST_JOB){
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostedJobViewController") as! PostedJobViewController
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }else if(type == K_WANT_JOB){
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
-                self.navigationController?.pushViewController(myVC, animated: true)
-            }
-            ActivityIndicator.hide()
-        }
     }
     
     @objc func shareAction(){
@@ -196,15 +171,6 @@ extension SideDrawerViewController: UITableViewDelegate {
             K_CURRENT_TAB = K_HISTORY_TAB
             self.navigationController?.pushViewController(myVC, animated: true)
             return
-        case "My Publications":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PublicationViewController") as! PublicationViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
-
-
-
-
         */
     }
 }

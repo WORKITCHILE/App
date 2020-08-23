@@ -29,6 +29,8 @@
 		4F08B74B24E5B6B7004FE8F7 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F08B73824E5B6B7004FE8F7 /* Poppins-ThinItalic.ttf */; };
 		4F5DC1BE24CFB4780076FCDF /* HomeWorker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BD24CFB4780076FCDF /* HomeWorker.storyboard */; };
 		4F5DC1C024D4696C0076FCDF /* signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5DC1BF24D4696C0076FCDF /* signup.storyboard */; };
+		4F5F008024F1BE8300246CB6 /* CustomSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F007E24F1BE8300246CB6 /* CustomSectionHeader.swift */; };
+		4F5F008124F1BE8300246CB6 /* CustomSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F007F24F1BE8300246CB6 /* CustomSectionHeader.xib */; };
 		4F8D8AF424DCE9E2006E7A68 /* UIViewControlller+Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */; };
 		4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */; };
 		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
@@ -135,6 +137,8 @@
 		4F08B73824E5B6B7004FE8F7 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		4F5DC1BD24CFB4780076FCDF /* HomeWorker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeWorker.storyboard; sourceTree = "<group>"; };
 		4F5DC1BF24D4696C0076FCDF /* signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = signup.storyboard; sourceTree = "<group>"; };
+		4F5F007E24F1BE8300246CB6 /* CustomSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSectionHeader.swift; sourceTree = "<group>"; };
+		4F5F007F24F1BE8300246CB6 /* CustomSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSectionHeader.xib; sourceTree = "<group>"; };
 		4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControlller+Header.swift"; sourceTree = "<group>"; };
 		4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		4F5DC1BB24CFB45E0076FCDF /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				4F5F007D24F1BE7600246CB6 /* xib */,
 				4F5DC1BC24CFB4690076FCDF /* storyboards */,
 			);
 			name = ui;
@@ -257,6 +262,15 @@
 				4FADC48C24E5F98800882BFA /* Home.storyboard */,
 			);
 			name = storyboards;
+			sourceTree = "<group>";
+		};
+		4F5F007D24F1BE7600246CB6 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				4F5F007E24F1BE8300246CB6 /* CustomSectionHeader.swift */,
+				4F5F007F24F1BE8300246CB6 /* CustomSectionHeader.xib */,
+			);
+			name = xib;
 			sourceTree = "<group>";
 		};
 		4F8D8AF224DCE9D1006E7A68 /* extensionts */ = {
@@ -646,6 +660,7 @@
 				4F08B73F24E5B6B7004FE8F7 /* Poppins-BlackItalic.ttf in Resources */,
 				D2801C3823D6F227001AD735 /* RobotoMono-Bold.ttf in Resources */,
 				D2D7691923BE2C0C001485E1 /* Assets.xcassets in Resources */,
+				4F5F008124F1BE8300246CB6 /* CustomSectionHeader.xib in Resources */,
 				4F08B73E24E5B6B7004FE8F7 /* Poppins-Medium.ttf in Resources */,
 				D2801C3723D6F227001AD735 /* RobotoMono-Medium.ttf in Resources */,
 				D2D7691723BE2C08001485E1 /* Main.storyboard in Resources */,
@@ -727,6 +742,7 @@
 				4FFE072124E1C002007029A2 /* HomeViewController.swift in Sources */,
 				4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */,
 				D25BFAA523C0486200CBB4DE /* ReceivedJobViewController.swift in Sources */,
+				4F5F008024F1BE8300246CB6 /* CustomSectionHeader.swift in Sources */,
 				D2E124BB240948A9009DF90A /* SlidingButton.swift in Sources */,
 				D2D7695523BE2CC2001485E1 /* Router.swift in Sources */,
 				4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */,
