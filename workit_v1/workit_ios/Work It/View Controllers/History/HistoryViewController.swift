@@ -19,8 +19,7 @@ class HistoryViewController: UIViewController, ScrollView {
         
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
-        
-        self.setNavigationBar()
+
         
         HistoryPageViewController.indexDelegate = self
         K_CURRENT_TAB = K_RUNNING_JOB_TAB

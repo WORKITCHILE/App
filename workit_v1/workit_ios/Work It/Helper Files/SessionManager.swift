@@ -107,12 +107,8 @@ class SessionManager: NSObject {
 
     func getHeader(reqCode: String) -> HTTPHeaders? {
         let token = UserDefaults.standard.string(forKey: UD_TOKEN)
-        if (reqCode != U_LOGIN){
-            if(token == nil){
-                return nil
-            }else {
-                return ["Authorization": "Bearer " + token!]
-            }
+        if (reqCode != U_LOGIN && token != nil){
+            return ["Authorization": "Bearer " + token!]
         } else {
             return nil
         }

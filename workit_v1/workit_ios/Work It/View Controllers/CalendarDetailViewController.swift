@@ -132,9 +132,10 @@ extension CalendarDetailViewController: UITableViewDelegate,UITableViewDataSourc
 
 class CalenderViewCell: UITableViewCell{
     //MARK:IBOUtlets
-    @IBOutlet weak var jobDate: DesignableUILabel!
-    @IBOutlet weak var jobTime: DesignableUILabel!
-    @IBOutlet weak var jobStatus: DesignableUILabel!
-    @IBOutlet weak var jobTitle: DesignableUILabel!
-    @IBOutlet weak var jobAddress: DesignableUILabel!
+    @IBOutlet weak var emptyJobStatus: UILabel!
+    @IBOutlet weak var jobDate: UILabel!
+    @IBOutlet weak var jobTime: UILabel!
+    @IBOutlet weak var jobStatus: UILabel!
+    @IBOutlet weak var jobTitle: UILabel!
+    @IBOutlet weak var jobAddress: UILabel!
 }

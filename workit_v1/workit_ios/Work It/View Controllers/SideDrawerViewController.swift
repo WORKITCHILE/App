@@ -50,7 +50,7 @@ class SideDrawerViewController: UIViewController {
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_config"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_config"), name: "Configuraciones", action: .open, data:["vc":"CreditViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
         ]
          

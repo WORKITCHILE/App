@@ -10,7 +10,7 @@ import UIKit
 
 class ScheduleCalenderViewController: UIViewController {
     //MARK:IBOutlets
-    @IBOutlet weak var selectedMonth: DesignableUITextField!
+    @IBOutlet weak var titleDate : UILabel!
     @IBOutlet weak var calenderView: UITableView!
     @IBOutlet fileprivate var picker : MonthYearPickerView!
     @IBOutlet weak var popupView: UIView!
@@ -22,22 +22,26 @@ class ScheduleCalenderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        picker.minYear = 2020
-//        picker.maxYear = 2099
-//        picker.rowHeight = 40
-//        picker.selectToday()
-//        picker.selectRow(0, inComponent: 1, animated: false)
-       // picker.selectRow(500, inComponent: 0, animated: false)
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+              
+    
+        
         picker.minimumDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())
         picker.maximumDate = Calendar.current.date(byAdding: .year, value: 10, to: Date())
-        self.calenderView.estimatedRowHeight = 90
+        
+        self.calenderView.estimatedRowHeight = 100
         self.calenderView.rowHeight = UITableView.automaticDimension
+        
         let time = Int(Date().timeIntervalSince1970)
-        self.selectedMonth.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
-        self.month = Int(self.convertTimestampToDate(time, to: "M") ?? "0") ?? 0
+
+        self.titleDate.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
+        self.month = Int(self.convertTimestampToDate(time, to: "M") ) ?? 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.getCalenderData(date:Int(Date().timeIntervalSince1970))
     }
     
@@ -66,37 +70,149 @@ class ScheduleCalenderViewController: UIViewController {
     }
     
     //MARK:IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func dateAction(_ sender: Any) {
+        popupView.isHidden = false
     }
     
-    @IBAction func dateAction(_ sender: Any) {
+    @IBAction func cancelAction(_ sender: Any) {
         popupView.isHidden = false
     }
     
     @IBAction func doneButtonAction(_ sender: Any) {
         self.popupView.isHidden = true
         let time = Int(picker.date.timeIntervalSince1970)
-        self.selectedMonth.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
-        self.month = Int(self.convertTimestampToDate(time, to: "M") ?? "0") ?? 0
+        self.titleDate.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
+        self.month = Int(self.convertTimestampToDate(time, to: "M")) ?? 0
         self.getCalenderData(date:time)
     }
 }
 
 extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            let val = self.calenderData[indexPath.row]
+              
+               
+               if(self.isFutureDate){
+                 
+                   if(K_CURRENT_USER == K_WANT_JOB){
+                       
+                   }else {
+                       /*
+                       //let todayData = Int(Date().timeIntervalSince1970)
+                       //let futuretDate = self.convertDateToTimestamp((cell.jobDate.text ?? ""), to:  "d MMM,YYYY")
+                       if(futuretDate > todayData){
+                           
+                       }else {
+                          
+                       }
+                        */
+                   }
+                 
+               }else {
+                   
+            
+                   var jobCount:[GetJobResponse]?
+                   
+                   if(K_CURRENT_USER == K_POST_JOB){
+                       jobCount = val.job_data?.filter{
+                           $0.user_id == Singleton.shared.userInfo.user_id
+                       }
+                   }else {
+                       jobCount = val.job_data?.filter{
+                           $0.user_id != Singleton.shared.userInfo.user_id
+                       }
+                   }
+                   
+                   if(jobCount?.count==0){
+                
+                       
+                       
+                       if(K_CURRENT_USER == K_WANT_JOB){
+                          
+                       }else {
+                          
+                       }
+                
+                  
+                   }else if(jobCount?.count == 1){
+                  
+                       
+                    return 160.0
+                   }else{
+                       
+                   }
+               }
+        
+        return 100.0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.isFutureDate){
-            return self.monthDays[self.month-1]
-        }else {
-            return self.calenderData.count
-        }
+        return self.isFutureDate ? self.monthDays[self.month-1] : self.calenderData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderViewCell") as! CalenderViewCell
+        /*  */
+        let val = self.calenderData[indexPath.row]
+        var cellIdentifier = "CalenderViewCell"
+        
+        if(self.isFutureDate){
+          
+            if(K_CURRENT_USER == K_WANT_JOB){
+                
+            }else {
+                /*
+                //let todayData = Int(Date().timeIntervalSince1970)
+                //let futuretDate = self.convertDateToTimestamp((cell.jobDate.text ?? ""), to:  "d MMM,YYYY")
+                if(futuretDate > todayData){
+                    
+                }else {
+                   
+                }
+                 */
+            }
+          
+        }else {
+            
+            let val = self.calenderData[indexPath.row]
+            var jobCount:[GetJobResponse]?
+            
+            if(K_CURRENT_USER == K_POST_JOB){
+                jobCount = val.job_data?.filter{
+                    $0.user_id == Singleton.shared.userInfo.user_id
+                }
+            }else {
+                jobCount = val.job_data?.filter{
+                    $0.user_id != Singleton.shared.userInfo.user_id
+                }
+            }
+            
+            if(jobCount?.count==0){
+         
+                
+                
+                if(K_CURRENT_USER == K_WANT_JOB){
+                   
+                }else {
+                   
+                }
+         
+           
+            }else if(jobCount?.count == 1){
+                debugPrint("COUNT 1")
+                
+               cellIdentifier = "CalenderViewCellPay"
+            }else{
+                
+            }
+        }
+        
+        /* */
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CalenderViewCell
 
-        cell.jobDate.text = "\(indexPath.row + 1) \(self.selectedMonth.text ?? "")"
+        cell.jobDate.text = "\(indexPath.row + 1) \(self.titleDate.text ?? "")"
         
         if(self.isFutureDate){
             cell.jobTime.text = "--:--"
@@ -115,8 +231,10 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
             }
             cell.jobStatus.textColor = .white
         }else {
-            let val = self.calenderData[indexPath.row]
+            
+           
             var jobCount:[GetJobResponse]?
+            
             if(K_CURRENT_USER == K_POST_JOB){
                 jobCount = val.job_data?.filter{
                     $0.user_id == Singleton.shared.userInfo.user_id
@@ -126,27 +244,26 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
                     $0.user_id != Singleton.shared.userInfo.user_id
                 }
             }
+            
             if(jobCount?.count==0){
+         
                 cell.jobTime.text = "--:--"
-                cell.jobTitle.text = ""
-                cell.jobAddress.text = ""
+                
                 if(K_CURRENT_USER == K_WANT_JOB){
-                    cell.jobStatus.text =  "NO JOB SCHEDULED"
+                    cell.emptyJobStatus.text =  "Sin Programar"
                 }else {
                     let todayData = Int(Date().timeIntervalSince1970)
                     let futuretDate = self.convertDateToTimestamp((cell.jobDate.text ?? ""), to:  "d MMM,YYYY")
-                    if(futuretDate > todayData){
-                        cell.jobStatus.text = "POST A JOB NOW"
-                    }else {
-                        cell.jobStatus.text = "NO JOB SCHEDULED"
-                    }
+                    cell.emptyJobStatus.text = futuretDate > todayData ? "Postear Trabajo" : "Sin Programar"
                 }
-                cell.jobStatus.textColor = .white
+         
+           
             }else if(jobCount?.count == 1){
                 cell.jobTime.text = self.convertTimestampToDate(jobCount?[0].job_time ?? 0, to: "h:mm a")
                 cell.jobTitle.text = jobCount?[0].job_name ?? ""
-                cell.jobStatus.text = jobCount?[0].status ?? ""
+                //cell.jobStatus.text = jobCount?[0].status ?? ""
                 cell.jobAddress.text = jobCount?[0].job_address ?? ""
+                /*
                 if(cell.jobStatus.text == K_ACCEPT || cell.jobStatus.text == K_FINISH || cell.jobStatus.text == K_START){
                     cell.jobStatus.textColor = lightGreen
                 }else if(cell.jobStatus.text == K_REJECT || cell.jobStatus.text == K_CANCEL){
@@ -158,6 +275,7 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
                 }else {
                     cell.jobStatus.textColor = .white
                 }
+                */
             }else{
                 cell.jobTime.text = ""
                 cell.jobTitle.text = "Click here to view details."

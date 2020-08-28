@@ -12,10 +12,10 @@ import CoreLocation
 
 class CategoryListViewController: UIViewController, ApplyFilter,SelectDate {
     
-func selectedDate(date: Int) {
-    self.selectedDate = date
-    self.filterDate.text = self.convertTimestampToDate(date, to: "dd.MM.yyyy")
-}
+    func selectedDate(date: Int) {
+        self.selectedDate = date
+        self.filterDate.text = self.convertTimestampToDate(date, to: "dd.MM.yyyy")
+    }
     
     func reloadTable(approach: String, price: Float, address: String,lat: CLLocationDegrees, long: CLLocationDegrees) {
         self.getJobData(address: address, lat: "\(lat)", long: "\(long)", approach: approach, price: "\(price)", distane:"40",searchText:"", date: self.selectedDate)
@@ -34,7 +34,7 @@ func selectedDate(date: Int) {
     
       
     var jobData = [GetJobResponse]()
-    var subcategoryId = [String]()
+    var subcategoryId : [String] = []
     var refreshControl = UIRefreshControl()
     var searchText = ""
     var selectedDate = Int()
@@ -58,9 +58,9 @@ func selectedDate(date: Int) {
     func getJobData(address: String, lat:String, long: String, approach: String, price: String, distane: String,searchText: String,date:Int){
          var latitude = CLLocationDegrees()
          var longitude = CLLocationDegrees()
-         var locManager =  CLLocationManager()
+         let locManager =  CLLocationManager()
         
-                if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
                           CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
                           guard let currentLocation = locManager.location else {
                               return
@@ -68,32 +68,41 @@ func selectedDate(date: Int) {
                    longitude = currentLocation.coordinate.longitude
                    latitude = currentLocation.coordinate.latitude
         }
-        
+       
+
         ActivityIndicator.show(view: self.view)
         let param : [String:Any] = [
             "subcategory_id": self.subcategoryId,
             "user_id": Singleton.shared.userInfo.user_id ?? "",
-            "address":address,
+            "address": "General Bustamante 1015",
             "current_longitude":longitude,
             "current_latitude":latitude,
-            "address_latitude":lat,
-            "address_longitude":long,
-            "job_approach":approach,
-            "price":price,
-            "distance":distane,
+            "address_latitude": String(latitude),
+            "address_longitude": String(longitude),
+            "job_approach": approach,
+            "price": "10000",
+            "distance": distane == "" ? "100" : distane  ,
             "search": searchText,
             "date_filter":(date == 0 ? "":date)
             ]
-           SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_WORKER_POSTED_JOB , method: .post, parameter: param, objectClass: GetJob.self, requestCode: U_GET_WORKER_POSTED_JOB) { (response) in
-               
+        
+       
+        
+        let url = "\(U_BASE)\(U_GET_WORKER_POSTED_JOB)"
+        
+        debugPrint(param)
+        
+        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: GetJob.self, requestCode: U_GET_WORKER_POSTED_JOB) { (response) in
+           
             self.jobData = []
+            debugPrint(response.data)
             self.jobData = response.data.sorted(by: {$0.job_time! < $1.job_time!})
             self.jobData = self.jobData.filter{
                 $0.user_id != Singleton.shared.userInfo.user_id
             }
-               self.jobTable.reloadData()
-               ActivityIndicator.hide()
-           }
+           self.jobTable.reloadData()
+           ActivityIndicator.hide()
+       }
     }
     
     //MARK: IBActions

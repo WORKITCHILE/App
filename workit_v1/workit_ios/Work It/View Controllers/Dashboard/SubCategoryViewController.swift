@@ -24,8 +24,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getSubCategoryData()
-        
-        //self.titleLabel.text = titleHeading
+    
         setNavigationBar()
         
         let img = UIImage(named: "header_rect_green")
@@ -49,12 +48,6 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    //MARK: IBAction
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     @IBAction func nextAction(_ sender: Any) {
         /*
         if(self.selectedSubcategories.count == 0){
@@ -65,6 +58,11 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
             self.navigationController?.pushViewController(myVC, animated: true)
         }
         */
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let myVC = segue.destination as! CategoryListViewController
+        myVC.subcategoryId = Array(self.selectedSubcategories)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,12 +91,5 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         }
         print(self.selectedSubcategories)
     }
-    
-    //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    //        let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
-    //        let val = self.subcategoryData[indexPath.row]
-    //        cell.menuImage?.image = UIImage(named: "square")
-    //        self.selectedSubcategories?.remove(val.subcategory_id ?? "")
-    //    }
-    
+
 }

@@ -77,7 +77,7 @@ var U_OWNER_JOB_APPROVAL = "owner/start-approval"
 var U_GET_VENDOR_COMPLETED_JOB = "vendor/get-completed-jobs?user_id="
 
 var U_GET_VENDOR_RUNNING_JOB = "vendor/get-running-jobs?user_id="
-var U_GET_WORKER_POSTED_JOB = "vendor/get-posted-jobs?"
+var U_GET_WORKER_POSTED_JOB = "vendor/get-posted-jobs"
 var U_GET_SINGLE_JOB_VENDOR = "/vendor/get-single-job?user_id="
 var U_VENDOR_CANCEL_JOB = "vendor/cancel-job"
 var U_VENDOR_CANCEL_BID = "vendor/cancel-bid"
