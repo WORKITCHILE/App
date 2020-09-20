@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nlv-Tf-wtr">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Payment Flow View Controller-->
+        <scene sceneID="ils-e0-RNQ">
+            <objects>
+                <viewController id="nlv-Tf-wtr" customClass="PaymentFlowViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="051-LM-Eph">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeG-JB-LWU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="SeG-JB-LWU" secondAttribute="bottom" id="2Zr-P8-JJb"/>
+                            <constraint firstItem="SeG-JB-LWU" firstAttribute="leading" secondItem="PG0-2c-wXG" secondAttribute="leading" id="HKZ-vm-NxS"/>
+                            <constraint firstItem="SeG-JB-LWU" firstAttribute="top" secondItem="051-LM-Eph" secondAttribute="top" id="Nfh-us-dno"/>
+                            <constraint firstItem="SeG-JB-LWU" firstAttribute="trailing" secondItem="PG0-2c-wXG" secondAttribute="trailing" id="gvI-nI-jOx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PG0-2c-wXG"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="SeG-JB-LWU" id="mE7-2U-Frr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HUf-5l-nsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="237.68115942028987" y="-277.23214285714283"/>
+        </scene>
+    </scenes>
+</document>

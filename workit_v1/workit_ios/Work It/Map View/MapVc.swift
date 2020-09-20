@@ -67,7 +67,7 @@ class MapVC: UIView,MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
              annotationView?.canShowCallout = true
-            let pinImage = #imageLiteral(resourceName: "placeholder(7)")
+            let pinImage = #imageLiteral(resourceName: "ic_location_work_blue")
             let size = CGSize(width: 35, height: 40)
             UIGraphicsBeginImageContext(size)
             pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))

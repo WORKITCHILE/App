@@ -70,7 +70,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
         let val = self.categoriesData[indexPath.row]
         
         cell.jobName.text = val.category_name
-        cell.jobImage.sd_setImage(with: URL(string: val.category_image ?? ""), placeholderImage: #imageLiteral(resourceName: "appliances-white"))
+        cell.jobImage.sd_setImage(with: URL(string: val.category_image ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         
        
         return cell
@@ -84,7 +84,5 @@ class DashboardCell: UITableViewCell{
     //MARK: IBOutlets
     @IBOutlet weak var jobImage: UIImageView!
     @IBOutlet weak var jobName: UILabel!
-  
-    
 }
 

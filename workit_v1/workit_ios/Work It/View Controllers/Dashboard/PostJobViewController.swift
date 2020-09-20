@@ -496,7 +496,7 @@ extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashboardCollection", for: indexPath) as! DashboardCollection
         if(imageString[indexPath.row] == "camera"){
-            cell.jobImage.image = #imageLiteral(resourceName: "camera")
+            cell.jobImage.image = #imageLiteral(resourceName: "dummyProfile")
             cell.addBtn.isHidden = false
             cell.deleteBtn.isHidden = true
             cell.addButton = {
@@ -506,13 +506,13 @@ extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataS
         }else {
             cell.addBtn.isHidden = true
             cell.deleteBtn.isHidden = false
-            cell.jobImage.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "camera"))
+            cell.jobImage.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.deleteButton = {
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
                 self.deleteImageIndex = indexPath.row
-                myVC.image = #imageLiteral(resourceName: "information-button copy")
-                myVC.titleLabel = "Delete Image?"
-                myVC.okBtnTtl = "Yes"
+                myVC.image = #imageLiteral(resourceName: "dummyProfile")
+                myVC.titleLabel = "¿Borrar Imagen?"
+                myVC.okBtnTtl = "Si"
                 myVC.cancelBtnTtl = "No"
                 myVC.cancelBtnHidden = false
                 myVC.successDelegate = self
@@ -524,9 +524,9 @@ extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let imageView = UIImageView()
+       
         let newImageView = UIImageView()
-        newImageView.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "camera"))
+        newImageView.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         newImageView.frame = UIScreen.main.bounds
         newImageView.backgroundColor = .black
         newImageView.contentMode = .scaleAspectFit
@@ -534,7 +534,6 @@ extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataS
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         newImageView.addGestureRecognizer(tap)
         self.view.addSubview(newImageView)
-        //self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
     

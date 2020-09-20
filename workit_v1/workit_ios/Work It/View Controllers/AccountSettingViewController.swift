@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class AccountSettingViewController: UIViewController, AddAccount {
     func refreshAccountTable() {
@@ -19,6 +20,10 @@ class AccountSettingViewController: UIViewController, AddAccount {
     @IBOutlet weak var viewForWallet: UIView!
     @IBOutlet weak var viewForCards: UIView!
     @IBOutlet weak var availBalance: DesignableUILabel!
+    @IBOutlet weak var animation: AnimationView?
+           
+       
+      
     
     var accountData = [GetAccountsDetail]()
     var isSelectCard = false
@@ -37,7 +42,17 @@ class AccountSettingViewController: UIViewController, AddAccount {
         self.getWalletInfo()
         self.getAccountData()
         
-    }
+            let starAnimation = Animation.named("add_account")
+            animation!.animation = starAnimation
+            animation?.loopMode = .loop
+            
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+              super.viewWillAppear(animated)
+              animation?.play()
+          }
+              
     
     func getWalletInfo(){
         ActivityIndicator.show(view: self.view)

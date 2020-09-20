@@ -29,20 +29,20 @@
             <objects>
                 <viewController storyboardIdentifier="PostJobViewController" id="HnQ-D8-2GW" customClass="PostJobViewController" customModule="Work_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T4o-IA-aiM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1646"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10O-W0-2IP">
-                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="1556"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNI-M3-tr5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="752"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1556"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eaQ-WU-ng4">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1549.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1202"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kNz-qb-NhJ">
-                                                        <rect key="frame" x="31" y="20" width="352" height="1519.5"/>
+                                                        <rect key="frame" x="31" y="20" width="352" height="1172"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0V-G1-98A" customClass="View" customModule="Work_It" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="352" height="45"/>
@@ -283,10 +283,10 @@
                                                                             <constraint firstAttribute="width" constant="20" id="uB5-DZ-Cac"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poG-RF-AKY" customClass="DesignableUITextField" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="43" y="3.5" width="82" height="40.5"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poG-RF-AKY" customClass="DesignableUITextField" customModule="Work_It" customModuleProvider="target">
+                                                                        <rect key="frame" x="43" y="4" width="301" height="41"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
@@ -308,7 +308,7 @@
                                                                     <constraint firstItem="HNw-RC-OkP" firstAttribute="top" secondItem="eM1-NN-FI7" secondAttribute="top" id="VFG-nf-lfB"/>
                                                                     <constraint firstItem="poG-RF-AKY" firstAttribute="height" secondItem="eM1-NN-FI7" secondAttribute="height" multiplier="0.9" id="VRK-Hk-Mrc"/>
                                                                     <constraint firstAttribute="bottom" secondItem="HNw-RC-OkP" secondAttribute="bottom" id="dPf-c5-DzA"/>
-                                                                    <constraint firstItem="poG-RF-AKY" firstAttribute="centerY" secondItem="eM1-NN-FI7" secondAttribute="centerY" constant="1" id="gq8-9h-hap"/>
+                                                                    <constraint firstItem="poG-RF-AKY" firstAttribute="centerY" secondItem="eM1-NN-FI7" secondAttribute="centerY" constant="2" id="gq8-9h-hap"/>
                                                                     <constraint firstItem="h7J-oh-Ed3" firstAttribute="centerY" secondItem="eM1-NN-FI7" secondAttribute="centerY" id="hXl-2w-1M3"/>
                                                                     <constraint firstItem="HNw-RC-OkP" firstAttribute="leading" secondItem="eM1-NN-FI7" secondAttribute="leading" id="nga-aB-9Cd"/>
                                                                     <constraint firstItem="poG-RF-AKY" firstAttribute="leading" secondItem="eM1-NN-FI7" secondAttribute="leading" constant="43" id="qSi-sq-l62"/>
@@ -331,19 +331,16 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vnJ-6T-xZ8" customClass="View" customModule="Work_It" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="505" width="352" height="45"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subcategory" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fgf-MM-1Jg" customClass="DesignableUITextField" customModule="Work_It" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subcategoria" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fgf-MM-1Jg" customClass="DesignableUITextField" customModule="Work_It" customModuleProvider="target">
                                                                         <rect key="frame" x="12" y="2.5" width="290" height="40.5"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                                 <integer key="value" value="4"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
-                                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                                        </variation>
                                                                     </textField>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FG5-Vq-z0d">
                                                                         <rect key="frame" x="312" y="7.5" width="30" height="30"/>
@@ -433,13 +430,13 @@
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="value" name="border"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                         <real key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="22"/>
+                                                                        <real key="value" value="5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="NO"/>
                                                                 </userDefinedRuntimeAttributes>
@@ -447,13 +444,13 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgU-Va-H70">
                                                                 <rect key="frame" x="0.0" y="625" width="352" height="160"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photos(optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSM-8H-4tt" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="25"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agregar Fotos (Opcional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSM-8H-4tt" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="189.5" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="Isk-gP-YXL"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
+                                                                        <color key="textColor" name="dark_gray"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
@@ -475,47 +472,38 @@
                                                                                 </collectionViewFlowLayout>
                                                                                 <cells>
                                                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DashboardCollection" id="ygh-SP-2iA" customClass="DashboardCollection" customModule="Work_It" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="15" width="100" height="90"/>
+                                                                                        <rect key="frame" x="0.0" y="20" width="80" height="80"/>
                                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RHb-6T-aQu">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="90"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CzY-QT-GFh">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="90"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                                                     <subviews>
                                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oop-DA-Z8Y">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="90"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                                                             <constraints>
                                                                                                                 <constraint firstAttribute="height" constant="120" id="dFc-dI-eIQ"/>
                                                                                                                 <constraint firstAttribute="width" constant="150" id="zYu-1R-gGb"/>
                                                                                                             </constraints>
                                                                                                         </imageView>
                                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp2-U5-JkS" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="70" y="5" width="25" height="25"/>
+                                                                                                            <rect key="frame" x="55" y="5" width="20" height="20"/>
                                                                                                             <constraints>
-                                                                                                                <constraint firstAttribute="height" constant="25" id="RQH-qO-E3j"/>
+                                                                                                                <constraint firstAttribute="height" constant="20" id="RQH-qO-E3j"/>
                                                                                                                 <constraint firstAttribute="width" secondItem="vp2-U5-JkS" secondAttribute="height" multiplier="1:1" id="Zl8-Wu-VZr"/>
                                                                                                             </constraints>
                                                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                                                                                            <state key="normal" title="-">
+                                                                                                            <state key="normal" backgroundImage="ic_remove_image">
                                                                                                                 <color key="titleColor" red="0.66274509800000003" green="0.1333333333" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             </state>
-                                                                                                            <userDefinedRuntimeAttributes>
-                                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                                                    <color key="value" red="0.66274509800000003" green="0.1333333333" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                                                </userDefinedRuntimeAttribute>
-                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="circle" value="YES"/>
-                                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                                                    <real key="value" value="1"/>
-                                                                                                                </userDefinedRuntimeAttribute>
-                                                                                                            </userDefinedRuntimeAttributes>
                                                                                                             <connections>
                                                                                                                 <action selector="deleteAction:" destination="ygh-SP-2iA" eventType="touchUpInside" id="p1k-uQ-Oc2"/>
                                                                                                             </connections>
                                                                                                         </button>
                                                                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHx-2c-JAS" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="90"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                                                                                             <state key="normal">
                                                                                                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -556,7 +544,7 @@
                                                                                                 <constraint firstItem="CzY-QT-GFh" firstAttribute="width" secondItem="RHb-6T-aQu" secondAttribute="width" id="vl8-YU-GaC"/>
                                                                                             </constraints>
                                                                                         </collectionViewCellContentView>
-                                                                                        <size key="customSize" width="100" height="90"/>
+                                                                                        <size key="customSize" width="80" height="80"/>
                                                                                         <connections>
                                                                                             <outlet property="addBtn" destination="KHx-2c-JAS" id="Fu0-Bb-P0g"/>
                                                                                             <outlet property="deleteBtn" destination="vp2-U5-JkS" id="GTu-3r-JcB"/>
@@ -568,12 +556,10 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGS-sF-xu4">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="352" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wx4-VH-CfW">
-                                                                                        <rect key="frame" x="116" y="0.0" width="120" height="120"/>
-                                                                                    </imageView>
-                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTl-sh-vc8" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
-                                                                                        <rect key="frame" x="116" y="0.0" width="120" height="120"/>
-                                                                                        <state key="normal">
+                                                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTl-sh-vc8" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
+                                                                                        <rect key="frame" x="136" y="20" width="80" height="80"/>
+                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                        <state key="normal" backgroundImage="ic_plus_form">
                                                                                             <color key="titleColor" red="0.20784313730000001" green="0.75294117650000003" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
                                                                                         <userDefinedRuntimeAttributes>
@@ -587,16 +573,6 @@
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                <constraints>
-                                                                                    <constraint firstItem="wx4-VH-CfW" firstAttribute="centerY" secondItem="pGS-sF-xu4" secondAttribute="centerY" id="Olg-LZ-lbN"/>
-                                                                                    <constraint firstItem="UTl-sh-vc8" firstAttribute="top" secondItem="wx4-VH-CfW" secondAttribute="top" id="OxI-6u-h4M"/>
-                                                                                    <constraint firstItem="UTl-sh-vc8" firstAttribute="bottom" secondItem="wx4-VH-CfW" secondAttribute="bottom" id="U1A-sB-I8k"/>
-                                                                                    <constraint firstItem="wx4-VH-CfW" firstAttribute="width" secondItem="pGS-sF-xu4" secondAttribute="height" id="dcD-gw-Xgd"/>
-                                                                                    <constraint firstItem="UTl-sh-vc8" firstAttribute="trailing" secondItem="wx4-VH-CfW" secondAttribute="trailing" id="ppO-F3-IXt"/>
-                                                                                    <constraint firstItem="wx4-VH-CfW" firstAttribute="height" secondItem="pGS-sF-xu4" secondAttribute="height" id="qtE-MC-1sW"/>
-                                                                                    <constraint firstItem="wx4-VH-CfW" firstAttribute="centerX" secondItem="pGS-sF-xu4" secondAttribute="centerX" id="t99-vr-NUQ"/>
-                                                                                    <constraint firstItem="UTl-sh-vc8" firstAttribute="leading" secondItem="wx4-VH-CfW" secondAttribute="leading" id="zJ5-gm-Tmh"/>
-                                                                                </constraints>
                                                                             </view>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -937,10 +913,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgO-yl-K3U" customClass="View" customModule="Work_It" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="1055" width="352" height="399.5"/>
+                                                                <rect key="frame" x="0.0" y="1055" width="352" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**WORKIT tomara una comisión aproximadamente de 8%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="te8-4o-LTP" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="17.5" y="10" width="317" height="379.5"/>
+                                                                        <rect key="frame" x="17.5" y="10" width="317" height="32"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -954,6 +930,7 @@
                                                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="te8-4o-LTP" secondAttribute="bottom" constant="10" id="IVe-3i-X4a"/>
+                                                                    <constraint firstAttribute="height" constant="52" id="OHh-vF-xHy"/>
                                                                     <constraint firstItem="te8-4o-LTP" firstAttribute="width" secondItem="qgO-yl-K3U" secondAttribute="width" multiplier="0.9" id="PEU-Di-KY6"/>
                                                                     <constraint firstItem="te8-4o-LTP" firstAttribute="centerX" secondItem="qgO-yl-K3U" secondAttribute="centerX" id="V8D-zu-eyZ"/>
                                                                     <constraint firstItem="te8-4o-LTP" firstAttribute="centerY" secondItem="qgO-yl-K3U" secondAttribute="centerY" id="eJr-A1-o0P"/>
@@ -972,7 +949,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuF-gX-JQv" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="1469.5" width="352" height="50"/>
+                                                                <rect key="frame" x="0.0" y="1122" width="352" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                                                 <state key="normal" title="PUBLICAR TRABAJO" backgroundImage="button_background">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1043,6 +1020,8 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="1700"/>
                     <connections>
                         <outlet property="address" destination="NCO-UQ-HOP" id="n2p-Cv-aEu"/>
                         <outlet property="category" destination="poG-RF-AKY" id="7tl-pl-Pph"/>
@@ -1062,7 +1041,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3wc-kC-CLr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-589.85507246376812" y="7720.3125"/>
+            <point key="canvasLocation" x="-549.27536231884062" y="7785.9375"/>
         </scene>
         <!--Posted Job View Controller-->
         <scene sceneID="ZgA-CG-d7q">
@@ -1294,14 +1273,17 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57e-fy-M6D">
-                                        <rect key="frame" x="48" y="680" width="319" height="33"/>
+                                        <rect key="frame" x="48" y="680" width="319" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" name="dark_gray"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYG-wj-ikm" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="765.5" width="319" height="56.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYG-wj-ikm">
+                                        <rect key="frame" x="48" y="772" width="319" height="50"/>
                                         <color key="backgroundColor" name="workit_green"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="P7A-rM-p82"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="PUBLICAR TRABAJO" backgroundImage="button_background">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1314,6 +1296,9 @@
                                                 <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="2Dc-og-Kis" kind="presentation" id="uxu-QO-7XY"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMl-vX-Axd" customClass="AnimationView" customModule="Lottie">
                                         <rect key="frame" x="0.0" y="243" width="414" height="388"/>
@@ -3067,12 +3052,14 @@
             <point key="canvasLocation" x="-1500" y="8684"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="uxu-QO-7XY"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Edit_button" width="32" height="32"/>
         <image name="button_background" width="319" height="50"/>
-        <image name="camera" width="512" height="512"/>
         <image name="circle_header" width="375" height="170"/>
-        <image name="dummyProfile" width="100" height="100"/>
+        <image name="dummyProfile" width="90" height="90"/>
         <image name="header_rect_green" width="414" height="99"/>
         <image name="ic_calendar_blue" width="13" height="14"/>
         <image name="ic_cancel_job_button" width="71" height="72"/>
@@ -3080,6 +3067,8 @@
         <image name="ic_description_work_blue" width="18" height="20"/>
         <image name="ic_location_work_blue" width="14" height="20"/>
         <image name="ic_new_job_button" width="71" height="72"/>
+        <image name="ic_plus_form" width="53" height="52"/>
+        <image name="ic_remove_image" width="32" height="32"/>
         <image name="ic_time_blue" width="14" height="14"/>
         <image name="ic_work_name_blue" width="20" height="20"/>
         <namedColor name="border">

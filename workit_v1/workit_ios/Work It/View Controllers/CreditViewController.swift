@@ -7,48 +7,56 @@
 //
 
 import UIKit
+import Lottie
 
 class CreditViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var totalCredit: UILabel!
     @IBOutlet weak var transactionTable: UITableView!
-    @IBOutlet weak var popUpView: UIView!
-    @IBOutlet weak var noTransactionLabel: DesignableUILabel!
-    @IBOutlet weak var amountField: UITextField!
+    @IBOutlet weak var emptyView : UIView!
+    @IBOutlet weak var animation: AnimationView?
+     
+   
     
     var transactionData : GetTransactionResponse?
     var isBackButtonHidden = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.getWalletInfo()
-    }
-    
-    func getWalletInfo(){
-        ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_CREDIT + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetTransaction.self, requestCode: U_GET_CREDIT) { (response) in
-            self.transactionData = response.data
-            self.totalCredit.text = "$" + (response.data?.credits == "" ? "0": (response.data?.credits ?? "0"))
-            self.transactionTable.reloadData()
-            ActivityIndicator.hide()
-        }
-    }
-    
-    @IBAction func addCreditAction(_ sender: Any) {
-        self.popUpView.isHidden = false
+        
+        let starAnimation = Animation.named("wallet")
+        animation!.animation = starAnimation
+        animation?.loopMode = .loop
         
     }
     
-    @IBAction func dismissAction(_ sender: Any) {
-        self.amountField.text = ""
-        self.popUpView.isHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animation?.play()
+    }
+        
+    
+    func getWalletInfo(){
+        ActivityIndicator.show(view: self.view)
+        let url = "\(U_BASE)\(U_GET_CREDIT)\(Singleton.shared.userInfo.user_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetTransaction.self, requestCode: U_GET_CREDIT) {
+            self.transactionData = $0.data
+            self.totalCredit.text = "$" + ($0.data?.credits == "" ? "0": ($0.data?.credits ?? "0"))
+            self.transactionTable.reloadData()
+            ActivityIndicator.hide()
+            self.emptyView.isHidden = self.transactionData?.transactions?.count ?? 0 > 0
+        }
     }
     
+
+    
     @IBAction func addAction(_ sender: Any) {
+        /*
         if(self.amountField.text!.isEmpty){
             Singleton.shared.showToast(text: "Enter some amount to add into your wallet")
         }else {
-            self.popUpView.isHidden = true
             self.amountField.text?.replacingOccurrences(of: "$", with: "")
             ActivityIndicator.show(view: self.view)
             let param : [String:Any] = [
@@ -63,6 +71,7 @@ class CreditViewController: UIViewController {
     
             }
         }
+        */
     }
     
     

@@ -53,10 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             locationManager.requestWhenInUseAuthorization()
             break
         case .denied:
-            self.createSettingsAlertController(title: "Enable Location", message: "This app requires to get current location of user for getting the nearest job.")
+            self.createSettingsAlertController(title: "Activa el GPS", message: "Esta aplicación require obtener la ubicación del usuario para obtener el trabajo más cercano. ")
             break
         case .restricted:
-            // Nothing you can do, app cannot use location services
             break
         default:
             break

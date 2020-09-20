@@ -19,8 +19,12 @@ class SessionManager: NSObject {
      
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
 
+          
+            
             let statusCode = dataResponse.response?.statusCode
-
+            
+            debugPrint(dataResponse.result)
+            
             switch dataResponse.result {
                 case .success(_):
                     let object = self.convertDataToObject(response: dataResponse.data, T.self)

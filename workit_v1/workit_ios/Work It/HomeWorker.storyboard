@@ -1712,7 +1712,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dummyProfile" width="100" height="100"/>
+        <image name="dummyProfile" width="90" height="90"/>
         <image name="filter-results-button" width="512" height="512"/>
         <image name="ic_arrow_blue" width="12" height="20"/>
         <image name="mapView" width="608" height="449"/>

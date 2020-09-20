@@ -278,8 +278,15 @@ struct GetNotificationResponse: Codable {
     var notification_id: String?
 }
 
+struct GetPaymentResponse : Codable {
+    var status: String?
+    var id : String?
+    var url : String?
+}
+
 struct GetTransaction: Codable {
     var data : GetTransactionResponse?
+    var payment: GetPaymentResponse?
     var message: String?
     var status: Int?
 }

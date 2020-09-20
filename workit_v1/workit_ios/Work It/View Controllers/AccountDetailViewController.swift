@@ -16,6 +16,7 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     func selectedItem(name: String, id: Int) {
         if(currentPicker == 1){
             self.bankName.text = name
+            self.sbif = self.bankNames.filter { $0["label"] == name }.first!["sbif"]!
         }else if(currentPicker == 2){
             self.accountType.text = name
         }
@@ -27,32 +28,98 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     @IBOutlet weak var accountNumber: DesignableUITextField!
     @IBOutlet weak var userName: DesignableUITextField!
     @IBOutlet weak var idNumber: DesignableUITextField!
-    @IBOutlet weak var viewBackButton: UIView!
-    @IBOutlet weak var headingLabel: DesignableUILabel!
     
     
-    var bankNames = ["Banco de Chile / Banco Edwards / Citi","Banco Internacional", "Scotiabank Chile", "Banco de Crédito e Inversiones", "Corpbanca", "Banco Bice", "HSBC Bank", "Banco Santander", "Banco Itaú Chile", "Banco Security", "Banco Falabella", "Deutsche Bank", "Banco RIpley", "Rabobank Chile", "Banco Consorcio", "Banco Penta", "Banco Paris", "BBVA"]
+    var bankNames = [
+        [
+            "label":"Banco de Chile / Banco Edwards / Citi",
+            "sbif":"0001"
+        ],
+        [
+            "label":"Banco Internacional",
+            "sbif":"0009"
+        ],
+        [
+            "label":"Scotiabank Chile",
+            "sbif":"0014"
+        ],
+        [
+            "label": "Banco de Crédito e Inversiones",
+            "sbif":"0016"
+        ],
+        [
+            "label":"Corpbanca",
+            "sbif":"0027"
+        ],
+        [
+            "label" : "Banco Bice",
+            "sbif" : "0028"
+        ],
+        [
+            "label":"HSBC Bank",
+            "sbif":"0031"
+        ],
+        [
+            "label":"Banco Santander",
+            "sbif":"0037"
+        ],
+        [
+            "label":"Banco Itaú Chile",
+            "sbif":"0039"
+        ],
+        [
+            "label": "Banco Security",
+            "sbif":"0049"
+        ],
+        [
+            "label": "Banco Falabella",
+            "sbif" : "0051"
+        ],
+        [
+            "label": "Banco Ripley",
+            "sbif":"0053"
+        ],
+        [
+            "label" : "Rabobank Chile",
+            "sbif" : "0054"
+        ],
+        [
+            "label" : "Banco Consorcio",
+            "sbif": "0055"
+        ],
+        [
+            "label": "Banco Penta",
+            "sbif":"0056"
+        ],
+        [
+            "label": "Banco Paris",
+            "sbif":"0057"
+        ],
+        [
+            "label": "BBVA",
+            "sbif":"0504"
+        ]
+    ]
     var accountsType = ["Current", "Saving"]
     var currentPicker = Int()
     var accountDetail = GetAccountsDetail()
     var isEditBankDetail = 0
     var accountDelegate:AddAccount?  = nil
     var isSelectCard = false
+    var sbif = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.idNumber.delegate = self
         self.accountNumber.delegate = self
+        setNavigationBar()
         if(self.isEditBankDetail == 1){
-            self.headingLabel.text = "Edit your bank account details for the deposit of your service"
-            self.viewBackButton.isHidden = false
             self.userName.text = accountDetail.full_name
             self.idNumber.text = accountDetail.RUT
             self.accountNumber.text = accountDetail.account_number
             self.accountType.text = accountDetail.account_type
             self.bankName.text = accountDetail.bank
-        }else if(self.isEditBankDetail == 2){
-            self.viewBackButton.isHidden = false
         }
     }
     
@@ -78,38 +145,37 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     @IBAction func selectBankAction(_ sender: Any) {
         let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.modalPresentationStyle = .overFullScreen
-        myVC.pickerData = self.bankNames
+        myVC.pickerData = self.bankNames.map({ $0["label"]! })
         myVC.pickerDelegate = self
         self.currentPicker = 1
         self.present(myVC, animated: true, completion: nil)
     }
-    
-    
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
+
     
     @IBAction func bidAction(_ sender: Any) {
         if(userName.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter full name")
+            Singleton.shared.showToast(text: "Ingres tu nombre")
         }else if(idNumber.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter ID Number")
+            Singleton.shared.showToast(text: "Ingresa tu rut")
         }else if(bankName.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter your bank name")
+            Singleton.shared.showToast(text: "Elige un banco")
         }else if(accountType.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter account type")
+            Singleton.shared.showToast(text: "Elige un tipo de cuenta")
         }else if(accountNumber.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter account number")
+            Singleton.shared.showToast(text: "Ingresa tu numero de cuenta")
         }else {
             if(self.isEditBankDetail == 1){
                 let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
                 ActivityIndicator.show(view: self.view)
                 let param:[String:Any] = [
                     "user_id": Singleton.shared.userInfo.user_id,
+                    "email":Singleton.shared.userInfo.email,
+                    "phone":Singleton.shared.userInfo.contact_number,
                     "bank_detail_id":self.accountDetail.bank_detail_id ?? "",
                     "RUT":self.idNumber.text ?? "",
                     "full_name":self.userName.text ?? "",
                     "bank":self.bankName.text ?? "",
+                    "sbif":self.sbif,
                     "account_number":card ?? "",
                     "account_type":self.accountType.text ?? ""
                 ]
@@ -123,14 +189,17 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
             }else{
                 let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
                 ActivityIndicator.show(view: self.view)
-                let param = [
+                let param: [String:Any] = [
                     "user_id":Singleton.shared.userInfo.user_id,
-                    "RUT":self.idNumber.text,
+                    "email":Singleton.shared.userInfo.email,
+                    "phone":Singleton.shared.userInfo.contact_number,
+                    "RUT": self.idNumber.text,
                     "full_name":self.userName.text,
                     "bank":self.bankName.text,
+                     "sbif": self.sbif,
                     "account_number":card,
                     "account_type":self.accountType.text
-                    ] as? [String:Any]
+                    ]
                 SessionManager.shared.methodForApiCalling(url: U_BASE + U_POST_BANK_DETAIL, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_BANK_DETAIL) { (response) in
                     ActivityIndicator.hide()
                     Singleton.shared.showToast(text: "Successfully added bank details")
@@ -147,14 +216,7 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
                         self.navigationController?.popViewController(animated: true)
                     }else{
                         self.getProfileData()
-                            if(K_CURRENT_USER == K_WANT_JOB){
-                                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
-                                self.navigationController?.pushViewController(myVC, animated: true)
-                            }else {
-                                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostedJobViewController") as! PostedJobViewController
-                                K_CURRENT_TAB = ""
-                                self.navigationController?.pushViewController(myVC, animated: true)
-                            }
+                       self.navigationController?.popViewController(animated: true)
                       
                     }
                     

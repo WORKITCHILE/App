@@ -45,7 +45,8 @@ class ScheduleCalenderViewController: UIViewController {
     
     func getCalenderData(date: Int){
         ActivityIndicator.show(view: self.view)
-        let url =  U_BASE + U_USER_CALENDER_JOBS + "?user_id=\(Singleton.shared.userInfo.user_id ?? "")&month=\(date)"
+        let url =  "\(U_BASE)\(U_USER_CALENDER_JOBS)?user_id=\(Singleton.shared.userInfo.user_id ?? "")&month=\(date)"
+        debugPrint(url)
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: CalendarJobs.self, requestCode: url) { (response) in
             ActivityIndicator.hide()
             self.calenderData = response.data

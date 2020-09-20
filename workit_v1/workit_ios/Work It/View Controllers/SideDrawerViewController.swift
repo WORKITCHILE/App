@@ -15,10 +15,12 @@ import Cosmos
 class SideDrawerViewController: UIViewController {
     
     //MARK: IBOutlet
-    @IBOutlet weak var tableViewMenu: UITableView!
-    @IBOutlet weak var userImage: ImageView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userRating: CosmosView!
+    @IBOutlet weak var tableViewMenu : UITableView!
+    @IBOutlet weak var userImage : ImageView!
+    @IBOutlet weak var userName : UILabel!
+    @IBOutlet weak var userRating : CosmosView!
+    @IBOutlet weak var fakeHeader : UIImageView!
+    @IBOutlet weak var userImageContainer : UIView!
     
     var arrayMenu: [MenuObject]?
     var isFirstTIme = true
@@ -27,6 +29,8 @@ class SideDrawerViewController: UIViewController {
         super.viewDidLoad()
         self.populateTableView()
         setTransparentHeader()
+         self.fakeHeader.alpha = 0.0
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,10 +50,11 @@ class SideDrawerViewController: UIViewController {
          
         arrayMenu = [
             //MenuObject(image: #imageLiteral(resourceName: "ic_menu_work"), name: "Trabajos en ejecución", action: .open, data: ["vc":"HistoryViewController"]),
+        
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_config"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
         ]
          
@@ -172,7 +177,24 @@ extension SideDrawerViewController: UITableViewDelegate {
             return
         */
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let firstLimit = scrollView.contentOffset.y >= -10.0
+        let secondLimit = scrollView.contentOffset.y >= 60.0
+        
+        UIView.animate(withDuration: 0.5) {
+           self.userImageContainer.alpha = firstLimit ? 0.0 : 1.0
+           self.fakeHeader.alpha = secondLimit ?  1.0 : 0.0
+        }
+        
+       
+       
+        
+    }
 }
+
+
 
 
 class SideMenuTableViewCell: UITableViewCell{
