@@ -10,57 +10,53 @@
 import UIKit
 
 class AccountsViewController: UIViewController, ScrollAccount {
+    
     //MARK: IBOUtlets
-    @IBOutlet weak var postedLabel: UILabel!
-    @IBOutlet weak var postView: UIView!
-    @IBOutlet weak var receivedView: UIView!
-    @IBOutlet weak var receivedLabel: UILabel!
+    @IBOutlet weak var segmentControl : UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         AccountPageViewController.indexDelegate = self
-        self.receivedLabel.textColor = .lightGray
-        self.postedLabel.textColor = .black
-        self.postedLabel.text = "Accounts"
-        self.receivedLabel.text = "Credits"
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        self.setNavigationBar()
+        
+         segmentControl.addTarget(self, action: #selector(HistoryViewController.indexChanged(_:)), for: .valueChanged)
+        
     }
     
+   
+           
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+    
+         
+           if self.segmentControl.selectedSegmentIndex == 0 {
+            
+              let pageViewController = AccountPageViewController.dataSource as! AccountPageViewController
+              pageViewController.setControllerFirst()
+            
+           } else if self.segmentControl.selectedSegmentIndex == 1 {
+               let pageViewController = AccountPageViewController.dataSource as! AccountPageViewController
+               pageViewController.setControllerSecond()
+           }
+       }
+
     func scrollAccountView(index: Int) {
+        /*
         if(index == 0){
-            self.receivedLabel.textColor = .lightGray
-            self.postedLabel.textColor = .black
+           
             self.receivedView.isHidden = true
             self.postView.isHidden = false
         }else {
-            self.receivedLabel.textColor = .black
-                   self.postedLabel.textColor = .lightGray
+        
                    self.receivedView.isHidden = false
                    self.postView.isHidden = true
         }
+        */
     }
     
-    //MARK: BACtions
-    @IBAction func postedAction(_ sender: Any) {
-        let pageViewController = AccountPageViewController.dataSource as! AccountPageViewController
-        self.receivedLabel.textColor = .lightGray
-        self.postedLabel.textColor = .black
-        self.receivedView.isHidden = true
-        self.postView.isHidden = false
-        pageViewController.setControllerFirst()
-    }
-    
-    @IBAction func receivedAction(_ sender: Any) {
-        let pageViewController = AccountPageViewController.dataSource as! AccountPageViewController
-        self.receivedLabel.textColor = .black
-        self.postedLabel.textColor = .lightGray
-        self.receivedView.isHidden = false
-        self.postView.isHidden = true
-        pageViewController.setControllerSecond()
-    }
-    
-    
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
+ 
     
 }

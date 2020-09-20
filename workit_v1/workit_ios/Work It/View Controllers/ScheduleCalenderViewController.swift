@@ -25,8 +25,6 @@ class ScheduleCalenderViewController: UIViewController {
         
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
-              
-    
         
         picker.minimumDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())
         picker.maximumDate = Calendar.current.date(byAdding: .year, value: 10, to: Date())

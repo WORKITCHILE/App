@@ -90,7 +90,6 @@ class CategoryListViewController: UIViewController, ApplyFilter,SelectDate {
         
         let url = "\(U_BASE)\(U_GET_WORKER_POSTED_JOB)"
         
-        debugPrint(param)
         
         SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: GetJob.self, requestCode: U_GET_WORKER_POSTED_JOB) { (response) in
            

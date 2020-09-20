@@ -17,11 +17,8 @@ class AccountSettingViewController: UIViewController, AddAccount {
     @IBOutlet weak var accountTable: UITableView!
     @IBOutlet weak var viewTopBar: View!
     @IBOutlet weak var viewForWallet: UIView!
-    @IBOutlet weak var addAccountButton: CustomButton!
     @IBOutlet weak var viewForCards: UIView!
     @IBOutlet weak var availBalance: DesignableUILabel!
-    
-   
     
     var accountData = [GetAccountsDetail]()
     var isSelectCard = false
@@ -30,12 +27,10 @@ class AccountSettingViewController: UIViewController, AddAccount {
         super.viewDidLoad()
         if(isSelectCard){
             self.viewTopBar.isHidden = true
-            self.addAccountButton.isHidden = true
             self.viewForWallet.isHidden = false
             viewForCards.isHidden = true
         }else {
             self.viewTopBar.isHidden = true
-            self.addAccountButton.isHidden = false
             self.viewForWallet.isHidden = true
             viewForCards.isHidden = false
         }
@@ -97,16 +92,16 @@ extension AccountSettingViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "JobTableView") as! JobTableView
         let val = self.accountData[indexPath.row]
         cell.jobName.text  = val.bank
-        cell.userName.text = "Username: " + (val.full_name ?? "")
-        cell.jobPrice.text = "Account Number: " + (val.account_number ?? "").applyPatternOnNumbers(pattern: "#### #### #### ####", replacmentCharacter: "#")
-        cell.jobTime.text = "Account Type: " + (val.account_type ?? "")
-        cell.jobDescription.text = "RUT: " +  (val.RUT ?? "")
-        cell.jobDate.text = "Added on: " +  self.convertTimestampToDate(val.updated_at
+        cell.userName.text = val.full_name ?? ""
+        cell.jobPrice.text = (val.account_number ?? "").applyPatternOnNumbers(pattern: "#### #### #### ####", replacmentCharacter: "#")
+        cell.jobTime.text = (val.account_type ?? "")
+        cell.jobDescription.text =  (val.RUT ?? "")
+        cell.jobDate.text = self.convertTimestampToDate(val.updated_at
             ?? 0 , to: "dd.MM.yy")
          if(isSelectCard){
-            cell.viewForEdit.isHidden = true
+            cell.buttonEdit.isHidden = true
          }else{
-            cell.viewForEdit.isHidden = false
+            cell.buttonEdit.isHidden = false
         }
         cell.editJob = {
             let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountDetailViewController") as! AccountDetailViewController

@@ -34,6 +34,24 @@ extension UIViewController {
         }
     }
     
+    /**/
+    func uplaodDocument(imageName: String,image: Data,completionHandler: @escaping (String) -> Void) {
+        ActivityIndicator.show(view: self.view)
+        var storeImg = StorageReference()
+        let lastPathComponent = "\(Int(Date().timeIntervalSince1970))"
+        storeImg = storageRef.child("documents/").child(lastPathComponent)
+        storeImg.putData(image, metadata:StorageMetadata(dictionary: [:])) { (snapshot, error) in
+ 
+             storeImg.downloadURL(completion: { (url, error) in
+                guard let downloadURL = url else {
+                    return
+                }
+                completionHandler(downloadURL.absoluteString)
+                ActivityIndicator.hide()
+            })
+        }
+    }
+    
     func uplaodUserImage(imageName: String,image: Data, type: Int,completionHandler: @escaping (String) -> Void) {
         ActivityIndicator.show(view: self.view)
         var storeImg = StorageReference()
@@ -45,6 +63,7 @@ extension UIViewController {
         }else if(type == 3){
              storeImg = storageRef.child("job_images/").child(lastPathComponent)
         }
+        
         storeImg.putData(image, metadata:StorageMetadata(dictionary: ["contentType": "image/png"])) { (snapshot, error) in
             // When the image has successfully uploaded, we get it's download URL
              storeImg.downloadURL(completion: { (url, error) in

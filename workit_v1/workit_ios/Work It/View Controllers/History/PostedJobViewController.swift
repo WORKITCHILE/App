@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import Lottie
     
 class PostedJobViewController: UIViewController {
         //IBOUtlets
@@ -18,9 +19,19 @@ class PostedJobViewController: UIViewController {
         var jobData = [GetJobResponse]()
         let refreshControl = UIRefreshControl()
         var selectedEditIntdex = 0
+    
+    @IBOutlet weak var animation: AnimationView?
+    
+
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            
+            let starAnimation = Animation.named("home")
+            animation!.animation = starAnimation
+            animation?.loopMode = .loop
+            
+            
             
             self.jobTable.delegate = self
             self.jobTable.dataSource = self
@@ -32,7 +43,7 @@ class PostedJobViewController: UIViewController {
         
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            
+            animation?.play()
             if(Singleton.shared.jobData.count == 0){
                 self.getJobData()
             } else {
@@ -112,7 +123,7 @@ class PostedJobViewController: UIViewController {
     
     class JobTableView: UITableViewCell {
         //MARK: IBOutlets
-        @IBOutlet weak var editView: View!
+        @IBOutlet weak var buttonEdit: UIButton!
         @IBOutlet weak var userImage: ImageView!
         @IBOutlet weak var jobPrice: UILabel!
         @IBOutlet weak var jobDescription: UILabel!

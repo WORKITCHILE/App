@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wVp-Va-pgh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wVp-Va-pgh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -284,7 +284,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poG-RF-AKY" customClass="DesignableUITextField" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="43" y="3.5" width="57.5" height="40.5"/>
+                                                                        <rect key="frame" x="43" y="3.5" width="82" height="40.5"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -448,7 +448,7 @@
                                                                 <rect key="frame" x="0.0" y="625" width="352" height="160"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photos(optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSM-8H-4tt" customClass="DesignableUILabel" customModule="Work_It" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="Isk-gP-YXL"/>
                                                                         </constraints>
@@ -1286,54 +1286,56 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rSf-vo-9RM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons_background_home" translatesAutoresizingMaskIntoConstraints="NO" id="78x-RV-ia6">
-                                        <rect key="frame" x="0.0" y="306" width="414" height="153"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47d-4Q-0mu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="153" id="ENo-Es-2Ve"/>
+                                            <constraint firstAttribute="height" constant="220" id="93X-le-cnj"/>
                                         </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFT-kL-l74">
-                                        <rect key="frame" x="153.5" y="339" width="107" height="107"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="107" id="U9c-57-D5F"/>
-                                            <constraint firstAttribute="width" constant="107" id="dQX-Jj-hmE"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="home_plus_button"/>
-                                        <connections>
-                                            <segue destination="2Dc-og-Kis" kind="presentation" id="Dx8-F5-Vi3"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PUBLICAR UN TRABAJO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMv-i5-CzC">
-                                        <rect key="frame" x="96.5" y="511" width="221" height="19"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="221" id="9v4-HE-I8g"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
-                                        <color key="textColor" name="intense_blue"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57e-fy-M6D">
-                                        <rect key="frame" x="75" y="552" width="264" height="112"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="112" id="GXe-1e-tK2"/>
-                                            <constraint firstAttribute="width" constant="264" id="nVC-i9-kEE"/>
-                                        </constraints>
+                                        <rect key="frame" x="48" y="680" width="319" height="33"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" name="dark_gray"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYG-wj-ikm" customClass="CustomButton" customModule="Work_It" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="765.5" width="319" height="56.5"/>
+                                        <color key="backgroundColor" name="workit_green"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
+                                        <state key="normal" title="PUBLICAR TRABAJO" backgroundImage="button_background">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMl-vX-Axd" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="0.0" y="243" width="414" height="388"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="78x-RV-ia6" firstAttribute="top" secondItem="rSf-vo-9RM" secondAttribute="top" constant="306" id="7ro-gm-hlK"/>
-                                    <constraint firstItem="78x-RV-ia6" firstAttribute="leading" secondItem="rSf-vo-9RM" secondAttribute="leading" id="Eh4-bg-wx6"/>
-                                    <constraint firstItem="hMv-i5-CzC" firstAttribute="centerX" secondItem="rSf-vo-9RM" secondAttribute="centerX" id="KKg-GV-sqZ"/>
-                                    <constraint firstItem="jFT-kL-l74" firstAttribute="centerX" secondItem="rSf-vo-9RM" secondAttribute="centerX" id="NeR-7y-oTv"/>
-                                    <constraint firstItem="jFT-kL-l74" firstAttribute="top" secondItem="rSf-vo-9RM" secondAttribute="top" constant="339" id="P3i-jn-D8i"/>
-                                    <constraint firstAttribute="trailing" secondItem="78x-RV-ia6" secondAttribute="trailing" id="Pce-br-HYm"/>
-                                    <constraint firstItem="57e-fy-M6D" firstAttribute="top" secondItem="hMv-i5-CzC" secondAttribute="bottom" constant="22" id="jko-QK-NzP"/>
-                                    <constraint firstItem="hMv-i5-CzC" firstAttribute="top" secondItem="78x-RV-ia6" secondAttribute="bottom" constant="52" id="nzs-4H-Hu1"/>
-                                    <constraint firstItem="57e-fy-M6D" firstAttribute="centerX" secondItem="rSf-vo-9RM" secondAttribute="centerX" id="osj-Dj-0Ru"/>
+                                    <constraint firstItem="HMl-vX-Axd" firstAttribute="leading" secondItem="rSf-vo-9RM" secondAttribute="leading" id="609-WS-hNI"/>
+                                    <constraint firstItem="EYG-wj-ikm" firstAttribute="leading" secondItem="rSf-vo-9RM" secondAttribute="leading" constant="48" id="7L7-mp-c1I"/>
+                                    <constraint firstAttribute="bottom" secondItem="EYG-wj-ikm" secondAttribute="bottom" constant="74" id="8BD-gH-Giz"/>
+                                    <constraint firstItem="57e-fy-M6D" firstAttribute="top" secondItem="HMl-vX-Axd" secondAttribute="bottom" constant="49" id="OcH-BN-CS7"/>
+                                    <constraint firstAttribute="trailing" secondItem="HMl-vX-Axd" secondAttribute="trailing" id="P9S-e4-6yX"/>
+                                    <constraint firstItem="57e-fy-M6D" firstAttribute="leading" secondItem="rSf-vo-9RM" secondAttribute="leading" constant="48" id="QCI-RH-0jH"/>
+                                    <constraint firstAttribute="trailing" secondItem="EYG-wj-ikm" secondAttribute="trailing" constant="47" id="a5Z-nL-6Zf"/>
+                                    <constraint firstItem="EYG-wj-ikm" firstAttribute="top" secondItem="57e-fy-M6D" secondAttribute="bottom" constant="52.5" id="irW-fu-jBD"/>
+                                    <constraint firstAttribute="trailing" secondItem="57e-fy-M6D" secondAttribute="trailing" constant="47" id="kbb-fW-Gww"/>
+                                    <constraint firstAttribute="trailing" secondItem="47d-4Q-0mu" secondAttribute="trailing" id="rdb-Wh-MLI"/>
+                                    <constraint firstItem="HMl-vX-Axd" firstAttribute="top" secondItem="47d-4Q-0mu" secondAttribute="bottom" constant="23" id="vQC-6p-wOs"/>
+                                    <constraint firstAttribute="bottom" secondItem="HMl-vX-Axd" secondAttribute="bottom" constant="265" id="wWe-zp-XaZ"/>
+                                    <constraint firstItem="47d-4Q-0mu" firstAttribute="top" secondItem="rSf-vo-9RM" secondAttribute="top" id="y7k-lZ-Aaj"/>
+                                    <constraint firstItem="47d-4Q-0mu" firstAttribute="leading" secondItem="rSf-vo-9RM" secondAttribute="leading" id="zwx-fh-XcM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1356,8 +1358,10 @@
                         <nil key="title"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="addJobStack" destination="ZWV-6l-YVL" id="Cl5-L3-Yqw"/>
+                        <outlet property="animation" destination="HMl-vX-Axd" id="Uxm-sU-NXs"/>
                         <outlet property="jobTable" destination="MK7-di-Djz" id="A7k-hn-rbq"/>
                         <outlet property="noJobsFound" destination="rSf-vo-9RM" id="bje-hK-JEW"/>
                     </connections>
@@ -3063,9 +3067,6 @@
             <point key="canvasLocation" x="-1500" y="8684"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="rUA-gO-GHN"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Edit_button" width="32" height="32"/>
         <image name="button_background" width="319" height="50"/>
@@ -3073,7 +3074,6 @@
         <image name="circle_header" width="375" height="170"/>
         <image name="dummyProfile" width="100" height="100"/>
         <image name="header_rect_green" width="414" height="99"/>
-        <image name="home_plus_button" width="137" height="139"/>
         <image name="ic_calendar_blue" width="13" height="14"/>
         <image name="ic_cancel_job_button" width="71" height="72"/>
         <image name="ic_category_work_blue" width="22" height="23"/>
@@ -3082,7 +3082,6 @@
         <image name="ic_new_job_button" width="71" height="72"/>
         <image name="ic_time_blue" width="14" height="14"/>
         <image name="ic_work_name_blue" width="20" height="20"/>
-        <image name="icons_background_home" width="391" height="153"/>
         <namedColor name="border">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -3097,6 +3096,9 @@
         </namedColor>
         <namedColor name="selected_blue">
             <color red="0.29019607843137257" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="workit_green">
+            <color red="0.0" green="0.68627450980392157" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
