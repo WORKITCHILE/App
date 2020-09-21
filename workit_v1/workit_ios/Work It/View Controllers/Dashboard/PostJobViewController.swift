@@ -386,10 +386,20 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                 if(self.isRepostJob){
                     self.callRepostAPI()
                 }
-                if !(self.isEditJob){
-                    self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Your job is posted successfully", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
+                if(self.isEditJob){
+                     Singleton.shared.showToast(text: "Job updated successfully")
+                   
                 }else {
-                    Singleton.shared.showToast(text: "Job updated successfully")
+                    
+                    let alert = UIAlertController(title: "Trabajo Publicado", message: "Hemos publicado tu trabajo con exito", preferredStyle: .alert)
+                  
+                    alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: { action in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                
+                    self.present(alert, animated: true)
+                    
+                    
                 }
                 if(self.isRepostJob){
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostedJobViewController") as! PostedJobViewController

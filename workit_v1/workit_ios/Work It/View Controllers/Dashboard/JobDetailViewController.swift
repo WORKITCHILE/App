@@ -89,10 +89,10 @@ class JobDetailViewController: UIViewController{
       
         if(Singleton.shared.userInfo.user_id == self.jobData?.user_id){
             self.userName.text = self.jobData?.user_name!.formatName()
-            self.userImage.sd_setImage(with: URL(string: Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
+            self.userImage.sd_setImage(with: URL(string: Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         }else {
             self.userName.text = self.jobData?.user_name!.formatName()
-            self.userImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
+            self.userImage.sd_setImage(with: URL(string: self.jobData?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         }
        /*
         if(self.jobData?.vendor_name != nil){

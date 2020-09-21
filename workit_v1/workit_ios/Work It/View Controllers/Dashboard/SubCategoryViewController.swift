@@ -14,7 +14,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     //MARKL: IBOutlets
     @IBOutlet weak var selecteCategoryTable: UITableView!
     @IBOutlet weak var noDataLabel: DesignableUILabel!
-    @IBOutlet weak var nextButton: View!
+   
     
     var subcategoryData = [GetSubcategoryResponse]()
     var categoryId = String()
@@ -37,10 +37,9 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
             self.subcategoryData = response.data
             if(self.subcategoryData.count == 0){
                 self.noDataLabel.isHidden = false
-                self.nextButton.isHidden = true
+  
             }else {
                 self.noDataLabel.isHidden = true
-                self.nextButton.isHidden = false
             }
             
             self.selecteCategoryTable.reloadData()
@@ -74,7 +73,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
         let val = self.subcategoryData[indexPath.row]
-        cell.menuImage?.image = UIImage(named: "Rectangle 1")
+        cell.menuImage?.image = #imageLiteral(resourceName: "ic_uncheck")
         cell.menuName.text = val.subcategory_name
         return cell
     }
@@ -82,11 +81,11 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
         let val = self.subcategoryData[indexPath.row]
-        if(cell.menuImage?.image == #imageLiteral(resourceName: "checked")){
-            cell.menuImage?.image = UIImage(named: "Rectangle 1")
+        if(cell.menuImage?.image == #imageLiteral(resourceName: "ic_check")){
+            cell.menuImage?.image = #imageLiteral(resourceName: "ic_uncheck")
             self.selectedSubcategories.remove(val.subcategory_id ?? "")
         }else{
-            cell.menuImage?.image = #imageLiteral(resourceName: "checked")
+            cell.menuImage?.image = #imageLiteral(resourceName: "ic_check")
             self.selectedSubcategories.insert(val.subcategory_id ?? "")
         }
         print(self.selectedSubcategories)
