@@ -409,15 +409,15 @@
                     android:textColor="@color/colorBlack"/>
 
             <Button
-                    android:visibility="gone"
-                    android:id="@+id/release_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:text="@string/release_payment"
-                    android:textAppearance="@style/WorkItApp.SubHeader"
-                    android:textColor="@color/colorBlack"/>
+                android:id="@+id/release_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="?selectableItemBackgroundBorderless"
+                android:text="@string/release_payment"
+                android:textAppearance="@style/WorkItApp.SubHeader"
+                android:textColor="@color/colorBlack"
+                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

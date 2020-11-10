@@ -12,6 +12,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile file('/Users/jorgeacosta/workit_release')
+            keyAlias 'workit'
+            storePassword 'L1b3rt4d'
+            keyPassword 'L1b3rt4d'
+        }
+        release {
+            storeFile file('/Users/jorgeacosta/workit_release')
+            storePassword 'L1b3rt4d'
+            keyAlias 'workit'
+            keyPassword 'L1b3rt4d'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

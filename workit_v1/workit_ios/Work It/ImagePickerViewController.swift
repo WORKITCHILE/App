@@ -39,9 +39,10 @@ extension ImagePickerViewController: UIImagePickerControllerDelegate,UINavigatio
         }else {
             self.imageName = "image.jpg"
         }
-        let imageData:NSData = selectedImage.pngData()! as NSData
         
-        imageDelegate?.geImagePath(image: selectedImage,imagePath:self.imageName!, imageData: selectedImage.pngData()!)
+        let imageData = selectedImage.pngData()
+        
+        imageDelegate?.geImagePath(image: selectedImage,imagePath:self.imageName!, imageData: imageData!)
         picker.dismiss(animated: true)
     }
     

@@ -10,14 +10,13 @@ import UIKit
 import Lottie
 
 class CreditViewController: UIViewController {
+    
+    
     //MARK: IBOutlets
-    @IBOutlet weak var totalCredit: UILabel!
     @IBOutlet weak var transactionTable: UITableView!
     @IBOutlet weak var emptyView : UIView!
     @IBOutlet weak var animation: AnimationView?
      
-   
-    
     var transactionData : GetTransactionResponse?
     var isBackButtonHidden = true
     
@@ -28,8 +27,7 @@ class CreditViewController: UIViewController {
         
         let starAnimation = Animation.named("wallet")
         animation!.animation = starAnimation
-        animation?.loopMode = .loop
-        
+        animation?.loopMode = .loop 
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,37 +41,11 @@ class CreditViewController: UIViewController {
         let url = "\(U_BASE)\(U_GET_CREDIT)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetTransaction.self, requestCode: U_GET_CREDIT) {
             self.transactionData = $0.data
-            self.totalCredit.text = "$" + ($0.data?.credits == "" ? "0": ($0.data?.credits ?? "0"))
             self.transactionTable.reloadData()
             ActivityIndicator.hide()
             self.emptyView.isHidden = self.transactionData?.transactions?.count ?? 0 > 0
         }
     }
-    
-
-    
-    @IBAction func addAction(_ sender: Any) {
-        /*
-        if(self.amountField.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter some amount to add into your wallet")
-        }else {
-            self.amountField.text?.replacingOccurrences(of: "$", with: "")
-            ActivityIndicator.show(view: self.view)
-            let param : [String:Any] = [
-                "user_id":Singleton.shared.userInfo.user_id ?? "",
-                "amount":self.amountField.text ?? "0"
-            ]
-            SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_CREDIT, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_CREDIT) { (response) in
-                ActivityIndicator.hide()
-                self.amountField.text = ""
-               Singleton.shared.showToast(text: "Amount credited to your wallet")
-                self.getWalletInfo()
-    
-            }
-        }
-        */
-    }
-    
     
 }
 
@@ -109,6 +81,7 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
             cell.count.textColor = .red
         }
         cell.timeLabel.text = self.convertTimestampToDate(val?.created_at ?? 0, to: "MMM dd, h:mm a")
+        cell.card.defaultShadow()
         return cell
     }
 

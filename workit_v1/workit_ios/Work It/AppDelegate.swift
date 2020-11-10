@@ -84,9 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
-    //    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    //        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-    //    }
     
     func initializeGoogleMap(){
         GMSPlacesClient.provideAPIKey("AIzaSyAoQQfWXcKbUxORBjLW9-ajrF4I5cGTApo")
@@ -129,7 +126,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             user?.getIDToken(completion: { (token, error) in
                 user?.getIDTokenForcingRefresh(true, completion: { (toke, erro) in
-                    if let tok = token{
+                    if token != nil{
                         UserDefaults.standard.setValue(token, forKey: UD_TOKEN)
                     }
                 })
@@ -284,7 +281,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 }
                 
             }
-            //        NotificationCenter.default.post(name: NSNotification.Name(N_NOTIFICATION_DATA),object: nil,userInfo: ["info": info])
         }
     }
     
@@ -296,14 +292,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("fcm token: \(fcmToken)")
         UserDefaults.standard.set(fcmToken, forKey: UD_FCM_TOKEN)
     }
     
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        
-        print("foreground remote notification")
+
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

@@ -229,7 +229,7 @@ PODS:
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - DLRadioButton (1.4.12)
-  - Eureka (5.2.1)
+  - Eureka (5.3.0)
   - Fabric (1.10.2)
   - FacebookCore (0.9.0):
     - FBSDKCoreKit (~> 5.0)
@@ -479,7 +479,7 @@ PODS:
   - SwiftyCodeView (0.3.6):
     - SwiftyCodeView/Core (= 0.3.6)
   - SwiftyCodeView/Core (0.3.6)
-  - Toaster (2.2.0)
+  - Toaster (2.3.0)
 
 DEPENDENCIES:
   - AccountKit
@@ -487,7 +487,6 @@ DEPENDENCIES:
   - Cosmos
   - Crashlytics
   - DLRadioButton (~> 1.4)
-  - Eureka
   - Fabric
   - FacebookCore
   - FacebookLogin
@@ -512,7 +511,7 @@ DEPENDENCIES:
   - PostalAddressRow
   - SDWebImage
   - SwiftyCodeView
-  - Toaster
+  - Toaster (from `https://github.com/devxoul/Toaster.git`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -568,7 +567,16 @@ SPEC REPOS:
     - Protobuf
     - SDWebImage
     - SwiftyCodeView
-    - Toaster
+
+EXTERNAL SOURCES:
+  Toaster:
+    :branch: master
+    :git: https://github.com/devxoul/Toaster.git
+
+CHECKOUT OPTIONS:
+  Toaster:
+    :commit: 0fca711c4083cb921cc0893a7a47836358ebf96b
+    :git: https://github.com/devxoul/Toaster.git
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -577,10 +585,10 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Cosmos: 2795b36ad4bbea1af3050d6d65576ed63875f86a
-  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
-  Eureka: c883105488e05bc65539f583246ecf9657cabbfe
-  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  Eureka: 49239596c9d2eed9ab523990c34de62b6feac9f0
+  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
   FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
@@ -623,8 +631,8 @@ SPEC CHECKSUMS:
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SwiftyCodeView: 0252e3520749a3fda1a9b141873401f8e6c570ad
-  Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 124e9139ed08ff7f1460f570dd0c9e47d7cc91b0
+PODFILE CHECKSUM: 76c0958876c92e034769dbfff6568fcf16e9ca65
 
 COCOAPODS: 1.9.3

@@ -9,107 +9,73 @@
 import UIKit
 import SDWebImage
 
-class ProfileViewController: ImagePickerViewController, PickImage, SelectDate, SelectFromPicker,CaptureImage  {
-    func showCaptureImage(img: UIImage) {
-       
-        if(imagePath2 != nil){
-            let url = imagePath2
-            let store = storageRef.storage.reference(forURL: url)
-            store.delete { error in
-                if let error = error {
-                    print(error)
-                }else {
-                    self.uplaodUserImage(imageName: self.imagePath2 ?? "", image: img.pngData()!, type: 1) { (val) in
-                        self.idImage.image = img
-                        self.imagePath2 = val
-                    }
-                }
-            }
-        }
-    }
+class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPicker  {
     
-    func selectedItem(name: String, id: Int) {
-        self.nationality.text = name
-    }
     
     //MARK: IBOutlets
-    @IBOutlet weak var userImage: ImageView!
-    @IBOutlet weak var userName: DesignableUITextField!
-    @IBOutlet weak var userAge: DesignableUITextField!
-    @IBOutlet weak var credit: DesignableUITextField!
-    @IBOutlet weak var email: DesignableUITextField!
-    @IBOutlet weak var idNumber: DesignableUITextField!
-    @IBOutlet weak var address: DesignableUITextField!
-    @IBOutlet weak var fatherlastName: DesignableUITextField!
-    @IBOutlet weak var motherLastName: DesignableUITextField!
-    @IBOutlet weak var occupation: DesignableUITextField!
-    @IBOutlet weak var userDescription: UITextView!
-    @IBOutlet weak var viewForImage: UIView!
-    @IBOutlet weak var userDetailStack: UIStackView!
-    @IBOutlet weak var porfileHeading: DesignableUILabel!
-    @IBOutlet weak var editImage: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var nationality: DesignableUITextField!
-    @IBOutlet weak var nationalityButton: UIButton!
-    @IBOutlet weak var idImage: UIImageView!
-    @IBOutlet weak var contactNumber: DesignableUITextField!
     
+    @IBOutlet weak var tableList: UITableView!
+    @IBOutlet weak var userImage : ImageView!
+    @IBOutlet weak var userName : UILabel!
+    @IBOutlet weak var editButton : UIButton!
+    @IBOutlet weak var buttonContainer: UIView!
+    @IBOutlet weak var dniImageFront : UIImageView!
+    @IBOutlet weak var dniImageBack : UIImageView!
     
+    private var profileData = UserInfo()
+    private var imagePath1 = ""
+    private var userData : [[String:Any]] = []
+    private var displayData : [[String:Any]] = []
+    private var editMode = false
     
-    var profileData = UserInfo()
-    var imagePath1 = String()
-    var imagePath2 = String()
-    var currentImage = Int()
-    var userDate = Int()
-    var countries = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userName.delegate = self
-        self.email.delegate = self
-        self.idNumber.delegate = self
-        self.address.delegate = self
-        self.contactNumber.delegate = self
-        self.fatherlastName.delegate = self
-        self.motherLastName.delegate = self
-        self.occupation.delegate = self
-        self.userDescription.delegate = self
-        DispatchQueue.main.async {
-            for code in NSLocale.isoCountryCodes  {
-                let id = NSLocale.localeIdentifier(fromComponents: [NSLocale.Key.countryCode.rawValue: code])
-                let name = NSLocale(localeIdentifier: "en_UK").displayName(forKey: NSLocale.Key.identifier, value: id) ?? "Country not found for code: \(code)"
-                self.countries.append(name)
+        
+        self.imageDelegate = self
+        
+        if let filepath = Bundle.main.path(forResource: "user_profile_config", ofType: "json") {
+            do {
+                let contents = try String(contentsOfFile: filepath)
+                let data = contents.data(using: .utf8)!
+                if let json = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? Dictionary<String,Any>
+                {
+                    userData = (json["data"] as?  [[String:Any]])!
+                }
+         
+            } catch {
+              
             }
         }
+        self.setNavigationBar()
+        self.tableList.delegate = self
+        self.tableList.dataSource = self
+        self.tableList.separatorColor = UIColor.clear
+        
+        self.buttonContainer.isHidden = true
+        
+        let userInfo = Singleton.shared.userInfo
+        
+        self.userName.text = userInfo.name
+        self.userImage.sd_setImage(with: URL(string: userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        self.dniImageFront.sd_setImage(with: URL(string: userInfo.id_image1 ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        self.dniImageBack.sd_setImage(with: URL(string: userInfo.id_image2 ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+
         self.getProfileData()
     }
-    
-    func selectedDate(date: Int) {
-        self.userDate = date
-        self.userAge.text = self.calculateAge(timeStamp: date)
+
+    func geImagePath(image: UIImage, imagePath: String, imageData: Data) {
+        
+        self.userImage.image = image
+       
+        self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { val in
+            self.imagePath1 = val
+        }
+     
     }
     
-    func geImagePath(image: UIImage, imagePath: String, imageData: Data) {
-        if(currentImage == 1){
-            
-            if(imagePath1 != nil){
-                let url = imagePath1 ?? ""
-                let store = storageRef.storage.reference(forURL: url)
-                
-                store.delete { error in
-                    if let error = error {
-                        print(error)
-                    }else {
-                        self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { (val) in
-                            self.userImage.image = image
-                            self.imagePath1 = val
-                        }
-                    }
-                }
-            }
-        }else if(self.currentImage == 2) {
-
-        }
+    func selectedItem(name: String, id: Int) {
+        //self.nationality.text = name
     }
     
     func getProfileData(){
@@ -124,35 +90,31 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectDate, S
     }
     
     func manageView(){
-        self.userImage.sd_setImage(with: URL(string: self.profileData.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
-        imagePath1 = self.profileData.profile_picture ?? ""
-        self.idImage.sd_setImage(with: URL(string: self.profileData.id_image1 ?? ""),placeholderImage: #imageLiteral(resourceName: "camera"))
-        imagePath2 = self.profileData.id_image1 ?? ""
-        self.userName.text = self.profileData.name
-        self.userAge.text = self.calculateAge(timeStamp: self.profileData.date_of_birth ?? 0)
-        self.userDate = self.profileData.date_of_birth ?? 0
-        self.contactNumber.text = self.profileData.contact_number
-        self.credit.text = "$" + (self.profileData.credits ?? "0")
-        self.email.text = self.profileData.email
-        self.idNumber.text = self.profileData.id_number
-        self.address.text = self.profileData.address
-        self.nationality.text = self.profileData.nationality
+        userData[0]["value"] = self.profileData.email
+        userData[1]["value"] = self.profileData.id_number
+        userData[2]["value"] = self.profileData.name
+        userData[3]["value"] = self.profileData.father_last_name
+        userData[4]["value"] = self.profileData.mother_last_name
+        userData[5]["value"] = self.profileData.nationality
+        userData[6]["value"] = self.profileData.contact_number
+        userData[7]["value"] = self.profileData.address
+        userData[8]["value"] = self.profileData.address_number
+        userData[9]["value"] = self.profileData.address_reference
+        userData[10]["value"] =  self.profileData.profile_description
         
-        self.occupation.text = self.profileData.occupation
-        self.credit.text = (self.profileData.credits == "") ? "$0":(self.profileData.credits ?? "$0")
-        self.fatherlastName.text = self.profileData.father_last_name
-        self.motherLastName.text = self.profileData.mother_last_name
-        self.userDescription.text = self.profileData.profile_description
-        self.userDescription.textColor = .black
+        displayData = userData.filter({ ($0["workerField"] as? Bool)! })
+
+        self.tableList.reloadData()
+
     }
     
     func uploadImage(){
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+        let alert = UIAlertController(title: "Eliger una imagen desde", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camara", style: .default, handler: { _ in
             self.openCamera()
         }))
         
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Galeria", style: .default, handler: { _ in
             self.openGallary()
         }))
         
@@ -166,159 +128,102 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectDate, S
     
     
     //MARK: IBActions
-    @IBAction func nationalityAction(_ sender: Any) {
-        if(editButton.titleLabel!.text == "Save"){
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
-            myVC.modalPresentationStyle = .overFullScreen
-            myVC.pickerData = self.countries
-            myVC.pickerDelegate = self
-            self.navigationController?.present(myVC, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func userAgeAction(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as! DatePickerViewController
-        myVC.pickerMode = 1
-        myVC.dateDelegate = self
-        myVC.selectedDate = self.profileData.date_of_birth ?? 0
-        self.navigationController?.present(myVC, animated: true, completion: nil)
-    }
-    
     @IBAction func editAction(_ sender: Any) {
-        if(editImage.isHidden){
-            if(self.imagePath1 == nil){
-                Singleton.shared.showToast(text: "Upload profile image")
-            }else if(self.userName.text!.isEmpty){
-                Singleton.shared.showToast(text: "Username cannot be empty")
-            }else if(self.userDate == 0){
-                Singleton.shared.showToast(text: "Select user date of birth")
-            }else if(self.email.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter email address")
-            }else if !(self.isValidEmail(emailStr: self.email.text ?? "")){
-                Singleton.shared.showToast(text: "Enter valid email address")
-            }else if(self.contactNumber.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter contact number")
-            }else if(self.idNumber.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter ID number")
-            }else if(self.address.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter address")
-            }else if(self.fatherlastName.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter Father's Last Name")
-            }else if(self.motherLastName.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter Mother's Last Name")
-            }else if(self.occupation.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter occupation")
-            }else if(self.userDescription.text!.isEmpty){
-                Singleton.shared.showToast(text: "Enter user description")
-            }else {
-                ActivityIndicator.show(view: self.view)
-                let param = [
-                    "user_id":Singleton.shared.userInfo.user_id ?? "",
-                    "name": self.userName.text ?? "",
-                    "email": self.email.text,
-                    "date_of_birth": self.userDate,
-                    "address": self.address.text,
-                    "nationality":self.nationality.text,
-                    "contact_number":self.contactNumber.text,
-                    
-                    "profile_description":self.userDescription.text,
-                    "father_last_name": self.fatherlastName.text,
-                    "mother_last_name": self.motherLastName.text,
-                    "id_image1":self.imagePath2,
-                    "profile_picture":self.imagePath1,
-                    "id_number": self.idNumber.text
-                    ] as? [String:Any]
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_EDIT_PROFILE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_EDIT_PROFILE) { (response) in
-                    self.editImage.isHidden = false
-                    self.editButton.setTitle("", for: .normal)
-                    self.porfileHeading.text = "Profile"
-                    self.getProfileData()
-                    self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Profile updated successfully", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
-                    self.viewForImage.isUserInteractionEnabled = false
-                    self.userDetailStack.isUserInteractionEnabled = false
-                    ActivityIndicator.hide()
-                }
-                
-            }
-        }else{
-            self.editImage.isHidden = true
-            self.editButton.setTitle("Save", for: .normal)
-            self.porfileHeading.text = "Edit Profile"
-            self.viewForImage.isUserInteractionEnabled = true
-            self.userDetailStack.isUserInteractionEnabled = true
-        }
+        ActivityIndicator.show(view: self.view)
         
+        let contactNumber = self.userData[6]["value"] as! String
+        let address = self.userData[7]["value"] as! String
+        let addressNumber = self.userData[8]["value"] as! String
+        let addressReference = self.userData[9]["value"] as! String
+        let profileDescription = self.userData[10]["value"] as! String
+        
+        let param : [String:String] = [
+            "user_id": Singleton.shared.userInfo.user_id ?? "",
+            "email":  Singleton.shared.userInfo.email ?? "",
+            "contact_number": contactNumber,
+            "profile_description": profileDescription,
+            "address": address,
+            "address_number": addressNumber,
+            "address_reference": addressReference,
+            "profile_picture": self.imagePath1
+        ]
+        
+        let url = "\(U_BASE)\(U_EDIT_PROFILE)"
+        
+        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_EDIT_PROFILE) { response in
+            
+            self.getProfileData()
+            ActivityIndicator.hide()
+        }
     }
-    
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
-    
+
     @IBAction func addImage(_ sender: Any) {
-        if(editButton.titleLabel!.text == "Save"){
-            self.imageDelegate = self
-            self.currentImage = 1
-            self.uploadImage()
-        }
+        if(editMode == false) { return }
+        
+        self.uploadImage()
+
     }
     
-    @IBAction func addIdImage(_ sender: Any) {
-        if(editButton.titleLabel!.text == "Save"){
-            self.currentImage = 2
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "CaptureIdCardViewController") as! CaptureIdCardViewController
-            myVC.captureDelegate = self
-            self.navigationController?.pushViewController(myVC, animated: true)
+    @IBAction func saveMode(_ sender : Any){
+        self.editMode = true;
+        self.buttonContainer.isHidden = false
+        self.buttonContainer.alpha = 0.0
+        UIView.animate(withDuration: 0.5, delay: 0.0) {
+            self.editButton.alpha = 0.0
+            self.buttonContainer.alpha = 1.0
+        } completion: { isCompleted in
+            self.editButton.isEnabled = false
         }
+
+        self.tableList.reloadData()
     }
 }
 
-extension ProfileViewController: UITextViewDelegate,UITextFieldDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if(self.userDescription.text == "Type here"){
-            self.userDescription.text = ""
-            self.userDescription.textColor = .black
-        }else {
-            self.userDescription.textColor = .black
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return displayData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let field = self.displayData[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: ((field["cell"] as? String)!)) as! FieldTableViewCell
+        
+        let editable = (field["editable"] as! Bool)
+        
+        cell.iconImage.image = UIImage(named: (field["icon"] as! String))
+        
+        let value : String = field["value"] as! String
+        if((field["cell"] as? String) == "fieldData"){
+            cell.fieldTextField.placeholder = (field["placeholder"] as! String)
+            cell.fieldTextField.text = value
+            cell.fieldTextField.isEnabled = editMode && editable
+        } else {
+            cell.fieldTextView.text = value
+            cell.fieldTextView.isEditable = editMode && editable
+        }
+        
+        if(editMode && editable){
+            cell.borderEditable()
+        } else {
+            cell.borderNotEditable()
+        }
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let field = self.displayData[indexPath.row]
+        
+        if((field["cell"] as? String) == "fieldData"){
+            return 60.0
+        } else {
+            return 150.0
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView){
-        if(self.userDescription.text == ""){
-            self.userDescription.text = "Type here"
-            self.userDescription.textColor = .lightGray
-        }else {
-            self.userDescription.textColor = .black
-        }
-        textView.resignFirstResponder()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.resignFirstResponder()
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if(textField == contactNumber){
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                if (isBackSpace == -92 || textField.text!.count <= 12) {
-                    return true
-                }else {
-                    return false
-                }
-            }
-        }else if(textField == idNumber){
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                if (isBackSpace == -92 || textField.text!.count <= 10) {
-                    if(self.idNumber.text!.count == 9 && !(isBackSpace == -92)){
-                        self.idNumber.text = (self.idNumber.text ?? "") + "-"
-                    }
-                    return true
-                }else {
-                    return false
-                }
-            }
-        }
-        return true
-    }
 }

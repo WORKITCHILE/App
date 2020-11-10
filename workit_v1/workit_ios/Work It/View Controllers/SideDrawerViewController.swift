@@ -29,8 +29,9 @@ class SideDrawerViewController: UIViewController {
         super.viewDidLoad()
         self.populateTableView()
         setTransparentHeader()
-         self.fakeHeader.alpha = 0.0
-    
+        self.fakeHeader.alpha = 0.0
+        
+        self.userImageContainer.defaultShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +50,12 @@ class SideDrawerViewController: UIViewController {
         self.userRating.rating = Double(userInfo.average_rating ?? "0")!
          
         arrayMenu = [
-            //MenuObject(image: #imageLiteral(resourceName: "ic_menu_work"), name: "Trabajos en ejecución", action: .open, data: ["vc":"HistoryViewController"]),
-        
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Configuraciones", action: .open, data:["vc":"AccountsViewController"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Tus datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController", "storyboard":"Main"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction", "storyboard":"Main"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Cuenta Bancaria", action: .open, data:["vc":"AccountSettingViewController", "storyboard":"AccountAndCredits"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Historial de pago", action: .open, data:["vc":"CreditViewController", "storyboard":"AccountAndCredits"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController", "storyboard":"Main"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
         ]
          
@@ -142,40 +143,15 @@ extension SideDrawerViewController: UITableViewDelegate {
         
         switch arrayMenu?[indexPath.row].action {
             case .open:
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: data!["vc"]!)
-                self.navigationController?.pushViewController(myVC!, animated: true)
+                let storyboard  = UIStoryboard(name: data!["storyboard"]!, bundle: nil)
+                let myVC = storyboard.instantiateViewController(withIdentifier: data!["vc"]!)
+                self.navigationController?.pushViewController(myVC, animated: true)
             case .action:
                 self.perform(Selector(data!["action"]!))
             default:
                 return
         }
-        
-        
-        /*
-        switch selectedMenu {
-        case "Evaluations":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "EvaluationViewController") as! EvaluationViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            self.navigationController?.pushViewController(myVC, animated: true)
-        case "My Bids":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            K_CURRENT_TAB = K_MYBID_TAB
-            self.navigationController?.pushViewController(myVC, animated: true)
-
-        case "Running Jobs":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            K_CURRENT_TAB = K_RUNNING_JOB_TAB
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
-        case "History":
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as! HistoryViewController
-            tableViewMenu.isUserInteractionEnabled = false
-            K_CURRENT_TAB = K_HISTORY_TAB
-            self.navigationController?.pushViewController(myVC, animated: true)
-            return
-        */
+    
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -187,10 +163,6 @@ extension SideDrawerViewController: UITableViewDelegate {
            self.userImageContainer.alpha = firstLimit ? 0.0 : 1.0
            self.fakeHeader.alpha = secondLimit ?  1.0 : 0.0
         }
-        
-       
-       
-        
     }
 }
 

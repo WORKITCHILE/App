@@ -39,8 +39,8 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
         self.captureSession.startRunning()
         
         let myButton = UIButton()
-        myButton.setTitle("Capture", for: .normal)
-        myButton.frame = CGRect(x: self.view.center.x-40, y: self.view.frame.maxY-55, width: 80, height: 45)
+        myButton.setTitle("Capturar", for: .normal)
+        myButton.frame = CGRect(x: self.view.center.x - 40, y: self.view.frame.maxY - 100, width: 80, height: 45)
         myButton.setTitleColor(lightBlue, for: .normal)
         
         myButton.layer.cornerRadius = 5
@@ -57,6 +57,7 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     }
     
     func doPerspectiveCorrection(_ observation: VNRectangleObservation, from buffer: CVImageBuffer) {
+       
         var ciImage = CIImage(cvImageBuffer: buffer)
 
         let topLeft = observation.topLeft.scaled(to: ciImage.extent.size)
@@ -76,12 +77,12 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
         let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
         let output = UIImage(cgImage: cgImage!)
         self.captureDelegate?.showCaptureImage(img: output)
-        self.dismiss(animated: true, completion: nil)
-
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     @IBAction func doScan(_ sender: Any) {
+ 
         self.isTapped = true
     }
     
@@ -138,13 +139,17 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     
     private func detectRectangle(in image: CVPixelBuffer) {
 
+      
         let request = VNDetectRectanglesRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
                 
                 guard let results = request.results as? [VNRectangleObservation] else { return }
                 self.removeMask()
                 
+                debugPrint("DETECT RECTANGLE IN")
+                
                 guard let rect = results.first else{return}
+                    
                     self.drawBoundingBox(rect: rect)
                 
                     if self.isTapped{
@@ -158,8 +163,7 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
         request.maximumAspectRatio = VNAspectRatio(1.6)
         request.minimumSize = Float(0.5)
         request.maximumObservations = 1
-       // request.quadratureTolerance = VNDegrees(exactly: 80)!
-        
+     
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, options: [:])
         try? imageRequestHandler.perform([request])
     }

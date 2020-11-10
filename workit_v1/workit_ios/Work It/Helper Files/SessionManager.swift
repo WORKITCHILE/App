@@ -19,17 +19,16 @@ class SessionManager: NSObject {
      
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
 
-          
-            
+         
+           
             let statusCode = dataResponse.response?.statusCode
-            
-            debugPrint(dataResponse.result)
             
             switch dataResponse.result {
                 case .success(_):
                     let object = self.convertDataToObject(response: dataResponse.data, T.self)
                     let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
                    
+                  
                     if (statusCode == 200 || statusCode == 201) && object != nil {
                         completionHandler(object!)
                     } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
@@ -38,20 +37,21 @@ class SessionManager: NSObject {
                         self.showAlert(msg:errorObject?.message)
                     } else if(statusCode == 400) {
                         self.showAlert(msg: errorObject?.message)
+                    } else {
+                        self.showAlert(msg: errorObject?.message)
                     }
+                    
+                  
                     
                     break
                 case .failure(_):
+                   
                     let error = dataResponse.error?.localizedDescription
-                    if error == "The Internet connection appears to be offline." {
-                        //Showing error message on alert
-                        self.showAlert(msg: error)
-                    } else {
-                        //Showing error message on alert
-                        self.showAlert(msg: error)
-                    }
+                    self.showAlert(msg: error)
                     break
                 }
+            
+            ActivityIndicator.hide()
         }
     }
 
@@ -67,7 +67,7 @@ class SessionManager: NSObject {
                     if key != "file_path" {
                         multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
                     } else {
-                        multipartFormData.append(value as! Data, withName: key as! String, fileName: "image.png", mimeType: "image/png")
+                        multipartFormData.append(value as! Data, withName: key , fileName: "image.png", mimeType: "image/png")
                     }
                 }
 
@@ -81,7 +81,7 @@ class SessionManager: NSObject {
 
                         if dataResponse.response?.statusCode == 200 {
                             let object = self.convertDataToObject(response: dataResponse.data, Response.self)
-                          //  completionHandler(object?.response)
+                            completionHandler(dataResponse)
                         } else {
                             UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Error", message: errorObject?.message, action1Name: "Ok", action2Name: nil)
                         }

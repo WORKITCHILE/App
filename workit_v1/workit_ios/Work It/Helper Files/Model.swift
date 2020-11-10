@@ -47,8 +47,9 @@ struct UserInfo: Codable {
     var mother_last_name: String?
     var is_bank_details_added: Int?
     var address: String?
+    var address_number: String?
+    var address_reference: String?
     var profile_picture: String?
-    var date_of_birth: Int?
     var nationality: String?
     var occupation: String?
     var contact_number: String?
@@ -57,6 +58,7 @@ struct UserInfo: Codable {
     var rating: String?
     var profile_description: String?
     var id_image1: String?
+    var id_image2: String?
     var id_number: String?
     var average_rating: String?
     var user_id: String?

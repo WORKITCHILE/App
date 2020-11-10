@@ -43,24 +43,34 @@ class LoginViewController: UIViewController {
                 "user_id": userId,
                 "fcm_token": fcmToken! as String
             ]
-            
-            SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
+            let url = "\(U_BASE)\(U_ADD_FCM_TOKEN)"
+            SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
                 
             }
         }
     }
     
     func getProfileData(id: String){
+        
+        debugPrint("--> getProfileData \(id)")
             ActivityIndicator.show(view: self.view)
-            SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_PROFILE + id, method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
+        
+            let url = "\(U_BASE)\(U_GET_PROFILE)\(id)"
+       
+       
+            SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
+                
+               
+                
                 Singleton.shared.userInfo = response.data!
                 Singleton.saveUserInfo(data:Singleton.shared.userInfo)
                 if(Singleton.shared.userInfo.is_email_verified != 1){
+                    debugPrint("FORGOT")
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
                     myVC.isNewuser = true
                     self.navigationController?.pushViewController(myVC, animated: true)
                 }else {
-                    
+                     debugPrint("MAIN")
                     Singleton.shared.showToast(text: "Successfully Logged In")
                     let storyboard  = UIStoryboard(name: "Main", bundle: nil)
                     let myVC = storyboard.instantiateViewController(withIdentifier: "main")
@@ -80,13 +90,15 @@ class LoginViewController: UIViewController {
         K_CURRENT_USER = K_POST_JOB
         
         if(self.password.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter your password")
+            Singleton.shared.showToast(text: "Ingresa tu contraseña")
         }else {
             
             
             ActivityIndicator.show(view: self.view)
+       
             Auth.auth().signIn(withEmail: self.emailAddress.text ?? "", password: self.password.text ?? "") { [weak self] authResult, error in
                 
+                debugPrint("-->")
                 debugPrint(error as Any)
                 
                 guard self != nil else { return }
@@ -100,11 +112,11 @@ class LoginViewController: UIViewController {
                     Singleton.shared.userInfo.token = authResult?.user.refreshToken
                     Singleton.shared.userInfo.user_id = authResult?.user.uid ?? ""
                     Singleton.shared.userInfo.email = authResult?.user.email
-//                    if(self!.isNewUser){
-//                     Singleton.shared.userInfo.is_email_verified = 0
-//                    }else{
-//                        Singleton.shared.userInfo.is_email_verified = 1
-//                    }
+                    if(self!.isNewUser){
+                     Singleton.shared.userInfo.is_email_verified = 0
+                    }else{
+                        Singleton.shared.userInfo.is_email_verified = 1
+                    }
                     Singleton.shared.userInfo.profile_picture = authResult?.user.photoURL?.absoluteString
                     UserDefaults.standard.set(authResult?.user.uid ?? "", forKey: UD_USER_ID)
                     Singleton.shared.userInfo.contact_number = authResult?.user.phoneNumber
@@ -117,6 +129,7 @@ class LoginViewController: UIViewController {
                     self?.getProfileData(id:  authResult?.user.uid ?? "")
                 }
             }
+           
         }
     }
     

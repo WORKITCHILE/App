@@ -85,4 +85,5 @@ class EvaluationTableView: UITableViewCell {
     @IBOutlet weak var jobName: UILabel!
     @IBOutlet weak var jobAddress: UILabel!
     @IBOutlet weak var count: UILabel!
+    @IBOutlet weak var card: UIView!
 }

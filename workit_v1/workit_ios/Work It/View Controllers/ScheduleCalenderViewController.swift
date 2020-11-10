@@ -34,8 +34,10 @@ class ScheduleCalenderViewController: UIViewController {
         
         let time = Int(Date().timeIntervalSince1970)
 
-        self.titleDate.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
+        //self.titleDate.text = self.convertTimestampToDate(time, to: "MMM,YYYY")
+        
         self.month = Int(self.convertTimestampToDate(time, to: "M") ) ?? 0
+        self.popupView.isHidden =  true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +48,8 @@ class ScheduleCalenderViewController: UIViewController {
     func getCalenderData(date: Int){
         ActivityIndicator.show(view: self.view)
         let url =  "\(U_BASE)\(U_USER_CALENDER_JOBS)?user_id=\(Singleton.shared.userInfo.user_id ?? "")&month=\(date)"
-        debugPrint(url)
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: CalendarJobs.self, requestCode: url) { (response) in
+ 
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: CalendarJobs.self, requestCode: url) { response in
             ActivityIndicator.hide()
             self.calenderData = response.data
             if(self.calenderData.count == 0){
@@ -199,8 +201,7 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
          
            
             }else if(jobCount?.count == 1){
-                debugPrint("COUNT 1")
-                
+     
                cellIdentifier = "CalenderViewCellPay"
             }else{
                 
@@ -211,7 +212,7 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CalenderViewCell
 
-        cell.jobDate.text = "\(indexPath.row + 1) \(self.titleDate.text ?? "")"
+//        cell.jobDate.text = "\(indexPath.row + 1) \(self.titleDate.text ?? "")"
         
         if(self.isFutureDate){
             cell.jobTime.text = "--:--"
@@ -277,10 +278,10 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
                 */
             }else{
                 cell.jobTime.text = ""
-                cell.jobTitle.text = "Click here to view details."
-                cell.jobAddress.text = ""
-                cell.jobStatus.text = "\(jobCount?.count ?? 0) jobs scheduled."
-                cell.jobStatus.textColor = .green
+                //cell.jobTitle.text = "Click here to view details."
+                //cell.jobAddress.text = ""
+                //cell.jobStatus.text = "\(jobCount?.count ?? 0) jobs scheduled."
+                //cell.jobStatus.textColor = .green
             }
         }
         return cell

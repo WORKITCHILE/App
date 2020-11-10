@@ -3,6 +3,7 @@ package com.app.workit.view.ui.hire.singlejob;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
@@ -167,6 +168,8 @@ public class SingleJobActivity extends MainBaseActivity implements MVVMBaseView,
                 }
             }
         });
+
+
         if (userInfo.getType().equalsIgnoreCase(AppConstants.USER_TYPE.WORK)) {
             btnPostBid.setVisibility(View.VISIBLE);
             btnCancelJob.setVisibility(View.GONE);
@@ -374,7 +377,7 @@ public class SingleJobActivity extends MainBaseActivity implements MVVMBaseView,
 
     private void addMarker(LocationModel currentlocation) {
         LatLng newLatLng = new LatLng(currentlocation.getLatitude(), currentlocation.getLongitude());
-        Marker marker = mMap.addMarker(new MarkerOptions().position(newLatLng).icon(CommonUtils.bitmapDescriptorFromVector(this, R.drawable.ic_marker)));
+        Marker marker = mMap.addMarker(new MarkerOptions().position(newLatLng).icon(CommonUtils.bitmapDescriptorFromVector(this, R.drawable.ic_map_pin)));
         CameraPosition cameraPosition = new CameraPosition.Builder().target(newLatLng).zoom(16.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.animateCamera(cameraUpdate);

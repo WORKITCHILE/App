@@ -164,7 +164,7 @@ protocol SlideButtonDelegate{
     }
     
     @objc func panDetected(sender: UIPanGestureRecognizer){
-        var translatedPoint = sender.translation(in: self)
+        let translatedPoint = sender.translation(in: self)
        // translatedPoint     = CGPoint(x: translatedPoint.x, y: self.frame.size.height / 2)
         if(translatedPoint.x < (self.frame.width - 46)){
             if(translatedPoint.x > 0){

@@ -41,10 +41,11 @@ class WelcomeViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = U_BASE + U_SOCIAL_LOGIN + "\(type)&social_handle=" + ( (type == 1 ? gId : fId) ?? "")
        
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: SocialLogin.self, requestCode: U_SOCIAL_LOGIN) { (response) in
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: SocialLogin.self, requestCode: U_SOCIAL_LOGIN) { response in
+            
             if(response.data?.user_id == nil){
                 
-                self.openSuccessPopup(img: #imageLiteral(resourceName: "information-button copy"), msg: "New user, please create account on workit and continue", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
+                
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController
                 myVC.googleId = gId ?? ""
                 myVC.facebookId = fId ?? ""
@@ -58,16 +59,24 @@ class WelcomeViewController: UIViewController {
                         myVC.fName = firstName
                         myVC.lName = lastName
                     }
-                }else if(type == 2){
+                } else if(type == 2){
+                    let picture: [String: Any] = self.fbData["picture"] as! [String : Any]
+                   
+                    let pictureData : [String: Any] = picture["data"] as! [String : Any]
+                    myVC.socialPicture = pictureData["url"]! as! String
+                    
                     myVC.fName = self.fbData["first_name"] as? String ?? ""
                     myVC.lName = self.fbData["last_name"] as? String ?? ""
                 }
                 
                 self.navigationController?.pushViewController(myVC, animated: true)
+                
             }else{
+                
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 myVC.email = email
                 self.navigationController?.pushViewController(myVC, animated: true)
+                
             }
         }
     }

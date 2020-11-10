@@ -44,7 +44,11 @@
 		4FADC48D24E5F98800882BFA /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC48C24E5F98800882BFA /* Home.storyboard */; };
 		4FADC49024E7458F00882BFA /* chat.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC48F24E7458F00882BFA /* chat.json */; };
 		4FADC49224E8862800882BFA /* support.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC49124E8862800882BFA /* support.json */; };
-		4FF6E5D624D9DCD000867B98 /* NewSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */; };
+		4FAEF3E42556CEDB009CA225 /* AccountAndCredits.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FAEF3E32556CEDB009CA225 /* AccountAndCredits.storyboard */; };
+		4FAEF3E72556DA01009CA225 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEF3E62556DA01009CA225 /* UIView+Shadow.swift */; };
+		4FAEF3EB2556F392009CA225 /* FieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAEF3EA2556F392009CA225 /* FieldTableViewCell.swift */; };
+		4FAEF3F125570981009CA225 /* user_profile_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FAEF3F025570981009CA225 /* user_profile_config.json */; };
+		4FAEF4362558302C009CA225 /* user_signup_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FAEF4352558302C009CA225 /* user_signup_config.json */; };
 		4FFE071F24E09AC6007029A2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE071E24E09AC6007029A2 /* MainTabViewController.swift */; };
 		4FFE072124E1C002007029A2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE072024E1C002007029A2 /* HomeViewController.swift */; };
 		D2085A4D2487693F00F58742 /* VendorReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2085A4C2487693E00F58742 /* VendorReviewsViewController.swift */; };
@@ -67,7 +71,6 @@
 		D25BFA9E23C047E600CBB4DE /* EvaluationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9D23C047E600CBB4DE /* EvaluationViewController.swift */; };
 		D25BFAA023C047FF00CBB4DE /* SideDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFA9F23C047FF00CBB4DE /* SideDrawerViewController.swift */; };
 		D25BFAA323C0485800CBB4DE /* PostedJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFAA223C0485800CBB4DE /* PostedJobViewController.swift */; };
-		D25BFAA523C0486200CBB4DE /* ReceivedJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFAA423C0486200CBB4DE /* ReceivedJobViewController.swift */; };
 		D25BFAA723C051D100CBB4DE /* PostJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BFAA623C051D100CBB4DE /* PostJobViewController.swift */; };
 		D25DEA3E2410C67A00924557 /* SuccessMsgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25DEA3D2410C67900924557 /* SuccessMsgViewController.swift */; };
 		D263C7F5247CE39900ED656E /* CaptureIdCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D263C7F4247CE39900ED656E /* CaptureIdCardViewController.swift */; };
@@ -159,7 +162,11 @@
 		4FADC48C24E5F98800882BFA /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4FADC48F24E7458F00882BFA /* chat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chat.json; sourceTree = "<group>"; };
 		4FADC49124E8862800882BFA /* support.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = support.json; sourceTree = "<group>"; };
-		4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignupViewController.swift; sourceTree = "<group>"; };
+		4FAEF3E32556CEDB009CA225 /* AccountAndCredits.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountAndCredits.storyboard; sourceTree = "<group>"; };
+		4FAEF3E62556DA01009CA225 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		4FAEF3EA2556F392009CA225 /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
+		4FAEF3F025570981009CA225 /* user_profile_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_profile_config.json; sourceTree = "<group>"; };
+		4FAEF4352558302C009CA225 /* user_signup_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_signup_config.json; sourceTree = "<group>"; };
 		4FF6E5DE24DA2E1A00867B98 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		4FF6E5DF24DA2E1B00867B98 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FFE071E24E09AC6007029A2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
@@ -189,7 +196,6 @@
 		D25BFA9D23C047E600CBB4DE /* EvaluationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationViewController.swift; sourceTree = "<group>"; };
 		D25BFA9F23C047FF00CBB4DE /* SideDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideDrawerViewController.swift; sourceTree = "<group>"; };
 		D25BFAA223C0485800CBB4DE /* PostedJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedJobViewController.swift; sourceTree = "<group>"; };
-		D25BFAA423C0486200CBB4DE /* ReceivedJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedJobViewController.swift; sourceTree = "<group>"; };
 		D25BFAA623C051D100CBB4DE /* PostJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJobViewController.swift; sourceTree = "<group>"; };
 		D25DEA3D2410C67900924557 /* SuccessMsgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessMsgViewController.swift; sourceTree = "<group>"; };
 		D263C7F4247CE39900ED656E /* CaptureIdCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureIdCardViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +268,7 @@
 		4F5DC1BB24CFB45E0076FCDF /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				4FAEF3E92556F372009CA225 /* Cell */,
 				4F5F007D24F1BE7600246CB6 /* xib */,
 				4F5DC1BC24CFB4690076FCDF /* storyboards */,
 			);
@@ -271,10 +278,12 @@
 		4F5DC1BC24CFB4690076FCDF /* storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				D2D7691523BE2C08001485E1 /* Main.storyboard */,
 				4F5DC1BD24CFB4780076FCDF /* HomeWorker.storyboard */,
 				4F5DC1BF24D4696C0076FCDF /* signup.storyboard */,
 				4FADC48C24E5F98800882BFA /* Home.storyboard */,
 				4F0E7A342517CF1B002A5916 /* PaymentFlow.storyboard */,
+				4FAEF3E32556CEDB009CA225 /* AccountAndCredits.storyboard */,
 			);
 			name = storyboards;
 			sourceTree = "<group>";
@@ -293,6 +302,7 @@
 			children = (
 				4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */,
 				4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */,
+				4FAEF3E62556DA01009CA225 /* UIView+Shadow.swift */,
 			);
 			name = extensionts;
 			sourceTree = "<group>";
@@ -310,10 +320,26 @@
 			name = lottie;
 			sourceTree = "<group>";
 		};
+		4FAEF3E92556F372009CA225 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4FAEF3EA2556F392009CA225 /* FieldTableViewCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		4FAEF3EF25570968009CA225 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				4FAEF3F025570981009CA225 /* user_profile_config.json */,
+				4FAEF4352558302C009CA225 /* user_signup_config.json */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
 		4FF6E5D424D9DCBB00867B98 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4FF6E5D524D9DCD000867B98 /* NewSignupViewController.swift */,
 				4FFE071E24E09AC6007029A2 /* MainTabViewController.swift */,
 				4FFE072024E1C002007029A2 /* HomeViewController.swift */,
 				4F0E7A302517C7CA002A5916 /* AddCreditViewController.swift */,
@@ -396,7 +422,6 @@
 			children = (
 				D25BFA9123C0478200CBB4DE /* HistoryViewController.swift */,
 				D25BFAA223C0485800CBB4DE /* PostedJobViewController.swift */,
-				D25BFAA423C0486200CBB4DE /* ReceivedJobViewController.swift */,
 				D29D075023C4C3CB00401B8C /* HistoryPageViewController.swift */,
 			);
 			path = History;
@@ -509,6 +534,7 @@
 		D2D7690E23BE2C08001485E1 /* Work It */ = {
 			isa = PBXGroup;
 			children = (
+				4FAEF3EF25570968009CA225 /* config */,
 				4FADC48E24E7457300882BFA /* lottie */,
 				4F8D8AF224DCE9D1006E7A68 /* extensionts */,
 				4FF6E5D424D9DCBB00867B98 /* Controllers */,
@@ -522,7 +548,6 @@
 				D266D11523BF35C70026FE3A /* View Controllers */,
 				D2D7693F23BE2CAE001485E1 /* Helper Files */,
 				D2D7690F23BE2C08001485E1 /* AppDelegate.swift */,
-				D2D7691523BE2C08001485E1 /* Main.storyboard */,
 				D2D7691823BE2C0C001485E1 /* Assets.xcassets */,
 				D2D7691A23BE2C0C001485E1 /* LaunchScreen.storyboard */,
 				D2D7691D23BE2C0C001485E1 /* Info.plist */,
@@ -659,7 +684,9 @@
 				4F0E7A20251787A5002A5916 /* Poppins-ExtraBold.ttf in Resources */,
 				4F0E7A21251787A5002A5916 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				4F0E7A22251787A5002A5916 /* Poppins-ExtraLight.ttf in Resources */,
+				4FAEF3E42556CEDB009CA225 /* AccountAndCredits.storyboard in Resources */,
 				4F0E7A23251787A5002A5916 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				4FAEF3F125570981009CA225 /* user_profile_config.json in Resources */,
 				4F0E7A24251787A5002A5916 /* Poppins-Italic.ttf in Resources */,
 				4F0E7A25251787A5002A5916 /* Poppins-Light.ttf in Resources */,
 				4F0E7A26251787A5002A5916 /* Poppins-LightItalic.ttf in Resources */,
@@ -686,6 +713,7 @@
 				4FADC49224E8862800882BFA /* support.json in Resources */,
 				4FADC49024E7458F00882BFA /* chat.json in Resources */,
 				D2E2EEB023E2D865006315C3 /* verdana.ttf in Resources */,
+				4FAEF4362558302C009CA225 /* user_signup_config.json in Resources */,
 				D2801C3823D6F227001AD735 /* RobotoMono-Bold.ttf in Resources */,
 				D2D7691923BE2C0C001485E1 /* Assets.xcassets in Resources */,
 				4F5F008124F1BE8300246CB6 /* CustomSectionHeader.xib in Resources */,
@@ -767,7 +795,7 @@
 				D25BFAA023C047FF00CBB4DE /* SideDrawerViewController.swift in Sources */,
 				4FFE072124E1C002007029A2 /* HomeViewController.swift in Sources */,
 				4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */,
-				D25BFAA523C0486200CBB4DE /* ReceivedJobViewController.swift in Sources */,
+				4FAEF3EB2556F392009CA225 /* FieldTableViewCell.swift in Sources */,
 				4F5F008024F1BE8300246CB6 /* CustomSectionHeader.swift in Sources */,
 				D2E124BB240948A9009DF90A /* SlidingButton.swift in Sources */,
 				D2D7695523BE2CC2001485E1 /* Router.swift in Sources */,
@@ -784,6 +812,7 @@
 				4F0E7A312517C7CA002A5916 /* AddCreditViewController.swift in Sources */,
 				D2D7695723BE2CC2001485E1 /* NavigationViewController.swift in Sources */,
 				D29D075323C4C77F00401B8C /* CategoryListViewController.swift in Sources */,
+				4FAEF3E72556DA01009CA225 /* UIView+Shadow.swift in Sources */,
 				D25B8B8023CD7B7200F35416 /* ViewJobViewController.swift in Sources */,
 				D2D7695323BE2CC2001485E1 /* Model.swift in Sources */,
 				D2D0627D2484C4B7003CD091 /* AccountPageViewController.swift in Sources */,
@@ -810,7 +839,6 @@
 				D2196B2323CC9D5800DC9572 /* ChatViewController.swift in Sources */,
 				D25BFA9223C0478200CBB4DE /* HistoryViewController.swift in Sources */,
 				D2D7695A23BE2CC2001485E1 /* Constants.swift in Sources */,
-				4FF6E5D624D9DCD000867B98 /* NewSignupViewController.swift in Sources */,
 				D25BFA9623C047A200CBB4DE /* PrivacyPolicyViewController.swift in Sources */,
 				D25B8B8223CD7BAF00F35416 /* AccountDetailViewController.swift in Sources */,
 				D266D11823BF35EF0026FE3A /* WelcomeViewController.swift in Sources */,
@@ -980,10 +1008,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Work It/Work It.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Sagar Pandit (2HHVJFS6A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V6W7VB43FV;
+				DEVELOPMENT_TEAM = 8QR84N5G5A;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Work It/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -993,9 +1021,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-It";
+				PRODUCT_BUNDLE_IDENTIFIER = workit.workitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "WorkIt Development";
+				PROVISIONING_PROFILE_SPECIFIER = "Dev Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1007,10 +1035,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Work It/Work It.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Sagar Pandit (2HHVJFS6A3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V6W7VB43FV;
+				DEVELOPMENT_TEAM = 8QR84N5G5A;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Work It/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1020,9 +1048,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = "workit.Work-It";
+				PRODUCT_BUNDLE_IDENTIFIER = workit.workitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "WorkIt Development";
+				PROVISIONING_PROFILE_SPECIFIER = "Dev Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

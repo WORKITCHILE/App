@@ -12,100 +12,87 @@ import GooglePlaces
 import FirebaseUI
 import Firebase
 
-class SignupViewController: ImagePickerViewController, UITextFieldDelegate, PickImage,UITextViewDelegate, SelectFromPicker, GMSAutocompleteViewControllerDelegate,CaptureImage {
-    
-    
-    func showCaptureImage(img: UIImage) {
-        if(imagePath2 != nil){
-            storageRef.storage.reference(withPath: imagePath2 ?? "").delete(completion: nil)
-        }
-        self.uplaodUserImage(imageName: self.imagePath2 ?? "", image: img.pngData()!, type: 1) { (val) in
-            self.viewUploadImage.isHidden = true
-            self.viewIdImage.isHidden = false
-            self.idImage.image = img
-            self.imagePath2 = val
-        }
-    }
-    
+class SignupViewController: ImagePickerViewController, PickImage, SelectFromPicker, GMSAutocompleteViewControllerDelegate,CaptureImage {
     
     //MARK: IBOUtlets
-    
-    @IBOutlet weak var documentImage1 : UIImageView!
-    @IBOutlet weak var documentImage2 : UIImageView!
-    
+    @IBOutlet weak var tableList: UITableView!
     @IBOutlet weak var userImage: ImageView!
-    @IBOutlet weak var userDescription: UITextView!
-    @IBOutlet weak var idNumber: DesignableUITextField!
-    @IBOutlet weak var motherName: DesignableUITextField!
-    @IBOutlet weak var fatherName: DesignableUITextField!
-    @IBOutlet weak var username: DesignableUITextField!
-    @IBOutlet weak var address: DesignableUITextField!
-    
-    @IBOutlet weak var referenceAddress: DesignableUITextField!
-    @IBOutlet weak var numberAddress: DesignableUITextField!
-    
-    @IBOutlet weak var imageTick: ImageView!
-    @IBOutlet weak var idImage: UIImageView!
-    @IBOutlet weak var nationality: DesignableUITextField!
-    @IBOutlet weak var confirmPassword: DesignableUITextField!
-    @IBOutlet weak var password: DesignableUITextField!
-    @IBOutlet weak var email: DesignableUITextField!
-    @IBOutlet weak var mobileNumber: DesignableUITextField!
-    @IBOutlet weak var occupation: DesignableUITextField!
-    @IBOutlet weak var documentBackground: DesignableUITextField!
- 
-
-    @IBOutlet weak var viewIdImage: View!
-    @IBOutlet weak var viewUploadImage: View!
-    
-    @IBOutlet weak var descriptionContainer : UIView!
-    @IBOutlet weak var rutContainer : UIView!
-    @IBOutlet weak var occupationContainer : UIView!
-    @IBOutlet weak var countryContainer : UIView!
-    @IBOutlet weak var documentContainer : UIView!
-    @IBOutlet weak var rutImageContainer : UIView!
-
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var fakerHeader: UIImageView!
     
-    
-    var imagePath1: String?
-    var imagePath2: String?
-    var imagePath3: String?
-    var currentImage: Int?
-    var countries: [String] = []
+
+    var categories: [String] = []
     var googleId: String?
     var facebookId: String?
     var fName = ""
     var lName = ""
+    var socialPicture = ""
     var userEmail = ""
     var docuymentUrl = ""
     let authUI = FUIAuth.defaultAuthUI()
+    private var userData : [[String:Any]] = []
+    private var displayData : [[String:Any]] = []
+    
+    private var image1 : UIImage? = nil
+    private var image2 : UIImage? = nil
+    
+    private var imagePath1 = ""
+    private var imagePath2 = ""
+    
+    private var userProfilePicture = ""
+    
+    private var currentImage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.username.text = self.fName
-        self.fatherName.text = self.lName
-        self.email.text = self.userEmail
-        self.userDescription.text = "Escribe una descripción"
-        self.mobileNumber.text = "+56"
-        self.mobileNumber.delegate = self
-        self.idNumber.delegate = self
-        self.userDescription.delegate = self
+        self.fakerHeader.isHidden = true
         
-     
-        self.userDescription.textColor = .lightGray
+        if let filepath = Bundle.main.path(forResource: "user_signup_config", ofType: "json") {
+            do {
+                let contents = try String(contentsOfFile: filepath)
+                let data = contents.data(using: .utf8)!
+                if let json = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? Dictionary<String,Any>
+                {
+                    userData = (json["data"] as?  [[String:Any]])!
+                    if(self.fName != ""){
+                        self.userData[1]["value"] = self.fName
+                        let commponents = self.lName.split(separator: " ").map{ String($0) }
+                        if(commponents.count == 2){
+                            self.userData[2]["value"] = commponents[0]
+                            self.userData[3]["value"] = commponents[1]
+                        } else {
+                            self.userData[2]["value"] = self.lName
+                        }
+                        
+                    }
+                    if(self.userEmail != ""){
+                        self.userData[0]["value"] = self.userEmail
+                    }
+                    self.filterData(false)
+                }
+         
+            } catch {
+              
+            }
+        }
+        
        
         
-         descriptionContainer.isHidden = true
-         rutContainer.isHidden = true
-         occupationContainer.isHidden = true
-         countryContainer.isHidden = true
-         documentContainer.isHidden = true
-         rutImageContainer.isHidden = true
-         
-         setTransparentHeader()
+        self.tableList.delegate = self
+        self.tableList.dataSource = self
+        self.tableList.separatorColor = UIColor.clear
+        self.setNavigationBar()
+        
+        self.tableList.reloadData()
+        setTransparentHeader()
+        
+        if(self.socialPicture != ""){
+            self.userImage.sd_setImage(with: URL(string: self.socialPicture ), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            
+        }
+        
+       
     }
     
 
@@ -113,25 +100,20 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        setTransparentHeader()
-      
         
-        getSubCategoryData()
-         viewDidLayoutSubviews()
+      
+        setTransparentHeader()
+        getCategoryData()
+      
+ 
     }
     
-    
-    
-    override func viewDidLayoutSubviews() {
 
-        self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height:  (self.segmentControl.selectedSegmentIndex == 0) ? 1200.0 : 1600.0)
-         super.viewDidLayoutSubviews()
-    }
        
-    func getSubCategoryData(){
-         
-          SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_CATEGORIES, method: .get, parameter: nil, objectClass: GetCategory.self, requestCode: U_GET_CATEGORIES) { (response) in
-                self.countries = response.data.map({
+    func getCategoryData(){
+          let url = "\(U_BASE)\(U_GET_CATEGORIES)"
+          SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetCategory.self, requestCode: U_GET_CATEGORIES) { (response) in
+                self.categories = response.data.map({
                     $0.category_name!
                 })
                
@@ -141,29 +123,9 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     
     func geImagePath(image: UIImage,imagePath: String, imageData: Data) {
         
-        if(currentImage == 2){
-            
-        }else if(currentImage == 1){
-            
-            if(imagePath1 != nil){
-                storageRef.storage.reference(withPath: imagePath1 ?? "").delete(completion: nil)
-            }
-            
-            self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { (val) in
-                self.userImage.image = image
-                self.imagePath1 = val
-            }
-            
-        } else if(currentImage == 8){
-                self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { (val) in
-                   self.documentImage1.image = image
-                   self.imagePath2 = val
-               }
-        } else if(currentImage == 9){
-                self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { (val) in
-                    self.documentImage2.image = image
-                    self.imagePath3 = val
-                }
+        self.userImage.image = image
+        self.uplaodUserImage(imageName: imagePath, image: imageData, type: 2) { (val) in
+            self.userProfilePicture = val
         }
     }
     
@@ -187,16 +149,16 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     }
     
     func selectedItem(name: String, id: Int) {
-        self.occupation.text = name
+       
     }
     
     func sendFcmToken(userId: String){
         DispatchQueue.global(qos: .background).async {
             let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
-            let param = [
+            let param: [String:Any] = [
                 "user_id":userId,
                 "fcm_token":fcmToken
-                ] as? [String:Any]
+                ]
             
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
                 
@@ -207,7 +169,7 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     func getAccessToken(email:String,pass:String){
         ActivityIndicator.show(view: self.view)
         Auth.auth().signIn(withEmail: email, password: pass) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
+            guard self != nil else { return }
             if(authResult == nil){
                 Singleton.shared.showToast(text: "Wrong credentials")
                 ActivityIndicator.hide()
@@ -218,19 +180,14 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
                 Singleton.shared.userInfo.token = authResult?.user.refreshToken
                 Singleton.shared.userInfo.user_id = authResult?.user.uid ?? ""
                 Singleton.shared.userInfo.email = authResult?.user.email
-                //                    if(self!.isNewUser){
-                //                     Singleton.shared.userInfo.is_email_verified = 0
-                //                    }else{
-                //                        Singleton.shared.userInfo.is_email_verified = 1
-                //                    }
                 Singleton.shared.userInfo.profile_picture = authResult?.user.photoURL?.absoluteString
                 UserDefaults.standard.set(authResult?.user.uid ?? "", forKey: UD_USER_ID)
                 Singleton.shared.userInfo.contact_number = authResult?.user.phoneNumber
                 authResult?.user.getIDToken(completion: { (token, error) in
                     if(error == nil){
                         UserDefaults.standard.setValue(token ?? "", forKey: UD_TOKEN)
-                    }else {
-                        print(error)
+                    } else {
+                       
                     }
                 })
                 ActivityIndicator.hide()
@@ -239,28 +196,29 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
                 myVC.isNewuser = true
                 myVC.emailAdd = authResult?.user.email ?? ""
                 self?.navigationController?.pushViewController(myVC, animated: true)
-//                self?.navigationController?.viewControllers.removeAll(where: { (vc) -> Bool in
-//                    if vc.isKind(of: SignupViewController.self) {
-//                        return true
-//                    } else {
-//                        return false
-//                    }
-//                })
+
             }
         }
+    }
+    
+    private func filterData(_ isWorker: Bool){
+        
+       
+        
+        displayData = userData.filter({
+            
+            let isWorkerField = ($0["workerField"] as? Bool)!
+            return (isWorkerField && isWorker) || !isWorkerField
+        })
     }
     
     //MARK: IBAction
     
     @IBAction  func segmentedControlValueChanged(segment: UISegmentedControl) {
            
-        let isHidden = segment.selectedSegmentIndex == 0
-        self.descriptionContainer.isHidden = isHidden
-        self.rutContainer.isHidden = isHidden
-        self.occupationContainer.isHidden = isHidden
-        self.countryContainer.isHidden = isHidden
-        self.documentContainer.isHidden = isHidden
-        self.rutImageContainer.isHidden = isHidden
+        let isWorker = segment.selectedSegmentIndex == 1
+        filterData(isWorker)
+        self.tableList.reloadData()
     }
        
     
@@ -286,57 +244,66 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
         present(autocompleteController, animated: true, completion: nil)
     }
     
-    @IBAction func selectCategory(_ sender: Any) {
-        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
-        myVC.modalPresentationStyle = .overFullScreen
-        myVC.pickerData = self.countries
-        myVC.pickerDelegate = self
-        self.navigationController?.present(myVC, animated: true, completion: nil)
-    }
-    
+
     func validateClientData() -> Bool {
-        if(imagePath1 == nil){
+        
+        let email = self.displayData[0]["value"] as! String
+        let password = self.displayData[1]["value"] as! String
+        let confirmPassword = self.displayData[2]["value"] as! String
+        let name = self.displayData[3]["value"] as! String
+        let fatherName = self.displayData[4]["value"] as! String
+        let motherName = self.displayData[5]["value"] as! String
+        let nationality = self.displayData[6]["value"] as! String
+        let mobileNumber = self.displayData[7]["value"] as! String
+        let address = self.displayData[8]["value"] as! String
+        
+        if(userProfilePicture == ""){
            Singleton.shared.showToast(text: "Sube una imagen de perfil")
             return false
-        } else if(username.text!.isEmpty){
+        } else if(name.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu nombre")
             return false
-        }else if(fatherName.text!.isEmpty){
+        }else if(fatherName.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu apellido paterno")
             return false
-        }else if(motherName.text!.isEmpty){
+        }else if(motherName.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu apellido materno")
             return false
-        }else if(email.text!.isEmpty){
+        } else if(email.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu correo")
-        } else if !(self.isValidEmail(emailStr:self.email.text!)){
+            return false
+        } else if !(self.isValidEmail(emailStr: email)){
             Singleton.shared.showToast(text: "Ingresa un correo valido")
             return false
-        } else if(self.address.text!.isEmpty){
-            Singleton.shared.showToast(text: "Ingresa una dirección")
-            return false
-        } else if(mobileNumber.text!.isEmpty){
+        } else if(mobileNumber.isEmpty){
             Singleton.shared.showToast(text: "Ingresa un numero de telefono")
             return false
-        } else if(mobileNumber.text!.count < 10){
+        } else if(mobileNumber.count < 10){
             Singleton.shared.showToast(text: "Ingresa un numero de telefono valido")
             return false
-        } else if(password.text!.isEmpty){
+        } else if(address.isEmpty){
+            Singleton.shared.showToast(text: "Ingresa una dirección")
+            return false
+        }  else if(password.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu contraseña")
             return false
-        } else if(confirmPassword.text!.isEmpty){
+        } else if(confirmPassword.isEmpty){
             Singleton.shared.showToast(text: "Confirma tu contraseña")
             return false
-        } else if(confirmPassword.text != self.password.text){
+        } else if(confirmPassword != password){
             Singleton.shared.showToast(text: "Las contraseñas no coinciden")
             return false
+        } else if(nationality.isEmpty){
+            Singleton.shared.showToast(text: "Ingresa tu pais")
+            return false
         }
+      
         
         return true
     }
     
     func validateWorkerData() -> Bool{
+        /*
         if(userDescription.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu descripción")
              return false
@@ -345,9 +312,6 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
             return false
         }else if(idNumber.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu rut")
-            return false
-        }else if(nationality.text!.isEmpty){
-            Singleton.shared.showToast(text: "Ingresa tu nacionalidad")
             return false
         }else if(self.imagePath2 == nil){
             Singleton.shared.showToast(text: "Sube una foto frontal de tu carnet")
@@ -359,12 +323,18 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
             Singleton.shared.showToast(text: "Acepta los términos y condiciones")
             return false
         }
+        */
         
         return true
     }
     
     
     @IBAction func continueAction(_ sender: Any) {
+        
+        
+        self.displayData.forEach {
+            debugPrint($0["value"] as Any)
+        }
         
        let isWorker = self.segmentControl.selectedSegmentIndex == 1
        let isValidClientData = validateClientData()
@@ -380,138 +350,65 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
        ActivityIndicator.show(view: self.view)
        let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
        
-       let param : [String:Any] = [
-           "name": self.username.text,
-           "email": self.email.text ?? "",
-           "password": self.password.text,
-           "contact_number": self.mobileNumber.text,
-           "address": self.address.text,
+        let email = self.displayData[0]["value"] as! String
+        let password = self.displayData[1]["value"] as! String
+        let name = self.displayData[3]["value"] as! String
+        let fatherName = self.displayData[4]["value"] as! String
+        let motherName = self.displayData[5]["value"] as! String
+        let nationality = self.displayData[6]["value"] as! String
+        let mobileNumber = self.displayData[7]["value"] as! String
+        let address = self.displayData[8]["value"] as! String
+        
+        let param : [String:Any] = [
+            "google_handle": self.googleId,
+            "facebook_handle": self.facebookId,
+            "fcm_token": fcmToken,
+            "profile_picture": self.userProfilePicture,
+            "email":email,
+            "name":name,
+            "father_last_name": fatherName,
+            "mother_last_name": motherName,
+            "password": password,
+            "nationality": nationality,
+            "contact_number": mobileNumber,
+            "address": address,
+            "type": isWorker ? "WORK": "HIRE"
+        /*
            "address_reference": self.referenceAddress.text,
            "address_number": self.numberAddress.text,
            "document_background":self.documentBackground.text,
-           "nationality": self.nationality.text,
-           "father_last_name": self.fatherName.text,
-           "mother_last_name": self.motherName.text,
            "id_number": self.idNumber.text,
            "id_image1": self.imagePath2,
            "id_image2": self.imagePath3,
-           "profile_picture": imagePath1,
-           "credits": "0.00",
-           "fcm_token": fcmToken,
            "profile_description": self.userDescription.text,
-           "occupation": self.occupation.text,
-           "google_handle": self.googleId,
-           "facebook_handle": self.facebookId
+           "occupation": self.occupation.text
+        */
        ]
+      
        let url = "\(U_BASE)\(U_SIGN_UP)"
        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
-           ActivityIndicator.hide()
-           self.getAccessToken(email:self.email.text ?? "", pass: self.password.text ?? "")
-           self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Gracias, Tu cuenta ha sido creada exitosamente.", yesTitle: "Aceptar", noTitle: nil, isNoHidden: true)
+           
+            ActivityIndicator.hide()
+            self.getAccessToken(email: email, pass: password)
+            self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Gracias, Tu cuenta ha sido creada exitosamente.", yesTitle: "Aceptar", noTitle: nil, isNoHidden: true)
+    
        }
+      
         
     }
     
-    @IBAction func pickDocument(sender: AnyObject){
-       let importMenu = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-       importMenu.delegate = self
-       importMenu.modalPresentationStyle = .formSheet
-       self.present(importMenu, animated: true, completion: nil)
-    }
-    
-    
-    
-    @IBAction func tickAction(_ sender: Any) {
-        if(self.imageTick.image == UIImage(named: "checked")){
-            self.imageTick.image = #imageLiteral(resourceName: "Rectangle 1")
-        }else {
-            self.imageTick.image = #imageLiteral(resourceName: "checked")
-        }
-    }
     
     @IBAction func profileImageAction(_ sender: Any) {
-        self.currentImage = 1
         self.imageDelegate = self
         self.uploadImage()
     }
     
     @IBAction func cancelImageAction(_ sender: Any) {
-        self.viewUploadImage.isHidden = false
-        self.viewIdImage.isHidden = true
-        self.idImage.image = nil
-        self.imagePath2 = nil
-    }
-    
-    @IBAction func pickDocumentImage1(_ sender: AnyObject){
-        self.currentImage = 8
-         self.imageDelegate = self
-        self.uploadImage()
-    }
-    
-    @IBAction func pickDocumentImage2(_ sender: AnyObject){
-        self.currentImage = 9
-         self.imageDelegate = self
-         self.uploadImage()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.currentImage = 2
-        let myVC = segue.destination as! CaptureIdCardViewController
-         myVC.captureDelegate = self
-    }
-    
-    
-  
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if(textField == mobileNumber){
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                return isBackSpace == -92 || textField.text!.count <= 11
-            }
-        }else if(textField == idNumber){
-           
-            
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-              
-                if (isBackSpace == -92 || textField.text!.count <= 9) {
-                    if(self.idNumber.text!.count == 9 && !(isBackSpace == -92)){
-                       self.idNumber.text = textField.text?.toRutFormatter()
-                    }
-                    return true
-                }else {
-                    return false
-                }
-            }
-        }
-        
-        return true
-    }
-    
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        
-        if(self.userDescription.text == "Escribe una descripción"){
-            self.userDescription.text = ""
-        }
-        
-        self.userDescription.textColor = .black
-        
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if self.userDescription.text == "" {
-            self.userDescription.text = "Escribe una descripción"
-            self.userDescription.textColor = .lightGray
-        }else {
-            self.userDescription.textColor = .black
-        }
-    }
-    
 
+   
+    }
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        self.address.text = place.formattedAddress
         dismiss(animated: true, completion: nil)
     }
     
@@ -530,28 +427,161 @@ class SignupViewController: ImagePickerViewController, UITextFieldDelegate, Pick
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
+    
+    func showCaptureImage(img: UIImage) {
+       
+        if(currentImage == 0){
+            self.image1 = img
+        } else if(currentImage == 1){
+            self.image2 = img
+        }
+        
+        self.tableList.reloadData()
+        
+        /*
+        if(imagePath2 != nil){
+            storageRef.storage.reference(withPath: imagePath2 ?? "").delete(completion: nil)
+        }
+        self.uplaodUserImage(imageName: self.imagePath2 ?? "", image: img.pngData()!, type: 1) { (val) in
+           
+            self.idImage.image = img
+            self.imagePath2 = val
+        }
+        */
+    }
+    
 }
 
 
 extension SignupViewController:   UIDocumentPickerDelegate {
     
   func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-      print("Cancelled")
+      
   }
 
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
     
         if(urls.count > 0){
+        
           do {
-                let components = urls[0].absoluteString.split(separator: "/")
-            self.documentBackground.text = String(components.last!)
+            let components = urls[0].absoluteString.split(separator: "/").map { String($0) }
+                self.displayData[15]["value"] = components.last
+                self.tableList.reloadData()
+
                 let documentData = try Data(contentsOf: urls[0])
-                self.uplaodDocument(imageName: "document", image: documentData){ (val) in
+                self.uplaodDocument(imageName: "document", image: documentData){ val in
                     self.docuymentUrl = val
                 }
+
           } catch {
-              print("Unable to load data: \(error)")
+             
           }
+          
         }
   }
+}
+
+extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return displayData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let field = self.displayData[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: ((field["cell"] as? String)!)) as! FieldTableViewCell
+        cell.indexPath = indexPath
+        cell.delegate = self
+     
+        if(cell.iconImage != nil){
+            cell.iconImage.image = UIImage(named: (field["icon"] as! String))
+        }
+        
+        let value : String = field["value"] as! String
+        let cellType : String = field["cell"] as! String
+        let security: Bool = field["security"] as! Bool
+        
+        if(!value.isEmpty){
+            cell.borderEditable()
+        }else {
+            cell.borderNotEditable()
+        }
+        if(cellType == "fieldData" || cellType == "fieldDataButton"){
+            cell.fieldTextField.placeholder = (field["placeholder"] as! String)
+            cell.fieldTextField.text = value
+            cell.fieldTextField.isSecureTextEntry = security
+        } else if(cellType == "FieldDataBigText") {
+            cell.fieldTextView.text = value
+        } else if(cellType == "FieldDataButtons") {
+            
+            if(cell.button1 != nil && self.image1 != nil){
+                cell.button1.setBackgroundImage(self.image1, for: .normal)
+                cell.button1.setBackgroundImage(self.image1, for: .highlighted)
+            }
+            
+            if(cell.button2 != nil && self.image2 != nil){
+                cell.button2.setBackgroundImage(self.image2, for: .normal)
+                cell.button2.setBackgroundImage(self.image2, for: .highlighted)
+            }
+        }
+        
+        
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let field = self.displayData[indexPath.row]
+        let cellType : String = field["cell"] as! String
+        if(cellType == "fieldData" || cellType == "fieldDataButton"){
+            return 60.0
+        } else if(cellType == "fieldDataBigText") {
+            return 188.0
+        } else {
+            return 128.0
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if(scrollView.contentOffset.y >= 0){
+            self.fakerHeader.isHidden = false
+        } else {
+            self.fakerHeader.isHidden = true
+        }
+    }
+
+}
+
+
+extension SignupViewController : FieldTableViewCellDelegate{
+    func tapButton(indexCell: IndexPath, tagButton: Int) {
+        
+        if(indexCell.row == 13){
+            let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+            myVC.modalPresentationStyle = .overFullScreen
+            myVC.pickerDelegate = self
+            myVC.pickerData = self.categories
+            self.navigationController?.present(myVC, animated: false, completion: nil)
+        } else if(indexCell.row == 14){
+            self.currentImage = tagButton
+            let storyboard  = UIStoryboard(name: "signup", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "CaptureIdCardViewController") as! CaptureIdCardViewController
+            myVC.captureDelegate = self
+            self.navigationController?.pushViewController(myVC, animated: true)
+            
+        } else if(indexCell.row == 15){
+            let importMenu = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+            importMenu.delegate = self
+            importMenu.modalPresentationStyle = .formSheet
+            self.present(importMenu, animated: true, completion: nil)
+        }
+      
+       
+    }
+    
+    func textFieldDidEnd(indexCell: IndexPath, text: String){
+        displayData[indexCell.row]["value"] = text
+        self.tableList.reloadData()
+    }
 }

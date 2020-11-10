@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.Shashank02051997:FancyToast-Android:0.1.6@aar">
     <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c08be110e0540b1bc7434363d6aa9eb/jetified-FancyToast-Android-0.1.6/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c08be110e0540b1bc7434363d6aa9eb/jetified-FancyToast-Android-0.1.6/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c08be110e0540b1bc7434363d6aa9eb/jetified-FancyToast-Android-0.1.6/res" />
     </CLASSES>

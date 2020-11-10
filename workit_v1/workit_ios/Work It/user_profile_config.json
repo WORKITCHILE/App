@@ -1,0 +1,94 @@
+{
+    "data":[
+        {
+            "placeholder":"Correo",
+            "workerField":false,
+            "icon":"ic_signup_arroba",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Rut",
+            "workerField":true,
+            "icon":"ic_user_rut",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Nombre",
+            "workerField":false,
+            "icon":"ic_signup_option_data",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Apellido Paterno",
+            "workerField":false,
+            "icon":"ic_signup_option_data",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Apellido Materno",
+            "workerField":false,
+            "icon":"ic_signup_option_data",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Nacionalidad",
+            "workerField":false,
+            "icon":"ic_signup_flag",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
+        },
+        {
+            "placeholder":"Número de telefono",
+            "workerField":false,
+            "icon":"ic_signup_phone",
+            "value":"",
+            "cell":"fieldData",
+            "editable":true
+        },
+        {
+            "placeholder":"Dirección",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldData",
+            "editable":true
+        },
+        {
+            "placeholder":"Nº de casa / Departamento",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldData",
+            "editable":true
+        },
+        {
+            "placeholder":"Referencia",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldData",
+            "editable":true
+        },
+        {
+            "placeholder":"descripción",
+            "workerField":true,
+            "icon":"ic_signup_document",
+            "value":"",
+            "cell":"fieldDataBigText",
+            "editable":true
+        }
+        
+        
+    ]
+}

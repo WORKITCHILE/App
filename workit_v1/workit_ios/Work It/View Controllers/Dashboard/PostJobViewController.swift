@@ -73,7 +73,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             
         }
         
-        self.address.text = "General Bustamante 1015, Providencia, Chile"
+       
     }
     
     func initialiseView(){
