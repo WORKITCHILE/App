@@ -399,8 +399,10 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     
     
     @IBAction func profileImageAction(_ sender: Any) {
+     
         self.imageDelegate = self
         self.uploadImage()
+      
     }
     
     @IBAction func cancelImageAction(_ sender: Any) {

@@ -462,7 +462,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z2T-bG-JiL">
-                                <rect key="frame" x="25" y="716" width="352" height="30"/>
+                                <rect key="frame" x="25" y="719" width="352" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="352" id="8Mr-ct-kRo"/>
                                 </constraints>
@@ -914,6 +914,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-Yw-CXo">
+                                                    <rect key="frame" x="34" y="11" width="352" height="36"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_signup_document" translatesAutoresizingMaskIntoConstraints="NO" id="Bvc-lg-cHM">
+                                                            <rect key="frame" x="0.0" y="8" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="XEg-ir-hqZ"/>
+                                                                <constraint firstAttribute="width" constant="20" id="i5j-ta-PXT"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Foto de carnet (Ambos lados)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PL-rZ-vUu">
+                                                            <rect key="frame" x="28" y="8" width="300" height="21"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="0PL-rZ-vUu" firstAttribute="top" secondItem="i0d-Yw-CXo" secondAttribute="top" constant="8" id="1k4-ob-9A0"/>
+                                                        <constraint firstItem="Bvc-lg-cHM" firstAttribute="top" secondItem="i0d-Yw-CXo" secondAttribute="top" constant="8" id="Csg-fy-eaQ"/>
+                                                        <constraint firstItem="Bvc-lg-cHM" firstAttribute="leading" secondItem="i0d-Yw-CXo" secondAttribute="leading" id="EUj-Ne-ZbU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="0PL-rZ-vUu" secondAttribute="bottom" constant="7" id="LEe-vF-Fad"/>
+                                                        <constraint firstItem="0PL-rZ-vUu" firstAttribute="leading" secondItem="Bvc-lg-cHM" secondAttribute="trailing" constant="8" symbolic="YES" id="eQW-1v-bVF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Bvc-lg-cHM" secondAttribute="bottom" constant="8" id="jen-oZ-1vK"/>
+                                                    </constraints>
+                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdY-54-EGy">
                                                     <rect key="frame" x="34" y="55" width="53" height="52"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -931,6 +958,11 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="i0d-Yw-CXo" secondAttribute="trailing" constant="8" id="gJg-79-j9E"/>
+                                                <constraint firstItem="i0d-Yw-CXo" firstAttribute="top" secondItem="O1C-Vg-K7u" secondAttribute="topMargin" id="gQS-rX-m5I"/>
+                                                <constraint firstItem="i0d-Yw-CXo" firstAttribute="leading" secondItem="O1C-Vg-K7u" secondAttribute="leadingMargin" constant="14" id="xwD-z1-fYC"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="button1" destination="gdY-54-EGy" id="aYg-OT-lUG"/>
@@ -1536,10 +1568,10 @@
     </scenes>
     <designables>
         <designable name="0M1-UM-A0q">
-            <size key="intrinsicContentSize" width="69" height="25.5"/>
+            <size key="intrinsicContentSize" width="68" height="22.5"/>
         </designable>
         <designable name="1xz-rw-IKX">
-            <size key="intrinsicContentSize" width="183.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="203.5" height="21"/>
         </designable>
         <designable name="4o9-pb-ubC">
             <size key="intrinsicContentSize" width="265" height="20.5"/>
@@ -1548,10 +1580,10 @@
             <size key="intrinsicContentSize" width="62" height="30"/>
         </designable>
         <designable name="FKo-ch-ePU">
-            <size key="intrinsicContentSize" width="164" height="18.5"/>
+            <size key="intrinsicContentSize" width="128" height="17.5"/>
         </designable>
         <designable name="L3X-Zg-8ok">
-            <size key="intrinsicContentSize" width="49" height="30"/>
+            <size key="intrinsicContentSize" width="69" height="36"/>
         </designable>
         <designable name="Mg8-wQ-hRM"/>
         <designable name="MiE-HC-JLX">
@@ -1564,19 +1596,19 @@
             <size key="intrinsicContentSize" width="319" height="50"/>
         </designable>
         <designable name="Xcc-Jg-g2o">
-            <size key="intrinsicContentSize" width="139" height="20.5"/>
+            <size key="intrinsicContentSize" width="126.5" height="17.5"/>
         </designable>
         <designable name="YkD-Hz-Xn4">
-            <size key="intrinsicContentSize" width="156" height="20.5"/>
+            <size key="intrinsicContentSize" width="145.5" height="17.5"/>
         </designable>
         <designable name="aNe-Dh-mZb">
-            <size key="intrinsicContentSize" width="5" height="23"/>
+            <size key="intrinsicContentSize" width="6" height="22.5"/>
         </designable>
         <designable name="ekU-CD-4N2">
             <size key="intrinsicContentSize" width="133.5" height="23"/>
         </designable>
         <designable name="gcy-y6-cD8">
-            <size key="intrinsicContentSize" width="179.5" height="24"/>
+            <size key="intrinsicContentSize" width="157.5" height="20"/>
         </designable>
         <designable name="jSw-7c-4Bh">
             <size key="intrinsicContentSize" width="90" height="90"/>
@@ -1585,7 +1617,7 @@
             <size key="intrinsicContentSize" width="40" height="30"/>
         </designable>
         <designable name="q2o-ET-QmU">
-            <size key="intrinsicContentSize" width="164" height="20.5"/>
+            <size key="intrinsicContentSize" width="183.5" height="21"/>
         </designable>
         <designable name="rHR-A5-f6M">
             <size key="intrinsicContentSize" width="319" height="50"/>
@@ -1594,10 +1626,10 @@
             <size key="intrinsicContentSize" width="69" height="30"/>
         </designable>
         <designable name="vij-OP-JUP">
-            <size key="intrinsicContentSize" width="5" height="23"/>
+            <size key="intrinsicContentSize" width="6" height="22.5"/>
         </designable>
         <designable name="vut-8F-D2D">
-            <size key="intrinsicContentSize" width="69" height="25.5"/>
+            <size key="intrinsicContentSize" width="68" height="22.5"/>
         </designable>
     </designables>
     <resources>
