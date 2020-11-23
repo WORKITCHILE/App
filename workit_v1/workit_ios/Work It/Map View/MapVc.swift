@@ -11,7 +11,7 @@ class MapVC: UIView,MKMapViewDelegate {
     
     var location = [MKPointAnnotation]()
     var latitude: Double = 0
-    var address = "address"
+    var address = "Dirección"
     var longitude: Double = 0 {
         didSet {
             if(self.latitude != 0){
@@ -41,13 +41,11 @@ class MapVC: UIView,MKMapViewDelegate {
         
         let location = MKPointAnnotation()
         location.title = "\(self.address)"
-       // let lat = Int(Int((((latitude as Double).doubleValue)*100).rounded()))/100
-        //let long = Int(Int((((longitude as Double).doubleValue)*100).rounded()))/100
-        
-        location.coordinate = CLLocationCoordinate2D(latitude: self.latitude    ,longitude:self.longitude)
+
+        location.coordinate = CLLocationCoordinate2D(latitude: self.latitude ,longitude:self.longitude)
         self.location.append(location)
         let span = MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2)
-        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        _ = MKCoordinateRegion(center: location.coordinate, span: span)
         mapView.showAnnotations(self.location, animated: true)
         mapView.setRegion(MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500), animated: true)
         if(CLLocationCoordinate2DIsValid(location.coordinate)){
@@ -67,8 +65,8 @@ class MapVC: UIView,MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
              annotationView?.canShowCallout = true
-            let pinImage = #imageLiteral(resourceName: "ic_location_work_blue")
-            let size = CGSize(width: 35, height: 40)
+            let pinImage = #imageLiteral(resourceName: "ic_map_pin")
+            let size = CGSize(width: 27, height: 40)
             UIGraphicsBeginImageContext(size)
             pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()

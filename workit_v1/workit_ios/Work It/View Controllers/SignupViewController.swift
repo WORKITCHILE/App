@@ -88,11 +88,12 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         setTransparentHeader()
         
         if(self.socialPicture != ""){
-            self.userImage.sd_setImage(with: URL(string: self.socialPicture ), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             
+            self.userImage.sd_setImage(with: URL(string: self.socialPicture ), placeholderImage: #imageLiteral(resourceName: "dummyProfile"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+              
+            })
         }
         
-       
     }
     
 
@@ -149,7 +150,8 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     }
     
     func selectedItem(name: String, id: Int) {
-       
+        self.displayData[13]["value"] = name
+        self.tableList.reloadData()
     }
     
     func sendFcmToken(userId: String){
@@ -203,8 +205,6 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     
     private func filterData(_ isWorker: Bool){
         
-       
-        
         displayData = userData.filter({
             
             let isWorkerField = ($0["workerField"] as? Bool)!
@@ -213,35 +213,11 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     }
     
     //MARK: IBAction
-    
     @IBAction  func segmentedControlValueChanged(segment: UISegmentedControl) {
            
         let isWorker = segment.selectedSegmentIndex == 1
         filterData(isWorker)
         self.tableList.reloadData()
-    }
-       
-    
-    @IBAction func addressAction(_ sender: Any) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        
-        // Specify the place data types to return.
-        let fields: GMSPlaceField = GMSPlaceField(rawValue:UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue) |
-            UInt(GMSPlaceField.coordinate.rawValue) |
-            GMSPlaceField.addressComponents.rawValue |
-            GMSPlaceField.formattedAddress.rawValue)!
-        autocompleteController.placeFields = fields
-        
-        // Specify a filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .noFilter
-        autocompleteController.autocompleteFilter = filter
-        
-        // Display the autocomplete view controller.
-        autocompleteController.modalPresentationStyle = .overFullScreen
-        present(autocompleteController, animated: true, completion: nil)
     }
     
 
@@ -303,27 +279,23 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     }
     
     func validateWorkerData() -> Bool{
-        /*
-        if(userDescription.text!.isEmpty){
+        
+        let userDescription = self.displayData[11]["value"] as! String
+        let idNumber = self.displayData[12]["value"] as! String
+        let occupation = self.displayData[13]["value"] as! String
+        
+        
+        if(userDescription.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu descripción")
              return false
-        }else if(occupation.text!.isEmpty){
+        }else if(occupation.isEmpty){
             Singleton.shared.showToast(text: "Elige una ocupación")
             return false
-        }else if(idNumber.text!.isEmpty){
+        }else if(idNumber.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu rut")
             return false
-        }else if(self.imagePath2 == nil){
-            Singleton.shared.showToast(text: "Sube una foto frontal de tu carnet")
-            return false
-        }else if(self.imagePath3 == nil){
-            Singleton.shared.showToast(text: "Sube una foto trasera de tu carnet")
-            return false
-        }else if(self.imageTick.image == #imageLiteral(resourceName: "Rectangle 1")){
-            Singleton.shared.showToast(text: "Acepta los términos y condiciones")
-            return false
         }
-        */
+      
         
         return true
     }
@@ -358,11 +330,16 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         let nationality = self.displayData[6]["value"] as! String
         let mobileNumber = self.displayData[7]["value"] as! String
         let address = self.displayData[8]["value"] as! String
+        let addressNumber = self.displayData[9]["value"] as! String
+        let addressReference = self.displayData[10]["value"] as! String
+        let profileDescription = self.displayData[11]["value"] as! String
+        let idNumber = self.displayData[12]["value"] as! String
+        let occupation =  self.displayData[13]["value"] as! String
         
         let param : [String:Any] = [
-            "google_handle": self.googleId,
-            "facebook_handle": self.facebookId,
-            "fcm_token": fcmToken,
+            "google_handle": self.googleId as Any,
+            "facebook_handle": self.facebookId as Any,
+            "fcm_token": fcmToken as Any,
             "profile_picture": self.userProfilePicture,
             "email":email,
             "name":name,
@@ -372,17 +349,15 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             "nationality": nationality,
             "contact_number": mobileNumber,
             "address": address,
-            "type": isWorker ? "WORK": "HIRE"
-        /*
-           "address_reference": self.referenceAddress.text,
-           "address_number": self.numberAddress.text,
-           "document_background":self.documentBackground.text,
-           "id_number": self.idNumber.text,
-           "id_image1": self.imagePath2,
-           "id_image2": self.imagePath3,
-           "profile_description": self.userDescription.text,
-           "occupation": self.occupation.text
-        */
+            "type": isWorker ? "WORK": "HIRE",
+            "id_image1": self.imagePath1,
+            "id_image2": self.imagePath2,
+            "id_number": idNumber,
+            "address_reference":addressReference,
+            "address_number" : addressNumber,
+            "profile_description": profileDescription,
+            "occupation": occupation,
+            "document_background": self.docuymentUrl
        ]
       
        let url = "\(U_BASE)\(U_SIGN_UP)"
@@ -390,7 +365,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
            
             ActivityIndicator.hide()
             self.getAccessToken(email: email, pass: password)
-            self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Gracias, Tu cuenta ha sido creada exitosamente.", yesTitle: "Aceptar", noTitle: nil, isNoHidden: true)
+            
     
        }
       
@@ -412,6 +387,9 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
+ 
+        self.displayData[8]["value"] = "\(place.formattedAddress ?? "")"
+        self.tableList.reloadData()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -431,6 +409,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     }
     
     func showCaptureImage(img: UIImage) {
+        let image_path = "\(NSDate().timeIntervalSince1970)_\(UUID().uuidString).png"
        
         if(currentImage == 0){
             self.image1 = img
@@ -440,16 +419,16 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         
         self.tableList.reloadData()
         
-        /*
-        if(imagePath2 != nil){
-            storageRef.storage.reference(withPath: imagePath2 ?? "").delete(completion: nil)
-        }
-        self.uplaodUserImage(imageName: self.imagePath2 ?? "", image: img.pngData()!, type: 1) { (val) in
+        self.uplaodUserImage(imageName: image_path , image: img.pngData()!, type: 1) { [self] val in
            
-            self.idImage.image = img
-            self.imagePath2 = val
+            if(self.currentImage == 0){
+                self.imagePath1 = val
+            } else if(self.currentImage == 1){
+                self.imagePath2 = val
+            }
+            
         }
-        */
+     
     }
     
 }
@@ -512,6 +491,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
             cell.fieldTextField.placeholder = (field["placeholder"] as! String)
             cell.fieldTextField.text = value
             cell.fieldTextField.isSecureTextEntry = security
+           
         } else if(cellType == "FieldDataBigText") {
             cell.fieldTextView.text = value
         } else if(cellType == "FieldDataButtons") {
@@ -559,13 +539,16 @@ extension SignupViewController : FieldTableViewCellDelegate{
     func tapButton(indexCell: IndexPath, tagButton: Int) {
         
         if(indexCell.row == 13){
+            
             let storyboard  = UIStoryboard(name: "Main", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
             myVC.modalPresentationStyle = .overFullScreen
             myVC.pickerDelegate = self
             myVC.pickerData = self.categories
             self.navigationController?.present(myVC, animated: false, completion: nil)
+            
         } else if(indexCell.row == 14){
+            
             self.currentImage = tagButton
             let storyboard  = UIStoryboard(name: "signup", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "CaptureIdCardViewController") as! CaptureIdCardViewController
@@ -573,10 +556,29 @@ extension SignupViewController : FieldTableViewCellDelegate{
             self.navigationController?.pushViewController(myVC, animated: true)
             
         } else if(indexCell.row == 15){
+            
             let importMenu = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
             importMenu.delegate = self
             importMenu.modalPresentationStyle = .formSheet
             self.present(importMenu, animated: true, completion: nil)
+            
+        } else if(indexCell.row == 8){
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+
+            let fields: GMSPlaceField = GMSPlaceField(rawValue:UInt(GMSPlaceField.name.rawValue) |
+                UInt(GMSPlaceField.placeID.rawValue) |
+                UInt(GMSPlaceField.coordinate.rawValue) |
+                GMSPlaceField.addressComponents.rawValue |
+                GMSPlaceField.formattedAddress.rawValue)!
+            autocompleteController.placeFields = fields
+ 
+            let filter = GMSAutocompleteFilter()
+            filter.type = .noFilter
+            autocompleteController.autocompleteFilter = filter
+        
+            autocompleteController.modalPresentationStyle = .overFullScreen
+            present(autocompleteController, animated: true, completion: nil)
         }
       
        
@@ -585,5 +587,33 @@ extension SignupViewController : FieldTableViewCellDelegate{
     func textFieldDidEnd(indexCell: IndexPath, text: String){
         displayData[indexCell.row]["value"] = text
         self.tableList.reloadData()
+    }
+    
+    func textChange(indexCell: IndexPath, textField: UITextField, range: NSRange, string: String) {
+        
+        if(indexCell.row == 12){
+         
+            
+            let str = "\(textField.text ?? "")"
+            let regex = try! NSRegularExpression(pattern: "[^_0-9kK]+", options: NSRegularExpression.Options.caseInsensitive)
+            let range = NSMakeRange(0, max(str.count - 1, 0))
+            let modString = regex.stringByReplacingMatches(in: str, options: [], range: range, withTemplate: "")
+                      
+            let formatter = NumberFormatter()
+            formatter.groupingSeparator = "."
+            formatter.groupingSize = 3
+            formatter.usesGroupingSeparator = true
+          
+            if string != "" {
+              
+                if let doubleVal = Double(modString) {
+                    let requiredString = formatter.string(from: NSNumber.init(value: doubleVal))
+                    textField.text = "\(requiredString ?? "")-"
+                }
+
+            }
+           
+        }
+       
     }
 }

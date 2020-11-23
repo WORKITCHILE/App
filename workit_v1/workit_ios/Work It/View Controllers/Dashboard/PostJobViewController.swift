@@ -10,7 +10,14 @@ import UIKit
 import GooglePlaces
 
 class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPicker, SelectDate {
+    
+    
     //MARK: IBOutlets
+    
+
+    @IBOutlet weak var workerName: UITextField!
+    @IBOutlet weak var workerImage: ImageView!
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var workName: DesignableUITextField!
     @IBOutlet weak var address: DesignableUITextField!
     @IBOutlet weak var subCategory: DesignableUITextField!
@@ -19,17 +26,18 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     @IBOutlet weak var charges: DesignableUITextField!
     @IBOutlet weak var category: DesignableUITextField!
     @IBOutlet weak var jobApproach: DesignableUITextField!
+    @IBOutlet weak var viewSubcategoryTitle: View!
     @IBOutlet weak var viewSubcategory: View!
-    //   @IBOutlet weak var jobImage: UIImageView!
+
     @IBOutlet weak var jobDescription: UITextView!
     @IBOutlet weak var headingLabel: DesignableUILabel!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var postJobButton: CustomButton!
-    @IBOutlet weak var dummyImage: UIView!
     @IBOutlet weak var mapView: MapVC!
+    @IBOutlet weak var buttonRemoveWorker: UIButton!
     
     
-    var imageString = [String]()
+    var imageString = ["camera"]
     
     var categoryData = [GetCategoryResponse]()
     var subcategoryData = [GetSubcategoryResponse]()
@@ -44,8 +52,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     var deleteImageIndex: Int?
     var selectedTime = Int()
     var isRepostJob = false
-    
-    //["All", "In Person", "Come and get it", "Take it to workplace" ]
+    var workerSelected : UserInfo?
+    var placeHolder = "Descripción del trabajo"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,21 +67,25 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         
         self.categoryData = Singleton.shared.getCategories
         self.jobDescription.delegate = self
-        self.jobDescription.text = "Job Description"
-        
+        self.jobDescription.text = placeHolder
         
         if(self.categoryData.count > 0){
             self.category.text = self.categoryData[0].category_name
             self.selectedCategory = self.categoryData[0]
             self.getSubCategoryData(id: self.selectedCategory.category_id ?? "")
-            
-        }
-        if(isEditJob || self.isRepostJob){
-            self.initialiseView()
-            
+            self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[0].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
         }
         
-       
+        if(isEditJob || self.isRepostJob){
+            self.initialiseView()
+        }
+        
+        self.buttonRemoveWorker.isHidden = true
+        self.latitude =  -33.4909571
+        self.longitude = -70.5890149
+        self.mapView.latitude = self.latitude
+        self.mapView.longitude = self.longitude
+     
     }
     
     func initialiseView(){
@@ -98,6 +110,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                         if(val.category_name == self.jobDetail?.category_name){
                             self.selectedCategory = val
                             self.category.text = self.jobDetail?.category_name
+                            
                         }
                     }
                 }
@@ -131,13 +144,15 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_SUBCATEGORIES + id, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
             
             self.subcategoryData = response.data
+            
             if(self.subcategoryData.count > 0){
-                self.viewSubcategory.isHidden = false
                 self.selectedSubcategory = self.subcategoryData[0]
                 self.subCategory.text = self.selectedSubcategory.subcategory_name
-            }else {
-                self.viewSubcategory.isHidden = true
             }
+            
+            self.viewSubcategory.isHidden = !(self.subcategoryData.count > 0)
+            self.viewSubcategoryTitle.isHidden = !(self.subcategoryData.count > 0)
+            
             ActivityIndicator.hide()
         }
     }
@@ -147,6 +162,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             self.category.text = name
             self.selectedCategory = self.categoryData[id]
             self.getSubCategoryData(id: self.selectedCategory.category_id ?? "")
+            self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[id].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
+            
         }else if(currentPicker == 4){
             self.selectedSubcategory =
                 self.subcategoryData[id]
@@ -158,7 +175,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     func selectedDate(date: Int) {
         if(currentDatePicker == 1){
-            self.workDate.text = self.convertTimestampToDate(date, to: "dd.MM.yyyy")
+            self.workDate.text = self.convertTimestampToDate(date, to: "dd/MM/yyyy")
             self.workTime.text = ""
             self.selectedTime = date
         }else if(currentDatePicker == 2){
@@ -175,14 +192,14 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     }
     
     func uploadImage(){
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Elige", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Galeria", style: .default, handler: { _ in
             self.openGallary()
         }))
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: "Cancelar", style: .cancel, handler: nil))
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = self.view
             popoverController.sourceRect = self.view.bounds
@@ -196,14 +213,6 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     
     //MARK: IBAction
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
-    }
-  
-    @IBAction func addImageAction(_ sender: Any) {
-      self.imageDelegate = self
-      self.uploadImage()
-    }
     
     @IBAction func categoryAction(_ sender: Any) {
         currentPicker = 3
@@ -212,7 +221,9 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         
  
         myVC.pickerDelegate = self
+        
         if(self.categoryData.count == 0){
+            
             ActivityIndicator.show(view: self.view)
             CallAPIViewController.shared.getCategory { (category) in
                 self.categoryData = category
@@ -225,7 +236,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                     self.navigationController?.present(myVC, animated: true, completion: nil)
                 }
             }
-        }else {
+        } else {
             
             myVC.pickerDelegate = self
             for val in self.categoryData {
@@ -252,12 +263,12 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     @IBAction func jobApproachAction(_ sender: Any) {
         currentPicker = 5
-         let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
         let myVC = mainStoryboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.pickerDelegate = self
-        myVC.pickerData = ["All", "In Person", "Come and get it", "Take it to workplace" ]
+        myVC.pickerData = ["Cualquiera", "A domicilio", "Recogerlo", "Llevarselo al worker" ]
         myVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.present(myVC, animated: true, completion: nil)
+        self.navigationController?.present(myVC, animated: false, completion: nil)
     }
     
     @IBAction func dateAction(_ sender: Any) {
@@ -279,7 +290,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         if(self.workDate.text!.isEmpty){
             myVC.selectedDate = Int(Date().addingTimeInterval(121*60).timeIntervalSince1970)
         }else {
-            let date = self.convertDateToTimestamp(self.workDate.text ?? "", to: "dd.MM.yyyy")
+            let date = self.convertDateToTimestamp(self.workDate.text ?? "", to: "dd/MM/yyyy")
             let todayData = self.convertTimestampToDate(Int(Date().timeIntervalSince1970), to: "dd.MM.yyyy")
             
             if((self.workDate.text ?? "") == todayData){
@@ -328,46 +339,54 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     }
     
     @IBAction func postJobAction(_ sender: Any) {
+        
         var sT = Date(timeIntervalSince1970: Double(Int(Date().timeIntervalSince1970)))
         sT = sT.addingTimeInterval(TimeInterval(60*120))
-        let todayDate = self.convertTimestampToDate(Int(Date().timeIntervalSince1970), to: "dd.MM.yyyy")
+        let todayDate = self.convertTimestampToDate(Int(Date().timeIntervalSince1970), to: "dd/MM/yyyy")
+        
         if(self.workName.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter job name")
+            Singleton.shared.showToast(text: "Ingresa un nombre")
         }else if(self.jobDescription.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter description for the job")
+            Singleton.shared.showToast(text: "Ingresa una descripción")
         }else if(self.address.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter job address")
+            Singleton.shared.showToast(text: "Ingresa una dirección")
         }else if(self.jobApproach.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter job approach")
+            Singleton.shared.showToast(text: "Selecciona el tipo de trabajo")
         }else if(self.category.text!.isEmpty){
-            Singleton.shared.showToast(text: "Select job category")
+            Singleton.shared.showToast(text: "Selecciona una categoria")
         }else if(self.subCategory.text!.isEmpty){
-            Singleton.shared.showToast(text: "Select job subcategory")
+            Singleton.shared.showToast(text: "Selecciona una subcategoria")
         }else if(self.workDate.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter work date")
+            Singleton.shared.showToast(text: "Ingresa la fecha del trabajo")
         }else if(self.workTime.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter work time")
+            Singleton.shared.showToast(text: "Ingresa el horario del trabajo")
         }else if(self.selectedTime < Int(sT.timeIntervalSince1970) && ((self.workDate.text ?? "") == todayDate)){
-            Singleton.shared.showToast(text: "Start time should be atleast 2 hours more from current time.")
+            Singleton.shared.showToast(text: "El horario del trabajo debe ser dos horas despues.")
         }else if(self.charges.text!.isEmpty){
-            Singleton.shared.showToast(text: "Enter payment for the service")
+            Singleton.shared.showToast(text: "Ingresa el precio del trabajo")
         }else {
+            
             var url = String()
+            
             if(self.isEditJob){
-                url = U_BASE + U_EDIT_JOB
+                url = "\(U_BASE)\(U_EDIT_JOB)"
             }else {
-                url = U_BASE + U_POST_JOB
+                url = "\(U_BASE)\(U_POST_JOB)"
             }
-            self.imageString = self.imageString.filter{
+            
+            let work_images = self.imageString.filter{
                 $0 != "camera"
             }
-            let param = [
+            
+            var param = [
                 "job_id": self.jobDetail?.job_id ?? "",
                 "category_name": self.selectedCategory.category_name,
                 "subcategory_name": self.selectedSubcategory.subcategory_name,
                 "category_id": self.selectedCategory.category_id,
                 "subcategory_id":self.selectedSubcategory.subcategory_id,
                 "user_id":Singleton.shared.userInfo.user_id,
+                "user_image":"\(Singleton.shared.userInfo.profile_picture)",
+                "user_name": "\(Singleton.shared.userInfo.name) \(Singleton.shared.userInfo.father_last_name)  \(Singleton.shared.userInfo.mother_last_name)",
                 "job_address_latitude":self.latitude,
                 "job_address_longitude":self.longitude,
                 "job_name":self.workName.text ?? "",
@@ -376,19 +395,30 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                 "job_date":self.workDate.text ?? "",
                 "job_time":self.selectedTime,
                 "initial_amount":Double(self.charges.text ?? "0")!,
-                "job_description":self.jobDescription.text,
-                "images":self.imageString
+                "job_description": self.jobDescription.text,
+                "images": work_images,
+                "have_document": Singleton.shared.userInfo.background_document != "" && Singleton.shared.userInfo.background_document != nil
                 ] as! [String: Any]
+            
+            if(self.workerSelected != nil){
+                param["worker_selected"] = self.workerSelected?.user_id
+            }
+           
+            
             ActivityIndicator.show(view: self.view)
+            
             SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_JOB) { (response) in
+                
                 Singleton.shared.jobData = []
                 ActivityIndicator.hide()
+                
                 if(self.isRepostJob){
                     self.callRepostAPI()
                 }
+                
                 if(self.isEditJob){
-                     Singleton.shared.showToast(text: "Job updated successfully")
-                   
+                    Singleton.shared.showToast(text: "Trabajo Actualizado correctamente")
+                    self.dismiss(animated: true, completion: nil)
                 }else {
                     
                     let alert = UIAlertController(title: "Trabajo Publicado", message: "Hemos publicado tu trabajo con exito", preferredStyle: .alert)
@@ -401,13 +431,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                     
                     
                 }
-                if(self.isRepostJob){
-                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostedJobViewController") as! PostedJobViewController
-                    Singleton.shared.jobData = []
-                    self.navigationController?.pushViewController(myVC, animated: true)
-                }else {
-                  self.navigationController?.popViewController(animated: true)
-                }
+                
+               
             }
         }
         
@@ -416,12 +441,35 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     @IBAction func dissmissAction(_ sender : AnyObject){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func removeWorker(_ sender: AnyObject){
+        self.buttonRemoveWorker.isHidden = true
+        self.workerName.text = ""
+        self.workerImage.image = UIImage(named: "ic_category_work_blue")
+        self.workerSelected = nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let wsVC = segue.destination as! WorkerSearchViewController
+        wsVC.delegate = self
+    }
+}
+
+extension PostJobViewController: WorkerSearchDelegate {
+    func selectWorker(worker: UserInfo) {
+        self.workerSelected = worker
+        self.workerName.text = "\(self.workerSelected?.name! ?? "") \(self.workerSelected?.father_last_name! ?? "") \(self.workerSelected?.mother_last_name! ?? "")"
+        
+        self.workerImage.sd_setImage(with: URL(string: (self.workerSelected?.profile_picture)!),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        
+        self.buttonRemoveWorker.isHidden = false
+    }
 }
 
 extension PostJobViewController: GMSAutocompleteViewControllerDelegate, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if(self.jobDescription.text == "Job Description"){
+        if(self.jobDescription.text == placeHolder){
             self.jobDescription.text = ""
             self.jobDescription.textColor = .black
         }else {
@@ -431,7 +479,7 @@ extension PostJobViewController: GMSAutocompleteViewControllerDelegate, UITextVi
     
     func textViewDidEndEditing(_ textView: UITextView){
         if(self.jobDescription.text == ""){
-            self.jobDescription.text = "Job Description"
+            self.jobDescription.text = placeHolder
             self.jobDescription.textColor = .lightGray
         }else {
             self.jobDescription.textColor = .black
@@ -446,9 +494,7 @@ extension PostJobViewController: GMSAutocompleteViewControllerDelegate, UITextVi
         self.mapView.latitude = place.coordinate.latitude
         self.mapView.longitude = place.coordinate.longitude
         self.mapView.address = place.formattedAddress ?? ""
-        print("Place name: \(place.name)")
-        print("Place ID: \(place.placeID)")
-        print("Place attributions: \(place.attributions)")
+
         dismiss(animated: true, completion: nil)
     }
     
@@ -472,17 +518,17 @@ extension PostJobViewController: GMSAutocompleteViewControllerDelegate, UITextVi
     }
 }
 
-extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataSource, SuccessPopup{
-    func yesAction() {
+extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func delete(index : Int) {
         
-        let url = self.imageString[deleteImageIndex ?? 0]
+        let url = self.imageString[index]
         let store = storageRef.storage.reference(forURL: url)
         
         store.delete { error in
-            if let error = error {
-                print(error)
+            if error != nil {
+                
             }else {
-                self.imageString.remove(at: self.deleteImageIndex ?? 0)
+                self.imageString.remove(at: index)
                 self.imageCollection.reloadData()
             }
             
@@ -490,44 +536,38 @@ extension PostJobViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-        if(self.imageString.count == 0){
-            self.dummyImage.isHidden = false
-        }else {
-            self.dummyImage.isHidden = true
-            self.imageString = self.imageString.filter{
-                $0 != "camera"
-            }
-            self.imageString.append("camera")
-        }
         return self.imageString.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashboardCollection", for: indexPath) as! DashboardCollection
+        
         if(imageString[indexPath.row] == "camera"){
-            cell.jobImage.image = #imageLiteral(resourceName: "dummyProfile")
+            cell.jobImage.image = #imageLiteral(resourceName: "ic_plus_form")
             cell.addBtn.isHidden = false
             cell.deleteBtn.isHidden = true
             cell.addButton = {
                 self.imageDelegate = self
                 self.uploadImage()
             }
-        }else {
+        } else {
             cell.addBtn.isHidden = true
             cell.deleteBtn.isHidden = false
             cell.jobImage.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.deleteButton = {
-                let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
-                self.deleteImageIndex = indexPath.row
-                myVC.image = #imageLiteral(resourceName: "dummyProfile")
-                myVC.titleLabel = "¿Borrar Imagen?"
-                myVC.okBtnTtl = "Si"
-                myVC.cancelBtnTtl = "No"
-                myVC.cancelBtnHidden = false
-                myVC.successDelegate = self
-                myVC.modalPresentationStyle = .overFullScreen
-                self.navigationController?.present(myVC, animated: true, completion: nil)
+                
+                let alert = UIAlertController(title: "Borrar Imagen", message: "¿Quieres borrar esta imagen?", preferredStyle: .alert)
+                let yesAction = UIAlertAction(title: "si", style: .default) { _ in
+                    self.delete(index: indexPath.row)
+                }
+                let noAction = UIAlertAction(title: "No", style: .default) { _ in }
+
+                alert.addAction(noAction)
+                alert.addAction(yesAction)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+               
             }
         }
         return cell

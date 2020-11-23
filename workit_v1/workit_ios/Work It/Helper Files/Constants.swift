@@ -27,6 +27,7 @@ var U_IMAGE_UPLOAD = "https://us-central1-workit-de544.cloudfunctions.net/app/ap
 
 
 var U_LOGIN = "users/login"
+var U_SEARCH_WORKER = "vendor/get-workers"
 var U_SIGN_UP = "users/sign-up"
 var U_CHANGE_USER_ROLE = "users/change-user-role"
 var U_GET_CATEGORIES = "users/get-categories"

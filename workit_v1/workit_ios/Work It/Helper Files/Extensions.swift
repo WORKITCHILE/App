@@ -67,11 +67,13 @@ extension UIViewController {
         storeImg.putData(image, metadata:StorageMetadata(dictionary: ["contentType": "image/png"])) { (snapshot, error) in
             // When the image has successfully uploaded, we get it's download URL
              storeImg.downloadURL(completion: { (url, error) in
+                ActivityIndicator.hide()
+                
                 guard let downloadURL = url else {
                     return
                 }
                 completionHandler(downloadURL.absoluteString)
-                ActivityIndicator.hide()
+                
             })
         }
     }

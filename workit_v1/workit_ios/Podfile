@@ -7,6 +7,7 @@ target 'Work It' do
 
   # Pods for Work It
 
+  pod 'FloatingPanel'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftyCodeView'
   pod 'Alamofire', '~> 4.9.1'

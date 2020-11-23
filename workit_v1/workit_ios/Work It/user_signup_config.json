@@ -86,7 +86,7 @@
             "workerField":false,
             "icon":"ic_signup_location",
             "value":"",
-            "cell":"fieldData",
+            "cell":"fieldDataButton",
             "editable":true,
             "field":"address",
             "security":false

@@ -53,7 +53,6 @@ struct UserInfo: Codable {
     var nationality: String?
     var occupation: String?
     var contact_number: String?
-    var credits: String?
     var name: String?
     var rating: String?
     var profile_description: String?
@@ -62,6 +61,7 @@ struct UserInfo: Codable {
     var id_number: String?
     var average_rating: String?
     var user_id: String?
+    var background_document: String?
 }
 
 struct GetCategory: Codable {
@@ -76,6 +76,14 @@ struct GetCategoryResponse: Codable{
     var category_name: String?
     var category_id: String?
 }
+
+
+struct GetWorkers: Codable {
+    var data = [UserInfo]()
+    var message: String?
+    var status: Int?
+}
+
 
 struct GetSubcategory: Codable {
     var data = [GetSubcategoryResponse]()

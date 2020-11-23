@@ -21,14 +21,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
        
         button_client.layer.cornerRadius = 32
-        //button_client.layer.masksToBounds = true
         button_client.layer.shadowColor = UIColor.black.cgColor
         button_client.layer.shadowOpacity = 0.4
         button_client.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
         button_client.layer.shadowRadius = 20.0
         
         button_worker.layer.cornerRadius = 32
-        //button_worker.layer.masksToBounds = true
         button_worker.layer.shadowColor = UIColor.black.cgColor
         button_worker.layer.shadowOpacity = 0.4
         button_worker.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
@@ -36,8 +34,8 @@ class HomeViewController: UIViewController {
         
         self.workerView.isHidden = true
         
-        styleSelectButtonClient()
-        styleUnselectButtonWorker()
+        styleSelectButtonClient(button: self.button_client, label: self.labelClient, icon:"person_outline")
+        styleUnselectButtonClient(button: self.button_worker, label: self.labelWorker, icon: "worker_outline")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,56 +43,39 @@ class HomeViewController: UIViewController {
         setTransparentHeader()
     }
     
-    private func styleSelectButtonClient(){
+    private func styleSelectButtonClient(button : UIButton, label: UILabel, icon: String){
         let selected_blue = UIColor(named: "selected_blue")
-        self.button_client.backgroundColor = selected_blue
-        let image = UIImage(named: "person_outline")?.withRenderingMode(.alwaysTemplate)
-        self.button_client.setImage(image, for: .normal)
-        self.button_client.tintColor = .white
-        self.labelClient.textColor = selected_blue
+        button.backgroundColor = selected_blue
+        let image = UIImage(named: icon)?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        label.textColor = selected_blue
     }
     
-    private func styleUnselectButtonClient(){
+    private func styleUnselectButtonClient(button : UIButton, label: UILabel, icon: String){
         let border = UIColor(named: "border")
-        self.button_client.backgroundColor = .white
-        let image = UIImage(named: "person_outline")?.withRenderingMode(.alwaysTemplate)
-        self.button_client.setImage(image, for: .normal)
-        self.button_client.tintColor = border
-        self.labelClient.textColor = border
+        button.backgroundColor = .white
+        let image = UIImage(named: icon)?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
+        button.tintColor = border
+        label.textColor = border
     }
     
-    private func styleSelectButtonWorker(){
-        let intense_blue = UIColor(named: "intense_blue")
-        self.button_worker.backgroundColor = intense_blue
-        let image = UIImage(named: "worker_outline")?.withRenderingMode(.alwaysTemplate)
-        self.button_worker.setImage(image, for: .normal)
-        self.button_worker.tintColor = .white
-        self.labelWorker.textColor = intense_blue
-    }
-    
-    private func styleUnselectButtonWorker(){
-        let border = UIColor(named: "border")
-        self.button_worker.backgroundColor = .white
-        let image = UIImage(named: "worker_outline")?.withRenderingMode(.alwaysTemplate)
-        self.button_worker.setImage(image, for: .normal)
-        self.button_worker.tintColor = border
-        self.labelWorker.textColor = border
-    }
     
     @IBAction func switchModeWorker(_ sender : AnyObject){
         self.clientView.isHidden = true
         self.workerView.isHidden = false
 
-        styleSelectButtonWorker()
-        styleUnselectButtonClient()
+        styleSelectButtonClient(button: self.button_worker, label: self.labelWorker, icon: "worker_outline")
+        styleUnselectButtonClient(button: self.button_client, label: self.labelClient, icon: "person_outline")
     }
     
     @IBAction func switchModeClient(_ sender : AnyObject){
         self.clientView.isHidden = false
         self.workerView.isHidden = true
         
-        styleSelectButtonClient()
-        styleUnselectButtonWorker()
+        styleSelectButtonClient(button: self.button_client, label: self.labelClient, icon: "person_outline")
+        styleUnselectButtonClient(button: self.button_worker, label: self.labelWorker, icon: "worker_outline")
     }
 
 

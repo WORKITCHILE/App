@@ -27,14 +27,16 @@ class PostedJobViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            let starAnimation = Animation.named("home")
+            let number = Int.random(in: 1...6)
+            
+            let starAnimation = Animation.named("home_\(number)")
             animation!.animation = starAnimation
             animation?.loopMode = .loop
             
-            
-            
+
             self.jobTable.delegate = self
             self.jobTable.dataSource = self
+            
             refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControl.Event.valueChanged)
             jobTable.tableFooterView = UIView()
             jobTable.addSubview(refreshControl)
@@ -68,7 +70,7 @@ class PostedJobViewController: UIViewController {
                 Singleton.shared.jobData = response.data
                 self.noJobsFound.isHidden = self.jobData.count != 0
                 self.addJobStack.isHidden = K_CURRENT_USER == K_POST_JOB && self.jobData.count == 0
-                
+               
                 self.jobTable.reloadData()
                 ActivityIndicator.hide()
             }
@@ -76,15 +78,8 @@ class PostedJobViewController: UIViewController {
         
     }
     
-    extension PostedJobViewController: UITableViewDelegate,UITableViewDataSource, SuccessPopup {
-        func yesAction() {
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-            myVC.jobDetail = self.jobData[self.selectedEditIntdex]
-            myVC.isEditJob = true
-            self.selectedEditIntdex = 0
-            self.navigationController?.pushViewController(myVC, animated: true)
-        }
-        
+    extension PostedJobViewController: UITableViewDelegate,UITableViewDataSource {
+     
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return self.jobData.count
         }
@@ -94,17 +89,16 @@ class PostedJobViewController: UIViewController {
             let val = self.jobData[indexPath.row]
             cell.jobPrice.text = "$" + "\(val.initial_amount ?? 0)"
             cell.jobName.text = val.job_name
-            cell.userImage.sd_setImage(with: URL(string: val.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.jobDate.text = val.job_date
             cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-            cell.totalBids.text = "Ofertas: \(val.bid_count ?? 0)"
+            cell.totalBids.text = "\(val.bid_count ?? 0)"
             cell.editJob = {
                
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
                myVC.jobDetail = self.jobData[self.selectedEditIntdex]
                myVC.isEditJob = true
                self.selectedEditIntdex = 0
-               self.navigationController?.pushViewController(myVC, animated: true)
+                self.present(myVC, animated: true, completion: nil)
                 
                 
             }
@@ -121,28 +115,28 @@ class PostedJobViewController: UIViewController {
     }
     
     
-    class JobTableView: UITableViewCell {
-        //MARK: IBOutlets
-        @IBOutlet weak var buttonEdit: UIButton!
-        @IBOutlet weak var userImage: ImageView!
-        @IBOutlet weak var jobPrice: UILabel!
-        @IBOutlet weak var jobDescription: UILabel!
-        @IBOutlet weak var jobName: UILabel!
-        @IBOutlet weak var userName: UILabel!
-        @IBOutlet weak var jobTime: UILabel!
-        @IBOutlet weak var jobDate: UILabel!
-        @IBOutlet weak var totalBids: UILabel!
-        @IBOutlet weak var userRating: CosmosView!
-        
-        @IBOutlet weak var viewForEdit: View!
-        
-        var editJob:(()-> Void)? = nil
-        
-        //MARK: IBActions
-        @IBAction func editAction(_ sender: Any) {
-            if let editButton = self.editJob {
-                editButton()
-            }
+class JobTableView: UITableViewCell {
+    //MARK: IBOutlets
+    @IBOutlet weak var buttonEdit: UIButton!
+    @IBOutlet weak var userImage: ImageView!
+    @IBOutlet weak var jobPrice: UILabel!
+    @IBOutlet weak var jobDescription: UILabel!
+    @IBOutlet weak var jobName: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var jobTime: UILabel!
+    @IBOutlet weak var jobDate: UILabel!
+    @IBOutlet weak var totalBids: UILabel!
+    @IBOutlet weak var userRating: CosmosView!
+    
+    @IBOutlet weak var viewForEdit: View!
+    
+    var editJob:(()-> Void)? = nil
+    
+    //MARK: IBActions
+    @IBAction func editAction(_ sender: Any) {
+        if let editButton = self.editJob {
+            editButton()
         }
-        
     }
+    
+}

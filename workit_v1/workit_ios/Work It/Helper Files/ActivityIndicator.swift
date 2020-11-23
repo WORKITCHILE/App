@@ -27,34 +27,38 @@ class ActivityIndicator
             
             self.label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 33.0))
             self.label.text = "Espera"
-            self.label.center = view.center
-            self.label.frame = CGRect(x: self.label.frame.origin.x, y: self.label.frame.origin.y + 35.0, width: 100.0, height: 33.0)
+            
+           
             self.label.textColor = UIColor.white
             self.label.textAlignment = NSTextAlignment.center
             
-            self.imageView.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
-            self.imageView.center = view.center
+           
+            view.addSubview(self.backgroundRounded)
+            self.backgroundRounded.addSubview(self.imageView)
+            self.backgroundRounded.addSubview(self.label)
+            
+            self.label.frame = CGRect(x: 0.0, y: 67.0, width: 100.0, height: 33.0)
+            self.imageView.frame = CGRect(x: 26.0, y: 16.0, width: 48.0, height: 48.0)
             
             self.turn180(self.imageView)
            
-            view.addSubview(self.backgroundRounded)
-            view.addSubview(self.imageView)
-            view.addSubview(self.label)
+            
         }
     }
     
-    static func turn180(_ view : UIView){
+    static func turn180(_ view : UIImageView){
+    
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
-            view.rotate(angle: 180)
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [], animations: {
+            view.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         }, completion: { complete in
             self.turn360(view)
         })
     }
     
-    static func turn360(_ view : UIView){
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
-            view.rotate(angle: 359)
+    static func turn360(_ view : UIImageView){
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [], animations: {
+            view.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
         }, completion: { complete in
             self.turn180(view)
         })
@@ -62,19 +66,10 @@ class ActivityIndicator
     
     static func hide() {
         overlayView.isUserInteractionEnabled = true
-        self.imageView.removeFromSuperview()
+       
+        self.imageView.stopAnimating()
         self.backgroundRounded.removeFromSuperview()
-        self.label.removeFromSuperview()
+
     }
 }
 
-
-extension UIView {
-
-    func rotate(angle: CGFloat) {
-        let radians = angle / 180.0 * CGFloat.pi
-        let rotation = self.transform.rotated(by: radians)
-        self.transform = rotation
-    }
-
-}

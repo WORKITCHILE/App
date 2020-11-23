@@ -41,6 +41,13 @@
 		4F8D8AF424DCE9E2006E7A68 /* UIViewControlller+Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */; };
 		4F8D8AF724DD8E75006E7A68 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */; };
 		4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F908E9524C9E7AB008F524C /* RatingViewController.swift */; };
+		4F956B09256ACFF500E68FD6 /* home_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B03256ACFEB00E68FD6 /* home_3.json */; };
+		4F956B0A256ACFF500E68FD6 /* home_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B04256ACFED00E68FD6 /* home_2.json */; };
+		4F956B0B256ACFF500E68FD6 /* home_6.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B05256ACFEF00E68FD6 /* home_6.json */; };
+		4F956B0C256ACFF500E68FD6 /* home_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B06256ACFF100E68FD6 /* home_5.json */; };
+		4F956B0D256ACFF500E68FD6 /* home_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B07256ACFF300E68FD6 /* home_1.json */; };
+		4F956B0E256ACFF500E68FD6 /* home_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F956B08256ACFF500E68FD6 /* home_4.json */; };
+		4F956B11256AE70200E68FD6 /* WorkerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F956B10256AE70200E68FD6 /* WorkerSearchViewController.swift */; };
 		4FADC48D24E5F98800882BFA /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC48C24E5F98800882BFA /* Home.storyboard */; };
 		4FADC49024E7458F00882BFA /* chat.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC48F24E7458F00882BFA /* chat.json */; };
 		4FADC49224E8862800882BFA /* support.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FADC49124E8862800882BFA /* support.json */; };
@@ -91,7 +98,6 @@
 		D2B4D4AC24633A260025CD0F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4D4AB24633A260025CD0F /* MapViewController.swift */; };
 		D2B714F124A716370023CFC2 /* CalendarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B714F024A716370023CFC2 /* CalendarDetailViewController.swift */; };
 		D2BBC54423CD8BF5007D85B5 /* AcceptJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBC54323CD8BF5007D85B5 /* AcceptJobViewController.swift */; };
-		D2BBC54623CD8DFA007D85B5 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BBC54523CD8DFA007D85B5 /* PaymentViewController.swift */; };
 		D2D0627D2484C4B7003CD091 /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0627C2484C4B7003CD091 /* AccountPageViewController.swift */; };
 		D2D0627F2484CC4D003CD091 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0627E2484CC4D003CD091 /* AccountsViewController.swift */; };
 		D2D7691023BE2C08001485E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7690F23BE2C08001485E1 /* AppDelegate.swift */; };
@@ -159,6 +165,13 @@
 		4F8D8AF324DCE9E2006E7A68 /* UIViewControlller+Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControlller+Header.swift"; sourceTree = "<group>"; };
 		4F8D8AF624DD8E75006E7A68 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		4F908E9524C9E7AB008F524C /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		4F956B03256ACFEB00E68FD6 /* home_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_3.json; sourceTree = "<group>"; };
+		4F956B04256ACFED00E68FD6 /* home_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_2.json; sourceTree = "<group>"; };
+		4F956B05256ACFEF00E68FD6 /* home_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_6.json; sourceTree = "<group>"; };
+		4F956B06256ACFF100E68FD6 /* home_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_5.json; sourceTree = "<group>"; };
+		4F956B07256ACFF300E68FD6 /* home_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_1.json; sourceTree = "<group>"; };
+		4F956B08256ACFF500E68FD6 /* home_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = home_4.json; sourceTree = "<group>"; };
+		4F956B10256AE70200E68FD6 /* WorkerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerSearchViewController.swift; sourceTree = "<group>"; };
 		4FADC48C24E5F98800882BFA /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4FADC48F24E7458F00882BFA /* chat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chat.json; sourceTree = "<group>"; };
 		4FADC49124E8862800882BFA /* support.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = support.json; sourceTree = "<group>"; };
@@ -216,7 +229,6 @@
 		D2B4D4AB24633A260025CD0F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D2B714F024A716370023CFC2 /* CalendarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailViewController.swift; sourceTree = "<group>"; };
 		D2BBC54323CD8BF5007D85B5 /* AcceptJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptJobViewController.swift; sourceTree = "<group>"; };
-		D2BBC54523CD8DFA007D85B5 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		D2D0627C2484C4B7003CD091 /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		D2D0627E2484CC4D003CD091 /* AccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
 		D2D7690C23BE2C08001485E1 /* Work It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Work It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,6 +322,12 @@
 		4FADC48E24E7457300882BFA /* lottie */ = {
 			isa = PBXGroup;
 			children = (
+				4F956B07256ACFF300E68FD6 /* home_1.json */,
+				4F956B04256ACFED00E68FD6 /* home_2.json */,
+				4F956B03256ACFEB00E68FD6 /* home_3.json */,
+				4F956B08256ACFF500E68FD6 /* home_4.json */,
+				4F956B06256ACFF100E68FD6 /* home_5.json */,
+				4F956B05256ACFEF00E68FD6 /* home_6.json */,
 				4F0E7A322517C821002A5916 /* add_account.json */,
 				4F0E7A2E2517B6E9002A5916 /* wallet.json */,
 				4F8667002516D7AB0069E8E5 /* home.json */,
@@ -344,6 +362,7 @@
 				4FFE072024E1C002007029A2 /* HomeViewController.swift */,
 				4F0E7A302517C7CA002A5916 /* AddCreditViewController.swift */,
 				4F0E7A362517CF6E002A5916 /* PaymentFlowViewController.swift */,
+				4F956B10256AE70200E68FD6 /* WorkerSearchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -437,7 +456,6 @@
 				D28BD95D23BF547F0012ADDC /* Dashboard */,
 				D266D11623BF35D40026FE3A /* Registration */,
 				D25B8B8123CD7BAF00F35416 /* AccountDetailViewController.swift */,
-				D2BBC54523CD8DFA007D85B5 /* PaymentViewController.swift */,
 				4F908E9524C9E7AB008F524C /* RatingViewController.swift */,
 				D25DEA3D2410C67900924557 /* SuccessMsgViewController.swift */,
 				D2B4D4AB24633A260025CD0F /* MapViewController.swift */,
@@ -686,6 +704,7 @@
 				4F0E7A22251787A5002A5916 /* Poppins-ExtraLight.ttf in Resources */,
 				4FAEF3E42556CEDB009CA225 /* AccountAndCredits.storyboard in Resources */,
 				4F0E7A23251787A5002A5916 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				4F956B0E256ACFF500E68FD6 /* home_4.json in Resources */,
 				4FAEF3F125570981009CA225 /* user_profile_config.json in Resources */,
 				4F0E7A24251787A5002A5916 /* Poppins-Italic.ttf in Resources */,
 				4F0E7A25251787A5002A5916 /* Poppins-Light.ttf in Resources */,
@@ -693,6 +712,8 @@
 				4F0E7A27251787A5002A5916 /* Poppins-Medium.ttf in Resources */,
 				4F0E7A28251787A5002A5916 /* Poppins-MediumItalic.ttf in Resources */,
 				4F0E7A29251787A5002A5916 /* Poppins-Regular.ttf in Resources */,
+				4F956B0C256ACFF500E68FD6 /* home_5.json in Resources */,
+				4F956B09256ACFF500E68FD6 /* home_3.json in Resources */,
 				4F0E7A2A251787A5002A5916 /* Poppins-SemiBold.ttf in Resources */,
 				4F0E7A2B251787A5002A5916 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				4F0E7A2F2517B6E9002A5916 /* wallet.json in Resources */,
@@ -705,9 +726,12 @@
 				4FADC48D24E5F98800882BFA /* Home.storyboard in Resources */,
 				D244A3332421D8490098B6FD /* firebaseConfigInfo.plist in Resources */,
 				4F5DC1C024D4696C0076FCDF /* signup.storyboard in Resources */,
+				4F956B0A256ACFF500E68FD6 /* home_2.json in Resources */,
 				4F8666FF2516D36F0069E8E5 /* search_worker.json in Resources */,
+				4F956B0B256ACFF500E68FD6 /* home_6.json in Resources */,
 				4F5DC1BE24CFB4780076FCDF /* HomeWorker.storyboard in Resources */,
 				4F08B74824E5B6B7004FE8F7 /* OFL.txt in Resources */,
+				4F956B0D256ACFF500E68FD6 /* home_1.json in Resources */,
 				4F0E7A352517CF1B002A5916 /* PaymentFlow.storyboard in Resources */,
 				4F8667012516D7AB0069E8E5 /* home.json in Resources */,
 				4FADC49224E8862800882BFA /* support.json in Resources */,
@@ -802,9 +826,9 @@
 				4F908E9624C9E7AB008F524C /* RatingViewController.swift in Sources */,
 				D25DEA3E2410C67A00924557 /* SuccessMsgViewController.swift in Sources */,
 				D28BD95C23BF528D0012ADDC /* SignupViewController.swift in Sources */,
+				4F956B11256AE70200E68FD6 /* WorkerSearchViewController.swift in Sources */,
 				D2E124B624091BC4009DF90A /* RunningJobViewController.swift in Sources */,
 				D25BFAA323C0485800CBB4DE /* PostedJobViewController.swift in Sources */,
-				D2BBC54623CD8DFA007D85B5 /* PaymentViewController.swift in Sources */,
 				D2E124B824094523009DF90A /* StartJobViewController.swift in Sources */,
 				D25BFA9A23C047BC00CBB4DE /* InboxViewController.swift in Sources */,
 				D25B8B8723CD84FC00F35416 /* FilterViewController.swift in Sources */,

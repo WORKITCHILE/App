@@ -9,20 +9,23 @@
 
 import UIKit
 import SDWebImage
+import FloatingPanel
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, FloatingPanelControllerDelegate {
     //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataFound: DesignableUILabel!
-    
+    var fpc: FloatingPanelController!
     var categoriesData = [GetCategoryResponse]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //
      
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         
         if(Singleton.shared.getCategories.count == 0){
             //ActivityIndicator.show(view: self.view)
@@ -45,6 +48,18 @@ class DashboardViewController: UIViewController {
             self.tableView.reloadData()
         }
        
+        fpc = FloatingPanelController()
+        fpc.delegate = self
+
+        /*
+        let contentVC = ContentViewController()
+        fpc.set(contentViewController: contentVC)
+        fpc.track(scrollView: contentVC.tableView)
+        */
+        fpc.contentMode = .fitToBounds
+        fpc.addPanel(toParent: self)
+        
+        
     }
    
     
@@ -68,8 +83,8 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell") as! DashboardCell
         
         let val = self.categoriesData[indexPath.row]
-        
-        cell.jobName.text = val.category_name
+        cell.selectionStyle = .none
+        cell.jobName.text = val.category_name?.uppercased()
         cell.jobImage.sd_setImage(with: URL(string: val.category_image ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         
        

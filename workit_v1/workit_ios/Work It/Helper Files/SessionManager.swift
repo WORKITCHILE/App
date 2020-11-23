@@ -23,6 +23,8 @@ class SessionManager: NSObject {
            
             let statusCode = dataResponse.response?.statusCode
             
+
+            
             switch dataResponse.result {
                 case .success(_):
                     let object = self.convertDataToObject(response: dataResponse.data, T.self)

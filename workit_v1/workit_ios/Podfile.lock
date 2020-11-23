@@ -387,6 +387,7 @@ PODS:
   - FirebaseUI/Storage (8.4.2):
     - Firebase/Storage (~> 6.0)
     - SDWebImage (~> 5.0)
+  - FloatingPanel (2.0.1)
   - GoogleAppMeasurement (6.6.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -502,6 +503,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - FirebaseUI/OAuth
   - FirebaseUI/Phone
+  - FloatingPanel
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
@@ -546,6 +548,7 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - FirebaseStorage
     - FirebaseUI
+    - FloatingPanel
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -610,6 +613,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 1725314c4b89d8853c876099ded037f11bee26db
   FirebaseStorage: f4f39ae834a7145963b913f54e2f24a9db1d8fac
   FirebaseUI: e57e9b9c4340631151fbe67a14206d23d0974f37
+  FloatingPanel: 579a5ac0154f923a9d7302c4f13dbc0268511c92
   GoogleAppMeasurement: 67458367830514fb20fd9e233496f1eef9d90185
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
@@ -633,6 +637,6 @@ SPEC CHECKSUMS:
   SwiftyCodeView: 0252e3520749a3fda1a9b141873401f8e6c570ad
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 76c0958876c92e034769dbfff6568fcf16e9ca65
+PODFILE CHECKSUM: 8d8c50a81ca41df3ce40287a13be1f6672d957f9
 
 COCOAPODS: 1.9.3
