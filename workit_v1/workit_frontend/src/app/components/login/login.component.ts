@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.angularFireAuth.auth.signInWithEmailAndPassword(this.userObj.email, this.userObj.password).then(value => {
       // console.log('Success!', value);
       // console.log('Success!', value.user.uid);
-      if (value.user.uid == 'TwFSa64QSch5DCGkKrfakDcBdqb2') {
+      if (value.user.uid == 'XXMi1Mhjc6UA3yO6XO7l5hCOT0l2') {
         this.auth.setValue(environment.adminId, value.user.uid);
         this.router.navigate(['/dashboard']);
       }

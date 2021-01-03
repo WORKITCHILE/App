@@ -20,9 +20,11 @@ class SessionManager: NSObject {
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
 
          
+            debugPrint(dataResponse)
            
             let statusCode = dataResponse.response?.statusCode
             
+
 
             
             switch dataResponse.result {

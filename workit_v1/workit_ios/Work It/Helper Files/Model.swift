@@ -62,6 +62,8 @@ struct UserInfo: Codable {
     var average_rating: String?
     var user_id: String?
     var background_document: String?
+    var work_images : [String?] = []
+    var marketplace : String?
 }
 
 struct GetCategory: Codable {
@@ -75,6 +77,7 @@ struct GetCategoryResponse: Codable{
     var created_at: Int?
     var category_name: String?
     var category_id: String?
+    var types: [String]? = []
 }
 
 
@@ -91,11 +94,12 @@ struct GetSubcategory: Codable {
     var status: Int?
 }
 
-struct GetSubcategoryResponse: Codable{
+struct GetSubcategoryResponse: Codable, Hashable{
     var subcategory_image: String?
     var category_id: String?
     var subcategory_name: String?
     var subcategory_id: String?
+    var types: [String]? = []
 }
 
 struct GetState: Codable{
@@ -131,7 +135,7 @@ struct GetJob: Codable {
 
 
 struct GetJobResponse: Codable{
-    var job_amount: String?
+    var have_document: Bool = false
     var is_reposted:Int?
     var status: String?
     var owner_status: String?
@@ -158,6 +162,7 @@ struct GetJobResponse: Codable{
     var is_bid_placed: Int?
     var bid_count: Int?
     var initial_amount: Double?
+    var service_amount: Double?
     var images : [String]?
     var job_time: Int?
     var job_city: String?
@@ -170,29 +175,53 @@ struct GetJobResponse: Codable{
     var job_address_longitude: Double?
     var job_address_latitude: Double?
     var category_name: String?
-    var service_amount: String?
     var counteroffer_amount: String?
     var job_date: String?
     var job_approach: String?
     var canceled_by: String?
     var created_at: Int?
-    var my_bid:BidResponse?
+    var my_bid: BidResponse?
     var bids:[BidResponse]?
 }
 
 struct BidResponse: Codable {
-    var owner_status: String?
-    var job_id: String?
-    var bid_id: String?
-    var vendor_id: String?
-    var vendor_occupation: String?
-    var vendor_dob: Int?
-    var vendor_name: String?
+
+    var bid_show_status = "YES"
+    var initial_amount = 0
+    var job_address_number = ""
+    var average_rating = "0"
+    var comment = ""
+    var job_address = ""
+    var marketplace = ""
+    var updated_at = 0
+    var created_at = 0
+    var job_name = ""
+    var job_date = ""
+    var job_address_reference = ""
+    var job_approach = ""
+    var user_image: String?
     var vendor_image: String?
-    var vendor_status: String?
-    var vendor_average_rating: String?
-    var comment: String?
-    var counteroffer_amount: String?
+    var job_end_time = 0
+    var job_day_timestamp  = 0
+    var counteroffer_amount = "0"
+    var job_time = 0
+    var vendor_description = ""
+    var have_vendor_document : Bool?
+    var have_document : Bool?
+    var vendor_name = ""
+    var vendor_status = ""
+    var category_name = ""
+    var job_id = ""
+    var vendor_id = ""
+    var job_description = ""
+    var vendor_occupation = ""
+    var user_description = ""
+    var owner_status = ""
+    var subcategory_name = ""
+    var user_name = ""
+    var user_occupation = ""
+    var vendor_images : [String] = []
+    var bid_id = ""
 }
 
 struct GetSingleJob: Codable{
@@ -228,7 +257,7 @@ struct GetRatingResponse: Codable {
     var rate_from_image: String?
     var rate_from_name: String?
     var job_approach: String?
-    var job_amount: String?
+    var job_amount = 0
     var rate_to_image: String?
     var job_city: String?
     var job_time:Int?
@@ -241,7 +270,7 @@ struct GetRatingResponse: Codable {
     var rate_to_type: String?
     var job_name: String?
     var job_id: String?
-    var rating: String?
+    var rating = 0.0
     var job_description: String?
     var rate_to: String?
     var job_date: String?
@@ -315,8 +344,11 @@ struct TransactionDetail: Codable{
     var created_at: Int?
     var user_id: String?
     var job_id: String?
+    var job_name: String?
+    var payment_received = false
     var commission: String?
     var transaction_id: String?
+    var detail: String?
     var transaction_for: String?
     var payment_option: String?
     var amount: String?
@@ -360,8 +392,17 @@ struct CalendarJobs: Codable{
 }
 
 struct CalendarJobsResponse: Codable{
-    var job_data : [GetJobResponse]?
+    var job_data : [CalendarJob]?
 }
 
+struct CalendarJob : Codable {
+    var job_address = ""
+    var job_date = ""
+    var job_id = ""
+    var job_name = ""
+    var job_time = 0
+    var status = "POSTED"
+    var user_id = ""
+}
 
 

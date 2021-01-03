@@ -20,15 +20,16 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var fakerHeader: UIImageView!
     
-
     var categories: [String] = []
     var googleId: String?
     var facebookId: String?
+    
     var fName = ""
     var lName = ""
     var socialPicture = ""
     var userEmail = ""
     var docuymentUrl = ""
+    
     let authUI = FUIAuth.defaultAuthUI()
     private var userData : [[String:Any]] = []
     private var displayData : [[String:Any]] = []
@@ -56,14 +57,10 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
                 {
                     userData = (json["data"] as?  [[String:Any]])!
                     if(self.fName != ""){
-                        self.userData[1]["value"] = self.fName
-                        let commponents = self.lName.split(separator: " ").map{ String($0) }
-                        if(commponents.count == 2){
-                            self.userData[2]["value"] = commponents[0]
-                            self.userData[3]["value"] = commponents[1]
-                        } else {
-                            self.userData[2]["value"] = self.lName
-                        }
+                  
+                        self.userData[3]["value"] = fName
+                        self.userData[4]["value"] = lName
+                       
                         
                     }
                     if(self.userEmail != ""){
@@ -87,13 +84,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         self.tableList.reloadData()
         setTransparentHeader()
         
-        if(self.socialPicture != ""){
-            
-            self.userImage.sd_setImage(with: URL(string: self.socialPicture ), placeholderImage: #imageLiteral(resourceName: "dummyProfile"),options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
-              
-            })
-        }
-        
+       
     }
     
 
@@ -223,16 +214,17 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
 
     func validateClientData() -> Bool {
         
-        let email = self.displayData[0]["value"] as! String
-        let password = self.displayData[1]["value"] as! String
-        let confirmPassword = self.displayData[2]["value"] as! String
-        let name = self.displayData[3]["value"] as! String
-        let fatherName = self.displayData[4]["value"] as! String
-        let motherName = self.displayData[5]["value"] as! String
-        let nationality = self.displayData[6]["value"] as! String
-        let mobileNumber = self.displayData[7]["value"] as! String
-        let address = self.displayData[8]["value"] as! String
-        
+        let name = self.displayData[0]["value"] as! String
+        let fatherName = self.displayData[1]["value"] as! String
+        let motherName = self.displayData[2]["value"] as! String
+        let address = self.displayData[3]["value"] as! String
+        let mobileNumber = self.displayData[6]["value"] as! String
+        let email = self.displayData[7]["value"] as! String
+        let password = self.displayData[8]["value"] as! String
+        let confirmPassword = self.displayData[9]["value"] as! String
+        let nationality = self.displayData[10]["value"] as! String
+       
+       
         if(userProfilePicture == ""){
            Singleton.shared.showToast(text: "Sube una imagen de perfil")
             return false
@@ -304,13 +296,12 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     @IBAction func continueAction(_ sender: Any) {
         
         
-        self.displayData.forEach {
-            debugPrint($0["value"] as Any)
-        }
+      
         
        let isWorker = self.segmentControl.selectedSegmentIndex == 1
        let isValidClientData = validateClientData()
       
+        /*
         if(isValidClientData == false){
             return
         }
@@ -318,20 +309,22 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         if(isWorker && validateWorkerData() == false){
             return
         }
+        */
         
        ActivityIndicator.show(view: self.view)
        let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
        
-        let email = self.displayData[0]["value"] as! String
-        let password = self.displayData[1]["value"] as! String
-        let name = self.displayData[3]["value"] as! String
-        let fatherName = self.displayData[4]["value"] as! String
-        let motherName = self.displayData[5]["value"] as! String
-        let nationality = self.displayData[6]["value"] as! String
-        let mobileNumber = self.displayData[7]["value"] as! String
-        let address = self.displayData[8]["value"] as! String
-        let addressNumber = self.displayData[9]["value"] as! String
-        let addressReference = self.displayData[10]["value"] as! String
+        let name = self.displayData[0]["value"] as! String
+        let fatherName = self.displayData[1]["value"] as! String
+        let motherName = self.displayData[2]["value"] as! String
+        let address = self.displayData[3]["value"] as! String
+        let addressNumber = self.displayData[4]["value"] as! String
+        let addressReference = self.displayData[5]["value"] as! String
+        let mobileNumber = self.displayData[6]["value"] as! String
+        let email = self.displayData[7]["value"] as! String
+        let password = self.displayData[8]["value"] as! String
+        let nationality = self.displayData[10]["value"] as! String
+        
         let profileDescription = self.displayData[11]["value"] as! String
         let idNumber = self.displayData[12]["value"] as! String
         let occupation =  self.displayData[13]["value"] as! String
@@ -339,7 +332,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         let param : [String:Any] = [
             "google_handle": self.googleId as Any,
             "facebook_handle": self.facebookId as Any,
-            "fcm_token": fcmToken as Any,
+            "fcm_token": fcmToken! as Any,
             "profile_picture": self.userProfilePicture,
             "email":email,
             "name":name,
@@ -359,7 +352,10 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             "occupation": occupation,
             "document_background": self.docuymentUrl
        ]
+        
+        debugPrint(param)
       
+        /*
        let url = "\(U_BASE)\(U_SIGN_UP)"
        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
            
@@ -368,6 +364,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             
     
        }
+ */
       
         
     }
@@ -388,7 +385,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
  
-        self.displayData[8]["value"] = "\(place.formattedAddress ?? "")"
+        self.displayData[3]["value"] = "\(place.formattedAddress ?? "")"
         self.tableList.reloadData()
     }
     
@@ -446,7 +443,7 @@ extension SignupViewController:   UIDocumentPickerDelegate {
         
           do {
             let components = urls[0].absoluteString.split(separator: "/").map { String($0) }
-                self.displayData[15]["value"] = components.last
+                self.displayData[16]["value"] = components.last
                 self.tableList.reloadData()
 
                 let documentData = try Data(contentsOf: urls[0])
@@ -487,13 +484,27 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
         }else {
             cell.borderNotEditable()
         }
+        
+        debugPrint("cellType", cellType)
+        debugPrint("value", value)
+        
         if(cellType == "fieldData" || cellType == "fieldDataButton"){
+            
             cell.fieldTextField.placeholder = (field["placeholder"] as! String)
             cell.fieldTextField.text = value
             cell.fieldTextField.isSecureTextEntry = security
            
-        } else if(cellType == "FieldDataBigText") {
-            cell.fieldTextView.text = value
+        } else if(cellType == "fieldDataBigText") {
+            
+            debugPrint("value", value)
+            
+            if(value == ""){
+                cell.fieldTextView.text = (field["placeholder"] as! String)
+            } else {
+                cell.fieldTextView.text = value
+            }
+          
+           
         } else if(cellType == "FieldDataButtons") {
             
             if(cell.button1 != nil && self.image1 != nil){
@@ -536,6 +547,28 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
 
 
 extension SignupViewController : FieldTableViewCellDelegate{
+    
+    func tapCollectionItem(indexCell: IndexPath) {
+        if(indexCell.row == 0){
+            
+            let alert = UIAlertController(title: "Elegir Imagen", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Camara", style: .default, handler: { _ in
+                self.openCamera()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Galeria", style: .default, handler: { _ in
+                self.openGallary()
+            }))
+            
+            alert.addAction(UIAlertAction.init(title: "Cancelar", style: .cancel, handler: nil))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = self.view.bounds
+            }
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func tapButton(indexCell: IndexPath, tagButton: Int) {
         
         if(indexCell.row == 13){
@@ -547,7 +580,7 @@ extension SignupViewController : FieldTableViewCellDelegate{
             myVC.pickerData = self.categories
             self.navigationController?.present(myVC, animated: false, completion: nil)
             
-        } else if(indexCell.row == 14){
+        } else if(indexCell.row == 15){
             
             self.currentImage = tagButton
             let storyboard  = UIStoryboard(name: "signup", bundle: nil)
@@ -555,14 +588,15 @@ extension SignupViewController : FieldTableViewCellDelegate{
             myVC.captureDelegate = self
             self.navigationController?.pushViewController(myVC, animated: true)
             
-        } else if(indexCell.row == 15){
+        } else if(indexCell.row == 16){
             
             let importMenu = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
             importMenu.delegate = self
             importMenu.modalPresentationStyle = .formSheet
             self.present(importMenu, animated: true, completion: nil)
             
-        } else if(indexCell.row == 8){
+        } else if(indexCell.row == 3){
+            
             let autocompleteController = GMSAutocompleteViewController()
             autocompleteController.delegate = self
 
@@ -579,6 +613,7 @@ extension SignupViewController : FieldTableViewCellDelegate{
         
             autocompleteController.modalPresentationStyle = .overFullScreen
             present(autocompleteController, animated: true, completion: nil)
+            
         }
       
        

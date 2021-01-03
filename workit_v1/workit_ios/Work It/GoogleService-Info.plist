@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>863747706156-ps4oak8f2hpm997uau2h9m97ovlo31pb.apps.googleusercontent.com</string>
+	<string>863747706156-3l7nrf7be6oiu11jl9pphhvm78caeq47.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.863747706156-ps4oak8f2hpm997uau2h9m97ovlo31pb</string>
+	<string>com.googleusercontent.apps.863747706156-3l7nrf7be6oiu11jl9pphhvm78caeq47</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>863747706156-1rc566oklu8i8onv71tg8na8dpei4p4j.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBr2HA1jMPGrMnUrGLDEKcB4qOoNdbRgQ8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>workit.Work-It</string>
+	<string>workit.workitapp</string>
 	<key>PROJECT_ID</key>
 	<string>workit-de544</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:863747706156:ios:c91f1b812078169c2c7089</string>
+	<string>1:863747706156:ios:255a05b03bb33bad2c7089</string>
 	<key>DATABASE_URL</key>
 	<string>https://workit-de544.firebaseio.com</string>
 </dict>

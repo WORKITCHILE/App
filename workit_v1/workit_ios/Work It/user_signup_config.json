@@ -2,36 +2,6 @@
 {
     "data":[
         {
-            "placeholder":"Correo",
-            "workerField":false,
-            "icon":"ic_signup_arroba",
-            "value":"",
-            "cell":"fieldData",
-            "editable":false,
-            "field":"email",
-            "security":false
-        },
-        {
-            "placeholder":"Contraseña",
-            "workerField":false,
-            "icon":"ic_signup_lock",
-            "value":"",
-            "cell":"fieldData",
-            "editable":false,
-            "field":"password",
-            "security":true
-        },
-        {
-            "placeholder":"Confirmar contraseña",
-            "workerField":false,
-            "icon":"ic_signup_lock",
-            "value":"",
-            "cell":"fieldData",
-            "editable":false,
-            "field":"repassword",
-            "security":true
-        },
-        {
             "placeholder":"Nombre",
             "workerField":false,
             "icon":"ic_signup_option_data",
@@ -59,26 +29,6 @@
             "cell":"fieldData",
             "editable":false,
             "field":"motherName",
-            "security":false
-        },
-        {
-            "placeholder":"Nacionalidad",
-            "workerField":false,
-            "icon":"ic_signup_flag",
-            "value":"",
-            "cell":"fieldData",
-            "editable":false,
-            "field":"country",
-            "security":false
-        },
-        {
-            "placeholder":"Número de telefono",
-            "workerField":false,
-            "icon":"ic_signup_phone",
-            "value":"",
-            "cell":"fieldData",
-            "editable":true,
-            "field":"phone",
             "security":false
         },
         {
@@ -112,7 +62,57 @@
             "security":false
         },
         {
-            "placeholder":"descripción",
+            "placeholder":"Número de telefono",
+            "workerField":false,
+            "icon":"ic_signup_phone",
+            "value":"",
+            "cell":"fieldData",
+            "editable":true,
+            "field":"phone",
+            "security":false
+        },
+        {
+            "placeholder":"Correo",
+            "workerField":false,
+            "icon":"ic_signup_arroba",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false,
+            "field":"email",
+            "security":false
+        },
+        {
+            "placeholder":"Contraseña",
+            "workerField":false,
+            "icon":"ic_signup_lock",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false,
+            "field":"password",
+            "security":true
+        },
+        {
+            "placeholder":"Confirmar contraseña",
+            "workerField":false,
+            "icon":"ic_signup_lock",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false,
+            "field":"repassword",
+            "security":true
+        },
+        {
+            "placeholder":"Nacionalidad",
+            "workerField":false,
+            "icon":"ic_signup_flag",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false,
+            "field":"country",
+            "security":false
+        },
+        {
+            "placeholder":"Escribe una descripción",
             "workerField":true,
             "icon":"ic_signup_document",
             "value":"",
@@ -139,6 +139,16 @@
             "cell":"fieldDataButton",
             "editable":true,
             "field":"occupation",
+            "security":false
+        },
+        {
+            "placeholder":"",
+            "workerField":true,
+            "icon":"",
+            "value":"",
+            "cell":"fieldCollection",
+            "editable":true,
+            "field":"images",
             "security":false
         },
         {

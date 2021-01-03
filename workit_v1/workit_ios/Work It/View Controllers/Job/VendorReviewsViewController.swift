@@ -48,7 +48,7 @@ class VendorReviewsViewController: UIViewController {
             cell.userImage.sd_setImage(with: URL(string: val.rate_from_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.userName.text = val.rate_from_name!.formatName()
             cell.timeLabel.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-            cell.rateView.rating = Double(val.rating ?? "0")!
+            cell.rateView.rating = val.rating
             cell.jobAddress.text = val.comment
             return cell
         }

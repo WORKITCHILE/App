@@ -52,26 +52,25 @@ class LoginViewController: UIViewController {
     
     func getProfileData(id: String){
         
-        debugPrint("--> getProfileData \(id)")
+
             ActivityIndicator.show(view: self.view)
         
             let url = "\(U_BASE)\(U_GET_PROFILE)\(id)"
        
        
             SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
-                
-               
+            
                 
                 Singleton.shared.userInfo = response.data!
                 Singleton.saveUserInfo(data:Singleton.shared.userInfo)
                 if(Singleton.shared.userInfo.is_email_verified != 1){
-                    debugPrint("FORGOT")
+                    
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
                     myVC.isNewuser = true
                     self.navigationController?.pushViewController(myVC, animated: true)
+                    
                 }else {
-                     debugPrint("MAIN")
-                    Singleton.shared.showToast(text: "Successfully Logged In")
+                   
                     let storyboard  = UIStoryboard(name: "Main", bundle: nil)
                     let myVC = storyboard.instantiateViewController(withIdentifier: "main")
                     self.view.window?.rootViewController = myVC

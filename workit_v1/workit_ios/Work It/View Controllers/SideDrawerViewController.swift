@@ -48,15 +48,18 @@ class SideDrawerViewController: UIViewController {
         self.userName.text = userInfo.name
         self.userImage.sd_setImage(with: URL(string: userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         self.userRating.rating = Double(userInfo.average_rating ?? "0")!
-         
+        
         arrayMenu = [
             MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Tus datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"]),
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Cuenta Bancaria", action: .open, data:["vc":"AccountSettingViewController", "storyboard":"AccountAndCredits"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_setting_account"), name: "Historial de pago", action: .open, data:["vc":"CreditViewController", "storyboard":"AccountAndCredits"]),
+            MenuObject(image: UIImage(named: "ic_bids"), name: "Mis Ofertas", action: .open, data:["vc":"MyBidsViewController", "storyboard":"Main"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_bank_account"), name: "Cuenta Bancaria", action: .open, data:["vc":"AccountSettingViewController", "storyboard":"AccountAndCredits"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_signup_wallet"), name: "Historial de pago", action: .open, data:["vc":"CreditViewController", "storyboard":"AccountAndCredits"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_historial"), name: "Historial", action: .open, data:["vc":"HistorialViewController", "storyboard":"Main"]),
+          
             MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:[:])
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
+            MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:["vc":"terms", "storyboard":"signup"])
         ]
          
          tableViewMenu.reloadData()
@@ -157,7 +160,7 @@ extension SideDrawerViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let firstLimit = scrollView.contentOffset.y >= -10.0
-        let secondLimit = scrollView.contentOffset.y >= 60.0
+        let secondLimit = scrollView.contentOffset.y >= 30.0
         
         UIView.animate(withDuration: 0.5) {
            self.userImageContainer.alpha = firstLimit ? 0.0 : 1.0

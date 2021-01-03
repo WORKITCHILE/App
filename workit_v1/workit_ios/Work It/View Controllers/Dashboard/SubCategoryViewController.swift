@@ -12,14 +12,14 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     //MARKL: IBOutlets
-    @IBOutlet weak var selecteCategoryTable: UITableView!
-    @IBOutlet weak var noDataLabel: DesignableUILabel!
-   
+    @IBOutlet private weak var selecteCategoryTable: UITableView!
+    @IBOutlet private weak var buttonContinue: UIButton!
     
-    var subcategoryData = [GetSubcategoryResponse]()
-    var categoryId = String()
-    var selectedSubcategories = Set<String>()
-    var titleHeading:String?
+    private var subcategoryData = [GetSubcategoryResponse]()
+    
+    private var selectedSubcategories = Set<GetSubcategoryResponse>()
+    var category: GetCategoryResponse?
+    var titleHeading = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,39 +29,44 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        buttonContinue.isEnabled = false
+        buttonContinue.alpha = 0.5
     }
     
     func getSubCategoryData(){
         ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_SUBCATEGORIES + categoryId, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
+        let url = "\(U_BASE)\(U_GET_SUBCATEGORIES)\(category?.category_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
             self.subcategoryData = response.data
-            if(self.subcategoryData.count == 0){
-                self.noDataLabel.isHidden = false
-  
-            }else {
-                self.noDataLabel.isHidden = true
-            }
-            
             self.selecteCategoryTable.reloadData()
             ActivityIndicator.hide()
+            
+            if(self.subcategoryData.count == 0){
+                let storyboard  = UIStoryboard(name: "HomeWorker", bundle: nil)
+                let myVC = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController") as! CategoryListViewController
+                
+                myVC.subcategories = [GetSubcategoryResponse(subcategory_image: self.category?.category_image, category_id: self.category?.category_id, subcategory_name: self.category?.category_name, subcategory_id: self.category?.category_id, types: self.category?.types)]
+               
+              
+               
+                
+                var navigationArray = self.navigationController?.viewControllers
+                navigationArray!.remove(at: 1)
+                
+                
+                self.navigationController?.viewControllers = navigationArray!
+                
+                self.navigationController?.pushViewController(myVC, animated: true)
+                
+            }
         }
     }
-    
-    @IBAction func nextAction(_ sender: Any) {
-        /*
-        if(self.selectedSubcategories.count == 0){
-            Singleton.shared.showToast(text: "Select category")
-        }else {
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoryListViewController") as! CategoryListViewController
-            myVC.subcategoryId = Array(self.selectedSubcategories)
-            self.navigationController?.pushViewController(myVC, animated: true)
-        }
-        */
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let myVC = segue.destination as! CategoryListViewController
-        myVC.subcategoryId = Array(self.selectedSubcategories)
+        myVC.subcategories = Array(self.selectedSubcategories)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,22 +78,26 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
         let val = self.subcategoryData[indexPath.row]
-        cell.menuImage?.image = #imageLiteral(resourceName: "ic_uncheck")
+        cell.menuImage?.image = (selectedSubcategories.contains(val)) ? UIImage(named: "ic_check"): UIImage(named: "ic_uncheck")
         cell.menuName.text = val.subcategory_name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
+       
         let val = self.subcategoryData[indexPath.row]
-        if(cell.menuImage?.image == #imageLiteral(resourceName: "ic_check")){
-            cell.menuImage?.image = #imageLiteral(resourceName: "ic_uncheck")
-            self.selectedSubcategories.remove(val.subcategory_id ?? "")
-        }else{
-            cell.menuImage?.image = #imageLiteral(resourceName: "ic_check")
-            self.selectedSubcategories.insert(val.subcategory_id ?? "")
+        
+        if(selectedSubcategories.contains(val)){
+            selectedSubcategories.remove(val)
+        } else {
+            selectedSubcategories.insert(val)
         }
-        print(self.selectedSubcategories)
+        
+        buttonContinue.isEnabled = self.selectedSubcategories.count != 0
+        buttonContinue.alpha = self.selectedSubcategories.count == 0 ? 0.5 : 1.0
+        
+        self.selecteCategoryTable.reloadData()
+    
     }
 
 }

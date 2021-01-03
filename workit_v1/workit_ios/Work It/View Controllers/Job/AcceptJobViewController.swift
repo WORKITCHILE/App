@@ -357,7 +357,8 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
             //self.offerValue.text = "$" + (self.jobData?.my_bid?.counteroffer_amount ?? self.jobData?.counteroffer_amount ?? self.bidDetail?.counteroffer_amount ?? "0")
             //self.occupation.text =  self.jobData?.vendor_occupation ?? self.bidDetail?.vendor_occupation ?? self.jobData?.user_occupation ?? ""
             //self.workerDescription.text =  self.jobData?.comment ?? self.bidDetail?.comment ?? self.jobData?.job_description ?? ""
-            self.userRating.rating = Double(self.jobData?.vendor_average_rating ?? self.bidDetail?.vendor_average_rating ?? self.jobData?.user_average_rating ?? "0")!
+            //self.userRating.rating = Double(self.jobData?.vendor_average_rating ?? self.bidDetail?.vendor_average_rating ?? self.jobData?.user_average_rating ?? "0")!
+            
         }else {
            // self.viewReviewButton.isHidden = true
             if(Singleton.shared.userInfo.user_id == self.jobData?.user_id){

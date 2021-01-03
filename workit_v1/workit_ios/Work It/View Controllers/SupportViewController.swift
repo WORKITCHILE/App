@@ -13,6 +13,8 @@ class SupportViewController: UIViewController,UITextViewDelegate {
     //MARK: IBOUtlets
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var animation : AnimationView!
+    
+    private let placeholderString = "Escribe un mensaje"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ class SupportViewController: UIViewController,UITextViewDelegate {
        
         self.setNavigationBar()
         
-        self.comment.text = "Write Message"
+        self.comment.text = placeholderString
         self.comment.delegate = self
         
         let starAnimation = Animation.named("support")
@@ -37,19 +39,37 @@ class SupportViewController: UIViewController,UITextViewDelegate {
 
     
     @IBAction func sendAction(_ sender: Any) {
-        if(self.comment.text == "Write Message" || self.comment.text == ""){
-            Singleton.shared.showToast(text: "Write your comments")
+        if(self.comment.text == placeholderString || self.comment.text == ""){
+            Singleton.shared.showToast(text: "Debes escribir un mensaje")
         }else {
+            
             let param = [
                 "user_id":Singleton.shared.userInfo.user_id ?? "",
-              "message":self.comment.text ?? ""
+                "message":self.comment.text ?? ""
             ] as? [String:Any]
-            SessionManager.shared.methodForApiCalling(url: U_BASE + U_SUPPORT, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SUPPORT) { (response) in
-                self.openSuccessPopup(img: #imageLiteral(resourceName: "tick"), msg: "Thanks for connecting with WORKIT, One of the customer representative will connect with you within the next 48 hours.", yesTitle: "Ok", noTitle: nil, isNoHidden: true)
+            
+            
+            ActivityIndicator.show(view: self.view)
+            let url = "\(U_BASE)\(U_SUPPORT)"
+            SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SUPPORT) { (response) in
+              
+                ActivityIndicator.hide()
+                let alert = UIAlertController(title: "Workit", message: "Gracias por conectarse con WORKIT, uno de los encargados del soporte al cliente se contactara con usted en las próximas 48 horas", preferredStyle: .alert)
+                          
+                   alert.addAction(UIAlertAction(title: "Ok", style: .default){ _ in
+                     
+                    self.navigationController?.popViewController(animated: true)
+                     
+                      
+                   })
+                 
                 
-                self.comment.text = "Enter Message"
+                   self.present(alert, animated: true)
+                
+                self.comment.text = self.placeholderString
                 self.comment.textColor = .lightGray
-                self.navigationController?.popViewController(animated: true)
+                
+                
             }
             
         }
@@ -58,7 +78,7 @@ class SupportViewController: UIViewController,UITextViewDelegate {
     
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-           if(textView.text == "Write Message"){
+           if(textView.text == placeholderString){
                self.comment.text = ""
                self.comment.textColor = .black
            }else{
@@ -68,7 +88,7 @@ class SupportViewController: UIViewController,UITextViewDelegate {
        
        func textViewDidEndEditing(_ textView: UITextView) {
           if(textView.text == ""){
-               self.comment.text = "Write Message"
+               self.comment.text = placeholderString
                self.comment.textColor = .lightGray
            }else{
              self.comment.textColor = .black

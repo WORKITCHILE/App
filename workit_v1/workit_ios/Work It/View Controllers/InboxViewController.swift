@@ -13,6 +13,7 @@ class InboxViewController: UIViewController {
     //MARK: IBOutlets
     
     @IBOutlet weak var inboxTable: UITableView!
+    @IBOutlet weak var notContent: UIView!
     @IBOutlet weak var animation: AnimationView?
     
     var inboxData = [InboxResponse]()
@@ -40,19 +41,25 @@ class InboxViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_INBOX + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetInbox.self, requestCode: U_GET_INBOX) { (response) in
             self.inboxData = response.data
-            if(self.inboxData.count == 0){
-                       //self.noDataLabel.isHidden = false
-                   }else {
-                       //self.noDataLabel.isHidden = true
-                   }
+           
+            self.notContent.isHidden = self.inboxData.count != 0
+            
             self.inboxTable.reloadData()
             ActivityIndicator.hide()
         }
     }
     
     //MARK: IBActions
-    @IBAction func backAction(_ sender: Any) {
-        self.back()
+   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let myVC = segue.destination as! ChatViewController
+        let i = self.inboxData[self.inboxTable.indexPathForSelectedRow!.row]
+        
+        let jobdetail  = GetJobResponse( status: nil, job_id: i.job_id, user_name: i.sender_name, user_image: i.sender_image, vendor_image: i.receiver_image, vendor_name: i.receiver_name, job_vendor_id: i.receiver, user_id: i.sender, user_occupation: nil, vendor_occupation: nil, vendor_dob: nil, user_dob: nil, job_description: nil, comment: nil, is_bid_placed: nil, bid_count: nil, initial_amount: nil, service_amount: nil, images: nil, job_time: nil, job_city: nil, job_state: nil, job_address: nil, job_name: nil, subcategory_id: nil, subcategory_name: nil, job_address_longitude: nil, job_address_latitude: nil, category_name: nil, counteroffer_amount: nil, job_date: nil, job_approach: nil, my_bid: nil, bids: [])
+           myVC.jobDetail = jobdetail
+        
+       
     }
     
 }
@@ -64,8 +71,10 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
         let val = self.inboxData[indexPath.row]
+        
         if(val.sender == Singleton.shared.userInfo.user_id){
             cell.userImage.sd_setImage(with: URL(string: val.receiver_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.userName.text = val.receiver_name!.formatName()
@@ -80,13 +89,6 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        let i = self.inboxData[indexPath.row]
-        
-        let jobdetail  = GetJobResponse(job_amount: nil, status: nil, job_id: i.job_id, user_name: i.sender_name, user_image: i.sender_image, vendor_image: i.receiver_image, vendor_name: i.receiver_name, job_vendor_id: i.receiver, user_id: i.sender, user_occupation: nil, vendor_occupation: nil, vendor_dob: nil, user_dob: nil, job_description: nil, comment: nil, is_bid_placed: nil, bid_count: nil, initial_amount: nil, images: nil, job_time: nil, job_city: nil, job_state: nil, job_address: nil, job_name: nil, subcategory_id: nil, subcategory_name: nil, job_address_longitude: nil, job_address_latitude: nil, category_name: nil, service_amount: nil, counteroffer_amount: nil, job_date: nil, job_approach: nil, my_bid: nil, bids: nil)
-           myVC.jobDetail = jobdetail
-        self.navigationController?.pushViewController(myVC, animated: true)
-    }
+   
     
 }

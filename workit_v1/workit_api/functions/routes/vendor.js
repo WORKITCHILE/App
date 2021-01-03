@@ -362,7 +362,7 @@ routes.post('/api/vendor/place-bid', /*checkIfAuthenticated,*/[
             if (job.data().status === 'CANCELED') {
                 return res.status(400).json({
                     'data': [],
-                    'message': 'Sorry,This job is canceled by owner',
+                    'message': 'Disculpa, Este trabajo ha sido cancelado por el cliente.',
                     'status': 400
                 });
             }
@@ -396,9 +396,8 @@ routes.post('/api/vendor/place-bid', /*checkIfAuthenticated,*/[
                     job_day_timestamp: job_detail.data().day_timestamp,
                     initial_amount: job_detail.data().initial_amount,
                     user_id: userSnap.id,
-                    user_name: userSnap.data().name,
+                    user_name: userSnap.data().name + " " + userSnap.data().father_last_name,
                     user_image: userSnap.data().profile_picture,
-                    user_dob: userSnap.data().date_of_birth,
                     user_occupation: userSnap.data().occupation,
                     user_description: userSnap.data().profile_description,
                     bid_show_status: "YES"
@@ -429,7 +428,7 @@ routes.post('/api/vendor/place-bid', /*checkIfAuthenticated,*/[
                             const body = {
                                 'to': token,
                                 'notification': {
-                                    title: vendorSnap.data().name + ' placed bid on your job ',
+                                    title: vendorSnap.data().name + ' hizo una oferta en tu trabajo ',
                                     body: bidSnap.data().comment,
                                     type: 2,
                                     data: bidSnap.data().job_id,
@@ -447,7 +446,7 @@ routes.post('/api/vendor/place-bid', /*checkIfAuthenticated,*/[
                             receiver_id: userSnap.id,
                             sender_name: vendorSnap.data().name,
                             sender_image: vendorSnap.data().profile_picture,
-                            notification_body: vendorSnap.data().name + ' placed bid on your job ',
+                            notification_body: vendorSnap.data().name + '  hizo una oferta en tu trabajo ',
                             notification_type: 2,
                             job_id: bidSnap.data().job_id,
                             created_at: Date.now(),

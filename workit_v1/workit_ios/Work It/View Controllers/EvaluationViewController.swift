@@ -8,17 +8,25 @@
 
 import UIKit
 import Cosmos
+import Lottie
 
 class EvaluationViewController: UIViewController {
     
     //MARK: IBOUtlets
     @IBOutlet weak var evaluationTable: ContentSizedTableView!
-    @IBOutlet weak var noDataLabel: DesignableUILabel!
+    @IBOutlet weak var animation: AnimationView?
+    @IBOutlet weak var emptyView: UIView!
+    
+    
     var evaluationData = [GetRatingResponse]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let starAnimation = Animation.named("empty_evaluation")
+        animation!.animation = starAnimation
+        animation?.loopMode = .loop
+        
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
       
@@ -27,26 +35,22 @@ class EvaluationViewController: UIViewController {
         getUserRating()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animation?.play()
+    }
+    
     func getUserRating(){
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_RATING)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetRating.self, requestCode: U_GET_RATING) { 
             self.evaluationData = $0.data
-            self.noDataLabel.isHidden = self.evaluationData.count != 0
+            self.emptyView.isHidden = self.evaluationData.count != 0
             self.evaluationTable.reloadData()
             ActivityIndicator.hide()
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let myVC = segue.destination as! AcceptJobViewController
-        
-        myVC.isEvaluationScreen = true
-        myVC.jobId = self.evaluationData[self.evaluationTable.indexPathForSelectedRow!.row].job_id ?? ""
-        myVC.evaluationRating = self.evaluationData[self.evaluationTable.indexPathForSelectedRow!.row].rating ?? "0"
-        myVC.evaluationText = self.evaluationData[self.evaluationTable.indexPathForSelectedRow!.row].comment ?? ""
-    }
- 
     
 }
 
@@ -59,16 +63,17 @@ extension EvaluationViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
         let val = self.evaluationData[indexPath.row]
-        let isMyProfile = val.rate_to == Singleton.shared.userInfo.user_id
-        let userName = isMyProfile ? val.rate_from_name : val.rate_to_name
-        let imagePath = isMyProfile ? val.rate_from_image : val.rate_to_image
+       
+        let userName =  val.rate_from_name
+        let imagePath = val.rate_from_image
         
-        cell.userName.text = userName?.formatName()
+        cell.userName.text = userName
         cell.userImage.sd_setImage(with: URL(string: imagePath!),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-        cell.jobName.text = val.job_name
-        cell.timeLabel.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-        cell.rateView.rating = Double(val.rating ?? "0")!
-        cell.jobAddress.text = val.job_address
+        cell.jobName.text = val.job_name?.uppercased()
+        cell.timeLabel.text = val.job_date
+        cell.rateView.rating = val.rating
+        cell.jobAddress.text = val.comment
+        cell.card.defaultShadow()
         
         return cell
     }
@@ -86,4 +91,6 @@ class EvaluationTableView: UITableViewCell {
     @IBOutlet weak var jobAddress: UILabel!
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var card: UIView!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var statusContainer: UIView!
 }

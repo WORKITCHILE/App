@@ -66,9 +66,10 @@ class ActivityIndicator
     
     static func hide() {
         overlayView.isUserInteractionEnabled = true
-       
-        self.imageView.stopAnimating()
-        self.backgroundRounded.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.imageView.stopAnimating()
+            self.backgroundRounded.removeFromSuperview()
+        }
 
     }
 }

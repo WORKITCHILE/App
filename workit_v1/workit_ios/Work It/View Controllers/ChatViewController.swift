@@ -14,7 +14,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var userImage: ImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var lblUserName: UILabel!
-    @IBOutlet weak var occupation: DesignableUILabel!
+    @IBOutlet weak var occupation: UILabel!
     
     var chatData = [ChatResponse]()
     var userId = Int()
@@ -32,7 +32,7 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        picker.delegate = self
+       
         if(jobDetail?.job_id != nil){
             if(Singleton.shared.userInfo.user_id == self.jobDetail?.job_vendor_id){
                 userImage.sd_setImage(with:
@@ -82,52 +82,16 @@ class ChatViewController: UIViewController {
             }
         })
     }
-    
-    func uplaodUserImage() {
-        ActivityIndicator.show(view: self.view)
-        let fileData = self.imageData
-        let storeImg = storageRef.child("chat_photos/" + "\(self.chatId)").child(self.imageName)
-        storeImg.putData(fileData, metadata:StorageMetadata(dictionary: ["contentType": "image/png"])) { (snapshot, error) in
-            // When the image has successfully uploaded, we get it's download URL
-            self.imageData = Data()
-            storeImg.downloadURL(completion: { (url, error) in
-                guard let downloadURL = url else {
-                    return
-                }
-                let time =  Int(Date().timeIntervalSince1970)
-                //let reqId =  self.chatDetail.j ?? 0
-                // Write the download URL to the Realtime Database
-                let dbRef = ref.child("messages/" + self.chatId).childByAutoId().setValue([
-                    "id": self.chatId,
-                    "time": time,
-                    //"request_id": reqId,
-                    "sender_id": self.senderID,
-                    "receiver_id": self.receiverID,
-                    "message": downloadURL.absoluteString,
-                    "type": 2,
-                    "read_status": 1,
-                ])
-                var curUser = String()
-                if(K_CURRENT_USER == K_POST_JOB){
-                    curUser = K_WANT_JOB
-                }else{
-                    curUser = K_POST_JOB
-                }
-                self.sendSingleMessage(type: 2, recieverId: self.senderID, message: downloadURL.absoluteString, senderId: self.receiverID, senderType: K_CURRENT_USER ?? "" , receiverType: curUser, messageType: 2)
-                ActivityIndicator.hide()
-            })
-        }
-    }
+ 
     
     func scheduleNotifications(title:String,msg: String) {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = title
         notificationContent.body = msg
         notificationContent.sound = UNNotificationSound.default
-        
-        // Deliver the notification in five seconds.
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        // Schedule the notification.
+        
         let request = UNNotificationRequest(identifier: "FiveSecond", content: notificationContent, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error: Error?) in
@@ -157,8 +121,10 @@ class ChatViewController: UIViewController {
     
     //MARK: IBAction
     @IBAction func sendAction(_ sender: Any) {
+        
         let number = (self.textView.text ?? "").filter { "0"..."9" ~= $0 }
         let text = self.textView.text?.replacingOccurrences(of: " ", with: "")
+        
         if (((text?.range(of: ".*[^A-Za-z0-9].*", options: .regularExpression)) == nil) && (number.count < 5)) {
             if !(self.textView.text!.isEmpty && self.jobDetail?.job_id != nil){
                 self.textView.resignFirstResponder()
@@ -199,31 +165,6 @@ class ChatViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func attachmentAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallary()
-        }))
-        
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = sender as! UIView
-            popoverController.sourceRect = (sender as? AnyObject)!.bounds
-        }
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-    @IBAction func backBtnPressed(_ sender: Any) {
-        self.back()
-    }
-    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
@@ -234,56 +175,21 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = self.chatData[indexPath.row]
         var cell = ChatViewCell()
+        
         if(Singleton.shared.userInfo.user_id == data.receiver_id){
             cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell2") as! ChatViewCell
         }else {
             cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell1") as! ChatViewCell
             
         }
-        
-        if(data.type == 2){
-            cell.messageTextView.isHidden = true
-            cell.messageText.isHidden = true
-            cell.uploadedImage.isHidden  = false
-            if let profileURL = data.message as? String {
-                cell.uploadedImage.sd_setImage(with: URL(string:profileURL), placeholderImage: UIImage(named: ""))
-            }
-            else {
-                print("profileURL is nil")
-            }
-            
-        }else {
-            cell.messageTextView.isHidden = false
-            cell.messageText.isHidden = false
-            cell.uploadedImage.isHidden  = true
-            cell.messageText.text = data.message
-        }
-        
+
         cell.messageText.text = data.message
         
         cell.messageTime.text = self.convertTimestampToDate(data.time ?? 0, to: "MMM dd, h:mm a")
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! ChatViewCell
-        if(self.chatData[indexPath.row].type == 2){
-            let imageView = UIImageView()
-            let newImageView = UIImageView()
-            if let profileURL = self.chatData[indexPath.row].message as? String {
-                newImageView.sd_setImage(with: URL(string:profileURL), placeholderImage: UIImage(named: ""))
-            }
-            newImageView.frame = UIScreen.main.bounds
-            newImageView.backgroundColor = .black
-            newImageView.contentMode = .scaleAspectFit
-            newImageView.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-            newImageView.addGestureRecognizer(tap)
-            self.view.addSubview(newImageView)
-            self.navigationController?.isNavigationBarHidden = true
-            self.tabBarController?.tabBar.isHidden = true
-        }
-    }
+   
     
     @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
         self.navigationController?.isNavigationBarHidden = true
@@ -292,60 +198,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ChatViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
-    
-    
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
-            self.dismiss(animated: true, completion: nil)
-            return
-            
-        }
-        
-        if let selectedImageName = ((info[UIImagePickerController.InfoKey.referenceURL] as? NSURL)?.lastPathComponent) {
-            self.imageName = selectedImageName
-            //            self.addVehicle.setTitle("", for: .normal)
-        }else {
-            self.imageName = "image.jpg"
-        }
-        self.imageData = selectedImage.pngData()!
-        self.uplaodUserImage()
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func openCamera()
-    {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
-        {
-            picker.sourceType = UIImagePickerController.SourceType.camera
-            picker.allowsEditing = true
-            self.present(picker, animated: true, completion: nil)
-        }
-        else
-        {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func openGallary()
-    {
-        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        picker.allowsEditing = true
-        self.present(picker, animated: true, completion: nil)
-    }
-    
-}
-
-
-
 class ChatViewCell: UITableViewCell {
     //MARK:IBOutlets
     @IBOutlet weak var messageTime: UILabel!
     @IBOutlet weak var messageText: UILabel!
-    @IBOutlet weak var uploadedImage: UIImageView!
     @IBOutlet weak var messageTextView: UIView!
     
 }

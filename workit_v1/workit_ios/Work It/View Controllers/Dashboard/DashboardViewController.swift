@@ -9,14 +9,18 @@
 
 import UIKit
 import SDWebImage
-import FloatingPanel
 
-class DashboardViewController: UIViewController, FloatingPanelControllerDelegate {
+
+class DashboardViewController: UIViewController {
+    
+    
     //MARK: IBOutlets
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noDataFound: DesignableUILabel!
-    var fpc: FloatingPanelController!
-    var categoriesData = [GetCategoryResponse]()
+
+    private var categoriesData = [GetCategoryResponse]()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,7 @@ class DashboardViewController: UIViewController, FloatingPanelControllerDelegate
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        
+     
         if(Singleton.shared.getCategories.count == 0){
             //ActivityIndicator.show(view: self.view)
             CallAPIViewController.shared.getCategory(completionHandler: { response in
@@ -48,17 +52,7 @@ class DashboardViewController: UIViewController, FloatingPanelControllerDelegate
             self.tableView.reloadData()
         }
        
-        fpc = FloatingPanelController()
-        fpc.delegate = self
-
-        /*
-        let contentVC = ContentViewController()
-        fpc.set(contentViewController: contentVC)
-        fpc.track(scrollView: contentVC.tableView)
-        */
-        fpc.contentMode = .fitToBounds
-        fpc.addPanel(toParent: self)
-        
+     
         
     }
    
@@ -66,11 +60,14 @@ class DashboardViewController: UIViewController, FloatingPanelControllerDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let myVC = segue.destination as! SubCategoryViewController
         
-        myVC.categoryId = self.categoriesData[self.tableView.indexPathForSelectedRow!.row].category_id ?? ""
+        myVC.category = self.categoriesData[self.tableView.indexPathForSelectedRow!.row]
         myVC.titleHeading = self.categoriesData[self.tableView.indexPathForSelectedRow!.row].category_name ?? ""
+    
     }
     
 }
+
+
 
 
 extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {

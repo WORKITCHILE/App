@@ -12,6 +12,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email Id </th>
+                <th scope="col">Telefono</th>
                 <th scope="col">Message</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
@@ -22,8 +23,10 @@
                 paginate: { itemsPerPage: 10, currentPage: supportPage ,totalItems:total ,id:'support'} let i =index">
                 <th>{{10 * (supportPage - 1) + (i + 1)}}</th>
                 <td >{{user.user_name}}</td>
-                <td *ngIf="user.email">{{user.email}}</td>
-                <td *ngIf="!user.email">NA</td>
+                <td *ngIf="user.user_email">{{user.user_email}}</td>
+                <td *ngIf="!user.user_email">NA</td>
+                <td *ngIf="user.user_phone">{{user.user_phone}}</td>
+                <td *ngIf="!user.user_phone">NA</td>
                 <td *ngIf="user.message">{{user.message}}</td>
                 <td *ngIf="!user.message">NA</td>
                 <td *ngIf="user.status == 'UNDER_REVIEW'" >Under Review</td>

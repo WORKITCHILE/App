@@ -74,15 +74,17 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func verifyAction(_ sender: Any) {
         if(codeView.code.count != 6){
-            Singleton.shared.showToast(text: "Enter code")
+            Singleton.shared.showToast(text: "Ingresa el código")
         }else {
             if(self.isNewuser){
                 ActivityIndicator.show(view: self.view)
                 SessionManager.shared.methodForApiCalling(url: U_BASE + U_VERIFY_OTP, method: .post, parameter: ["email": self.email.text ?? "","verification_code": codeView.code,"user_id": Singleton.shared.userInfo.user_id ?? ""], objectClass: Response.self, requestCode: U_VERIFY_OTP) { (response) in
-                    Singleton.shared.showToast(text: "Your email verified successfully")
+                    Singleton.shared.showToast(text: "Tu correo fue verificado correctamente")
+                    
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ChooseOptionViewController") as! ChooseOptionViewController
                     self.navigationController?.pushViewController(myVC, animated: true)
                     ActivityIndicator.hide()
+                    
                 }
                 
             }else{

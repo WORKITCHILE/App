@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-class AccountSettingViewController: UIViewController, AddAccount {
+class AccountSettingViewController: UIViewController {
     
     //MARK: IBOutlets
     @IBOutlet weak var animation: AnimationView?
@@ -25,11 +25,12 @@ class AccountSettingViewController: UIViewController, AddAccount {
            
     var accountData = [GetAccountsDetail]()
     var isSelectCard = false
+    private var bank_id = ""
+    private var account_type = ["Cuenta Corriente", "Cuenta Vista / Cuenta Rut", "Cuenta Ahorro"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        
         
         let starAnimation = Animation.named("add_account")
         animation!.animation = starAnimation
@@ -70,15 +71,44 @@ class AccountSettingViewController: UIViewController, AddAccount {
     
     func fillData(){
         let val = self.accountData.first
+        bank_id = (val?.bank_detail_id)!
         bankNameLabel.text  = val?.bank?.uppercased()
         userNameLabel.text = val?.full_name ?? ""
         accountNumberLabel.text = (val?.account_number ?? "").applyPatternOnNumbers(pattern: "#### #### #### ####", replacmentCharacter: "#")
-        accountTypeLabel.text = (val?.account_type ?? "")
+        accountTypeLabel.text = account_type[Int(val?.account_type ?? "0")!]
         rutLabel.text =  (val?.RUT ?? "")
         createdLabel.text = self.convertTimestampToDate(val?.updated_at
-            ?? 0 , to: "dd.MM.yy")
+            ?? 0 , to: "dd/MM/yyyy")
         
       
+    }
+    
+    private func requestDeletedAccount(){
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_DELETE_BANK_ACCOUNT)"
+        let params: [String : String] = [
+            "user_id": Singleton.shared.userInfo.user_id!,
+            "bank_id": bank_id
+        ]
+        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: params, objectClass: GetAccounts.self, requestCode: U_DELETE_BANK_ACCOUNT) { [self] (response) in
+            
+            self.getAccountData()
+     
+        }
+    }
+    
+    @IBAction func deleteAccount(_ sender: AnyObject){
+        let alert = UIAlertController(title: "Workit", message: "¿Estás seguro que quieres eliminar esta cuenta?", preferredStyle: .alert)
+                  
+           alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in
+            self.requestDeletedAccount()
+             
+           })
+         
+           alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+           self.present(alert, animated: true)
     }
 }
 

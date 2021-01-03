@@ -20,6 +20,9 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var workName: DesignableUITextField!
     @IBOutlet weak var address: DesignableUITextField!
+    @IBOutlet weak var address_reference: UITextField!
+    @IBOutlet weak var address_number: UITextField!
+    
     @IBOutlet weak var subCategory: DesignableUITextField!
     @IBOutlet weak var workDate: DesignableUITextField!
     @IBOutlet weak var workTime: DesignableUITextField!
@@ -44,7 +47,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     var currentPicker = Int()
     var currentDatePicker = Int()
     var selectedCategory = GetCategoryResponse()
-    var selectedSubcategory = GetSubcategoryResponse()
+    var selectedSubcategory: GetSubcategoryResponse? = nil
     var latitude = CLLocationDegrees()
     var longitude = CLLocationDegrees()
     var jobDetail: GetJobResponse?
@@ -73,6 +76,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             self.category.text = self.categoryData[0].category_name
             self.selectedCategory = self.categoryData[0]
             self.getSubCategoryData(id: self.selectedCategory.category_id ?? "")
+           
             self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[0].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
         }
         
@@ -144,10 +148,12 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_SUBCATEGORIES + id, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
             
             self.subcategoryData = response.data
-            
+        
             if(self.subcategoryData.count > 0){
                 self.selectedSubcategory = self.subcategoryData[0]
-                self.subCategory.text = self.selectedSubcategory.subcategory_name
+                self.subCategory.text = self.selectedSubcategory?.subcategory_name
+            } else {
+                self.selectedSubcategory = nil
             }
             
             self.viewSubcategory.isHidden = !(self.subcategoryData.count > 0)
@@ -266,7 +272,12 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         let mainStoryboard  = UIStoryboard(name: "Main", bundle: nil)
         let myVC = mainStoryboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.pickerDelegate = self
-        myVC.pickerData = ["Cualquiera", "A domicilio", "Recogerlo", "Llevarselo al worker" ]
+        if(self.selectedSubcategory == nil){
+            myVC.pickerData = self.selectedCategory.types!
+        } else {
+            myVC.pickerData = (self.selectedSubcategory?.types!)!
+        }
+        
         myVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.present(myVC, animated: false, completion: nil)
     }
@@ -311,7 +322,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         myVC.latitude = self.latitude
         myVC.longitude = self.longitude
         
-    self.navigationController?.pushViewController(myVC, animated: true)
+        self.navigationController?.pushViewController(myVC, animated: true)
     }
     
    
@@ -381,12 +392,10 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             var param = [
                 "job_id": self.jobDetail?.job_id ?? "",
                 "category_name": self.selectedCategory.category_name,
-                "subcategory_name": self.selectedSubcategory.subcategory_name,
                 "category_id": self.selectedCategory.category_id,
-                "subcategory_id":self.selectedSubcategory.subcategory_id,
                 "user_id":Singleton.shared.userInfo.user_id,
-                "user_image":"\(Singleton.shared.userInfo.profile_picture)",
-                "user_name": "\(Singleton.shared.userInfo.name) \(Singleton.shared.userInfo.father_last_name)  \(Singleton.shared.userInfo.mother_last_name)",
+                "user_image":"\(Singleton.shared.userInfo.profile_picture ?? "")",
+                "user_name": "\(Singleton.shared.userInfo.name) \(Singleton.shared.userInfo.father_last_name)",
                 "job_address_latitude":self.latitude,
                 "job_address_longitude":self.longitude,
                 "job_name":self.workName.text ?? "",
@@ -394,11 +403,18 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                 "job_approach": self.jobApproach.text ?? "",
                 "job_date":self.workDate.text ?? "",
                 "job_time":self.selectedTime,
-                "initial_amount":Double(self.charges.text ?? "0")!,
+                "initial_amount": Double(self.charges.text ?? "0")!,
                 "job_description": self.jobDescription.text,
                 "images": work_images,
                 "have_document": Singleton.shared.userInfo.background_document != "" && Singleton.shared.userInfo.background_document != nil
                 ] as! [String: Any]
+            
+            param["address_reference"] = self.address_reference.text ?? ""
+            param["address_number"] = self.address_number.text ?? ""
+            if(self.selectedSubcategory != nil){
+                param["subcategory_id"] = self.selectedSubcategory?.subcategory_id
+                param["subcategory_name"] =  self.selectedSubcategory?.subcategory_name
+            }
             
             if(self.workerSelected != nil){
                 param["worker_selected"] = self.workerSelected?.user_id
@@ -409,6 +425,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             
             SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_JOB) { (response) in
                 
+               
                 Singleton.shared.jobData = []
                 ActivityIndicator.hide()
                 
@@ -499,8 +516,7 @@ extension PostJobViewController: GMSAutocompleteViewControllerDelegate, UITextVi
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        // TODO: handle the error.
-        print("Error: ", error.localizedDescription)
+     
     }
     
     // User canceled the operation.

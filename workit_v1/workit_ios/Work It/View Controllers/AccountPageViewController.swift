@@ -44,7 +44,7 @@ class AccountPageViewController: UIPageViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        HistoryPageViewController.dataSource = self
+        //HistoryPageViewController.dataSource = self
     }
     
     func handleView() {

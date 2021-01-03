@@ -18,7 +18,6 @@ class CreditViewController: UIViewController {
     @IBOutlet weak var animation: AnimationView?
      
     var transactionData : GetTransactionResponse?
-    var isBackButtonHidden = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,12 @@ class CreditViewController: UIViewController {
         
         let starAnimation = Animation.named("wallet")
         animation!.animation = starAnimation
-        animation?.loopMode = .loop 
+        animation?.loopMode = .loop
+        
+        self.setNavigationBar()
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,38 +63,42 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
         let val = self.transactionData?.transactions?[indexPath.row]
 
-            cell.userImage.sd_setImage(with: URL(string: val?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        if(val?.detail != nil) {
+         
+            cell.userName.text = val?.detail?.uppercased()
+        } else {
+            cell.userName.text = val?.transaction_for?.uppercased()
         
-        if(val?.transaction_type == "CREDIT"){
-            if(val?.transaction_for == "JOB"){
-                cell.userName.text = val?.opposite_user ?? ""
-            }else {
-                cell.userName.text = val?.user_name ?? ""
-            }
-            cell.jobAddress.text = "Credited to wallet"
-            cell.count.text = "$" + (val?.amount ?? "")
-            cell.count.textColor = lightBlue
-        }else if(val?.transaction_type == "DEBIT"){
-             cell.userName.text = val?.opposite_user ?? val?.user_name ?? ""
-            if(val?.payment_option == "BANK"){
-              cell.jobAddress.text = "Debited from bank"
-            }else{
-              cell.jobAddress.text = "Debited from wallet"
-            }
-            cell.count.text = "$" + (val?.amount ?? "")
-            cell.count.textColor = .red
         }
-        cell.timeLabel.text = self.convertTimestampToDate(val?.created_at ?? 0, to: "MMM dd, h:mm a")
+        
+        cell.userImage.sd_setImage(with: URL(string: val?.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        
+        if(val?.payment_received ?? false){
+            cell.status.text = "Pago recibido"
+        } else {
+            cell.status.text = "Pago realizado"
+        }
+        /*
+        if( transaction.getPaymentReceived()){
+              String creditStr = CurrencyFormat.Companion.format( String.valueOf(Double.valueOf(transaction.getAmount()) * 0.907F));
+              holder.lStatus.setTitle("Pago recibido");
+              holder.lStatus.setStatus(0);
+              holder.creditValue.setText(context.getString(R.string.price_in_dollar, creditStr));
+          } else {
+              String creditStr = CurrencyFormat.Companion.format( transaction.getAmount());
+              holder.lStatus.setTitle("Pago realizado");
+              holder.lStatus.setStatus(1);
+              holder.creditValue.setText(context.getString(R.string.price_in_dollar, creditStr));
+          }
+        */
+      
+        cell.jobAddress.text = val?.opposite_user ?? val?.user_name ?? ""
+        cell.count.text = "$" + (val?.amount ?? "")
+        
+        cell.timeLabel.text = self.convertTimestampToDate(val?.created_at ?? 0, to: "dd/MM/YYYY")
         cell.card.defaultShadow()
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-        myVC.jobId = self.transactionData?.transactions?[indexPath.row].job_id
-        if(myVC.jobId != nil){
-           self.navigationController?.pushViewController(myVC, animated: true)
-        }
-    }
     
 }

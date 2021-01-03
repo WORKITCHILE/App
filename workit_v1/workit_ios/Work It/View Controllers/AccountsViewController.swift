@@ -23,7 +23,7 @@ class AccountsViewController: UIViewController, ScrollAccount {
         
         self.setNavigationBar()
         
-         segmentControl.addTarget(self, action: #selector(HistoryViewController.indexChanged(_:)), for: .valueChanged)
+         //segmentControl.addTarget(self, action: #selector(HistoryViewController.indexChanged(_:)), for: .valueChanged)
         
     }
     

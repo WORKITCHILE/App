@@ -102,7 +102,7 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
         userData[9]["value"] = self.profileData.address_reference
         userData[10]["value"] =  self.profileData.profile_description
         
-        displayData = userData.filter({ ($0["workerField"] as? Bool)! })
+        displayData = userData //.filter({ ($0["workerField"] as? Bool)! })
 
         self.tableList.reloadData()
 

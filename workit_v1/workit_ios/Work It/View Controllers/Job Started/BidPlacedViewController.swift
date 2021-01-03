@@ -139,7 +139,9 @@ extension BidPlacedViewController: UITableViewDelegate,UITableViewDataSource {
         cell.jobDate.text = val.job_date
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
         cell.jobName.text = val.job_name
+        /*
         cell.jobPrice.text = "$" + (val.job_amount ?? val.service_amount ?? val.counteroffer_amount ?? "\(val.initial_amount ?? 0)" ?? "0")
+        */
         //cell.totalBids.text = ""
         cell.jobDescription.text = val.job_description
         cell.editJob = {

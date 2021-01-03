@@ -81,7 +81,7 @@
             "editable":true
         },
         {
-            "placeholder":"descripción",
+            "placeholder":"Escribe una descripción",
             "workerField":true,
             "icon":"ic_signup_document",
             "value":"",

@@ -53,6 +53,7 @@ class WelcomeViewController: UIViewController {
                 
                 if(type == 1){
                     var components = self.googleData.profile.name.components(separatedBy: " ")
+            
                     if(components.count > 0){
                         let firstName = components.removeFirst()
                         let lastName = components.joined(separator: " ")
@@ -64,7 +65,7 @@ class WelcomeViewController: UIViewController {
                    
                     let pictureData : [String: Any] = picture["data"] as! [String : Any]
                     myVC.socialPicture = pictureData["url"]! as! String
-                    
+                         
                     myVC.fName = self.fbData["first_name"] as? String ?? ""
                     myVC.lName = self.fbData["last_name"] as? String ?? ""
                 }

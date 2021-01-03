@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var button_client: UIButton!
     @IBOutlet weak var button_worker: UIButton!
+    @IBOutlet weak var topHeight: NSLayoutConstraint!
     @IBOutlet weak var clientView : UIView!
     @IBOutlet weak var workerView : UIView!
     @IBOutlet weak var labelClient : UILabel!
@@ -31,6 +32,10 @@ class HomeViewController: UIViewController {
         button_worker.layer.shadowOpacity = 0.4
         button_worker.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
         button_worker.layer.shadowRadius = 20.0
+    
+        if( self.view.frame.size.height == 667){
+            topHeight.constant = 80
+        }
         
         self.workerView.isHidden = true
         

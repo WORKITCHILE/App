@@ -11,14 +11,15 @@ import Cosmos
 import Lottie
     
 class PostedJobViewController: UIViewController {
-        //IBOUtlets
-        @IBOutlet weak var addJobStack: UIView!
-        @IBOutlet weak var jobTable: UITableView!
-        @IBOutlet weak var noJobsFound: UIView!
-        
-        var jobData = [GetJobResponse]()
-        let refreshControl = UIRefreshControl()
-        var selectedEditIntdex = 0
+    
+    //IBOUtlets
+    @IBOutlet weak var addJobStack: UIView!
+    @IBOutlet weak var jobTable: UITableView!
+    @IBOutlet weak var noJobsFound: UIView!
+    
+    var jobData = [GetJobResponse]()
+    let refreshControl = UIRefreshControl()
+    var selectedEditIntdex = 0
     
     @IBOutlet weak var animation: AnimationView?
     
@@ -27,11 +28,12 @@ class PostedJobViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            let number = Int.random(in: 1...6)
-            
-            let starAnimation = Animation.named("home_\(number)")
+           
+            let starAnimation = Animation.named("main_home")
             animation!.animation = starAnimation
             animation?.loopMode = .loop
+            animation?.clipsToBounds = true
+            animation?.contentMode = .scaleAspectFill
             
 
             self.jobTable.delegate = self
@@ -50,7 +52,7 @@ class PostedJobViewController: UIViewController {
                 self.getJobData()
             } else {
                 self.jobData = Singleton.shared.jobData
-                self.addJobStack.isHidden = K_CURRENT_USER != K_POST_JOB
+                self.addJobStack.isHidden = false
                 self.noJobsFound.isHidden = true
                 self.jobTable.reloadData()
             }
@@ -69,7 +71,7 @@ class PostedJobViewController: UIViewController {
                 self.jobData = response.data
                 Singleton.shared.jobData = response.data
                 self.noJobsFound.isHidden = self.jobData.count != 0
-                self.addJobStack.isHidden = K_CURRENT_USER == K_POST_JOB && self.jobData.count == 0
+                self.addJobStack.isHidden = self.jobData.count == 0
                
                 self.jobTable.reloadData()
                 ActivityIndicator.hide()
@@ -88,20 +90,20 @@ class PostedJobViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "JobTableView") as! JobTableView
             let val = self.jobData[indexPath.row]
             cell.jobPrice.text = "$" + "\(val.initial_amount ?? 0)"
-            cell.jobName.text = val.job_name
+            cell.jobName.text = val.job_name?.uppercased()
             cell.jobDate.text = val.job_date
             cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
             cell.totalBids.text = "\(val.bid_count ?? 0)"
             cell.editJob = {
                
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
-               myVC.jobDetail = self.jobData[self.selectedEditIntdex]
-               myVC.isEditJob = true
-               self.selectedEditIntdex = 0
+                myVC.jobDetail = self.jobData[self.selectedEditIntdex]
+                myVC.isEditJob = true
+                self.selectedEditIntdex = 0
                 self.present(myVC, animated: true, completion: nil)
                 
-                
             }
+            
             return cell
         }
         
@@ -126,8 +128,9 @@ class JobTableView: UITableViewCell {
     @IBOutlet weak var jobTime: UILabel!
     @IBOutlet weak var jobDate: UILabel!
     @IBOutlet weak var totalBids: UILabel!
+    @IBOutlet weak var verify: UIImageView!
     @IBOutlet weak var userRating: CosmosView!
-    
+    @IBOutlet weak var card: UIView!
     @IBOutlet weak var viewForEdit: View!
     
     var editJob:(()-> Void)? = nil

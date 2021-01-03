@@ -8,14 +8,8 @@
 
 import UIKit
 
-class ViewJobViewController: UIViewController, SuccessPopup, AddAccount {
-    func refreshAccountTable() {
-        DispatchQueue.main.async {
-            self.isBankdetailAdded = true
-            self.placeBidAction(self)
-        }
-    }
-    
+class ViewJobViewController: UIViewController, SuccessPopup {
+   
     func yesAction() {
         ActivityIndicator.show(view: self.view)
         let param = [
@@ -117,7 +111,7 @@ class ViewJobViewController: UIViewController, SuccessPopup, AddAccount {
                 }else {
                     self.bidRejectLabel.text = "Bid Placed"
                 }
-                self.counterOfferPrice.text = self.jobDetail?.my_bid?.counteroffer_amount
+                //self.counterOfferPrice.text = self.jobDetail?.my_bid?.counteroffer_amount
                 self.addWorkerComment.text = self.jobDetail?.my_bid?.comment
                 self.addWorkerComment.textColor = .black
                 self.bidStack.isHidden = true
@@ -188,11 +182,12 @@ class ViewJobViewController: UIViewController, SuccessPopup, AddAccount {
                 Singleton.shared.showToast(text: "Enter counter offer")
             }else {
                 if((Singleton.shared.userInfo.is_bank_details_added == 0 || Singleton.shared.userInfo.is_bank_details_added == nil) && (isBankdetailAdded == false)){
+                    /*
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountDetailViewController") as! AccountDetailViewController
                     Singleton.shared.showToast(text: "Please add bank detail before payment.")
-                    myVC.accountDelegate = self
-                    myVC.isEditBankDetail = 3
+         
                     self.navigationController?.pushViewController(myVC, animated: true)
+                    */
                 }else {
                     ActivityIndicator.show(view: self.view)
                     let param = [

@@ -8,17 +8,15 @@
 
 import UIKit
 
-protocol AddAccount{
-    func refreshAccountTable()
-}
-
 class AccountDetailViewController: UIViewController, SelectFromPicker {
+    
     func selectedItem(name: String, id: Int) {
         if(currentPicker == 1){
             self.bankName.text = name
             self.sbif = self.bankNames.filter { $0["label"] == name }.first!["sbif"]!
         }else if(currentPicker == 2){
             self.accountType.text = name
+            self.accountTypeId = "\(id)"
         }
     }
     
@@ -31,6 +29,10 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     
     
     var bankNames = [
+        [
+            "label":"BancoEstado",
+            "sbif":"0012"
+        ],
         [
             "label":"Banco de Chile / Banco Edwards / Citi",
             "sbif":"0001"
@@ -100,13 +102,14 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
             "sbif":"0504"
         ]
     ]
-    var accountsType = ["Current", "Saving"]
+    
+
+    var accountsType = ["Cuenta Corriente", "Cuenta Vista / Cuenta Rut", "Cuenta Ahorro"]
     var currentPicker = Int()
     var accountDetail = GetAccountsDetail()
-    var isEditBankDetail = 0
-    var accountDelegate:AddAccount?  = nil
     var isSelectCard = false
     var sbif = ""
+    var accountTypeId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,13 +117,7 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
         self.idNumber.delegate = self
         self.accountNumber.delegate = self
         setNavigationBar()
-        if(self.isEditBankDetail == 1){
-            self.userName.text = accountDetail.full_name
-            self.idNumber.text = accountDetail.RUT
-            self.accountNumber.text = accountDetail.account_number
-            self.accountType.text = accountDetail.account_type
-            self.bankName.text = accountDetail.bank
-        }
+       
     }
     
     func getProfileData(){
@@ -134,7 +131,9 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     
     //MARK:IBACtion
     @IBAction func accountTypeAction(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+      
+        let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.modalPresentationStyle = .overFullScreen
         myVC.pickerData = self.accountsType
         myVC.pickerDelegate = self
@@ -143,7 +142,10 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     }
     
     @IBAction func selectBankAction(_ sender: Any) {
-        let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
+        
+        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+      
+        let myVC = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as! PickerViewController
         myVC.modalPresentationStyle = .overFullScreen
         myVC.pickerData = self.bankNames.map({ $0["label"]! })
         myVC.pickerDelegate = self
@@ -154,74 +156,42 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
     
     @IBAction func bidAction(_ sender: Any) {
         if(userName.text!.isEmpty){
-            Singleton.shared.showToast(text: "Ingres tu nombre")
+            Singleton.shared.showToast(text: "Ingresa tu nombre")
+            return
         }else if(idNumber.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu rut")
+            return
         }else if(bankName.text!.isEmpty){
             Singleton.shared.showToast(text: "Elige un banco")
+            return
         }else if(accountType.text!.isEmpty){
             Singleton.shared.showToast(text: "Elige un tipo de cuenta")
+            return
         }else if(accountNumber.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu numero de cuenta")
-        }else {
-            if(self.isEditBankDetail == 1){
-                let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
-                ActivityIndicator.show(view: self.view)
-                let param:[String:Any] = [
-                    "user_id": Singleton.shared.userInfo.user_id,
-                    "email":Singleton.shared.userInfo.email,
-                    "phone":Singleton.shared.userInfo.contact_number,
-                    "bank_detail_id":self.accountDetail.bank_detail_id ?? "",
-                    "RUT":self.idNumber.text ?? "",
-                    "full_name":self.userName.text ?? "",
-                    "bank":self.bankName.text ?? "",
-                    "sbif":self.sbif,
-                    "account_number":card ?? "",
-                    "account_type":self.accountType.text ?? ""
-                ]
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_EDIT_BANK_DETAILS, method: .post, parameter: param, objectClass: Response.self, requestCode: U_EDIT_BANK_DETAILS) { (response) in
-                    Singleton.shared.showToast(text: "Successfully updated bank details")
-                    ActivityIndicator.hide()
-                    self.accountDelegate?.refreshAccountTable()
-                    self.navigationController?.popViewController(animated: true)
-                }
-                
-            }else{
-                let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
-                ActivityIndicator.show(view: self.view)
-                let param: [String:Any] = [
-                    "user_id":Singleton.shared.userInfo.user_id,
-                    "email":Singleton.shared.userInfo.email,
-                    "phone":Singleton.shared.userInfo.contact_number,
-                    "RUT": self.idNumber.text,
-                    "full_name":self.userName.text,
-                    "bank":self.bankName.text,
-                     "sbif": self.sbif,
-                    "account_number":card,
-                    "account_type":self.accountType.text
-                    ]
-                SessionManager.shared.methodForApiCalling(url: U_BASE + U_POST_BANK_DETAIL, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_BANK_DETAIL) { (response) in
-                    ActivityIndicator.hide()
-                    Singleton.shared.showToast(text: "Successfully added bank details")
-                    if(self.isEditBankDetail == 2){
-                        self.accountDelegate?.refreshAccountTable()
-                        if(self.isSelectCard){
-                            self.dismiss(animated: true, completion: nil)
-                        }else {
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }else if(self.isEditBankDetail == 3){
-                        self.getProfileData()
-                        self.accountDelegate?.refreshAccountTable()
-                        self.navigationController?.popViewController(animated: true)
-                    }else{
-                        self.getProfileData()
-                       self.navigationController?.popViewController(animated: true)
-                      
-                    }
-                    
-                }
-            }
+            return
+        }
+        
+        let card = self.accountNumber.text?.replacingOccurrences(of: " ", with: "")
+        ActivityIndicator.show(view: self.view)
+        
+        
+        let param: [String:Any] = [
+            "user_id":Singleton.shared.userInfo.user_id!,
+            "email":Singleton.shared.userInfo.email!,
+            "phone":Singleton.shared.userInfo.contact_number!,
+            "RUT": self.idNumber.text,
+            "full_name":self.userName.text ?? "",
+            "bank":self.bankName.text,
+            "sbif": self.sbif,
+            "account_number": card ?? "",
+            "account_type": accountTypeId
+            ]
+        SessionManager.shared.methodForApiCalling(url: U_BASE + U_POST_BANK_DETAIL, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_BANK_DETAIL) { (response) in
+            ActivityIndicator.hide()
+            Singleton.shared.showToast(text: "Cuenta Agregada exitosamente")
+            self.navigationController?.popViewController(animated: true)
+            
         }
     }
     
@@ -230,14 +200,27 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
 extension AccountDetailViewController: UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(textField == idNumber){
-            if let char = string.cString(using: String.Encoding.utf8) {
-                let isBackSpace = strcmp(char, "\\b")
-                if (isBackSpace == -92 || textField.text!.count <= 9) {
-                    return true
-                }else {
-                    return false
+            
+            
+            let str = "\(textField.text ?? "")"
+            let regex = try! NSRegularExpression(pattern: "[^_0-9kK]+", options: NSRegularExpression.Options.caseInsensitive)
+            let range = NSMakeRange(0, max(str.count - 1, 0))
+            let modString = regex.stringByReplacingMatches(in: str, options: [], range: range, withTemplate: "")
+                      
+            let formatter = NumberFormatter()
+            formatter.groupingSeparator = "."
+            formatter.groupingSize = 3
+            formatter.usesGroupingSeparator = true
+          
+            if string != "" {
+              
+                if let doubleVal = Double(modString) {
+                    let requiredString = formatter.string(from: NSNumber.init(value: doubleVal))
+                    textField.text = "\(requiredString ?? "")-"
                 }
+
             }
+            
         }else if(textField == accountNumber){
             let currentCharacterCount = self.accountNumber.text?.count ?? 0
             if (range.length + range.location > currentCharacterCount){

@@ -170,7 +170,9 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
         self.jobAddress.text = self.jobData?.job_address
         self.jobImage = (self.jobData?.images!)!
         self.jobTitle.text = self.jobData?.job_name
+        /*
         self.offerValue.text = "$" + (self.jobData?.counteroffer_amount ?? self.jobData?.my_bid?.counteroffer_amount ?? "0")
+ */
         
         self.viewPhotos.isHidden = self.jobImage.count == 0
         self.jobSubcategory.text = self.jobData?.subcategory_name

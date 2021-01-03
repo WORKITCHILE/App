@@ -17,6 +17,20 @@ extension String {
     }
 }
 
+extension Int {
+    func toFormatDate() -> String{
+        let unixTimestamp = self / 1000
+        let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        return dateFormatter.string(from: date)
+    }
+}
+
 
 extension String {
     func toRutFormatter() -> String {

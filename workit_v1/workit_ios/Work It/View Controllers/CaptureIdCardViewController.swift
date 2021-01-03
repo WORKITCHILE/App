@@ -146,7 +146,6 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
                 guard let results = request.results as? [VNRectangleObservation] else { return }
                 self.removeMask()
                 
-                debugPrint("DETECT RECTANGLE IN")
                 
                 guard let rect = results.first else{return}
                     

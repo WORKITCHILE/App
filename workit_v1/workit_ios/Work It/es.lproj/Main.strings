@@ -21,7 +21,7 @@
 "1bb-Pn-9dS.text" = "Offered amount";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "1tO-qs-zXu"; */
-"1tO-qs-zXu.title" = "Item";
+"1tO-qs-zXu.title" = "Calendario";
 
 /* Class = "UILabel"; text = "Work Schedule"; ObjectID = "25T-76-0pH"; */
 "25T-76-0pH.text" = "Work Schedule";
@@ -51,7 +51,7 @@
 "2yu-gX-TZd.text" = "Username: John Smith\\";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "34V-DW-TBx"; */
-"34V-DW-TBx.title" = "Item";
+"34V-DW-TBx.title" = "Calendario";
 
 /* Class = "UITextField"; placeholder = "Card Holder Number"; ObjectID = "3Or-da-O1M"; */
 "3Or-da-O1M.placeholder" = "Card Holder Number";
@@ -164,8 +164,8 @@
 /* Class = "UILabel"; text = "Post Job"; ObjectID = "Dbg-Z1-l5v"; */
 "Dbg-Z1-l5v.text" = "Post Job";
 
-/* Class = "UITabBarItem"; title = "REQUEST"; ObjectID = "DfA-EQ-K5n"; */
-"DfA-EQ-K5n.title" = "REQUEST";
+/* Class = "UITabBarItem"; title = "Trabajos en Curso"; ObjectID = "DfA-EQ-K5n"; */
+"DfA-EQ-K5n.title" = "Trabajos en Curso";
 
 /* Class = "UILabel"; text = "Service Charges"; ObjectID = "Dgv-8i-ciA"; */
 "Dgv-8i-ciA.text" = "Service Charges";
@@ -174,7 +174,7 @@
 "DwW-T9-Wdw.text" = "Posted By";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "E7W-ie-k46"; */
-"E7W-ie-k46.normalTitle" = "Send";
+"E7W-ie-k46.normalTitle" = "ENVIAR";
 
 /* Class = "UILabel"; text = "Job Approach"; ObjectID = "EFm-6Q-i0i"; */
 "EFm-6Q-i0i.text" = "Job Approach";
@@ -242,8 +242,8 @@
 /* Class = "UILabel"; text = "21 Jun'20"; ObjectID = "I9X-JM-C4F"; */
 "I9X-JM-C4F.text" = "21 Jun'20";
 
-/* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "IBW-xy-V6e"; */
-"IBW-xy-V6e.normalTitle" = "DONE";
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "IBW-xy-V6e"; */
+"IBW-xy-V6e.normalTitle" = "OK";
 
 /* Class = "UITextField"; placeholder = "Select Month"; ObjectID = "IIh-Qm-8J8"; */
 "IIh-Qm-8J8.placeholder" = "Select Month";
@@ -423,7 +423,7 @@
 "bkC-WM-IGg.text" = "Contact Number:";
 
 /* Class = "UIButton"; normalTitle = "Message"; ObjectID = "bxX-VV-faA"; */
-"bxX-VV-faA.normalTitle" = "Message";
+"bxX-VV-faA.normalTitle" = "Mensaje";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "c0f-qn-3x7"; */
 "c0f-qn-3x7.text" = "Email:";
@@ -434,8 +434,8 @@
 /* Class = "UILabel"; text = "Charly R."; ObjectID = "cnV-1c-XrB"; */
 "cnV-1c-XrB.text" = "Charly R.";
 
-/* Class = "UITabBarItem"; title = "Item"; ObjectID = "dBG-pi-Xuy"; */
-"dBG-pi-Xuy.title" = "Item";
+/* Class = "UITabBarItem"; title = "Calendario"; ObjectID = "dBG-pi-Xuy"; */
+"dBG-pi-Xuy.title" = "Calendario";
 
 /* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "dBd-zB-i5Z"; */
 "dBd-zB-i5Z.normalTitle" = "Ok";
@@ -453,7 +453,7 @@
 "dYJ-wd-oAq.normalTitle" = "Done";
 
 /* Class = "UITextView"; text = "Enter Message"; ObjectID = "dgR-mP-p9u"; */
-"dgR-mP-p9u.text" = "Enter Message";
+"dgR-mP-p9u.text" = "Ingresa tu mensaje";
 
 /* Class = "UILabel"; text = "Your Comment"; ObjectID = "duZ-iy-th3"; */
 "duZ-iy-th3.text" = "Your Comment";
@@ -524,8 +524,8 @@
 /* Class = "UILabel"; text = "Service needed on"; ObjectID = "hsI-GY-SJW"; */
 "hsI-GY-SJW.text" = "Service needed on";
 
-/* Class = "UITabBarItem"; title = "REQUEST"; ObjectID = "hxb-Zt-V30"; */
-"hxb-Zt-V30.title" = "REQUEST";
+/* Class = "UITabBarItem"; title = "Trabajos en Curso"; ObjectID = "hxb-Zt-V30"; */
+"hxb-Zt-V30.title" = "Trabajos en Curso";
 
 /* Class = "UILabel"; text = "Vendor Comment"; ObjectID = "i7d-NZ-PMK"; */
 "i7d-NZ-PMK.text" = "Vendor Comment";
@@ -626,8 +626,8 @@
 /* Class = "UILabel"; text = "Support"; ObjectID = "sC6-P7-1lH"; */
 "sC6-P7-1lH.text" = "Soporte";
 
-/* Class = "UITabBarItem"; title = "Item"; ObjectID = "sNX-hx-qUF"; */
-"sNX-hx-qUF.title" = "Item";
+/* Class = "UITabBarItem"; title = "Calendario"; ObjectID = "sNX-hx-qUF"; */
+"sNX-hx-qUF.title" = "Calendario";
 
 /* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "shx-0C-14I"; */
 "shx-0C-14I.normalTitle" = "Saltar";
@@ -642,7 +642,7 @@
 "t3E-aO-GgM.text" = "Posted On";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "tz1-tV-9lB"; */
-"tz1-tV-9lB.normalTitle" = "Enviar";
+"tz1-tV-9lB.normalTitle" = "ENVIAR";
 
 /* Class = "UILabel"; text = "Account type: ABC"; ObjectID = "uAh-ht-ZOZ"; */
 "uAh-ht-ZOZ.text" = "Tipo de cuenta: ABC";

@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const Hogan = require('hogan.js');
 const fs = require('fs');
 
+
 // read common template for send email
 var common_template = fs.readFileSync('./views/common/common.hjs', 'utf-8');
 // read job receipt template for send email
@@ -20,6 +21,11 @@ var compiledTemplateOwner = Hogan.compile(owner_template);
 module.exports = {
     //realtime notification function
     sendNotification: async (body) => {
+
+        await db.collection('error')
+        .add(body);
+
+        /*
         request.post({
             url: 'https://fcm.googleapis.com/fcm/send',
             method: 'POST',
@@ -32,8 +38,15 @@ module.exports = {
             console.log(body);
             // console.log('response  =>'+ response.message);
             console.log('err  =>' + error);
+            
+         await db.collection('error')
+                .add({
+                    error: error ? error : 'not error',
+                    response: response ? response : 'not response'
+                });
 
         });
+        /*
     },
     //function for saving all job events (for showing events on admin side)
     saveJobEvents: async (job_name, job_id, message, status, vendor_name) => {
