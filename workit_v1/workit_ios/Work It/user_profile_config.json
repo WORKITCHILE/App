@@ -1,6 +1,16 @@
 {
     "data":[
         {
+            "placeholder":"Cambiar Password",
+            "workerField":false,
+            "icon":"ic_signup_lock",
+            "value":"",
+            "cell":"fieldDataButton",
+            "editable":true,
+            "field":"address",
+            "security":false
+        },
+        {
             "placeholder":"Correo",
             "workerField":false,
             "icon":"ic_signup_arroba",
@@ -40,14 +50,7 @@
             "cell":"fieldData",
             "editable":false
         },
-        {
-            "placeholder":"Nacionalidad",
-            "workerField":false,
-            "icon":"ic_signup_flag",
-            "value":"",
-            "cell":"fieldData",
-            "editable":false
-        },
+       
         {
             "placeholder":"Número de telefono",
             "workerField":false,
@@ -55,6 +58,14 @@
             "value":"",
             "cell":"fieldData",
             "editable":true
+        },
+        {
+            "placeholder":"Nacionalidad",
+            "workerField":false,
+            "icon":"ic_signup_flag",
+            "value":"",
+            "cell":"fieldData",
+            "editable":false
         },
         {
             "placeholder":"Dirección",
@@ -81,14 +92,53 @@
             "editable":true
         },
         {
+            "placeholder":"Ocupación",
+            "workerField":true,
+            "icon":"ic_signup_portafolio",
+            "value":"",
+            "cell":"fieldDataButton",
+            "editable":true,
+            "field":"occupation",
+            "security":false
+        },
+        {
             "placeholder":"Escribe una descripción",
             "workerField":true,
             "icon":"ic_signup_document",
             "value":"",
             "cell":"fieldDataBigText",
             "editable":true
+        },
+        {
+            "placeholder":"Antecedentes Penales (Opcional)",
+            "workerField":true,
+            "icon":"ic_signup_document",
+            "value":"",
+            "cell":"fieldDataButton",
+            "editable":true,
+            "field":"backgroundDocument",
+            "security":false
+        },
+        {
+            "placeholder":"",
+            "workerField":true,
+            "icon":"",
+            "value":"",
+            "cell":"fieldCollection",
+            "editable":true,
+            "field":"images",
+            "security":false
+        },
+        {
+            "placeholder":"",
+            "workerField":true,
+            "icon":"",
+            "value":"",
+            "cell":"FieldDataButtons",
+            "editable":true,
+            "field":"rutImages",
+            "security":false
         }
-        
         
     ]
 }

@@ -14,18 +14,14 @@ class SessionManager: NSObject {
 
     let createWallet: Bool = true
 
-    func methodForApiCalling<T: Codable>(url: String, method: HTTPMethod, parameter: Parameters?, objectClass: T.Type, requestCode: String,completionHandler: @escaping (T) -> Void) {
+    func methodForApiCalling<T: Codable>(url: String, method: HTTPMethod, parameter: Parameters?, objectClass: T.Type, requestCode: String,completionHandler: @escaping (T?) -> Void) {
 
      
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
 
          
-            debugPrint(dataResponse)
            
             let statusCode = dataResponse.response?.statusCode
-            
-
-
             
             switch dataResponse.result {
                 case .success(_):
@@ -38,11 +34,16 @@ class SessionManager: NSObject {
                     } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
                         NotificationCenter.default.post(name: NSNotification.Name(N_USER_UNAUTHORIZED), object: nil)
                     } else if statusCode == 404  {
-                        self.showAlert(msg:errorObject?.message)
+                        
+                        //self.showAlert(msg:errorObject?.message)
                     } else if(statusCode == 400) {
-                        self.showAlert(msg: errorObject?.message)
+                       
+                       // self.showAlert(msg: errorObject?.message)
                     } else {
-                        self.showAlert(msg: errorObject?.message)
+                        if(object == nil){
+                            completionHandler(nil)
+                        }
+                      //  self.showAlert(msg: errorObject?.message)
                     }
                     
                   

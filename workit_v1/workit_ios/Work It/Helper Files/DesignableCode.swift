@@ -416,26 +416,26 @@ func changeFont(val: Int) -> UIFont {
     switch val {
     //For Main heading
     case 1:
-        return   UIFont(name: "RobotoMono-Bold", size: 35)!   //UIFont.boldSystemFont(ofSize: 36)
+        return   UIFont(name: "Poppins-Bold", size: 35)!   //UIFont.boldSystemFont(ofSize: 36)
     //FOR Main Title
     case 2:
-        return UIFont(name: "RobotoMono-Bold", size: 22)!
+        return UIFont(name: "Poppins-Bold", size: 22)!
     //FOR Main Sub-heading
     case 3:
-        return UIFont(name: "RobotoMono-Medium", size: 19)!
+        return UIFont(name: "Poppins-Medium", size: 19)!
     //FOR Body heading
     case 4:
-        return UIFont(name: "verdana", size: 17)!
+        return UIFont(name: "Poppins-Regular", size: 17)!
     //FOR small heading
     case 5:
-        return UIFont(name: "verdana", size: 14)!
+        return UIFont(name: "Poppins-Regular", size: 14)!
     case 6:
-        return UIFont(name: "verdana", size: 13)!
+        return UIFont(name: "Poppins-Regular", size: 13)!
     case 8:
-       return UIFont(name: "verdana", size: 19)!
+       return UIFont(name: "Poppins-Regular", size: 19)!
     //FOR extra small heading
     default:
-        return UIFont(name: "verdana", size: 17)!
+        return UIFont(name: "Poppins-Regular", size: 17)!
     }
     
 }

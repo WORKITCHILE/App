@@ -38,7 +38,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_SUBCATEGORIES)\(category?.category_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
-            self.subcategoryData = response.data
+            self.subcategoryData = response!.data
             self.selecteCategoryTable.reloadData()
             ActivityIndicator.hide()
             

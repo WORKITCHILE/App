@@ -27,8 +27,7 @@ class EvaluationViewController: UIViewController {
         animation!.animation = starAnimation
         animation?.loopMode = .loop
         
-        let img = UIImage(named: "header_rect_green")
-        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+      
       
         self.setNavigationBar()
                
@@ -37,6 +36,10 @@ class EvaluationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
         animation?.play()
     }
     
@@ -44,7 +47,7 @@ class EvaluationViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_RATING)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetRating.self, requestCode: U_GET_RATING) { 
-            self.evaluationData = $0.data
+            self.evaluationData = $0!.data
             self.emptyView.isHidden = self.evaluationData.count != 0
             self.evaluationTable.reloadData()
             ActivityIndicator.hide()

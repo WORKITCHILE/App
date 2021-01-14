@@ -75,8 +75,8 @@ class BidPlacedViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_ALL_BID)\(Singleton.shared.userInfo.user_id ?? "")&type=POSTED"
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_ALL_BID) { 
-            self.jobData = $0.data
-            Singleton.shared.vendorAcceptedBids = $0.data
+            self.jobData = $0!.data
+            Singleton.shared.vendorAcceptedBids = $0!.data
             self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()
@@ -87,8 +87,8 @@ class BidPlacedViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_OWNER_COMPLETED_JOBS)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_COMPLETED_JOBS) { (response) in
-            self.jobData = response.data
-            Singleton.shared.postedHistoryData = response.data
+            self.jobData = response!.data
+            Singleton.shared.postedHistoryData = response!.data
             self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()
@@ -99,7 +99,7 @@ class BidPlacedViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_OWNER_RUNNING_JOB)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) { (response) in
-            self.jobData = response.data
+            self.jobData = response!.data
             self.noJobsFound.isHidden = self.jobData.count != 0
             self.jobTable.reloadData()
             ActivityIndicator.hide()

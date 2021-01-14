@@ -118,7 +118,7 @@ class AcceptJobViewController: UIViewController, SuccessPopup, RatingFromhistory
         let url = "\(U_BASE)\(path)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(self.jobId ?? "")"
         
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
-            self.jobData = $0.data
+            self.jobData = $0?.data
             self.populateView()
             self.manageView()
             self.tableView.reloadData()

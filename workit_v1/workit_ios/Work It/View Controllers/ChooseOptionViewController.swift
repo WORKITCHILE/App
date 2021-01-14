@@ -43,7 +43,7 @@ class ChooseOptionViewController: UIViewController {
         if let id = UserDefaults.standard.value(forKey: UD_USER_ID) as? String{
             ActivityIndicator.show(view: self.view)
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_PROFILE + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
-                Singleton.shared.userInfo = response.data!
+                Singleton.shared.userInfo = (response?.data!)!
                 Singleton.saveUserInfo(data:Singleton.shared.userInfo)
                 
                 self.responseOk = true

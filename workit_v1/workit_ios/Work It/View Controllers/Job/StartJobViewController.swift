@@ -84,7 +84,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
             url = U_BASE + U_GET_SINGLE_JOB_VENDOR + (Singleton.shared.userInfo.user_id ?? "") + "&job_id=\(self.jobId ?? "")"
         }
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) { (response) in
-            self.jobData = response.data
+            self.jobData = response?.data
             self.manageView()
             ActivityIndicator.hide()
         }
@@ -216,6 +216,7 @@ class StartJobViewController: UIViewController, UITextViewDelegate, SlideButtonD
                 }
                 ActivityIndicator.hide()
             }
+            
         }else{
             self.slidingButton.reset()
         }

@@ -34,6 +34,7 @@ class ActivityIndicator
             
            
             view.addSubview(self.backgroundRounded)
+            
             self.backgroundRounded.addSubview(self.imageView)
             self.backgroundRounded.addSubview(self.label)
             
@@ -47,9 +48,9 @@ class ActivityIndicator
     }
     
     static func turn180(_ view : UIImageView){
-    
-        
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [], animations: {
+       
+  
+        UIView.animate(withDuration: 2.0, delay: 0.0, options:.curveLinear, animations: {
             view.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         }, completion: { complete in
             self.turn360(view)
@@ -57,7 +58,7 @@ class ActivityIndicator
     }
     
     static func turn360(_ view : UIImageView){
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveLinear, animations: {
             view.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
         }, completion: { complete in
             self.turn180(view)
@@ -65,10 +66,13 @@ class ActivityIndicator
     }
     
     static func hide() {
-        overlayView.isUserInteractionEnabled = true
+        
+        self.overlayView.isUserInteractionEnabled = true
         DispatchQueue.main.async {
             self.imageView.stopAnimating()
             self.backgroundRounded.removeFromSuperview()
+            self.backgroundRounded = UIView()
+            self.imageView = UIImageView(image: UIImage(named: "engine"))
         }
 
     }

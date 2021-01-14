@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var workerView : UIView!
     @IBOutlet weak var labelClient : UILabel!
     @IBOutlet weak var labelWorker : UILabel!
+    @IBOutlet weak var circleHeaderTop: NSLayoutConstraint!
+    @IBOutlet weak var whiteViewContraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,22 @@ class HomeViewController: UIViewController {
         button_worker.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
         button_worker.layer.shadowRadius = 20.0
     
-        if( self.view.frame.size.height == 667){
-            topHeight.constant = 80
-        }
+    
         
         self.workerView.isHidden = true
         
         styleSelectButtonClient(button: self.button_client, label: self.labelClient, icon:"person_outline")
         styleUnselectButtonClient(button: self.button_worker, label: self.labelWorker, icon: "worker_outline")
+        
+        
+        
+        if(self.view.frame.size.height == 667.0 || self.view.frame.size.height == 736.0){
+            self.circleHeaderTop.constant = -50.0
+            self.whiteViewContraint.constant = 197.0
+            self.topHeight.constant = 30
+        } 
+        
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {

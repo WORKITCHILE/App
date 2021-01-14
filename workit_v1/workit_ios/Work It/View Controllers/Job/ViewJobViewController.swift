@@ -69,7 +69,7 @@ class ViewJobViewController: UIViewController, SuccessPopup {
     func getSingleJob(){
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_SINGLE_JOB_WORKER + self.jobId + "&user_id=\(Singleton.shared.userInfo.user_id ?? "")", method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_WORKER) { (response) in
-            self.jobDetail = response.data
+            self.jobDetail = response?.data
             self.jobImage = self.jobDetail!.images ?? []
             self.jobCategory.text = self.jobDetail?.category_name
             self.jobSubcategory.text = self.jobDetail?.subcategory_name

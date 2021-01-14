@@ -98,7 +98,7 @@ class CategoryListViewController: UIViewController, ApplyFilter {
             self.jobData = []
 
             
-            self.jobData = response.data.sorted(by: {$0.job_time! < $1.job_time!})
+            self.jobData = response!.data.sorted(by: {$0.job_time! < $1.job_time!})
             self.jobData = self.jobData.filter{
                 $0.user_id != Singleton.shared.userInfo.user_id
             }
@@ -168,6 +168,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let myVC = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
         myVC.jobId = self.jobData[indexPath.row].job_id ?? ""
+        myVC.modeView = 1
         self.navigationController?.pushViewController(myVC, animated: true)
       
     }

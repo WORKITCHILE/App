@@ -14,8 +14,8 @@ class CalendarDetailViewController: UIViewController {
     @IBOutlet weak var calenderView: UITableView!
     
     var calenderData = [CalendarJob]()
-    var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31]
-    var isFutureDate = false
+    
+
     var month = Int()
     var sufixDate = ""
     
@@ -29,6 +29,11 @@ class CalendarDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        setNavigationBar()
     }
     
 
@@ -37,35 +42,59 @@ class CalendarDetailViewController: UIViewController {
 extension CalendarDetailViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-      
-        return 160.0
+        return 170.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.isFutureDate ? self.monthDays[self.month-1] : self.calenderData.count
+        return self.calenderData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         /*  */
         let val = self.calenderData[indexPath.row]
+       
         var cellIdentifier = "CalenderViewCell"
+        
+        if(val.status == "PAID"){
+            cellIdentifier = "CalenderViewCellPay"
+        }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CalenderViewCell
         cell.jobDate.text = "\(indexPath.row + 1) \(sufixDate)"
         
-        if(!self.isFutureDate){
+        cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
+        cell.jobTitle.text = val.job_name ?? ""
+        cell.jobAddress.text = val.job_address ?? ""
+        cell.card.defaultShadow()
         
-            cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-            cell.jobTitle.text = val.job_name ?? ""
-            cell.jobAddress.text = val.job_address ?? ""
-        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        let job = self.calenderData[indexPath.row]
+        self.getJobDetail(jobId: job.job_id)
+    }
+    
+    func getJobDetail(jobId: String){
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId ?? "")"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
+            
+            ActivityIndicator.hide()
+            
+           
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
+            myVC.jobData = $0?.data
+            myVC.mode = "HIRE"
+            self.navigationController?.pushViewController(myVC, animated: true)
+            
+           
+            
+        }
     }
 }
 
@@ -79,4 +108,5 @@ class CalenderViewCell: UITableViewCell{
     @IBOutlet weak var jobStatus: UILabel!
     @IBOutlet weak var jobTitle: UILabel!
     @IBOutlet weak var jobAddress: UILabel!
+    @IBOutlet weak var card: UIView!
 }

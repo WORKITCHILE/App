@@ -21,6 +21,7 @@ class SideDrawerViewController: UIViewController {
     @IBOutlet weak var userRating : CosmosView!
     @IBOutlet weak var fakeHeader : UIImageView!
     @IBOutlet weak var userImageContainer : UIView!
+    @IBOutlet weak var circleHeaderTop: NSLayoutConstraint!
     
     var arrayMenu: [MenuObject]?
     var isFirstTIme = true
@@ -32,6 +33,10 @@ class SideDrawerViewController: UIViewController {
         self.fakeHeader.alpha = 0.0
         
         self.userImageContainer.defaultShadow()
+        
+        if(self.view.frame.size.height == 667.0  || self.view.frame.size.height == 736.0){
+            self.circleHeaderTop.constant = -20
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,22 +50,36 @@ class SideDrawerViewController: UIViewController {
         self.tableViewMenu.dataSource = self
         let userInfo = Singleton.shared.userInfo
         
-        self.userName.text = userInfo.name
+        self.userName.text = "\(userInfo.name!) \(userInfo.father_last_name!)".uppercased()
+        
         self.userImage.sd_setImage(with: URL(string: userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         self.userRating.rating = Double(userInfo.average_rating ?? "0")!
         
-        arrayMenu = [
-            MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Tus datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController", "storyboard":"Main"]),
-            MenuObject(image: UIImage(named: "ic_bids"), name: "Mis Ofertas", action: .open, data:["vc":"MyBidsViewController", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_bank_account"), name: "Cuenta Bancaria", action: .open, data:["vc":"AccountSettingViewController", "storyboard":"AccountAndCredits"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_signup_wallet"), name: "Historial de pago", action: .open, data:["vc":"CreditViewController", "storyboard":"AccountAndCredits"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_historial"), name: "Historial", action: .open, data:["vc":"HistorialViewController", "storyboard":"Main"]),
-          
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController", "storyboard":"Main"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]),
-            MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:["vc":"terms", "storyboard":"signup"])
-        ]
+        arrayMenu = []
+        
+        if(userInfo.type == "HIRE"){
+            arrayMenu?.append( MenuObject(image: #imageLiteral(resourceName: "ic_engine_gradient"), name: "Quiero ser Worker", action: .open, data:["vc":"BecomeWorkerViewController", "storyboard":"signup"], cellType: "BecomeWorker"))
+        }
+        
+        self.userRating.isHidden = userInfo.type == "HIRE"
+       
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Tus datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+        
+        if(userInfo.type == "WORK"){
+            arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+            
+            arrayMenu?.append(MenuObject(image: UIImage(named: "ic_bids"), name: "Mis Ofertas", action: .open, data:["vc":"MyBidsViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+            
+            arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_bank_account"), name: "Cuenta Bancaria", action: .open, data:["vc":"AccountSettingViewController", "storyboard":"AccountAndCredits"], cellType: "SideMenuTableViewCell"))
+        }
+        
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_signup_wallet"), name: "Historial de pago", action: .open, data:["vc":"CreditViewController", "storyboard":"AccountAndCredits"], cellType: "SideMenuTableViewCell"))
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_historial"), name: "Historial", action: .open, data:["vc":"HistorialViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_support"), name: "Soporte", action: .open, data:["vc":"SupportViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_share"), name: "Compartir App", action: .action, data:["action": "shareAction"]))
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_term"), name: "Términos y condiciones", action: .open, data:["vc":"terms", "storyboard":"signup"], cellType: "SideMenuTableViewCell"))
+        
+      
          
          tableViewMenu.reloadData()
     }
@@ -128,11 +147,16 @@ extension SideDrawerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
         let menuObject = arrayMenu?[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: menuObject?.cellType ?? "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
+        
         
         cell.menuName.text = menuObject?.name?.uppercased()
         cell.menuImage.image = menuObject?.image
+        
+        if(cell.card != nil){
+            cell.card.defaultShadow()
+        }
         
         return cell
     }
@@ -176,4 +200,5 @@ class SideMenuTableViewCell: UITableViewCell{
     //MARK: IBOutles
     @IBOutlet weak var menuName: UILabel!
     @IBOutlet weak var menuImage: UIImageView!
+    @IBOutlet weak var card : UIView!
 }

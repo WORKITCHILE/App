@@ -18,7 +18,7 @@ class ScheduleCalenderViewController: UIViewController {
     var calenderData = [CalendarJobsResponse]()
     var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31]
     var isFutureDate = false
-    var month = Int()
+    var month = 0
     var sufixDate = ""
     
     override func viewDidLoad() {
@@ -55,7 +55,7 @@ class ScheduleCalenderViewController: UIViewController {
             
             ActivityIndicator.hide()
             
-            self.calenderData = response.data
+            self.calenderData = response!.data
             
             if(self.calenderData.count == 0){
                 self.isFutureDate = true
@@ -115,7 +115,7 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
            }
         }
         
-        return 100.0
+        return 110.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,9 +140,9 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
         if(jobCount?.count == 1){
             cellIdentifier = "CalenderViewCell"
             if(jobDetail?.status == "PAID"){
-                cellIdentifier = "CalenderPayViewCell"
+                cellIdentifier = "CalenderViewCellPay"
             } else if(jobDetail?.status == "CANCELED") {
-                cellIdentifier = "CalenderCancelViewCell"
+                cellIdentifier = "CalenderViewCellCancel"
             }
             
         } else if(jobCount!.count > 1){
@@ -164,6 +164,8 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
         } else if(jobCount!.count > 1){
             cell.jobTitle.text = "\(jobCount!.count) Trabajos programados"
         }
+        
+        cell.card.defaultShadow()
        
         
         return cell

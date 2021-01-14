@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SwiftPhotoGallery
 
 class JobDetailViewController: UIViewController{
 
@@ -24,8 +25,12 @@ class JobDetailViewController: UIViewController{
     @IBOutlet weak var cardView2: UIView!
     @IBOutlet weak var counterBid : UITextField!
     @IBOutlet weak var comment : UITextView!
-    @IBOutlet weak var mapView : MKMapView!
+    @IBOutlet weak var mapView : MapVC!
     @IBOutlet weak var stackHeight : NSLayoutConstraint!
+    
+    @IBOutlet weak var locationContainer : UIView!
+    @IBOutlet weak var counterBidContainer: UIView!
+    
     
     @IBOutlet weak var footer : UIView!
 
@@ -44,6 +49,7 @@ class JobDetailViewController: UIViewController{
     var hiddenHeader = true
     var hiddenAvatar = true
     
+    var modeView = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +67,16 @@ class JobDetailViewController: UIViewController{
         
         self.cardView1.defaultShadow()
         self.cardView2.defaultShadow()
+        
+        
+        if(modeView == 0){
+            self.counterBidContainer.isHidden = true
+            self.locationContainer.isHidden = true
+            recalculateFooter()
+            
+        }
+        
+        self.userImageView.defaultShadow()
     }
     
  
@@ -72,7 +88,7 @@ class JobDetailViewController: UIViewController{
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) { response in
             
             
-            self.jobData = response.data
+            self.jobData = response?.data
             
             self.jobImage = self.jobData!.images ?? []
             
@@ -86,11 +102,6 @@ class JobDetailViewController: UIViewController{
             self.cancelContainer.isHidden = self.jobData?.user_id != Singleton.shared.userInfo.user_id
             self.bidContainer.isHidden = self.jobData?.user_id == Singleton.shared.userInfo.user_id
             self.photosContainer.isHidden = self.jobImage.count == 0
-            
-            self.stackHeight.constant = ((self.jobImage.count == 0) ? 680 : 860)
-            
-            self.footer.frame = CGRect(x: self.footer.frame.origin.x, y: self.footer.frame.origin.y, width: self.footer.frame.size.width, height: ((self.jobImage.count == 0) ? 680 : 860))
-            self.view.layoutIfNeeded()
             
             self.counterBid.text = "$\(self.jobData?.initial_amount?.formattedWithSeparator ?? "")"
             
@@ -112,18 +123,42 @@ class JobDetailViewController: UIViewController{
             self.tableView.reloadData()
             self.photoCollection.reloadData()
             self.manageView()
+            self.recalculateFooter()
             
             ActivityIndicator.hide()
         }
     }
     
+    func recalculateFooter(){
+        
+        var originalHeight = 900
+        
+        if(self.jobImage.count == 0){
+            originalHeight =  originalHeight - 180
+        }
+        
+        if(modeView == 0){
+            originalHeight = originalHeight - 500
+        }
+        
+        if(self.jobData?.user_id == Singleton.shared.userInfo.user_id){
+            originalHeight = originalHeight - 110
+        }
+        
+        self.stackHeight.constant = CGFloat(originalHeight)
+        
+        self.footer.frame = CGRect(x: self.footer.frame.origin.x, y: self.footer.frame.origin.y, width: self.footer.frame.size.width, height:CGFloat(originalHeight))
+        self.view.layoutIfNeeded()
+    }
+    
     func centerMapOnLocation(location: CLLocation) {
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+       
         DispatchQueue.main.async {
-            self.mapView.setRegion(region, animated: true)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location.coordinate
-            self.mapView.addAnnotation(annotation)
+           
+            self.mapView.latitude = location.coordinate.latitude
+            self.mapView.longitude = location.coordinate.longitude
+            
+
         }
     }
     
@@ -203,7 +238,6 @@ class JobDetailViewController: UIViewController{
         var param = [
             "job_id": self.jobData?.job_id,
             "job_name": self.jobData?.job_name,
-            
             "category_name": self.jobData?.category_name,
             "subcategory_name":self.jobData?.subcategory_name,
             "user_id": self.jobData?.user_id,
@@ -226,11 +260,33 @@ class JobDetailViewController: UIViewController{
     
         SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_PLACE_BID) { (response) in
             ActivityIndicator.hide()
-            /*
-            self.openSuccessPopup(img:#imageLiteral(resourceName: "tick") , msg: "Bid Place Successfully\n Please wait for the owner to accept.", yesTitle: nil, noTitle: nil, isNoHidden: true)
-            self.navigationController?.popViewController(animated: true)
-            */
+            self.showSuccessAlert()
+          
+            
+           
         }
+    }
+    
+    func showSuccessAlert(){
+        let alert = UIAlertController(title: "Workit", message: "Tú oferta se realizo correctamente", preferredStyle: .alert)
+                  
+        alert.addAction(UIAlertAction(title: "Ok", style: .default){ _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        })
+         
+          
+
+        self.present(alert, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let bidDetail = segue.destination as! BidDetailViewController
+      
+        let rowIndex = (self.tableView.indexPathForSelectedRow?.row ?? 0) - self.jobDataProperties.count
+        let bid = self.jobData?.bids?[rowIndex]
+        
+        bidDetail.bidData = bid
+        bidDetail.jobData = self.jobData
     }
     
 }
@@ -242,31 +298,45 @@ extension JobDetailViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashboardCollection", for: indexPath) as! DashboardCollection
-        cell.jobImage.sd_setImage(with: URL(string: self.jobImage[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "camera"))
+        cell.jobImage.sd_setImage(with: URL(string: self.jobImage[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                 
-                let newImageView = UIImageView()
-               newImageView.sd_setImage(with: URL(string: self.jobImage[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "camera"))
-                newImageView.frame = UIScreen.main.bounds
-                newImageView.backgroundColor = .black
-                newImageView.contentMode = .scaleAspectFit
-                newImageView.isUserInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-                newImageView.addGestureRecognizer(tap)
-                self.view.addSubview(newImageView)
-                self.tabBarController?.tabBar.isHidden = true
-         }
-         
-         @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-             self.tabBarController?.tabBar.isHidden = true
-             sender.view?.removeFromSuperview()
-         }
+                
+        let gallery = SwiftPhotoGallery(delegate: self, dataSource: self)
+
+        gallery.backgroundColor = UIColor.black
+        gallery.pageIndicatorTintColor = UIColor.gray.withAlphaComponent(0.5)
+        gallery.currentPageIndicatorTintColor = UIColor.white
+        gallery.hidePageControl = false
     
 
+        present(gallery, animated: true, completion: nil)
+        
+            
+    }
+
+}
+
+
+extension JobDetailViewController: SwiftPhotoGalleryDataSource, SwiftPhotoGalleryDelegate{
+    
+    func numberOfImagesInGallery(gallery: SwiftPhotoGallery) -> Int {
+        return self.jobImage.count
+    }
+
+    func imageInGallery(gallery: SwiftPhotoGallery, forIndex: Int) -> UIImage? {
+        let newImageView = UIImageView()
+        newImageView.sd_setImage(with: URL(string: self.jobImage[forIndex]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        
+        return  newImageView.image
+    }
+
+    func galleryDidTapToClose(gallery: SwiftPhotoGallery) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 

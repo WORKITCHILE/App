@@ -62,10 +62,12 @@ extension UIViewController {
              storeImg = storageRef.child("profile_images/").child(lastPathComponent)
         }else if(type == 3){
              storeImg = storageRef.child("job_images/").child(lastPathComponent)
-        }
+        }else if(type == 4){
+            storeImg = storageRef.child("work_images/").child(lastPathComponent)
+       }
         
         storeImg.putData(image, metadata:StorageMetadata(dictionary: ["contentType": "image/png"])) { (snapshot, error) in
-            // When the image has successfully uploaded, we get it's download URL
+          
              storeImg.downloadURL(completion: { (url, error) in
                 ActivityIndicator.hide()
                 

@@ -24,7 +24,7 @@ class VendorReviewsViewController: UIViewController {
         func getReviewList(){
             ActivityIndicator.show(view: self.view)
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_RATING + "\(userId)&type=WORK", method: .get, parameter: nil, objectClass: GetRating.self, requestCode: U_GET_RATING) { (response) in
-                self.evaluationData = response.data
+                self.evaluationData = response!.data
                 if(self.evaluationData.count == 0){
                     self.noDataLabel.isHidden = false
                 }else{

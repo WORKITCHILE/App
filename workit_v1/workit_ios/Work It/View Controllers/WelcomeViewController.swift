@@ -39,11 +39,12 @@ class WelcomeViewController: UIViewController {
     func callSocialLoginAPI(type: Int, gId: String?,fId: String?, email: String){
         
         ActivityIndicator.show(view: self.view)
-        let url = U_BASE + U_SOCIAL_LOGIN + "\(type)&social_handle=" + ( (type == 1 ? gId : fId) ?? "")
+        
+        let url = "\(U_BASE)\(U_SOCIAL_LOGIN)\(type)&social_handle=\((type == 1 ? gId : fId) ?? "")"
        
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: SocialLogin.self, requestCode: U_SOCIAL_LOGIN) { response in
             
-            if(response.data?.user_id == nil){
+            if(response?.data?.user_id == nil){
                 
                 
                 let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SignupViewController") as! SignupViewController

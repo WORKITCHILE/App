@@ -62,7 +62,7 @@ class HistorialViewController: UIViewController {
             
             ActivityIndicator.hide()
             refreshControl.endRefreshing()
-            data = response.data
+            data = response!.data
             self.tableView.reloadData()
             
         }
@@ -77,7 +77,7 @@ class HistorialViewController: UIViewController {
             
             ActivityIndicator.hide()
             refreshControl.endRefreshing()
-            dataReceived = response.data
+            dataReceived = response!.data
             self.tableView.reloadData()
             
         }
@@ -168,6 +168,11 @@ extension HistorialViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        let item = (selectedIndex == 0) ? self.data[indexPath.row] : self.dataReceived[indexPath.row]
+        let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
+        myVC.jobData = item
+        myVC.mode = (selectedIndex == 0) ? "HIRE" : "WORK"
+        self.navigationController?.pushViewController(myVC, animated: true)
     }
 }

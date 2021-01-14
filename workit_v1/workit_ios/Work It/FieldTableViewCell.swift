@@ -13,6 +13,7 @@ import UIKit
     func textFieldDidEnd(indexCell: IndexPath, text: String)
     @objc optional func textChange(indexCell: IndexPath, textField: UITextField, range: NSRange, string: String)
     @objc optional func tapCollectionItem(indexCell: IndexPath)
+    @objc optional func tapCollectionDeleteItem(indexCell: IndexPath)
 }
 
 class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -20,17 +21,18 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var fieldTextField: UITextField!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var fieldTextView: UITextView!
+    @IBOutlet weak var prefixLabel : UILabel!
     @IBOutlet weak var border: UIView!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var collectionView : UICollectionView!
+    @IBOutlet weak var imageCollection : UICollectionView!
     
     public var indexPath : IndexPath? = nil
     public var placeHolder = ""
     
     weak var delegate : FieldTableViewCellDelegate?
     
-    var images : [String] = [""]
+    var images = ["camera"]
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,10 +41,16 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.fieldTextField.text = placeHolder
         }
         
-        if(self.collectionView != nil){
-            self.collectionView.delegate = self
-            self.collectionView.dataSource = self
-            self.collectionView.isPagingEnabled = true
+        if(self.imageCollection != nil){
+            self.imageCollection.delegate = self
+            self.imageCollection.dataSource = self
+            self.imageCollection.isPagingEnabled = true
+        }
+    }
+    
+    func reloadData(){
+        if(self.imageCollection != nil){
+            self.imageCollection.reloadData()
         }
     }
 
@@ -63,10 +71,12 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if( self.fieldTextView.text == placeHolder){
-            self.fieldTextView.text = ""
-        } else if(self.fieldTextView.text == ""){
-            self.fieldTextView.text = placeHolder
+        if(self.fieldTextView != nil){
+            if( self.fieldTextView.text == placeHolder){
+                self.fieldTextView.text = ""
+            } else if(self.fieldTextView.text == ""){
+                self.fieldTextView.text = placeHolder
+            }
         }
     }
     
@@ -93,23 +103,83 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 }
 
-extension FieldTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoItem", for: indexPath)
-    
-        return cell
+
+
+extension FieldTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
+    func delete(index : Int) {
         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if(delegate != nil){
-            delegate?.tapCollectionItem?(indexCell: indexPath)
+        let url = self.images[index]
+        let store = storageRef.storage.reference(forURL: url)
+        
+        store.delete { error in
+            if error != nil {
+                
+            }else {
+                self.images.remove(at: index)
+                self.imageCollection.reloadData()
+            }
+            
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashboardCollection", for: indexPath) as! DashboardCollection
+        
+        if(images[indexPath.row] == "camera"){
+            cell.jobImage.image = #imageLiteral(resourceName: "ic_plus_form_green")
+            cell.addBtn.isHidden = false
+            cell.deleteBtn.isHidden = true
+            cell.addButton = {
+               
+                if(self.delegate != nil){
+                    self.delegate?.tapCollectionItem?(indexCell: indexPath)
+                }
+               
+            }
+        } else {
+            cell.addBtn.isHidden = true
+            cell.deleteBtn.isHidden = false
+            cell.jobImage.sd_setImage(with: URL(string: self.images[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.deleteButton = {
+                
+                if(self.delegate != nil){
+                    self.delegate?.tapCollectionDeleteItem?(indexCell: indexPath)
+                }
+               
+               
+            }
+        }
+        return cell
+    }
+    
+    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        let newImageView = UIImageView()
+        newImageView.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        sender.view?.removeFromSuperview()
+    }
+    
+    */
+    
+   
+    
 }
+

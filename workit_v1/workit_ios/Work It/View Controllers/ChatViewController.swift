@@ -19,15 +19,19 @@ class ChatViewController: UIViewController {
     var chatData = [ChatResponse]()
     var userId = Int()
     var driverId  = Int()
-    var chatId = String()
+   
     let picker = UIImagePickerController()
-    var imageName = ""
+   
     var imageData  = Data()
     var jobDetail : GetJobResponse?
-    var senderID = String()
-    var receiverID = String()
-    var senderName = String()
-    var receiverName = String()
+    
+    var imageName = ""
+    var chatId = ""
+    var senderID = ""
+    var receiverID = ""
+    var senderName = ""
+    var receiverName = ""
+    
     var postedByMe = false
     
     override func viewDidLoad() {
@@ -37,8 +41,7 @@ class ChatViewController: UIViewController {
             if(Singleton.shared.userInfo.user_id == self.jobDetail?.job_vendor_id){
                 userImage.sd_setImage(with:
                     URL(string:self.jobDetail?.user_image ?? ""), placeholderImage: UIImage(named: ""))
-                self.lblUserName.text = jobDetail?.user_name!.formatName()
-                self.occupation.text = jobDetail?.job_name ?? ""
+                self.lblUserName.text = jobDetail?.user_name!
                 self.senderID =  jobDetail?.user_id ?? ""
                 self.receiverID = jobDetail?.job_vendor_id ?? ""
                 self.senderName = jobDetail?.user_name ?? ""
@@ -46,8 +49,8 @@ class ChatViewController: UIViewController {
                 
             }else {
                 userImage.sd_setImage(with:URL(string:self.jobDetail?.vendor_image ?? ""), placeholderImage: UIImage(named: ""))
-                self.lblUserName.text = jobDetail?.vendor_name!.formatName()
-                self.occupation.text = jobDetail?.job_name ?? ""
+                self.lblUserName.text = jobDetail?.vendor_name!
+               
                 self.senderID =  jobDetail?.job_vendor_id ?? ""
                 self.receiverID = jobDetail?.user_id ?? ""
                 self.senderName = jobDetail?.vendor_name ?? ""
@@ -58,6 +61,13 @@ class ChatViewController: UIViewController {
             self.addChatObserver()
             
         }
+        
+        setNavigationBar()
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        chatTable.estimatedRowHeight = 160;
+        chatTable.rowHeight = UITableView.automaticDimension
      
         
     }
@@ -69,10 +79,7 @@ class ChatViewController: UIViewController {
     func addChatObserver() {
         ref.child("messages/" + "\(self.chatId)").observe(.childAdded, with: { (snapshot) in
             if let myVal = snapshot.value as? [String:Any]{
-                //                let myVal = snap.values as! [String:Any]
-                //                if(self.userId == myVal["receiver_id"] as? Int){
-                //                    self.scheduleNotifications(title:myVal["sender"] as! String, msg: myVal["message"] as! String)
-                //                }
+                
                 self.chatData.append(ChatResponse(id: myVal["id"] as! String, message: myVal["message"] as! String, read_satus: myVal["read_status"] as! Int, receiver_id: myVal["receiver_id"] as! String, sender_id: myVal["sender_id"] as! String, time: myVal["time"] as! Int, type: myVal["type"] as! Int))
                 
                 self.chatTable.beginUpdates()
@@ -102,7 +109,7 @@ class ChatViewController: UIViewController {
     }
     
     func sendSingleMessage(type: Int, recieverId: String, message: String,senderId: String, senderType: String, receiverType: String, messageType:Int) {
-        let param = [
+        let param : [String:Any] = [
             "sender":senderId,
             "receiver":recieverId,
             "sender_type":senderType,
@@ -110,8 +117,8 @@ class ChatViewController: UIViewController {
             "message_type": messageType,
             "last_message":message,
             "last_message_by":senderId,
-            "job_id":self.jobDetail?.job_id
-            ] as? [String:Any]
+            "job_id":self.jobDetail?.job_id ?? ""
+            ]
         
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_SEND_CHAT_MESSAGE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SEND_CHAT_MESSAGE) { (response) in
             
@@ -122,87 +129,65 @@ class ChatViewController: UIViewController {
     //MARK: IBAction
     @IBAction func sendAction(_ sender: Any) {
         
-        let number = (self.textView.text ?? "").filter { "0"..."9" ~= $0 }
-        let text = self.textView.text?.replacingOccurrences(of: " ", with: "")
-        
-        if (((text?.range(of: ".*[^A-Za-z0-9].*", options: .regularExpression)) == nil) && (number.count < 5)) {
-            if !(self.textView.text!.isEmpty && self.jobDetail?.job_id != nil){
-                self.textView.resignFirstResponder()
-                let id = self.chatId
-                let time =  Int(Date().timeIntervalSince1970)
-                
-                let dbRef = ref.child("messages/" + self.chatId).childByAutoId().setValue([
-                    "id": self.chatId,
-                    "time": time,
-                    "sender_id": self.senderID,
-                    "receiver_id": self.receiverID,
-                    "message": self.textView.text,
-                    "type": 1,
-                    "read_status": 1,
-                ])
-                var curUser = String()
-                if(K_CURRENT_USER == K_POST_JOB){
-                    curUser = K_WANT_JOB
-                }else{
-                    curUser = K_POST_JOB
-                }
-                
-                self.sendSingleMessage(type: 1, recieverId: self.senderID, message: self.textView.text, senderId: self.receiverID, senderType: K_CURRENT_USER ?? "" , receiverType: curUser, messageType: 1)
-                self.textView.text = ""
-                self.chatTable.beginUpdates()
-                //            self.chatTable.insertRows(at: [IndexPath(row: self.chatData.count, section: 0)], with: .bottom)
-                self.chatTable.endUpdates()
-            }
-        }else {
+       
+        if !(self.textView.text!.isEmpty && self.jobDetail?.job_id != nil){
+            self.textView.resignFirstResponder()
+   
+            let time =  Int(Date().timeIntervalSince1970)
+            
+            ref.child("messages/" + self.chatId).childByAutoId().setValue([
+                "id": self.chatId,
+                "time": time,
+                "sender_id": self.senderID,
+                "receiver_id": self.receiverID,
+                "message": self.textView.text ?? "",
+                "type": 1,
+                "read_status": 1,
+            ])
+            
+            let curUser = (K_CURRENT_USER == K_POST_JOB) ? K_WANT_JOB : K_POST_JOB
+          
+            self.sendSingleMessage(type: 1, recieverId: self.senderID, message: self.textView.text, senderId: self.receiverID, senderType: K_CURRENT_USER ?? "" , receiverType: curUser, messageType: 1)
             self.textView.text = ""
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "SuccessMsgViewController") as! SuccessMsgViewController
-            myVC.image = #imageLiteral(resourceName: "information-button copy")
-            myVC.titleLabel = "You are not allowed to share these details, sharing such details is breaching our terms of services."
-            myVC.okBtnTtl = "Yes"
-            myVC.cancelBtnHidden = true
-            myVC.modalPresentationStyle = .overFullScreen
-            self.navigationController?.present(myVC, animated: true, completion: nil)
+            self.chatTable.beginUpdates()
+            self.chatTable.endUpdates()
         }
+        
+        
     }
     
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+    
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.chatData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = self.chatData[indexPath.row]
-        var cell = ChatViewCell()
+        let isMe = Singleton.shared.userInfo.user_id == data.receiver_id
+        let identifier = isMe ? "ChatViewCell2" : "ChatViewCell1"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! MessageCell
         
-        if(Singleton.shared.userInfo.user_id == data.receiver_id){
-            cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell2") as! ChatViewCell
+        if(isMe){
+            cell.card.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 15.0)
         }else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell1") as! ChatViewCell
-            
+            cell.card.roundCorners(corners: [.topRight, .bottomLeft, .bottomRight], radius: 15.0)
         }
-
-        cell.messageText.text = data.message
         
-        cell.messageTime.text = self.convertTimestampToDate(data.time ?? 0, to: "MMM dd, h:mm a")
+        cell.messageTextView.text = data.message
+        cell.timeAgoLabel.text = self.convertTimestampToDate(data.time ?? 0, to: "MMM dd, h:mm a")
+        //cell.card.defaultShadow()
+        
         return cell
     }
     
    
     
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-        sender.view?.removeFromSuperview()
-    }
+   
 }
 
-class ChatViewCell: UITableViewCell {
-    //MARK:IBOutlets
-    @IBOutlet weak var messageTime: UILabel!
-    @IBOutlet weak var messageText: UILabel!
-    @IBOutlet weak var messageTextView: UIView!
-    
-}
 

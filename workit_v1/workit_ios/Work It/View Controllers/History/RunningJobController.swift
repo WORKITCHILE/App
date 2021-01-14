@@ -48,7 +48,7 @@ class RunningJobController: UIViewController {
             
             ActivityIndicator.hide()
             
-            data = response.data
+            data = response!.data
             self.tableView.reloadData()
             
         }
@@ -63,7 +63,7 @@ class RunningJobController: UIViewController {
             
             ActivityIndicator.hide()
             
-            dataReceived = response.data
+            dataReceived = response!.data
             self.tableView.reloadData()
             
         }
@@ -109,19 +109,18 @@ extension RunningJobController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JobTableView") as! JobTableView
         let val = (selectedIndex == 0) ? self.data[indexPath.row] : self.dataReceived[indexPath.row]
        
-       
         
         if(selectedIndex == 0){
             cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? "" ),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.userName.text =  val.vendor_name
         } else {
             cell.userImage.sd_setImage(with: URL(string: val.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.userName.text =  val.user_name
            
         }
         
         cell.jobName.text = val.job_name?.uppercased()
-        
-        cell.userName.text =  val.user_name
-    
+       
         cell.jobDate.text = val.job_date!
 
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
@@ -140,6 +139,13 @@ extension RunningJobController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        let item = (selectedIndex == 0) ? self.data[indexPath.row] : self.dataReceived[indexPath.row]
+        let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
+        myVC.jobData = item
+        myVC.mode = (selectedIndex == 0) ? "HIRE" : "WORK"
+        self.navigationController?.pushViewController(myVC, animated: true)
+        
     }
 }

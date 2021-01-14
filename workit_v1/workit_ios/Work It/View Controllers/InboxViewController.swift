@@ -31,16 +31,16 @@ class InboxViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.getMessageList()
+       
         animation?.play()
+        self.getMessageList()
     }
     
  
-    
     func getMessageList(){
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_INBOX + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetInbox.self, requestCode: U_GET_INBOX) { (response) in
-            self.inboxData = response.data
+            self.inboxData = response!.data
            
             self.notContent.isHidden = self.inboxData.count != 0
             
@@ -72,23 +72,36 @@ extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EvaluationTableView") as! EvaluationTableView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell") as! MessageCell
         let val = self.inboxData[indexPath.row]
         
         if(val.sender == Singleton.shared.userInfo.user_id){
-            cell.userImage.sd_setImage(with: URL(string: val.receiver_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = val.receiver_name!.formatName()
-                
+            cell.avatarImage.sd_setImage(with: URL(string: val.receiver_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.nameLabel.text = val.receiver_name!
+            
         }else {
-            cell.userImage.sd_setImage(with: URL(string: val.sender_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-            cell.userName.text = val.sender_name!.formatName()
+            cell.avatarImage.sd_setImage(with: URL(string: val.sender_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.nameLabel.text = val.sender_name!
+            
             
         }
-        cell.jobAddress.text = val.last_message
-        cell.timeLabel.text = self.convertTimestampToDate(val.created_at ?? 0, to: "MMM dd, h:mm a")
+        cell.messageLabel.text = val.last_message
+        cell.timeAgoLabel.text = self.convertTimestampToDate(val.created_at ?? 0, to: "MMM dd, h:mm a")
+        
+        cell.card.defaultShadow()
+        
         return cell
     }
     
-   
+}
+
+class MessageCell : UITableViewCell {
+    @IBOutlet weak var avatarImage : ImageView!
+    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var messageLabel : UILabel!
+    @IBOutlet weak var timeAgoLabel : UILabel!
     
+    @IBOutlet weak var messageTextView : UITextView!
+   
+    @IBOutlet weak var card : UIView!
 }

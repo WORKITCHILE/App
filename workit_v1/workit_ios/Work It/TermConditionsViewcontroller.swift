@@ -39,7 +39,7 @@ class TermConditionsViewcontroller: UIViewController {
             
             ActivityIndicator.hide()
           
-            self.webView.loadHTMLString((response.data?.terms_and_conditions!)!, baseURL:nil)
+            self.webView.loadHTMLString((response?.data?.terms_and_conditions!)!, baseURL:nil)
         }
     }
    

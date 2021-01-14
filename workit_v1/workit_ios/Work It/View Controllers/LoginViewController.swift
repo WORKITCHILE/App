@@ -61,12 +61,13 @@ class LoginViewController: UIViewController {
             SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
             
                 
-                Singleton.shared.userInfo = response.data!
+                Singleton.shared.userInfo = response!.data!
                 Singleton.saveUserInfo(data:Singleton.shared.userInfo)
                 if(Singleton.shared.userInfo.is_email_verified != 1){
                     
                     let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
                     myVC.isNewuser = true
+                    myVC.emailAdd = self.emailAddress.text!
                     self.navigationController?.pushViewController(myVC, animated: true)
                     
                 }else {
@@ -97,12 +98,10 @@ class LoginViewController: UIViewController {
        
             Auth.auth().signIn(withEmail: self.emailAddress.text ?? "", password: self.password.text ?? "") { [weak self] authResult, error in
                 
-                debugPrint("-->")
-                debugPrint(error as Any)
-                
+
                 guard self != nil else { return }
                 if(authResult == nil){
-                    Singleton.shared.showToast(text: "Wrong credentials")
+                    Singleton.shared.showToast(text: "Credenciales incorrectas")
                     ActivityIndicator.hide()
                 }else {
                     self?.sendFcmToken(userId: authResult?.user.uid ?? "")

@@ -41,14 +41,7 @@ class CreditViewController: UIViewController {
         
     
     func getWalletInfo(){
-        ActivityIndicator.show(view: self.view)
-        let url = "\(U_BASE)\(U_GET_CREDIT)\(Singleton.shared.userInfo.user_id ?? "")"
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetTransaction.self, requestCode: U_GET_CREDIT) {
-            self.transactionData = $0.data
-            self.transactionTable.reloadData()
-            ActivityIndicator.hide()
-            self.emptyView.isHidden = self.transactionData?.transactions?.count ?? 0 > 0
-        }
+       
     }
     
 }

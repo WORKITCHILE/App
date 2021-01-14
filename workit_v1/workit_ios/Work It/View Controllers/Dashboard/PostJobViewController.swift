@@ -33,7 +33,6 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     @IBOutlet weak var viewSubcategory: View!
 
     @IBOutlet weak var jobDescription: UITextView!
-    @IBOutlet weak var headingLabel: DesignableUILabel!
     @IBOutlet weak var imageCollection: UICollectionView!
     @IBOutlet weak var postJobButton: CustomButton!
     @IBOutlet weak var mapView: MapVC!
@@ -93,13 +92,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     }
     
     func initialiseView(){
-        if(isRepostJob){
-            //self.headingLabel.text = "Repost Job"
-            //self.postJobButton.setTitle("Repost", for: .normal)
-        }else{
-            //self.headingLabel.text = "Edit Job"
-            //self.postJobButton.setTitle("Save", for: .normal)
-        }
+        
         
         self.workName.text = self.jobDetail?.job_name
         self.workDate.text = self.jobDetail?.job_date
@@ -147,7 +140,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         ActivityIndicator.show(view: self.view)
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_SUBCATEGORIES + id, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
             
-            self.subcategoryData = response.data
+            self.subcategoryData = response!.data
         
             if(self.subcategoryData.count > 0){
                 self.selectedSubcategory = self.subcategoryData[0]

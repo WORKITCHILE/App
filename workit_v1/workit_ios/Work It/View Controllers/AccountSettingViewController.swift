@@ -57,7 +57,7 @@ class AccountSettingViewController: UIViewController {
         let url = "\(U_BASE)\(U_GET_ACCOUNT_DETAILS)\((Singleton.shared.userInfo.user_id ?? ""))"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetAccounts.self, requestCode: U_GET_ACCOUNT_DETAILS) { [self] (response) in
             ActivityIndicator.hide()
-            self.accountData = response.data
+            self.accountData = response!.data
             self.emptyView.isHidden = self.accountData.count > 0
             if(self.accountData.count > 0){
                 self.fillData()

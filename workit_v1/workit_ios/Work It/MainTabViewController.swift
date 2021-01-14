@@ -47,7 +47,7 @@ class MainTabViewController: UITabBarController {
         self.menuButton.layer.cornerRadius = menuButtonFrame.height/2
         view.addSubview(self.menuButton)
 
-        self.menuButton.setImage(UIImage(named: "main_tab_button"), for: .normal)
+        self.menuButton.setImage(UIImage(named: "ic_home"), for: .normal)
         self.menuButton.addTarget(self, action: #selector(menuButtonAction(sender:)), for: .touchUpInside)
 
         view.layoutIfNeeded()
@@ -58,6 +58,7 @@ class MainTabViewController: UITabBarController {
 
     @objc private func menuButtonAction(sender: UIButton) {
         selectedIndex = 2
+        (self.viewControllers?[2] as! UINavigationController).popToRootViewController(animated: true)
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

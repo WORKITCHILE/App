@@ -23,6 +23,7 @@ struct MenuObject {
     var name: String?
     var action: MenuAction?
     var data : [String: String]
+    var cellType: String?
 }
 
 struct LoginResponse: Codable {
@@ -62,7 +63,7 @@ struct UserInfo: Codable {
     var average_rating: String?
     var user_id: String?
     var background_document: String?
-    var work_images : [String?] = []
+    var work_images : [String] = []
     var marketplace : String?
 }
 
@@ -168,6 +169,8 @@ struct GetJobResponse: Codable{
     var job_city: String?
     var job_state: String?
     var job_address: String?
+    var job_address_number: String?
+    var job_address_reference: String?
     var started_by: String?
     var job_name: String?
     var subcategory_id: String?
@@ -203,7 +206,7 @@ struct BidResponse: Codable {
     var vendor_image: String?
     var job_end_time = 0
     var job_day_timestamp  = 0
-    var counteroffer_amount = "0"
+    var counteroffer_amount = 0
     var job_time = 0
     var vendor_description = ""
     var have_vendor_document : Bool?
@@ -310,6 +313,7 @@ struct GetNotificationResponse: Codable {
     var notification_body: String?
     var sender_name: String?
     var job_id: String?
+    var bid_id: String?
     var sender_image: String?
     var sender_id: String?
     var created_at: Int?
@@ -323,9 +327,14 @@ struct GetPaymentResponse : Codable {
     var url : String?
 }
 
+struct VerifyTransaction: Codable {
+    var data : String?
+    var message: String?
+    var status: Int?
+}
+
 struct GetTransaction: Codable {
-    var data : GetTransactionResponse?
-    var payment: GetPaymentResponse?
+    var data : GetPaymentResponse?
     var message: String?
     var status: Int?
 }

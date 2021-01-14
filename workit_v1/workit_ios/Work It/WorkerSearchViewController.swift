@@ -45,6 +45,10 @@ class WorkerSearchViewController: UIViewController {
        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animation?.play()
+    }
 
     func search(query : String){
         
@@ -53,7 +57,7 @@ class WorkerSearchViewController: UIViewController {
         
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetWorkers.self, requestCode: U_POST_JOB) { (response) in
             
-            self.workers = response.data
+            self.workers = response!.data
             
             self.emptyView.isHidden = self.workers.count > 0
             self.tableView.reloadData()

@@ -19,6 +19,9 @@ target 'Work It' do
   pod 'AccountKit'
   pod 'lottie-ios'
   pod 'PostalAddressRow'
+  pod "SCPageControl"
+  pod 'DateToolsSwift'
+  pod 'SwiftPhotoGallery'
   pod 'ImageRow'
   pod 'Fabric'
   pod 'Crashlytics'

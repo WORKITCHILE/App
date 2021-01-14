@@ -228,6 +228,7 @@ PODS:
   - Cosmos (22.1.0)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
+  - DateToolsSwift (5.0.0)
   - DigitInputView (1.1.1)
   - DLRadioButton (1.4.12)
   - Eureka (5.3.0)
@@ -477,10 +478,12 @@ PODS:
     - Eureka (~> 5.0)
   - PromisesObjC (1.2.8)
   - Protobuf (3.12.0)
+  - SCPageControl (0.4.0)
   - SDWebImage (5.8.4):
     - SDWebImage/Core (= 5.8.4)
   - SDWebImage/Core (5.8.4)
   - SnapKit (5.0.1)
+  - SwiftPhotoGallery (3.4.1)
   - SwiftyCodeView (0.3.6):
     - SwiftyCodeView/Core (= 0.3.6)
   - SwiftyCodeView/Core (0.3.6)
@@ -491,6 +494,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.9.1)
   - Cosmos
   - Crashlytics
+  - DateToolsSwift
   - DigitInputView
   - DLRadioButton (~> 1.4)
   - Fabric
@@ -517,7 +521,9 @@ DEPENDENCIES:
   - lottie-ios
   - LZViewPager (~> 1.2.5)
   - PostalAddressRow
+  - SCPageControl
   - SDWebImage
+  - SwiftPhotoGallery
   - SwiftyCodeView
   - Toaster (from `https://github.com/devxoul/Toaster.git`, branch `master`)
 
@@ -530,6 +536,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Cosmos
     - Crashlytics
+    - DateToolsSwift
     - DigitInputView
     - DLRadioButton
     - Eureka
@@ -576,8 +583,10 @@ SPEC REPOS:
     - PostalAddressRow
     - PromisesObjC
     - Protobuf
+    - SCPageControl
     - SDWebImage
     - SnapKit
+    - SwiftPhotoGallery
     - SwiftyCodeView
 
 EXTERNAL SOURCES:
@@ -598,6 +607,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Cosmos: 2795b36ad4bbea1af3050d6d65576ed63875f86a
   Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
+  DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
   DigitInputView: a102d95aa73c23ea714297b7c284ea895794e7a0
   DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   Eureka: 49239596c9d2eed9ab523990c34de62b6feac9f0
@@ -644,11 +654,13 @@ SPEC CHECKSUMS:
   PostalAddressRow: 00b1ee182a0fcb741f5f7ea4a91b6fd59de9083d
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  SCPageControl: 8a8dfbba7d7d8c66487a317cb4c4578a7e4af27a
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftPhotoGallery: 795b79e2596beb160fb978e232603da0811006ce
   SwiftyCodeView: 0252e3520749a3fda1a9b141873401f8e6c570ad
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: a5f304b04f00201c01269ad76a0c44e803491699
+PODFILE CHECKSUM: 901b20e8711605019ed6cb40d81ac314fa910bf8
 
 COCOAPODS: 1.9.3
