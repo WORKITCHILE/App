@@ -79,6 +79,7 @@
             "cell":"fieldData",
             "editable":false,
             "field":"email",
+            "maxLength": 40,
             "security":false
         },
         {
@@ -119,6 +120,7 @@
             "cell":"fieldDataBigText",
             "editable":true,
             "field":"description",
+            "maxLength": 400,
             "security":false
         },
         {

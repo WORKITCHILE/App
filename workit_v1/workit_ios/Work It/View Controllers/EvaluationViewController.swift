@@ -19,6 +19,7 @@ class EvaluationViewController: UIViewController {
     
     
     var evaluationData = [GetRatingResponse]()
+    var fromNotification = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,14 @@ class EvaluationViewController: UIViewController {
         animation?.loopMode = .loop
         
       
-      
-        self.setNavigationBar()
+        
+        if(fromNotification){
+            self.setNavigationBarForClose()
+            self.setTransparentHeader()
+        } else {
+            self.setNavigationBar()
+        }
+     
                
         getUserRating()
     }
@@ -46,11 +53,16 @@ class EvaluationViewController: UIViewController {
     func getUserRating(){
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_RATING)\(Singleton.shared.userInfo.user_id ?? "")"
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetRating.self, requestCode: U_GET_RATING) { 
-            self.evaluationData = $0!.data
-            self.emptyView.isHidden = self.evaluationData.count != 0
-            self.evaluationTable.reloadData()
-            ActivityIndicator.hide()
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetRating.self, requestCode: U_GET_RATING) {
+            
+            if($0 != nil){
+                self.evaluationData = $0!.data
+                self.emptyView.isHidden = self.evaluationData.count != 0
+                self.evaluationTable.reloadData()
+                ActivityIndicator.hide()
+            }
+          
+            
         }
     }
     
@@ -75,7 +87,7 @@ extension EvaluationViewController: UITableViewDelegate, UITableViewDataSource {
         cell.jobName.text = val.job_name?.uppercased()
         cell.timeLabel.text = val.job_date
         cell.rateView.rating = val.rating
-        cell.jobAddress.text = val.comment
+        cell.jobAddress.text = (val.comment == "") ? "Cliente no dejo comentario" : val.comment
         cell.card.defaultShadow()
         
         return cell

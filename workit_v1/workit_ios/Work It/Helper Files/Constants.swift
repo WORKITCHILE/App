@@ -90,6 +90,7 @@ var U_VENDOR_CANCEL_BID = "vendor/cancel-bid"
 
 var U_PLACE_BID = "vendor/place-bid"
 var U_GET_SINGLE_JOB_WORKER = "vendor/get-single-job?job_id="
+var U_GET_SINGLE_BID_WORKER = "owner/get-single-bid?bid_id="
 var U_GET_ALL_BID = "vendor/get-all-bids?user_id="
 var U_JOB_ACTION = "vendor/job-action"
 

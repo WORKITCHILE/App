@@ -193,6 +193,7 @@ class CaptureIdCardViewController: UIViewController, AVCaptureVideoDataOutputSam
     func removeMask() {
         maskLayer.removeFromSuperlayer()
     }
+    
 }
 
 extension CGPoint {

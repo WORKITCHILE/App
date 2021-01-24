@@ -66,7 +66,7 @@ class ChatViewController: UIViewController {
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
         
-        chatTable.estimatedRowHeight = 160;
+        chatTable.estimatedRowHeight = 160
         chatTable.rowHeight = UITableView.automaticDimension
      
         
@@ -117,9 +117,11 @@ class ChatViewController: UIViewController {
             "message_type": messageType,
             "last_message":message,
             "last_message_by":senderId,
-            "job_id":self.jobDetail?.job_id ?? ""
+            "job_id": self.jobDetail?.job_id ?? "",
+            "job_name": self.jobDetail?.job_name ?? ""
             ]
         
+
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_SEND_CHAT_MESSAGE, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SEND_CHAT_MESSAGE) { (response) in
             
         }
@@ -131,6 +133,7 @@ class ChatViewController: UIViewController {
         
        
         if !(self.textView.text!.isEmpty && self.jobDetail?.job_id != nil){
+            
             self.textView.resignFirstResponder()
    
             let time =  Int(Date().timeIntervalSince1970)
@@ -144,11 +147,13 @@ class ChatViewController: UIViewController {
                 "type": 1,
                 "read_status": 1,
             ])
-            
+           
             let curUser = (K_CURRENT_USER == K_POST_JOB) ? K_WANT_JOB : K_POST_JOB
           
-            self.sendSingleMessage(type: 1, recieverId: self.senderID, message: self.textView.text, senderId: self.receiverID, senderType: K_CURRENT_USER ?? "" , receiverType: curUser, messageType: 1)
+            self.sendSingleMessage(type: 1, recieverId: self.senderID, message: self.textView.text, senderId: self.receiverID, senderType: Singleton.shared.userInfo.type! , receiverType: curUser, messageType: 1)
+            
             self.textView.text = ""
+            
             self.chatTable.beginUpdates()
             self.chatTable.endUpdates()
         }
@@ -160,7 +165,6 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.chatData.count
@@ -171,12 +175,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         let isMe = Singleton.shared.userInfo.user_id == data.receiver_id
         let identifier = isMe ? "ChatViewCell2" : "ChatViewCell1"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! MessageCell
-        
-        if(isMe){
-            cell.card.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 15.0)
-        }else {
-            cell.card.roundCorners(corners: [.topRight, .bottomLeft, .bottomRight], radius: 15.0)
-        }
         
         cell.messageTextView.text = data.message
         cell.timeAgoLabel.text = self.convertTimestampToDate(data.time ?? 0, to: "MMM dd, h:mm a")

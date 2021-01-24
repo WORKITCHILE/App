@@ -188,11 +188,8 @@ class BecomeWorkerViewController: ImagePickerViewController, PickImage, SelectFr
                 })
                 
               
-                let storyboard  = UIStoryboard(name: "signup", bundle: nil)
-                let myVC = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
-                myVC.isNewuser = true
-                myVC.emailAdd = authResult?.user.email ?? ""
-                self?.navigationController?.pushViewController(myVC, animated: true)
+            
+                self?.navigationController?.popToRootViewController(animated: true)
 
             }
         }
@@ -439,6 +436,8 @@ extension BecomeWorkerViewController : UITableViewDelegate, UITableViewDataSourc
 
 extension BecomeWorkerViewController : FieldTableViewCellDelegate{
     
+    
+    
     func tapCollectionItem(indexCell: IndexPath) {
         if(indexCell.row == 0){
             self.typeImage = 4
@@ -494,7 +493,7 @@ extension BecomeWorkerViewController : FieldTableViewCellDelegate{
        
     }
     
-    func textFieldDidEnd(indexCell: IndexPath, text: String){
+    func textFieldDidEnd(indexCell: IndexPath, text: String, _ tag : Int){
         displayData[indexCell.row]["value"] = text
         self.tableList.reloadData()
     }

@@ -20,6 +20,8 @@ import FirebaseDatabase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import FBSDKShareKit
+
 import GoogleMaps
 import CoreLocation
 
@@ -44,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setInitialController()
         handleUserLocation()
         initializeGoogleMap()
+        
+        
+        //FBAdSettings.setAdvertiserTrackingEnabled(true)
+        
         return true
     }
     
@@ -86,8 +92,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func initializeGoogleMap(){
-        GMSPlacesClient.provideAPIKey("AIzaSyAoQQfWXcKbUxORBjLW9-ajrF4I5cGTApo")
-        GMSServices.provideAPIKey("AIzaSyAoQQfWXcKbUxORBjLW9-ajrF4I5cGTApo")
+        let key = "AIzaSyAFNJwycb9jul04lJHbJyXV7prNO3utPDU" // AIzaSyAoQQfWXcKbUxORBjLW9-ajrF4I5cGTApo
+        GMSPlacesClient.provideAPIKey(key)
+        GMSServices.provideAPIKey(key)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
     }
     
@@ -102,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             initial_controller = storyboard.instantiateViewController(withIdentifier: "main")
         
 
-        }else {
+        } else {
             
             let signup_storyboard  = UIStoryboard(name: "signup", bundle: nil)
             initial_controller = signup_storyboard.instantiateViewController(withIdentifier:"WelcomeViewController")
@@ -153,137 +160,115 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
     }
     
-    func handleUserNotfication(info:[AnyHashable:Any]){
-        if (UserDefaults.standard.value(forKey: UD_TOKEN) as? String) != nil {
-            if let data = info as? [String:Any] {
-                let navigationController = self.window?.rootViewController as! UINavigationController
-                switch (data["gcm.notification.type"] as! String) {
-                // New Job Request
-                case "1":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
-                    (initialViewController as! ViewJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                    
-                // Bid Received for your posted job
-                case "2":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
-                    Singleton.shared.jobData = []
-                    (initialViewController as! JobDetailViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                //Bid accepted by owner for worker bid
-                case "3":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "StartJobViewController") as! StartJobViewController
-                    Singleton.shared.vendorAcceptedBids = []
-                    
-                    (initialViewController as! StartJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                //Bid rejected by owner for worker bid
-                case "4":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
-                    Singleton.shared.vendorRejectedBids = []
-                    (initialViewController as! ViewJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                // Job Started by worker
-                case "5":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.runningJobData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.viewControllers.removeAll(where: { (vc) -> Bool in
-                               if vc.isKind(of: AcceptJobViewController.self)  {
-                                   return true
-                               }else {
-                                   return false
-                               }
-                    })
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                // Job finished by worker
-                case "6":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.runningJobData = []
-                    Singleton.shared.postedHistoryData = []
-                    Singleton.shared.receivedHistoryData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                //Job Payment Release
-                case "7":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.runningJobData = []
-                    Singleton.shared.postedHistoryData = []
-                    Singleton.shared.receivedHistoryData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "8":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.runningJobData = []
-                    Singleton.shared.postedHistoryData = []
-                    Singleton.shared.receivedHistoryData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "10":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.runningJobData = []
-                    Singleton.shared.postedHistoryData = []
-                    Singleton.shared.receivedHistoryData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "11":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
-                    (initialViewController as! ViewJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "12":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "ViewJobViewController") as! ViewJobViewController
-                    (initialViewController as! ViewJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "13":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
-                    Singleton.shared.jobData = []
-                    (initialViewController as! JobDetailViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "14":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "AcceptJobViewController") as! AcceptJobViewController
-                    Singleton.shared.jobData = []
-                    (initialViewController as! AcceptJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    (initialViewController as! AcceptJobViewController).isVendorCancelJob = true
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "15":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "EvaluationViewController") as! EvaluationViewController
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                case "16":
-                    initialViewController = storyboard.instantiateViewController(withIdentifier: "StartJobViewController") as! StartJobViewController
-                    Singleton.shared.vendorRejectedBids = []
-                    Singleton.shared.vendorAcceptedBids = []
-                    (initialViewController as! StartJobViewController).jobId = (data["gcm.notification.data"] as? String) ?? ""
-                    navigationController.viewControllers.removeAll(where: { (vc) -> Bool in
-                               if vc.isKind(of: StartJobViewController.self)  {
-                                   return true
-                               }else {
-                                   return false
-                               }
-                    })
-                    navigationController.pushViewController(initialViewController, animated: true)
-                    break
-                default:
-                    break
-                }
-                
+    func retrieveJoFromId(_ jobId : String, _ mode : String, _ bid: BidResponse?){
+        ActivityIndicator.show(view: (self.window?.rootViewController?.view)!)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId)"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
+            
+            ActivityIndicator.hide()
+            
+            
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let nav = storyboard.instantiateViewController(withIdentifier: "BidDetailContainer") as! UINavigationController
+            let myVC = nav.viewControllers[0] as! BidDetailViewController
+            myVC.fromNotification = true
+            nav.modalPresentationStyle = .fullScreen
+            
+            myVC.jobData = $0?.data
+            if(bid != nil){
+                myVC.bidData = bid
             }
+            myVC.mode = mode
+            
+            self.window?.rootViewController?.present(nav, animated: true, completion: nil)
+            
+         
+            
         }
     }
     
+    func retrieveBidFromId(_ bidId : String, _ jobId: String){
+        ActivityIndicator.show(view: (self.window?.rootViewController?.view)!)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_BID_WORKER)\(bidId)"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleBid.self, requestCode: U_GET_SINGLE_BID_WORKER) { [self] repsonse in
+            
+            ActivityIndicator.hide()
+            if(repsonse != nil){
+                retrieveJoFromId(jobId, "HIRE", repsonse!.data)
+            }
+          
+            
+        }
+    }
+    
+    func handleUserNotfication(info:[AnyHashable:Any]){
+       
+     
+        if (UserDefaults.standard.value(forKey: UD_TOKEN) as? String) != nil {
+            if let data = info as? [String:Any] {
+                
+             
+                   let jobId = data["job_id"] as? String
+                   let bidId = data["bid_id"] as? String
+
+                   let userId = Singleton.shared.userInfo.user_id
+                   let senderId = data["sender_id"] as? String
+                   let notificationType = data["gcm.notification.type"] as! String
+               
+                   if(notificationType == "17"){
+                    self.showJobDetail(jobId: jobId!)
+                   } else if(notificationType == "9"){
+                       
+                       let nav = storyboard.instantiateViewController(withIdentifier: "InboxContainer") as! UINavigationController
+                       let myVC = nav.viewControllers[0] as! InboxViewController
+                       myVC.fromNotification = true
+                        myVC.jobIdFromNotification = jobId!
+                       nav.modalPresentationStyle = .fullScreen
+                       self.window?.rootViewController?.present(nav, animated: true, completion: nil)
+                       
+                   } else if(notificationType == "15"){
+                       let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+                  
+                       let nav = storyboard.instantiateViewController(withIdentifier: "EvaluationViewContainer") as! UINavigationController
+                       let myVC = nav.viewControllers[0] as! EvaluationViewController
+                       myVC.fromNotification = true
+                       nav.modalPresentationStyle = .fullScreen
+                       self.window?.rootViewController?.present(nav, animated: true, completion: nil)
+                   } else if(notificationType == "2"){
+                      
+                    self.retrieveBidFromId(bidId!, jobId!)
+                       
+                   } else if(notificationType == "4"){
+                    self.showJobDetail(jobId: jobId!)
+                   } else if(notificationType == "14"){
+                    self.retrieveJoFromId(jobId! , "HIRE", nil)
+                   } else {
+                    self.retrieveJoFromId(jobId! , (userId == senderId) ? "HIRE" : "WORK", nil)
+                   }
+ 
+              
+                
+            }
+        }
+        
+    }
+    
+    
+    func showJobDetail(jobId : String){
+        let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+        let nav = storyboard.instantiateViewController(withIdentifier: "JobDetailContainer") as! UINavigationController
+        let myVC = nav.viewControllers[0] as! JobDetailViewController
+        myVC.jobId = jobId
+        myVC.modeView = 1
+        myVC.fromNotification = true
+        nav.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nav, animated: true, completion: nil)
+    }
+   
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])

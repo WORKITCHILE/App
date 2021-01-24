@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import MapKit
 
 @objc public protocol FieldTableViewCellDelegate {
     func tapButton(indexCell: IndexPath, tagButton: Int)
-    func textFieldDidEnd(indexCell: IndexPath, text: String)
+    func textFieldDidEnd(indexCell: IndexPath, text: String, _ tag: Int)
     @objc optional func textChange(indexCell: IndexPath, textField: UITextField, range: NSRange, string: String)
     @objc optional func tapCollectionItem(indexCell: IndexPath)
     @objc optional func tapCollectionDeleteItem(indexCell: IndexPath)
+    @objc optional func changeTextView(indexCell: IndexPath,text: String)
 }
 
-class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
+class FieldTableViewCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var mapView : MapVC!
     @IBOutlet weak var fieldTextField: UITextField!
     @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var card : UIView!
     @IBOutlet weak var fieldTextView: UITextView!
     @IBOutlet weak var prefixLabel : UILabel!
     @IBOutlet weak var border: UIView!
@@ -29,6 +33,8 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     public var indexPath : IndexPath? = nil
     public var placeHolder = ""
+    public var placeHolder2 = ""
+    public var maxLength = 20
     
     weak var delegate : FieldTableViewCellDelegate?
     
@@ -46,11 +52,26 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.imageCollection.dataSource = self
             self.imageCollection.isPagingEnabled = true
         }
+        
+        if(self.fieldTextView != nil){
+            self.fieldTextView.delegate = self
+            
+        }
     }
     
     func reloadData(){
         if(self.imageCollection != nil){
             self.imageCollection.reloadData()
+        }
+    }
+    
+    func setLocation(_ location : CLLocation){
+        DispatchQueue.main.async {
+       
+            self.mapView.latitude = location.coordinate.latitude
+            self.mapView.longitude = location.coordinate.longitude
+      
+
         }
     }
 
@@ -60,7 +81,7 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func borderEditable(){
         if(self.border != nil){
-        self.border.layer.borderColor = UIColor(named: "calendar_green")?.cgColor
+            self.border.layer.borderColor = UIColor(named: "calendar_green")?.cgColor
         }
     }
     
@@ -71,26 +92,63 @@ class FieldTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if(self.fieldTextView != nil){
-            if( self.fieldTextView.text == placeHolder){
-                self.fieldTextView.text = ""
-            } else if(self.fieldTextView.text == ""){
-                self.fieldTextView.text = placeHolder
-            }
+        
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if(self.delegate != nil){
+            
+            self.delegate?.changeTextView?(indexCell: self.indexPath!, text: textView.text)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if(delegate != nil){
-            delegate?.textFieldDidEnd(indexCell: indexPath!, text: textField.text!)
+            delegate?.textFieldDidEnd(indexCell: indexPath!, text: textField.text!, textField.tag)
         }
+    }
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == self.placeHolder2 {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+ 
+        if textView.text.isEmpty {
+            textView.text = self.placeHolder2
+            textView.textColor = UIColor.lightGray
+            
+        }
+        
+        if(delegate != nil){
+            delegate?.textFieldDidEnd(indexCell: indexPath!, text: textView.text!, textView.tag)
+        }
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+       
+        
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return updatedText.count <= maxLength
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(delegate != nil){
             self.delegate?.textChange?(indexCell: self.indexPath!, textField: textField, range: range, string: string)
         }
-        return true
+       
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+   
+        return updatedText.count <= maxLength
     }
     
     @IBAction func tapButton(_ sender: AnyObject){
@@ -142,7 +200,9 @@ extension FieldTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
             }
         } else {
             cell.addBtn.isHidden = true
-            cell.deleteBtn.isHidden = false
+            if(cell.deleteBtn != nil){
+                cell.deleteBtn.isHidden = false
+            }
             cell.jobImage.sd_setImage(with: URL(string: self.images[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.deleteButton = {
                 
@@ -153,32 +213,16 @@ extension FieldTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
                
             }
         }
+        
+        
         return cell
     }
-    
-    /*
+ 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        let newImageView = UIImageView()
-        newImageView.sd_setImage(with: URL(string: self.imageString[indexPath.row]),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        self.view.addSubview(newImageView)
-        self.tabBarController?.tabBar.isHidden = true
+        if(self.delegate != nil){
+            self.delegate?.tapCollectionItem?(indexCell: indexPath)
+        }
     }
-    
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
-        sender.view?.removeFromSuperview()
-    }
-    
-    */
-    
    
     
 }

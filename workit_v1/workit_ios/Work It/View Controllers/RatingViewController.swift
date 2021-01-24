@@ -36,6 +36,11 @@ class RatingViewController: UIViewController, UITextViewDelegate {
         let img = UIImage(named: "header_rect_green")
         navigationController?.navigationBar.setBackgroundImage(img, for: .default)
         
+      
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if(jobId != ""){
             self.getSingleJob()
         }
@@ -96,7 +101,7 @@ class RatingViewController: UIViewController, UITextViewDelegate {
                     "rate_from_type":K_WANT_JOB,
                     "rate_to_type":K_POST_JOB,
                     "contact_outside":self.isContactOutside,
-                    "comment":self.comment.text ?? ""
+                    "comment": (self.comment.text == placeHolder) ? "" :  self.comment.text
                 ]
             }else {
          
@@ -110,7 +115,7 @@ class RatingViewController: UIViewController, UITextViewDelegate {
                     "rate_from_type":K_POST_JOB,
                     "rate_to_type":K_WANT_JOB,
                     "contact_outside":self.isContactOutside,
-                    "comment":self.comment.text
+                    "comment": (self.comment.text == placeHolder) ? "" :  self.comment.text
                 ]
             }
             

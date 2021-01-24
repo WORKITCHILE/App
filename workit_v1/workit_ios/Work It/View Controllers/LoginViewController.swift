@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
                 Singleton.saveUserInfo(data:Singleton.shared.userInfo)
                 if(Singleton.shared.userInfo.is_email_verified != 1){
                     
-                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+                    let myVC = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as! VerificationViewController
                     myVC.isNewuser = true
                     myVC.emailAdd = self.emailAddress.text!
                     self.navigationController?.pushViewController(myVC, animated: true)
@@ -132,8 +132,10 @@ class LoginViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
         let myVC = segue.destination as! ForgotPasswordViewController
-        myVC.emailAdd = self.email
+        myVC.email = self.email
+       
     }
     
    

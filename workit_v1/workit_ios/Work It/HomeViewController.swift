@@ -19,10 +19,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var labelWorker : UILabel!
     @IBOutlet weak var circleHeaderTop: NSLayoutConstraint!
     @IBOutlet weak var whiteViewContraint: NSLayoutConstraint!
+    @IBOutlet weak var nameLabel : UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        let userInfo = Singleton.shared.userInfo
+        self.nameLabel.text = "Hola \(userInfo.name ?? "")"
         button_client.layer.cornerRadius = 32
         button_client.layer.shadowColor = UIColor.black.cgColor
         button_client.layer.shadowOpacity = 0.4

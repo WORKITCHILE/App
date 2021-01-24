@@ -4,9 +4,9 @@
             "placeholder":"Cambiar Password",
             "workerField":false,
             "icon":"ic_signup_lock",
-            "value":"",
+            "value":"Cambiar Password",
             "cell":"fieldDataButton",
-            "editable":true,
+            "editable": false,
             "field":"address",
             "security":false
         },
@@ -56,7 +56,7 @@
             "workerField":false,
             "icon":"ic_signup_phone",
             "value":"",
-            "cell":"fieldData",
+            "cell":"fieldDataWithPrefix",
             "editable":true
         },
         {
@@ -72,7 +72,7 @@
             "workerField":false,
             "icon":"ic_signup_location",
             "value":"",
-            "cell":"fieldData",
+            "cell":"fieldDataButton",
             "editable":true
         },
         {
@@ -80,7 +80,7 @@
             "workerField":false,
             "icon":"ic_signup_location",
             "value":"",
-            "cell":"fieldData",
+            "cell":"fieldDataWithoutIcon",
             "editable":true
         },
         {
@@ -88,7 +88,7 @@
             "workerField":false,
             "icon":"ic_signup_location",
             "value":"",
-            "cell":"fieldData",
+            "cell":"fieldDataWithoutIcon",
             "editable":true
         },
         {
@@ -102,11 +102,12 @@
             "security":false
         },
         {
-            "placeholder":"Escribe una descripción",
+            "placeholder":"Descripción Perfil",
             "workerField":true,
             "icon":"ic_signup_document",
             "value":"",
             "cell":"fieldDataBigText",
+            "maxLength": 400,
             "editable":true
         },
         {

@@ -24,8 +24,7 @@ class ScheduleCalenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let img = UIImage(named: "header_rect_green")
-        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+   
         
         picker.minimumDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())
         picker.maximumDate = Calendar.current.date(byAdding: .year, value: 10, to: Date())
@@ -44,6 +43,9 @@ class ScheduleCalenderViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
         self.getCalenderData(date:Int(Date().timeIntervalSince1970))
     }
     
@@ -95,8 +97,9 @@ class ScheduleCalenderViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let calendarDetail = segue.destination as! CalendarDetailViewController
-        calendarDetail.sufixDate = sufixDate
+        calendarDetail.sufixDate = "\( self.calenderView.indexPathForSelectedRow!.row + 1)\(sufixDate)"
      
+       
         calendarDetail.calenderData = self.calenderData[calenderView.indexPathForSelectedRow?.row ?? 0].job_data ?? []
     }
 }
@@ -172,6 +175,41 @@ extension ScheduleCalenderViewController: UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        if(self.isFutureDate){
+            return
+        }
+        
+        let val = self.calenderData[indexPath.row]
+        let jobCount = val.job_data
+        
+        if(jobCount?.count == 1){
+            
+            self.getJobDetail(jobId: (val.job_data?[0].job_id)!)
+            
+        }
+        
+       
+    }
+    
+    func getJobDetail(jobId: String){
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId )"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
+            
+            ActivityIndicator.hide()
+            
+            let job = $0?.data
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
+            myVC.jobData = job
+            myVC.mode = (job?.job_vendor_id == Singleton.shared.userInfo.user_id) ? "WORK" :  "HIRE"
+            self.navigationController?.pushViewController(myVC, animated: true)
+            
+           
+            
+        }
     }
 }

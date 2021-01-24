@@ -26,20 +26,22 @@ class NotificationViewController: UIViewController {
         animation!.animation = starAnimation
         animation?.loopMode = .loop
         
-        let img = UIImage(named: "header_rect_green")
-        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
-        
         self.getNotificationData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
         animation?.play()
     }
     
     func getNotificationData(){
         ActivityIndicator.show(view: self.view)
-        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_NOTIFICATION +  (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: GetNotification.self, requestCode: U_GET_NOTIFICATION) { (response) in
+        let url = "\(U_BASE)\(U_GET_NOTIFICATION)\(Singleton.shared.userInfo.user_id ?? "")"
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetNotification.self, requestCode: U_GET_NOTIFICATION) { response in
             self.notificationData = response?.data
             self.noDataView.isHidden = self.notificationData?.count != 0
             self.notificationTable.reloadData()
@@ -47,11 +49,49 @@ class NotificationViewController: UIViewController {
         }
     }
     
+    func retrieveJoFromId(_ jobId : String, _ mode : String, _ bid: BidResponse?){
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId)"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
+            
+            ActivityIndicator.hide()
+            
+           
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
+            myVC.jobData = $0?.data
+            if(bid != nil){
+                myVC.bidData = bid
+            }
+            myVC.mode = mode
+            self.navigationController?.pushViewController(myVC, animated: true)
+            
+           
+            
+        }
+    }
+    
+    func retrieveBidFromId(_ bidId : String, _ jobId: String){
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_GET_SINGLE_BID_WORKER)\(bidId)"
+        
+        SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleBid.self, requestCode: U_GET_SINGLE_BID_WORKER) { [self] repsonse in
+            
+            ActivityIndicator.hide()
+            if(repsonse != nil){
+                retrieveJoFromId(jobId, "HIRE", repsonse!.data)
+            }
+          
+            
+        }
+    }
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return self.notificationData?.count ?? 0
     }
     
@@ -78,87 +118,28 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         let senderId = notification?.sender_id
         let notificationType = notification?.notification_type
         
+        // 14, 13, 12, 11, 10, 8, 7, 6, 5, 3
+    
         if(notificationType == 15){
-            
+            let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "EvaluationViewController")
+            self.navigationController?.pushViewController(myVC, animated: true)
         } else if(notificationType == 2){
-        
+            self.retrieveBidFromId(bidId!, jobId!)
         } else if(notificationType == 4){
-            
-        } else if(notificationType == 15){
-            
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
+            myVC.jobId = jobId
+            myVC.modeView = 1
+            self.navigationController?.pushViewController(myVC, animated: true)
+        } else if(notificationType == 14){
+            self.retrieveJoFromId(jobId ?? "", "HIRE", nil)
         } else {
             if(jobId != nil) {
-
-                ActivityIndicator.show(view: self.view)
-                
-                let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId ?? "")"
-                
-                SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
-                    
-                    ActivityIndicator.hide()
-                    
-                   
-                    let storyboard  = UIStoryboard(name: "Home", bundle: nil)
-                    let myVC = storyboard.instantiateViewController(withIdentifier: "bidDetail") as! BidDetailViewController
-                    myVC.jobData = $0?.data
-                    myVC.mode = (userId == senderId) ? "HIRE" : "WORK"
-                    self.navigationController?.pushViewController(myVC, animated: true)
-                    
-                   
-                    
-                }
-                
-               
-              
-         
-               
-
+                self.retrieveJoFromId(jobId ?? "", (userId == senderId) ? "HIRE" : "WORK", nil)
             }
         }
         
-        /*
-         
-         Notification notification = notificationList.get(position);
-         int notificationType = notification.getNotificationType();
-         String jobId = notification.getJobId();
-         String bidId = notification.getBidId();
-
-         if(notificationType == 15){
-             Intent intent = new Intent(this, EvaluationActivity.class);
-             startActivity(intent);
-         } else if(notificationType == 2){
-
-             if(jobId != null && bidId != null){
-                 currentSender = notification.getSenderId();
-                 getBidInfo(jobId, bidId);
-             }
-
-         } else if(notificationType == 4) {
-
-             startActivityForResult(SingleJobActivity.createIntent(this,jobId, 1), RC_JOB_INFO);
-
-         }  else if(notificationType == 14) {
-             if(jobId != null) {
-                 Intent intent = BidInfoActivity.createIntent(this, jobId);
-                 startActivity(intent);
-
-             }
-         } else {
-
-             if(jobId != null) {
-
-                 if(userInfo.getUserId().equalsIgnoreCase(notification.getSenderId())){
-                     Intent intent = BidInfoActivity.createIntent(this, jobId);
-                     startActivity(intent);
-                 } else {
-                     Intent intent = BidInfoWorkerActivity.createIntent(this, jobId);
-                     startActivity(intent);
-                 }
-
-             }
-
-         }
-         */
        
     }
     

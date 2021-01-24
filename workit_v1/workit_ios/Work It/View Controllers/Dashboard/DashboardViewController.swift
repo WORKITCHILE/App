@@ -10,7 +10,7 @@
 import UIKit
 import SDWebImage
 import Lottie
-import SCPageControl
+import CHIPageControl
 import Cosmos
 
 class DashboardViewController: UIViewController {
@@ -23,14 +23,18 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var noDataFound: DesignableUILabel!
     @IBOutlet weak var footerView : UIView!
     @IBOutlet weak var heightCollection : NSLayoutConstraint!
-    @IBOutlet weak var pageControl: SCPageControlView!
+    @IBOutlet weak var pageControl: CHIPageControlAji!
     @IBOutlet weak var becomeWorkerButton : UIView!
+    @IBOutlet weak var heightTitle: NSLayoutConstraint!
 
     private var categoriesData = [GetCategoryResponse]()
     private var jobData = [GetJobResponse]()
+    private var userInfo: UserInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userInfo = Singleton.shared.userInfo
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -42,12 +46,15 @@ class DashboardViewController: UIViewController {
         
         self.becomeWorkerButton.defaultShadow()
         
+        /*
         self.collectionView.collectionViewLayout = {
-                   let flowLayout = UICollectionViewFlowLayout()
-                   flowLayout.scrollDirection = .horizontal
-                   return flowLayout
+           let flowLayout = UICollectionViewFlowLayout()
+           flowLayout.scrollDirection = .horizontal
+           return flowLayout
         }()
-    
+        
+        self.collectionView.layoutIfNeeded()
+        */
     
         if(Singleton.shared.getCategories.count == 0){
            
@@ -69,20 +76,15 @@ class DashboardViewController: UIViewController {
             self.categoriesData = Singleton.shared.getCategories
             self.tableView.reloadData()
         }
-       
-        
-       
-     
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    
+      
         
-        let userInfo = Singleton.shared.userInfo
-        
-        self.becomeWorkerButton.isHidden = userInfo.type == "WORK"
-        
+        resizeHeader()
         getMeJobs()
     }
     
@@ -96,19 +98,62 @@ class DashboardViewController: UIViewController {
         
         SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: GetJob.self, requestCode: U_GET_WORKER_POSTED_JOB_ME) { [self] (response) in
        
-   
-            self.jobData = response!.data.sorted(by: {$0.job_time! < $1.job_time!})
-            self.pageControl.scp_style = .SCJAFillCircle
-            self.pageControl.set_view(self.jobData.count + 1, current: 0, current_color: UIColor(named: "selected_blue")!, disable_color: .gray)
             
-            self.resizeHeader()
-            self.tableView.reloadData()
-            self.collectionView.reloadData()
+            if(response != nil){
+                self.jobData = response!.data.sorted(by: {$0.job_time! < $1.job_time!})
+                self.pageControl.numberOfPages = self.jobData.count + 1
+                
+                self.pageControl.set(progress: 0, animated: true)
+                self.pageControl.radius = 4
+                self.pageControl.tintColor = UIColor(named: "border_blue")
+                self.pageControl.currentPageTintColor = UIColor(named: "calendar_blue")
+                
+                self.tableView.reloadData()
+            }
+          
             
             if(self.jobData.count > 0){
                 self.collectionView.isHidden = false
+                self.collectionView.reloadData()
+                self.resizeHeader()
             }
            
+        }
+    }
+    
+    func getSubCategoryData(_ category : GetCategoryResponse){
+        
+        ActivityIndicator.show(view: self.view)
+        
+        let url = "\(U_BASE)\(U_GET_SUBCATEGORIES)\(category.category_id ?? "")"
+        
+        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { response in
+            
+            ActivityIndicator.hide()
+            
+         
+            if(response == nil){
+                return
+            }
+            
+            let storyboard  = UIStoryboard(name: "HomeWorker", bundle: nil)
+            
+            if(response!.data.count == 0){
+               
+                let myVC = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController") as! CategoryListViewController
+                
+                myVC.subcategories = [GetSubcategoryResponse(subcategory_image: category.category_image, category_id: category.category_id, subcategory_name: category.category_name, subcategory_id: category.category_id, types: category.types)]
+               
+
+                self.navigationController?.pushViewController(myVC, animated: true)
+                     
+            } else {
+                let myVC = storyboard.instantiateViewController(withIdentifier: "SubCategoryViewController") as! SubCategoryViewController
+                myVC.subcategoryData = response!.data
+               
+                self.navigationController?.pushViewController(myVC, animated: true)
+            }
+            
         }
     }
     
@@ -119,16 +164,33 @@ class DashboardViewController: UIViewController {
     }
    
     func resizeHeader(){
-        let size = CGSize(width: self.view.frame.size.width, height: 152.0)
-        collectionView.setPrototypeCell(size: size)
+      
+        
+        self.becomeWorkerButton.isHidden = userInfo?.type == "WORK"
+        self.pageControl.isHidden = userInfo?.type != "WORK" || self.jobData.count == 0
+        self.collectionView.isHidden = userInfo?.type != "WORK" || self.jobData.count == 0
+        
+        let heightHeaderWithJob = 450.0
+        var heightHeaderWithoutJob = ( (userInfo?.type == "HIRE") ? 300.0 : 200.0)
+        
+        if(self.view.frame.size.height == 667.0){
+            heightHeaderWithoutJob = ( (userInfo?.type == "HIRE") ? 300.0 : 200.0)
+        } else if(self.view.frame.size.height == 736.0){
+            heightHeaderWithoutJob = ( (userInfo?.type == "HIRE") ? 300.0 : 200.0)
+        }
         
         if(self.jobData.count > 0){
+            
+            let size = CGSize(width: self.view.frame.size.width, height: 152.0)
+            collectionView.setPrototypeCell(size: size)
+            
             self.heightCollection.constant = 180.0
-            self.footerView.frame = CGRect(x: self.footerView.frame.origin.x, y: self.footerView.frame.origin.y, width: self.footerView.frame.size.width, height: 400.0)
+            self.heightTitle.constant = 70.0
+            self.footerView.frame = CGRect(x: self.footerView.frame.origin.x, y: self.footerView.frame.origin.y, width: self.footerView.frame.size.width, height: CGFloat(heightHeaderWithJob))
             
         } else {
-           
-            self.footerView.frame = CGRect(x: self.footerView.frame.origin.x, y: self.footerView.frame.origin.y, width: self.footerView.frame.size.width, height: 300.0)
+            self.heightCollection.constant = 180.0
+            self.footerView.frame = CGRect(x: self.footerView.frame.origin.x, y: self.footerView.frame.origin.y, width: self.footerView.frame.size.width, height: CGFloat(heightHeaderWithoutJob))
         }
         
     }
@@ -163,6 +225,11 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let val = self.categoriesData[indexPath.row]
+        getSubCategoryData(val)
+    }
 
 }
 
@@ -170,6 +237,11 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
 extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDataSource{
   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if(jobData.count == 0){
+            return 0
+        }
+        
         return 1 + self.jobData.count
     }
     
@@ -189,15 +261,14 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
            
             cell.jobName.text = val.job_name?.uppercased()
             
-            cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            cell.userImage.sd_setImage(with: URL(string: val.user_image!),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
             cell.userName.text =  val.user_name
         
             cell.jobDate.text = val.job_date
             cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
             cell.card.defaultShadow()
-            cell.verify.isHidden = !val.have_document
-      
-            
+            cell.verify.isHidden = !(val.have_document ?? false)
+
             let formater = NumberFormatter()
             formater.groupingSeparator = "."
             formater.numberStyle = .decimal
@@ -213,11 +284,14 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
-        myVC.jobId = self.jobData[indexPath.row - 1].job_id ?? ""
-        myVC.modeView = 1
-        self.navigationController?.pushViewController(myVC, animated: true)
+        if(indexPath.row > 0){
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
+            myVC.jobId = self.jobData[indexPath.row - 1].job_id ?? ""
+            myVC.modeView = 1
+            self.navigationController?.pushViewController(myVC, animated: true)
+        }
+       
         
     }
    
@@ -227,7 +301,13 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if(scrollView == self.collectionView){
-            self.pageControl.scroll_did(scrollView)
+           
+            
+            let pageWidth = scrollView.frame.size.width
+            let page = Int(floor( scrollView.contentOffset.x  / pageWidth) )
+
+            self.pageControl.set(progress: page, animated: true)
+          
         }
     }
 }
@@ -236,6 +316,8 @@ extension UICollectionView {
     func setPrototypeCell(size: CGSize, scrollDirection: UICollectionView.ScrollDirection = .horizontal) {
         let flow = UICollectionViewFlowLayout()
         flow.itemSize = size
+        flow.minimumLineSpacing = 0.0
+        flow.minimumInteritemSpacing = 0.0
         flow.scrollDirection = scrollDirection
         self.collectionViewLayout = flow
     }

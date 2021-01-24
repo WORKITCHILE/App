@@ -14,9 +14,6 @@ class CalendarDetailViewController: UIViewController {
     @IBOutlet weak var calenderView: UITableView!
     
     var calenderData = [CalendarJob]()
-    
-
-    var month = Int()
     var sufixDate = ""
     
     override func viewDidLoad() {
@@ -58,14 +55,16 @@ extension CalendarDetailViewController: UITableViewDelegate,UITableViewDataSourc
         
         if(val.status == "PAID"){
             cellIdentifier = "CalenderViewCellPay"
+        } else if(val.status == "CANCELED"){
+            cellIdentifier = "CalenderViewCellCancel"
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CalenderViewCell
-        cell.jobDate.text = "\(indexPath.row + 1) \(sufixDate)"
+        cell.jobDate.text = "\(sufixDate)"
         
-        cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-        cell.jobTitle.text = val.job_name ?? ""
-        cell.jobAddress.text = val.job_address ?? ""
+        cell.jobTime.text = self.convertTimestampToDate(val.job_time , to: "h:mm a")
+        cell.jobTitle.text = val.job_name
+        cell.jobAddress.text = val.job_address
         cell.card.defaultShadow()
         
         return cell
@@ -79,7 +78,7 @@ extension CalendarDetailViewController: UITableViewDelegate,UITableViewDataSourc
     func getJobDetail(jobId: String){
         ActivityIndicator.show(view: self.view)
         
-        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId ?? "")"
+        let url = "\(U_BASE)\(U_GET_SINGLE_JOB_OWNER)\(Singleton.shared.userInfo.user_id ?? "")&job_id=\(jobId )"
         
         SessionManager.shared.methodForApiCalling(url: url , method: .get, parameter: nil, objectClass: GetSingleJob.self, requestCode: U_GET_SINGLE_JOB_OWNER) {
             

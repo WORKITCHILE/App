@@ -11,6 +11,9 @@ import FirebaseStorage
 import GooglePlaces
 import FirebaseUI
 import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
 
 class SignupViewController: ImagePickerViewController, PickImage, SelectFromPicker, GMSAutocompleteViewControllerDelegate,CaptureImage {
     
@@ -19,6 +22,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     @IBOutlet weak var userImage: ImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var check : UISwitch!
+    @IBOutlet weak var header : UIView!
     
     var categories: [String] = []
     var googleId: String?
@@ -44,6 +48,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     
     private var currentImage = 0
     private var typeImage = 0
+    private var locality = ""
     
     var images = ["camera"]
 
@@ -91,6 +96,11 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         setTransparentHeader()
         
        
+        
+        if(self.view.frame.size.height == 667.0 || self.view.frame.size.height == 736.0){
+            self.header.frame = CGRect(x: self.header.frame.origin.x, y: self.header.frame.origin.y - 90.0, width: self.header.frame.size.width, height: self.header.frame.size.height )
+        }
+        
     }
     
 
@@ -164,7 +174,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
             let param: [String:Any] = [
                 "user_id": userId,
-                "fcm_token": fcmToken
+                "fcm_token": fcmToken ?? ""
                 ]
             
             SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
@@ -206,7 +216,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
                 
               
                 let storyboard  = UIStoryboard(name: "signup", bundle: nil)
-                let myVC = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+                let myVC = storyboard.instantiateViewController(withIdentifier: "VerificationViewController") as! VerificationViewController
                 myVC.isNewuser = true
                 myVC.emailAdd = authResult?.user.email ?? ""
                 self?.navigationController?.pushViewController(myVC, animated: true)
@@ -398,6 +408,13 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
            
             ActivityIndicator.hide()
+            let parameters = [
+                "type": isWorker ? "WORK": "HIRE",
+                "occupation": isWorker ? self.displayData[13]["value"] as! String : "Cliente",
+                "locality": self.locality
+            ]
+        
+            AppEvents.logEvent(AppEvents.Name(rawValue: "signup"), parameters: parameters)
             self.getAccessToken(email: email, pass: password)
             
     
@@ -430,7 +447,14 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
- 
+        
+        place.addressComponents?.forEach{
+            if($0.type == "locality"){
+                self.locality = $0.name
+            }
+           
+        }
+        
         self.displayData[3]["value"] = "\(place.formattedAddress ?? "")"
         self.tableList.reloadData()
     }
@@ -533,19 +557,29 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
             cell.borderNotEditable()
         }
         
-        if(cellType == "fieldData" || cellType == "fieldDataButton" || cellType == "fieldDataWithoutIcon"){
+        if(cellType == "fieldData" || cellType == "fieldDataButton" || cellType == "fieldDataWithoutIcon"){
             
             cell.fieldTextField.placeholder = (field["placeholder"] as! String)
             cell.fieldTextField.text = value
             cell.fieldTextField.isSecureTextEntry = security
+            
+            if let maxLength : Int = field["maxLength"] as? Int {
+                cell.maxLength = maxLength
+            }
+           
            
         } else if(cellType == "fieldDataBigText") {
             
             
             if(value == ""){
+                cell.placeHolder2 = (field["placeholder"] as! String)
                 cell.fieldTextView.text = (field["placeholder"] as! String)
             } else {
                 cell.fieldTextView.text = value
+            }
+            
+            if let maxLength : Int = field["maxLength"] as? Int {
+                cell.maxLength = maxLength
             }
           
            
@@ -665,10 +699,13 @@ extension SignupViewController : FieldTableViewCellDelegate{
        
     }
     
-    func textFieldDidEnd(indexCell: IndexPath, text: String){
+    func textFieldDidEnd(indexCell: IndexPath, text: String, _ tag: Int){
+      
         displayData[indexCell.row]["value"] = text
         self.tableList.reloadData()
     }
+    
+ 
     
     func textChange(indexCell: IndexPath, textField: UITextField, range: NSRange, string: String) {
         

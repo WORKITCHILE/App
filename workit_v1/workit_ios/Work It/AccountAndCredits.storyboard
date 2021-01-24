@@ -268,7 +268,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layrt.cornerRadius">
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -304,12 +304,12 @@
                     <navigationItem key="navigationItem" id="ebH-WU-IDc">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="nIV-iB-WtU">
-                            <rect key="frame" x="107" y="0.0" width="200" height="44"/>
+                            <rect key="frame" x="87" y="0.0" width="240" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGREGAR CUENTA BANCARIA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJ6-9m-JB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -736,7 +736,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layrt.cornerRadius">
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -833,47 +833,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHx-Mp-CIx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1m-pU-d9J">
-                                        <rect key="frame" x="25" y="257" width="364" height="382"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L90-SM-C6N" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="62" y="10" width="240" height="242"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="240" id="Aju-kt-xwe"/>
-                                                    <constraint firstAttribute="height" constant="242" id="l2D-6d-ZdF"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aún no has agregado créditos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcn-Bb-jDd">
-                                                <rect key="frame" x="23" y="277" width="319" height="20"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
-                                                <color key="textColor" name="dark_gray"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="382" id="5Ly-eh-mVA"/>
-                                            <constraint firstItem="Hcn-Bb-jDd" firstAttribute="leading" secondItem="D1m-pU-d9J" secondAttribute="leading" constant="23" id="B6S-vT-ljV"/>
-                                            <constraint firstItem="Hcn-Bb-jDd" firstAttribute="top" secondItem="L90-SM-C6N" secondAttribute="bottom" constant="25" id="Cjr-2Q-amE"/>
-                                            <constraint firstAttribute="trailing" secondItem="Hcn-Bb-jDd" secondAttribute="trailing" constant="22" id="KU0-g0-mxn"/>
-                                            <constraint firstItem="L90-SM-C6N" firstAttribute="top" secondItem="D1m-pU-d9J" secondAttribute="top" constant="10" id="Kc1-tG-qjz"/>
-                                            <constraint firstItem="L90-SM-C6N" firstAttribute="centerX" secondItem="D1m-pU-d9J" secondAttribute="centerX" id="Vil-qX-3bT"/>
-                                            <constraint firstAttribute="width" constant="364" id="atn-69-ftA"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="D1m-pU-d9J" firstAttribute="centerY" secondItem="wHx-Mp-CIx" secondAttribute="centerY" id="0b2-0B-9kU"/>
-                                    <constraint firstItem="D1m-pU-d9J" firstAttribute="centerX" secondItem="wHx-Mp-CIx" secondAttribute="centerX" id="1A2-LG-A0A"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="is3-Cd-SWg">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="winter_white"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="eTU-gW-6Mf">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -1058,9 +1020,47 @@
                                     <outlet property="delegate" destination="W3q-WJ-bxn" id="E7X-u5-8Ry"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHx-Mp-CIx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1m-pU-d9J">
+                                        <rect key="frame" x="25" y="257" width="364" height="382"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L90-SM-C6N" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="62" y="10" width="240" height="242"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="Aju-kt-xwe"/>
+                                                    <constraint firstAttribute="height" constant="242" id="l2D-6d-ZdF"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aún no hay movimientos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcn-Bb-jDd">
+                                                <rect key="frame" x="23" y="277" width="319" height="20"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
+                                                <color key="textColor" name="dark_gray"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="382" id="5Ly-eh-mVA"/>
+                                            <constraint firstItem="Hcn-Bb-jDd" firstAttribute="leading" secondItem="D1m-pU-d9J" secondAttribute="leading" constant="23" id="B6S-vT-ljV"/>
+                                            <constraint firstItem="Hcn-Bb-jDd" firstAttribute="top" secondItem="L90-SM-C6N" secondAttribute="bottom" constant="25" id="Cjr-2Q-amE"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hcn-Bb-jDd" secondAttribute="trailing" constant="22" id="KU0-g0-mxn"/>
+                                            <constraint firstItem="L90-SM-C6N" firstAttribute="top" secondItem="D1m-pU-d9J" secondAttribute="top" constant="10" id="Kc1-tG-qjz"/>
+                                            <constraint firstItem="L90-SM-C6N" firstAttribute="centerX" secondItem="D1m-pU-d9J" secondAttribute="centerX" id="Vil-qX-3bT"/>
+                                            <constraint firstAttribute="width" constant="364" id="atn-69-ftA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="D1m-pU-d9J" firstAttribute="centerY" secondItem="wHx-Mp-CIx" secondAttribute="centerY" id="0b2-0B-9kU"/>
+                                    <constraint firstItem="D1m-pU-d9J" firstAttribute="centerX" secondItem="wHx-Mp-CIx" secondAttribute="centerX" id="1A2-LG-A0A"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ec1-vY-Pao"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="winter_white"/>
                         <constraints>
                             <constraint firstItem="is3-Cd-SWg" firstAttribute="trailing" secondItem="Ec1-vY-Pao" secondAttribute="trailing" id="5Ct-Xf-ml6"/>
                             <constraint firstItem="wHx-Mp-CIx" firstAttribute="trailing" secondItem="Ec1-vY-Pao" secondAttribute="trailing" id="KI7-mc-nl7"/>
@@ -1072,6 +1072,22 @@
                             <constraint firstItem="wHx-Mp-CIx" firstAttribute="top" secondItem="aIX-D7-hPK" secondAttribute="top" id="mb8-SS-bIj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="wli-T9-HlI">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ad-kp-vt7">
+                            <rect key="frame" x="107" y="0.0" width="200" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HISTORIAL DE PAGOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dn0-kV-v6h">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="animation" destination="L90-SM-C6N" id="y75-nj-tje"/>
                         <outlet property="emptyView" destination="wHx-Mp-CIx" id="9d3-Jg-BKw"/>
@@ -1080,7 +1096,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ac-mN-VBP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050.7246376811595" y="5418.75"/>
+            <point key="canvasLocation" x="1051" y="5419"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ldj-2P-dac">
@@ -1100,6 +1116,24 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="4715.625"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="a0E-4L-g4b">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zol-Jq-FaP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nU2-nr-Ebs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="W3q-WJ-bxn" kind="relationship" relationship="rootViewController" id="pDz-mT-Wpy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="otl-2w-V2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="5419"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="3fk-3C-Z80">
@@ -1108,6 +1142,7 @@
         <designable name="7au-WD-wsA">
             <size key="intrinsicContentSize" width="90" height="90"/>
         </designable>
+        <designable name="L90-SM-C6N"/>
         <designable name="QBe-xZ-TEI">
             <size key="intrinsicContentSize" width="31.5" height="25.5"/>
         </designable>
@@ -1117,6 +1152,7 @@
         <designable name="VK3-i7-M5K">
             <size key="intrinsicContentSize" width="160" height="25.5"/>
         </designable>
+        <designable name="bIh-n6-KWu"/>
         <designable name="fnP-3R-rso">
             <size key="intrinsicContentSize" width="158.5" height="25.5"/>
         </designable>

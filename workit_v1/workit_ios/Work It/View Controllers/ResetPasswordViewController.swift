@@ -42,12 +42,12 @@ class ResetPasswordViewController: UIViewController {
                 let auth = EmailAuthProvider.credential(withEmail: Singleton.shared.userInfo.email ?? "" , password: self.oldPassword.text ?? "")
                 
                 user?.reauthenticate(with: auth, completion: { (result, error) in
-                    debugPrint(result)
+                 
                     ActivityIndicator.hide()
-                    if(error != nil){
+                    if(error == nil){
                         Auth.auth().currentUser?.updatePassword(to: self.newPassword.text ?? "", completion: { error1 in
                             /***/
-                            debugPrint("ERROR", error1)
+                          
                             let alertMessage = (error1 == nil) ? "Tu contraseña ha sido cambiada con exito" : "Ha ocurrido un error"
                             let alert = UIAlertController(title: "Workit", message: alertMessage, preferredStyle: .alert)
                                       

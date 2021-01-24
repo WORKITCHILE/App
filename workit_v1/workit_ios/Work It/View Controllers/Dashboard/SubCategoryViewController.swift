@@ -15,7 +15,7 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet private weak var selecteCategoryTable: UITableView!
     @IBOutlet private weak var buttonContinue: UIButton!
     
-    private var subcategoryData = [GetSubcategoryResponse]()
+    public var subcategoryData = [GetSubcategoryResponse]()
     
     private var selectedSubcategories = Set<GetSubcategoryResponse>()
     var category: GetCategoryResponse?
@@ -23,7 +23,6 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getSubCategoryData()
     
         setNavigationBar()
         
@@ -33,36 +32,6 @@ class SubCategoryViewController: UIViewController, UITableViewDelegate, UITableV
         buttonContinue.isEnabled = false
         buttonContinue.alpha = 0.5
     }
-    
-    func getSubCategoryData(){
-        ActivityIndicator.show(view: self.view)
-        let url = "\(U_BASE)\(U_GET_SUBCATEGORIES)\(category?.category_id ?? "")"
-        SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetSubcategory.self, requestCode: U_GET_SUBCATEGORIES) { (response) in
-            self.subcategoryData = response!.data
-            self.selecteCategoryTable.reloadData()
-            ActivityIndicator.hide()
-            
-            if(self.subcategoryData.count == 0){
-                let storyboard  = UIStoryboard(name: "HomeWorker", bundle: nil)
-                let myVC = storyboard.instantiateViewController(withIdentifier: "CategoryListViewController") as! CategoryListViewController
-                
-                myVC.subcategories = [GetSubcategoryResponse(subcategory_image: self.category?.category_image, category_id: self.category?.category_id, subcategory_name: self.category?.category_name, subcategory_id: self.category?.category_id, types: self.category?.types)]
-               
-              
-               
-                
-                var navigationArray = self.navigationController?.viewControllers
-                navigationArray!.remove(at: 1)
-                
-                
-                self.navigationController?.viewControllers = navigationArray!
-                
-                self.navigationController?.pushViewController(myVC, animated: true)
-                
-            }
-        }
-    }
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let myVC = segue.destination as! CategoryListViewController

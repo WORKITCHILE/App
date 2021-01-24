@@ -18,9 +18,9 @@ class SessionManager: NSObject {
 
      
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
-
-         
-           
+            
+            debugPrint("DATA RESPONSE", dataResponse)
+       
             let statusCode = dataResponse.response?.statusCode
             
             switch dataResponse.result {
@@ -28,26 +28,21 @@ class SessionManager: NSObject {
                     let object = self.convertDataToObject(response: dataResponse.data, T.self)
                     let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
                    
-                  
                     if (statusCode == 200 || statusCode == 201) && object != nil {
                         completionHandler(object!)
                     } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
                         NotificationCenter.default.post(name: NSNotification.Name(N_USER_UNAUTHORIZED), object: nil)
                     } else if statusCode == 404  {
                         
-                        //self.showAlert(msg:errorObject?.message)
+                        self.showAlert(msg:errorObject?.message)
                     } else if(statusCode == 400) {
                        
-                       // self.showAlert(msg: errorObject?.message)
+                        self.showAlert(msg: errorObject?.message)
                     } else {
                         if(object == nil){
                             completionHandler(nil)
                         }
-                      //  self.showAlert(msg: errorObject?.message)
                     }
-                    
-                  
-                    
                     break
                 case .failure(_):
                    
@@ -61,7 +56,16 @@ class SessionManager: NSObject {
     }
 
     private func showAlert(msg: String?) {
-        UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Error", message: msg, action1Name: "Ok", action2Name: nil)
+        
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+
+            topController.showAlert(title: "WorkIt", message: msg, action1Name: "Ok", action2Name: nil)
+          
+        }
+    
 
     }
 

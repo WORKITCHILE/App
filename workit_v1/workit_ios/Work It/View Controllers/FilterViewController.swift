@@ -26,6 +26,7 @@ class FilterViewController: UIViewController, SelectFromPicker{
     @IBOutlet weak var type: UITextField!
     @IBOutlet weak var distanceSliderValue: UILabel!
     @IBOutlet weak var priceSliderValue: UILabel!
+    @IBOutlet weak var height : NSLayoutConstraint!
     
     var filterData : [String] = []
     var filterDelegate: ApplyFilter? = nil
@@ -62,6 +63,10 @@ class FilterViewController: UIViewController, SelectFromPicker{
               
             })
             
+        }
+        
+        if(self.view.frame.size.height == 667.0 || self.view.frame.size.height == 736.0){
+            self.height.constant = 50.0
         }
     }
     

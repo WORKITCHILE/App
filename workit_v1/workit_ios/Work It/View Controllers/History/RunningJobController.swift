@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class RunningJobController: UIViewController {
     
@@ -14,28 +15,46 @@ class RunningJobController: UIViewController {
     //MARK: IBOUtlets
     @IBOutlet weak private var segmentControl : UISegmentedControl!
     @IBOutlet weak private var tableView : UITableView!
+    @IBOutlet weak private var notJobView : UIView!
+    @IBOutlet weak var animation: AnimationView?
     
     private var data : [GetJobResponse] = []
     private var dataReceived : [GetJobResponse] = []
-    private  var selectedIndex = 0
+    private var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let img = UIImage(named: "header_rect_green")
-        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
 
+        let userInfo = Singleton.shared.userInfo
+        
+        let starAnimation = Animation.named("historial")
+        animation!.animation = starAnimation
+        animation?.loopMode = .loop
+        
+        
         segmentControl.addTarget(self, action: #selector(RunningJobController.indexChanged(_:)), for: .valueChanged)
+        
+        segmentControl.isHidden = userInfo.type == "HIRE"
+
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMeJobs()
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        animation?.play()
+        
+        if(selectedIndex == 0){
+            getMeJobs()
+        } else {
+            getReceivedJobs()
+        }
     }
     
     func getMeJobs(){
@@ -49,6 +68,8 @@ class RunningJobController: UIViewController {
             ActivityIndicator.hide()
             
             data = response!.data
+            
+            self.notJobView.isHidden = data.count > 0
             self.tableView.reloadData()
             
         }
@@ -64,6 +85,7 @@ class RunningJobController: UIViewController {
             ActivityIndicator.hide()
             
             dataReceived = response!.data
+            self.notJobView.isHidden = dataReceived.count > 0
             self.tableView.reloadData()
             
         }
@@ -126,7 +148,13 @@ extension RunningJobController: UITableViewDelegate, UITableViewDataSource {
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
         
         cell.card.defaultShadow()
-        cell.verify.isHidden = !val.have_document
+        
+        if(selectedIndex == 0){
+            cell.verify.isHidden = !(val.have_vendor_document ?? false)
+        } else {
+            cell.verify.isHidden = !(val.have_document ?? false)
+        }
+       
   
         let formater = NumberFormatter()
         formater.groupingSeparator = "."

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class HistorialViewController: UIViewController {
     
@@ -14,6 +15,8 @@ class HistorialViewController: UIViewController {
     //MARK: IBOUtlets
     @IBOutlet weak private var segmentControl : UISegmentedControl!
     @IBOutlet weak private var tableView : UITableView!
+    @IBOutlet weak private var notJobView : UIView!
+    @IBOutlet weak var animation: AnimationView?
     
     private var data : [GetJobResponse] = []
     private var dataReceived : [GetJobResponse] = []
@@ -24,9 +27,11 @@ class HistorialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let img = UIImage(named: "header_rect_green")
-        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
-
+        
+        let starAnimation = Animation.named("historial")
+        animation!.animation = starAnimation
+        animation?.loopMode = .loop
+        
         self.setNavigationBar()
         
         segmentControl.addTarget(self, action: #selector(RunningJobController.indexChanged(_:)), for: .valueChanged)
@@ -37,6 +42,9 @@ class HistorialViewController: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Tira para Refrescar")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        
+        let userInfo = Singleton.shared.userInfo
+        segmentControl.isHidden = userInfo.type == "HIRE"
     }
     
     @objc func refresh(_ sender: AnyObject) {
@@ -49,7 +57,17 @@ class HistorialViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMeJobs()
+        
+        let img = UIImage(named: "header_rect_green")
+        navigationController?.navigationBar.setBackgroundImage(img, for: .default)
+        
+        animation?.play()
+        
+        if(selectedIndex == 0){
+           getMeJobs()
+        } else {
+            getReceivedJobs()
+        }
     }
     
     func getMeJobs(){
@@ -63,6 +81,7 @@ class HistorialViewController: UIViewController {
             ActivityIndicator.hide()
             refreshControl.endRefreshing()
             data = response!.data
+            self.notJobView.isHidden = data.count  > 0
             self.tableView.reloadData()
             
         }
@@ -78,6 +97,7 @@ class HistorialViewController: UIViewController {
             ActivityIndicator.hide()
             refreshControl.endRefreshing()
             dataReceived = response!.data
+            self.notJobView.isHidden = dataReceived.count  > 0
             self.tableView.reloadData()
             
         }
@@ -107,27 +127,33 @@ class HistorialViewController: UIViewController {
 
 extension HistorialViewController {
     func fillDataClient(cell: JobTableView, val : GetJobResponse) -> JobTableView{
-        
-        /*else {
-            cell.userImage.sd_setImage(with: URL(string: val.user_image ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
-           
-        }*/
+    
        
         cell.jobName.text = val.job_name?.uppercased()
         
         if(val.vendor_name == nil){
-            cell.userName.text = "Nadie tomo el trabajo"
+            cell.userName.text = "Nadie tomo este trabajo"
+            cell.userImage.image = UIImage(named: "ic_user_not_found")
+            cell.verify.isHidden  = true
         } else {
-            cell.userName.text =  val.vendor_name
-            cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? "" ),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+            
+            if(selectedIndex == 0){
+                cell.userName.text =  val.vendor_name
+                cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? "" ),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+                cell.verify.isHidden = !(val.have_vendor_document ?? false)
+            } else {
+                cell.userName.text =  val.user_name
+                cell.userImage.sd_setImage(with: URL(string: val.user_image ?? "" ),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+                cell.verify.isHidden = !(val.have_document ?? false)
+            }
+            
+          
+            
         }
         
         cell.jobDate.text = val.job_date!
-
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
-        
        
-        cell.verify.isHidden = !val.have_document
   
         let formater = NumberFormatter()
         formater.groupingSeparator = "."
@@ -141,6 +167,13 @@ extension HistorialViewController {
             cell.jobPrice.text =  "$\(formattedNumber ?? "")"
         }
         
+        let status : String = val.status ?? ""
+        
+        cell.statusContainer.backgroundColor = status.statusColor()
+        cell.statusLabel.textColor = status.statusHightlightColor()
+        cell.statusLabel.text =  status.translanteStatus()
+       
+      
         cell.card.defaultShadow()
         
         return cell
@@ -149,7 +182,6 @@ extension HistorialViewController {
 
 extension HistorialViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
         return 152.0
     }
     

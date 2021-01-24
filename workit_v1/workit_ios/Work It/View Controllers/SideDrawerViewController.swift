@@ -22,15 +22,20 @@ class SideDrawerViewController: UIViewController {
     @IBOutlet weak var fakeHeader : UIImageView!
     @IBOutlet weak var userImageContainer : UIView!
     @IBOutlet weak var circleHeaderTop: NSLayoutConstraint!
+    @IBOutlet weak var verifyIcon : UIImageView!
     
     var arrayMenu: [MenuObject]?
     var isFirstTIme = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.verifyIcon.isHidden = true
+        
         self.populateTableView()
         setTransparentHeader()
         self.fakeHeader.alpha = 0.0
+        
         
         self.userImageContainer.defaultShadow()
         
@@ -54,6 +59,7 @@ class SideDrawerViewController: UIViewController {
         
         self.userImage.sd_setImage(with: URL(string: userInfo.profile_picture ?? ""), placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         self.userRating.rating = Double(userInfo.average_rating ?? "0")!
+        self.verifyIcon.isHidden = userInfo.background_document == nil || userInfo.background_document == ""
         
         arrayMenu = []
         
@@ -63,7 +69,7 @@ class SideDrawerViewController: UIViewController {
         
         self.userRating.isHidden = userInfo.type == "HIRE"
        
-        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Tus datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
+        arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_person_green"), name: "Mis datos", action: .open, data:["vc":"ProfileViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))
         
         if(userInfo.type == "WORK"){
             arrayMenu?.append(MenuObject(image: #imageLiteral(resourceName: "ic_menu_evaluation"), name: "Evaluaciones", action: .open, data:["vc":"EvaluationViewController", "storyboard":"Main"], cellType: "SideMenuTableViewCell"))

@@ -155,7 +155,15 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
 
     
     @IBAction func bidAction(_ sender: Any) {
-        if(userName.text!.isEmpty){
+        
+        let contactNumber = Singleton.shared.userInfo.contact_number!
+        
+        let contactNumberInt = Int(contactNumber) ?? -1
+ 
+        if(contactNumberInt == -1){
+            Singleton.shared.showToast(text: "Tú numero de telefono no es valido")
+            return
+        } else if(userName.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa tu nombre")
             return
         }else if(idNumber.text!.isEmpty){
@@ -179,7 +187,7 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
         let param: [String:Any] = [
             "user_id":Singleton.shared.userInfo.user_id!,
             "email":Singleton.shared.userInfo.email!,
-            "phone":Singleton.shared.userInfo.contact_number!,
+            "phone": contactNumber,
             "RUT": self.idNumber.text,
             "full_name":self.userName.text ?? "",
             "bank":self.bankName.text,
@@ -187,12 +195,14 @@ class AccountDetailViewController: UIViewController, SelectFromPicker {
             "account_number": card ?? "",
             "account_type": accountTypeId
             ]
+        
         SessionManager.shared.methodForApiCalling(url: U_BASE + U_POST_BANK_DETAIL, method: .post, parameter: param, objectClass: Response.self, requestCode: U_POST_BANK_DETAIL) { (response) in
             ActivityIndicator.hide()
             Singleton.shared.showToast(text: "Cuenta Agregada exitosamente")
             self.navigationController?.popViewController(animated: true)
             
         }
+      
     }
     
 }
@@ -227,7 +237,7 @@ extension AccountDetailViewController: UITextFieldDelegate{
                 return false
             }
             let newLength = currentCharacterCount + string.count - range.length
-            self.accountNumber.text = self.accountNumber.text?.applyPatternOnNumbers(pattern: "#### #### #### ####", replacmentCharacter: "#")
+        
             return newLength <= 19
         }
         return true

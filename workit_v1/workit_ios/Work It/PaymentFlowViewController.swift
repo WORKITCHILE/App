@@ -18,6 +18,8 @@ class PaymentFlowViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet var webView: WKWebView!
     public var amount = 0
+    public var vendor_id = "2"
+    public var marketplace = ""
     private var response : GetTransaction?
     
     var delegate : PaymentDelegate?
@@ -50,7 +52,13 @@ class PaymentFlowViewController: UIViewController, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.request.url?.host) != nil {
-            if(navigationAction.request.url?.absoluteString == "https://payment.workitapp.cl/urlreturn"){
+            
+            debugPrint("PAYENT", navigationAction.request.url!.absoluteString)
+            
+            let absUrl: String = navigationAction.request.url!.absoluteString 
+            let isResultUrl : Bool = absUrl.caseInsensitiveHasPrefix( "https://payment.workitapp.cl/urlreturn")
+            
+            if(isResultUrl){
                 if(delegate != nil){
                     self.navigationController?.popViewController(animated: true)
                     self.delegate?.paymentComplete(response: self.response)
@@ -69,7 +77,9 @@ class PaymentFlowViewController: UIViewController, WKNavigationDelegate {
         let params : [String : Any] = [
             "user_id" : Singleton.shared.userInfo.user_id ?? "" ,
             "email" : Singleton.shared.userInfo.email ?? "" ,
-            "amount" : amount
+            "amount" : amount,
+            "vendor_id": vendor_id,
+            "marketplace": marketplace
         ]
         
         let url = "\(U_BASE)\(U_POST_PAYMENT)"

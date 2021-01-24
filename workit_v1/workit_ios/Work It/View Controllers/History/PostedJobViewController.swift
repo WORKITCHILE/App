@@ -19,6 +19,7 @@ class PostedJobViewController: UIViewController {
     @IBOutlet weak var topHeight: NSLayoutConstraint!
     @IBOutlet weak var animationW: NSLayoutConstraint!
     @IBOutlet weak var animationH: NSLayoutConstraint!
+    @IBOutlet weak var header : UIView!
     
     
     var jobData = [GetJobResponse]()
@@ -49,6 +50,8 @@ class PostedJobViewController: UIViewController {
             self.topHeight.constant = 200
             self.animationW.constant = 210
             self.animationH.constant = 210
+            self.header.frame = CGRect(x: self.header.frame.origin.y, y: self.header.frame.origin.y, width: self.header.frame.size.width, height: 157.0)
+        
         } else if(self.view.frame.size.height == 736.0){
             self.topHeight.constant = 200
             self.animationW.constant = 230
@@ -60,14 +63,14 @@ class PostedJobViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animation?.play()
-        if(Singleton.shared.jobData.count == 0){
-            self.getJobData()
-        } else {
-            self.jobData = Singleton.shared.jobData
-            self.addJobStack.isHidden = false
-            self.noJobsFound.isHidden = true
-            self.jobTable.reloadData()
-        }
+        
+    }
+    
+    override func viewDidAppear(_ aniated: Bool){
+        super.viewDidAppear(true)
+        
+       
+        self.getJobData()
     }
 
         
@@ -80,8 +83,11 @@ class PostedJobViewController: UIViewController {
         ActivityIndicator.show(view: self.view)
         let url = "\(U_BASE)\(U_GET_OWNER_POSTED_JOBS)\(Singleton.shared.userInfo.user_id ?? "")"
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetJob.self, requestCode: U_GET_OWNER_POSTED_JOBS) { (response) in
-            self.jobData = response!.data
-            Singleton.shared.jobData = response!.data
+            
+            if(response != nil){
+                self.jobData = response!.data
+                Singleton.shared.jobData = response!.data
+            }
             self.noJobsFound.isHidden = self.jobData.count != 0
             self.addJobStack.isHidden = self.jobData.count == 0
            
@@ -109,11 +115,18 @@ extension PostedJobViewController: UITableViewDelegate,UITableViewDataSource {
         cell.category.text = val.category_name
         cell.editJob = {
            
-            let myVC = self.storyboard?.instantiateViewController(withIdentifier: "PostJobViewController") as! PostJobViewController
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let nav = storyboard.instantiateViewController(withIdentifier: "PostJobContainer") as! UINavigationController
+            let myVC = nav.viewControllers[0] as! PostJobViewController
+          
             myVC.jobDetail = self.jobData[self.selectedEditIntdex]
             myVC.isEditJob = true
+            nav.modalPresentationStyle = .fullScreen
             self.selectedEditIntdex = 0
-            self.present(myVC, animated: true, completion: nil)
+            
+            self.present(nav, animated: true, completion: nil)
+            
+       
             
         }
         
@@ -123,6 +136,7 @@ extension PostedJobViewController: UITableViewDelegate,UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" {
             let myVC = segue.destination as! JobDetailViewController
+      
             myVC.jobId = self.jobData[self.jobTable.indexPathForSelectedRow!.row].job_id
         }
     }
@@ -146,6 +160,10 @@ class JobTableView: UITableViewCell {
     @IBOutlet weak var userRating: CosmosView!
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var viewForEdit: View!
+    
+    @IBOutlet weak var statusLabel : UILabel!
+    @IBOutlet weak var statusContainer : UIView!
+    
     
     var editJob:(()-> Void)? = nil
     

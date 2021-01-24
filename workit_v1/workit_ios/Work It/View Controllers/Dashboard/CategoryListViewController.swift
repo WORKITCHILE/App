@@ -139,13 +139,13 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
        
         cell.jobName.text = val.job_name?.uppercased()
         
-        cell.userImage.sd_setImage(with: URL(string: val.vendor_image ?? Singleton.shared.userInfo.profile_picture ?? ""),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
+        cell.userImage.sd_setImage(with: URL(string: val.user_image!),placeholderImage: #imageLiteral(resourceName: "dummyProfile"))
         cell.userName.text =  val.user_name
     
         cell.jobDate.text = val.job_date
         cell.jobTime.text = self.convertTimestampToDate(val.job_time ?? 0, to: "h:mm a")
         cell.card.defaultShadow()
-        cell.verify.isHidden = !val.have_document
+        cell.verify.isHidden = !(val.have_document ?? false)
   
         
         let formater = NumberFormatter()

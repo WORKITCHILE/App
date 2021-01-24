@@ -136,7 +136,8 @@ struct GetJob: Codable {
 
 
 struct GetJobResponse: Codable{
-    var have_document: Bool = false
+    var have_document: Bool? = false
+    var have_vendor_document: Bool? = false
     var is_reposted:Int?
     var status: String?
     var owner_status: String?
@@ -156,8 +157,6 @@ struct GetJobResponse: Codable{
     var user_id: String?
     var user_occupation: String?
     var vendor_occupation: String?
-    var vendor_dob: Int?
-    var user_dob: Int?
     var job_description: String?
     var comment: String?
     var is_bid_placed: Int?
@@ -178,7 +177,7 @@ struct GetJobResponse: Codable{
     var job_address_longitude: Double?
     var job_address_latitude: Double?
     var category_name: String?
-    var counteroffer_amount: String?
+    var counteroffer_amount: Int?
     var job_date: String?
     var job_approach: String?
     var canceled_by: String?
@@ -232,6 +231,13 @@ struct GetSingleJob: Codable{
     var message: String?
     var status: Int?
 }
+
+struct GetSingleBid: Codable{
+    var data : BidResponse
+    var message: String?
+    var status: Int?
+}
+
 
 struct GetProfile: Codable {
     var data = UserInfo()
@@ -294,6 +300,7 @@ struct InboxResponse: Codable{
     var created_at: Int?
     var sender_type: String?
     var job_id: String?
+    var job_name : String?
     var receiver_image: String?
     var receiver: String?
     var sender_name: String?
@@ -339,20 +346,29 @@ struct GetTransaction: Codable {
     var status: Int?
 }
 
-struct GetTransactionResponse: Codable {
-    var credits: String?
-    var transactions: [TransactionDetail]?
-    
+struct GetHistorialPaymentResponse: Codable {
+    var data : GetTransactionResponse?
+    var message: String?
+    var status: Int?
 }
+
+struct GetTransactionResponse: Codable {
+    var transactions: [TransactionDetail]?
+}
+
+
 
 struct TransactionDetail: Codable{
     var user_name: String?
     var opposite_user: String?
+    var opposite_user_image: String?
+    var account_number: Int?
     var user_image: String?
     var transaction_type: String?
     var created_at: Int?
     var user_id: String?
     var job_id: String?
+    var updated_at: Int?
     var job_name: String?
     var payment_received = false
     var commission: String?
