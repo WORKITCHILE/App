@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17700" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jvQ-7X-anc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jvQ-7X-anc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -166,7 +166,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa con Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2o-ET-QmU">
-                                        <rect key="frame" x="40" y="12" width="308" height="21"/>
+                                        <rect key="frame" x="40" y="14" width="308" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="dark_gray"/>
                                         <nil key="highlightedColor"/>
@@ -216,7 +216,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa con Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xz-rw-IKX">
-                                        <rect key="frame" x="40" y="12" width="308" height="21"/>
+                                        <rect key="frame" x="40" y="14" width="308" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="dark_gray"/>
                                         <nil key="highlightedColor"/>
@@ -2509,7 +2509,7 @@
             <size key="intrinsicContentSize" width="32" height="42"/>
         </designable>
         <designable name="789-gU-HOi">
-            <size key="intrinsicContentSize" width="200.5" height="23"/>
+            <size key="intrinsicContentSize" width="178.5" height="19"/>
         </designable>
         <designable name="CwZ-r3-oUt">
             <size key="intrinsicContentSize" width="90" height="90"/>
@@ -2518,13 +2518,13 @@
             <size key="intrinsicContentSize" width="30" height="54"/>
         </designable>
         <designable name="FKo-ch-ePU">
-            <size key="intrinsicContentSize" width="188" height="22.5"/>
+            <size key="intrinsicContentSize" width="167" height="19"/>
         </designable>
         <designable name="Oa9-i5-Bow">
-            <size key="intrinsicContentSize" width="200.5" height="23"/>
+            <size key="intrinsicContentSize" width="178.5" height="19"/>
         </designable>
         <designable name="VJW-qU-jco">
-            <size key="intrinsicContentSize" width="200.5" height="23"/>
+            <size key="intrinsicContentSize" width="178.5" height="19"/>
         </designable>
         <designable name="b0F-Dg-zPt">
             <size key="intrinsicContentSize" width="90" height="90"/>

@@ -86,7 +86,7 @@ class WelcomeViewController: UIViewController {
     
     func getFacebookUserInfo(){
         let loginManager = LoginManager()
-        LoginManager().loginBehavior = .browser
+        //LoginManager().loginBehavior = .browser
         loginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")

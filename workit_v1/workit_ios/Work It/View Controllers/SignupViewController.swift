@@ -684,7 +684,7 @@ extension SignupViewController : FieldTableViewCellDelegate{
                 UInt(GMSPlaceField.placeID.rawValue) |
                 UInt(GMSPlaceField.coordinate.rawValue) |
                 GMSPlaceField.addressComponents.rawValue |
-                GMSPlaceField.formattedAddress.rawValue)!
+                                                        GMSPlaceField.formattedAddress.rawValue)
             autocompleteController.placeFields = fields
  
             let filter = GMSAutocompleteFilter()

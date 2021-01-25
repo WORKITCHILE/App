@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17700" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wVp-Va-pgh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wVp-Va-pgh">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -4711,6 +4711,9 @@
         <designable name="TuF-gX-JQv">
             <size key="intrinsicContentSize" width="319" height="50"/>
         </designable>
+        <designable name="UHT-cZ-hDE">
+            <size key="intrinsicContentSize" width="220" height="40"/>
+        </designable>
         <designable name="WCc-t8-XQg"/>
         <designable name="a5C-qP-MBy">
             <size key="intrinsicContentSize" width="90" height="90"/>
@@ -4756,6 +4759,9 @@
         </designable>
         <designable name="slQ-zE-66j">
             <size key="intrinsicContentSize" width="22.5" height="47"/>
+        </designable>
+        <designable name="tGy-AP-llO">
+            <size key="intrinsicContentSize" width="95" height="15"/>
         </designable>
         <designable name="vp2-U5-JkS">
             <size key="intrinsicContentSize" width="32" height="42"/>

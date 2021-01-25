@@ -40,7 +40,7 @@
 	<key>FacebookDisplayName</key>
 	<string>WORKIT</string>
 	<key>LSApplicationCategoryType</key>
-	<string>This app requires to get current location of user for getting the nearest jobs.</string>
+	<string>Necesitamos la localización para poder mostrarte los trabajos más cercanos</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -51,13 +51,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires to access gallery for picking user images and for documents uploading</string>
+	<string>Necesitamos acceso a tu camara para mejorar tu experiencia con Workit</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app requires to get current location of user for getting the nearest job.</string>
+	<string>Necesitamos la localización para poder mostrarte los trabajos más cercanos</string>
 	<key>NSLocationUsageDescription</key>
-	<string>This app requires to get current location of user for getting the nearest jobs.</string>
+	<string>Necesitamos la localización para poder mostrarte los trabajos más cercanos</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app requires to get current location of user for getting the nearest jobs.</string>
+	<string>Necesitamos la localización para poder mostrarte los trabajos más cercanos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Necesitamos acceso a tu rollo de fotos para mejorar tu experiencia con Workit</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoMono-Bold.ttf</string>
@@ -96,7 +98,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

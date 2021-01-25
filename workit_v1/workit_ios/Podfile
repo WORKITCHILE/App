@@ -8,28 +8,27 @@ target 'Work It' do
   # Pods for Work It
 
   pod "DigitInputView"
-  pod 'FloatingPanel'
+
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftyCodeView'
   pod 'Alamofire', '~> 4.9.1'
-  pod 'DLRadioButton', '~> 1.4'
+
   pod 'Toaster', :git => 'https://github.com/devxoul/Toaster.git', :branch => 'master'
-  pod 'LZViewPager', '~> 1.2.5'
+
   pod 'SDWebImage'
   pod 'AccountKit'
   pod 'lottie-ios'
-  pod 'PostalAddressRow'
+
   pod 'CHIPageControl', '~> 0.1.3'
   pod 'DateToolsSwift'
   pod 'SwiftPhotoGallery'
-  pod 'ImageRow'
-  pod 'Fabric'
-  pod 'Crashlytics'
+
+ 
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'Cosmos'
   pod 'GoogleSignIn'
-  pod 'FacebookSDK'
+
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
@@ -46,4 +45,12 @@ target 'Work It' do
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Analytics'
 
+  post_install do |installer|
+      installer.pods_project.targets.each do |target|
+          target.build_configurations.each do |config|
+              config.build_settings['DYLIB_COMPATIBILITY_VERSION'] = ''
+          end
+      end
+  end
+  
 end

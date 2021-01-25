@@ -276,7 +276,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
 }
 extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         UserDefaults.standard.set(fcmToken, forKey: UD_FCM_TOKEN)
     }
     

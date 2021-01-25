@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17700" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="039-er-vaR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="039-er-vaR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1608,11 +1608,12 @@
             <size key="intrinsicContentSize" width="103.5" height="20"/>
         </designable>
         <designable name="MtM-Hv-VUu">
-            <size key="intrinsicContentSize" width="86" height="24"/>
+            <size key="intrinsicContentSize" width="74" height="20"/>
         </designable>
         <designable name="QD4-zI-xNk">
             <size key="intrinsicContentSize" width="90" height="90"/>
         </designable>
+        <designable name="wED-Z5-aeS"/>
     </designables>
     <resources>
         <image name="blue_gradient" width="5" height="137"/>

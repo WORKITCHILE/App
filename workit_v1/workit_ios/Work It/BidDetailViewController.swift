@@ -74,6 +74,14 @@ class BidDetailViewController: UIViewController {
                 "title": "Republicar trabajo",
                 "action": "repostJob"
             ])
+         } else if(mode == "HIRE"){
+            if(jobData?.status == "CANCELED" && jobData?.canceled_by == "WORK") {
+                data.append([
+                    "type": "positiveButton",
+                    "title": "Republicar trabajo",
+                    "action": "repostJob"
+                ])
+            }
          }
         
         data.append([ "type": "statusCard" ])

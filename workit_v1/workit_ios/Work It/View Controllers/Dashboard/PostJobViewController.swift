@@ -57,6 +57,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
     var workerSelected : UserInfo?
     var placeHolder = "Descripción del trabajo"
+    var subcategoryNotFound = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,9 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         self.imageCollection.delegate = self
         self.imageCollection.dataSource = self
         
+        self.viewSubcategory.isHidden = true
+        self.viewSubcategoryTitle.isHidden = true
+        
         self.categoryData = Singleton.shared.getCategories
         self.jobDescription.delegate = self
         self.jobDescription.text = placeHolder
@@ -75,7 +79,11 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     
         if(isEditJob || self.isRepostJob){
             self.initialiseView()
+        } else {
+            intentRetrieveCategory()
         }
+        
+       
         
         self.buttonRemoveWorker.isHidden = true
         self.latitude =  -33.4909571
@@ -89,30 +97,21 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         self.charges.addTarget(self, action: #selector(myTextFieldDidChange), for: .editingChanged)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-          if(self.categoryData.count > 0){
-          
-              if(self.selectedCategory == nil){
-                
-                  self.selectedCategory = self.categoryData[0]
-                  self.getSubCategoryData(id: self.selectedCategory?.category_id ?? "")
-                  self.category.text = self.categoryData[0].category_name
-                  self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[0].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
-                 
-              }
-             
-             
-             
-          }
-    }
-  
-    
     @objc func myTextFieldDidChange(_ textField: UITextField) {
 
         if let amountString = textField.text?.currencyInputFormatting() {
             textField.text = amountString
+        }
+    }
+    
+    func intentRetrieveCategory(){
+        if(self.categoryData.count > 0){
+            if(self.selectedCategory == nil){
+                self.selectedCategory = self.categoryData[0]
+                self.getSubCategoryData(id: self.selectedCategory?.category_id ?? "")
+                self.category.text = self.categoryData[0].category_name
+                self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[0].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
+            }
         }
     }
     
@@ -122,34 +121,37 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         self.workName.text = self.jobDetail?.job_name
         self.workDate.text = self.jobDetail?.job_date
         self.workTime.text = self.convertTimestampToDate(self.jobDetail?.job_time ?? 0, to: "h:mm a")
-        //self.jobDetail?.job_time
         
         self.jobDetail!.images?.forEach{
             self.imageString.append($0)
         }
         
-     
         
-        CallAPIViewController.shared.getCategory { (category) in
+        CallAPIViewController.shared.getCategory { [self] (category) in
             self.categoryData = category
                 for val in self.categoryData {
                     if(self.isEditJob || self.isRepostJob){
                         if(val.category_name == self.jobDetail?.category_name){
                             self.selectedCategory = val
                             self.category.text = self.jobDetail?.category_name
-                            
+                            self.intentRetrieveCategory()
                         }
                     }
                 }
         }
         
         self.selectedSubcategory = GetSubcategoryResponse(subcategory_image: nil, category_id: nil, subcategory_name: self.jobDetail?.subcategory_name, subcategory_id: self.jobDetail?.subcategory_id)
+        
+        self.viewSubcategory.isHidden = false
+        self.viewSubcategoryTitle.isHidden = false
+        
         self.imageCollection.reloadData()
         self.jobDescription.text = self.jobDetail?.job_description
         self.address.text = self.jobDetail?.job_address
         self.jobDescription.textColor = .black
         self.jobApproach.text = self.jobDetail?.job_approach
         self.subCategory.text = self.jobDetail?.subcategory_name
+        
         self.latitude = CLLocationDegrees(exactly: self.jobDetail?.job_address_latitude ?? 0)!
         self.longitude = CLLocationDegrees(exactly:self.jobDetail?.job_address_longitude ?? 0)!
         self.selectedTime = self.jobDetail?.job_time ?? 0
@@ -162,13 +164,13 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         
         
         if(isEditJob){
-            self.postJobButton.titleLabel?.text = "Editar Trabajo"
-            self.postJobButton.setTitle("Editar Trabajo", for: .normal)
-            self.postJobButton.setTitle("Editar Trabajo", for: .highlighted)
+            self.postJobButton.titleLabel?.text = "EDITAR TRABAJO"
+            self.postJobButton.setTitle("EDITAR TRABAJO", for: .normal)
+            self.postJobButton.setTitle("EDITAR TRABAJO", for: .highlighted)
         } else if(isRepostJob){
-            self.postJobButton.titleLabel?.text = "Republicar Trabajo"
-            self.postJobButton.setTitle("Republicar Trabajo", for: .normal)
-            self.postJobButton.setTitle("Republicar Trabajo", for: .highlighted)
+            self.postJobButton.titleLabel?.text = "REPUBLICAR TRABAJO"
+            self.postJobButton.setTitle("REPUBLICAR TRABAJO", for: .normal)
+            self.postJobButton.setTitle("REPUBLICAR TRABAJO", for: .highlighted)
         }
     }
     
@@ -187,9 +189,13 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             if(self.subcategoryData.count > 0){
                 self.selectedSubcategory = self.subcategoryData[0]
                 self.subCategory.text = self.selectedSubcategory?.subcategory_name
+                self.subcategoryNotFound = false
             } else {
+                self.subcategoryNotFound = true
                 self.selectedSubcategory = nil
             }
+            
+            
             
             self.viewSubcategory.isHidden = !(self.subcategoryData.count > 0)
             self.viewSubcategoryTitle.isHidden = !(self.subcategoryData.count > 0)
@@ -202,6 +208,8 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         if(currentPicker == 3){
             self.category.text = name
             self.selectedCategory = self.categoryData[id]
+            self.selectedSubcategory = nil
+            subcategoryNotFound = false
             self.getSubCategoryData(id: self.selectedCategory?.category_id ?? "")
             self.categoryImage.sd_setImage(with: URL(string: (self.categoryData[id].category_image)!),placeholderImage: #imageLiteral(resourceName: "ic_category_work_blue"))
             
@@ -372,7 +380,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             UInt(GMSPlaceField.placeID.rawValue) |
             UInt(GMSPlaceField.coordinate.rawValue) |
             GMSPlaceField.addressComponents.rawValue |
-            GMSPlaceField.formattedAddress.rawValue)!
+                                                    GMSPlaceField.formattedAddress.rawValue)
         autocompleteController.placeFields = fields
         
         // Specify a filter.
@@ -425,7 +433,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
             Singleton.shared.showToast(text: "Selecciona el tipo de trabajo")
         }else if(self.category.text!.isEmpty){
             Singleton.shared.showToast(text: "Selecciona una categoria")
-        }else if(self.subCategory.text!.isEmpty){
+        }else if(self.selectedSubcategory == nil && !self.subcategoryNotFound){
             Singleton.shared.showToast(text: "Selecciona una subcategoria")
         }else if(self.workDate.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa la fecha del trabajo")
@@ -456,7 +464,7 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
                 "category_id": self.selectedCategory?.category_id ?? "",
                 "user_id":Singleton.shared.userInfo.user_id ?? "",
                 "user_image":"\(Singleton.shared.userInfo.profile_picture ?? "")",
-                "user_name": "\(Singleton.shared.userInfo.name ?? "") \(Singleton.shared.userInfo.father_last_name ?? "")" ?? "",
+                "user_name": "\(Singleton.shared.userInfo.name ?? "") \(Singleton.shared.userInfo.father_last_name ?? "")" ,
                 "job_address_latitude":self.latitude,
                 "job_address_longitude":self.longitude,
                 "job_name":self.workName.text ?? "",
