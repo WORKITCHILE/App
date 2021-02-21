@@ -53,7 +53,7 @@ class WorkerSearchViewController: UIViewController {
     func search(query : String){
         
       
-        let url = "\(U_BASE)\(U_SEARCH_WORKER)?query=\(query)"
+        let url = "\(U_BASE)\(U_SEARCH_WORKER)?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
         
         SessionManager.shared.methodForApiCalling(url: url, method: .get, parameter: nil, objectClass: GetWorkers.self, requestCode: U_POST_JOB) { (response) in
             
@@ -74,7 +74,13 @@ extension WorkerSearchViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String) {
         
-        self.search(query: searchText)
+        if(searchText.count > 0){
+            self.search(query: searchText)
+        } else {
+            workers = []
+            self.tableView.reloadData()
+        }
+       
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)

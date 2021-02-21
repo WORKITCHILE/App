@@ -228,44 +228,42 @@ class BecomeWorkerViewController: ImagePickerViewController, PickImage, SelectFr
         }
     
        ActivityIndicator.show(view: self.view)
-       let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
-      
+     
+        debugPrint("imagePath1 : ", self.imagePath1)
+        debugPrint("imagePath2 : ", self.imagePath2)
+        
+     
         
         var param : [String:Any] = [
-            "google_handle": self.googleId as Any,
-            "facebook_handle": self.facebookId as Any,
-            "fcm_token": fcmToken! as Any,
+            "user_id":    Singleton.shared.userInfo.user_id,
+            "google_handle": "",
+            "facebook_handle": "",
             "profile_picture": self.userProfilePicture,
             "type": "WORK",
             "id_image1": self.imagePath1,
             "id_image2": self.imagePath2,
-            "document_background": self.docuymentUrl
+            "background_document": self.docuymentUrl,
+            "work_images": self.images.filter{ $0 != "camera" }
        ]
         
+        let profileDescription = self.displayData[0]["value"] as! String
+        let idNumber = self.displayData[1]["value"] as! String
+        let occupation =  self.displayData[2]["value"] as! String
         
-       
-            let profileDescription = self.displayData[11]["value"] as! String
-            let idNumber = self.displayData[12]["value"] as! String
-            let occupation =  self.displayData[13]["value"] as! String
+        param["profile_description"] = profileDescription
+        param["occupation"] = occupation
+        param["id_number"] = idNumber
             
-            param["profile_description"] = profileDescription
-            param["occupation"] = occupation
-            param["id_number"] = idNumber
-            
-      
-     
-        
-
     
-       let url = "\(U_BASE)\(U_SIGN_UP)"
-       SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
+       let url = "\(U_BASE)\(U_COMPLETE_WORKER_INFORMATION)"
+       SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_COMPLETE_WORKER_INFORMATION) { (response) in
            
             ActivityIndicator.hide()
-            
+            self.navigationController?.popViewController(animated: true)
     
        }
 
-      
+   
         
     }
     
@@ -299,8 +297,13 @@ class BecomeWorkerViewController: ImagePickerViewController, PickImage, SelectFr
     }
     
     func showCaptureImage(img: UIImage) {
+        
+        ActivityIndicator.show(view: self.view)
+        
         let image_path = "\(NSDate().timeIntervalSince1970)_\(UUID().uuidString).png"
        
+        debugPrint("--> SHOW CAPTURE", self.currentImage)
+        
         if(currentImage == 0){
             self.image1 = img
         } else if(currentImage == 1){
@@ -311,11 +314,16 @@ class BecomeWorkerViewController: ImagePickerViewController, PickImage, SelectFr
         
         self.uplaodUserImage(imageName: image_path , image: img.pngData()!, type: 1) { [self] val in
            
+            ActivityIndicator.hide()
+            
             if(self.currentImage == 0){
                 self.imagePath1 = val
+                debugPrint("--> IMAGEPATH 1 : ", self.imagePath1)
             } else if(self.currentImage == 1){
                 self.imagePath2 = val
+                debugPrint("--> IMAGEPATH 2 : ", self.imagePath2)
             }
+            
             
         }
      
@@ -372,6 +380,8 @@ extension BecomeWorkerViewController : UITableViewDelegate, UITableViewDataSourc
         let cellType : String = field["cell"] as! String
         let security: Bool = field["security"] as! Bool
         
+      
+        
         if(!value.isEmpty){
             cell.borderEditable()
         }else {
@@ -386,6 +396,7 @@ extension BecomeWorkerViewController : UITableViewDelegate, UITableViewDataSourc
            
         } else if(cellType == "fieldDataBigText") {
             
+            cell.maxLength = (field["maxLength"] as! Int)
             
             if(value == ""){
                 cell.fieldTextView.text = (field["placeholder"] as! String)
@@ -476,6 +487,7 @@ extension BecomeWorkerViewController : FieldTableViewCellDelegate{
         } else if(indexCell.row == 4){
             
             self.currentImage = tagButton
+           
             let storyboard  = UIStoryboard(name: "signup", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "CaptureIdCardViewController") as! CaptureIdCardViewController
             myVC.captureDelegate = self

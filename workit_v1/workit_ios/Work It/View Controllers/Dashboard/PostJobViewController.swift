@@ -394,8 +394,10 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     }
     
     @IBAction func postJobAction(_ sender: Any) {
-        
-     
+        self.postJob()
+    }
+    
+    func postJob(){
         var today = Date()
         var currentDate = Date()
         
@@ -421,8 +423,6 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
            
         }
         
-      
-        
         if(self.workName.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa un nombre")
         }else if(self.jobDescription.text!.isEmpty){
@@ -444,6 +444,35 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         } else if(self.charges.text!.isEmpty){
             Singleton.shared.showToast(text: "Ingresa el precio del trabajo")
         } else {
+            
+            
+            let userInfo = Singleton.shared.userInfo
+            
+            if( userInfo.address == "" || userInfo.contact_number == ""){
+                
+                /* OPEN COMPLETE DATA CONTAINER*/
+                
+                let alert = UIAlertController(title: "Workit", message: "Debes completar algunos datos antes de publicar", preferredStyle: .alert)
+                          
+                alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in
+                    let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+                    let nav = storyboard.instantiateViewController(withIdentifier: "CompleteDataContainer") as! UINavigationController
+                    nav.modalPresentationStyle = .fullScreen
+                    let myVC = nav.viewControllers[0] as! CompleteInfoViewController
+                    myVC.delegate = self
+                    self.present(nav, animated: true, completion: nil)
+                      
+                })
+                 
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+                self.present(alert, animated: true)
+                
+               
+                
+                return
+            }
+            
             
             var url = String()
             
@@ -517,7 +546,6 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
         
          
         }
-        
     }
     
     func showPublishSuccessfull(){
@@ -550,6 +578,12 @@ class PostJobViewController: ImagePickerViewController, PickImage, SelectFromPic
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let wsVC = segue.destination as! WorkerSearchViewController
         wsVC.delegate = self
+    }
+}
+
+extension PostJobViewController: CompleteInfoDelegate {
+    func complete(){
+        self.postJob()
     }
 }
 

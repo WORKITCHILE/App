@@ -1613,7 +1613,6 @@
         <designable name="QD4-zI-xNk">
             <size key="intrinsicContentSize" width="90" height="90"/>
         </designable>
-        <designable name="wED-Z5-aeS"/>
     </designables>
     <resources>
         <image name="blue_gradient" width="5" height="137"/>

@@ -81,6 +81,8 @@
 		4FC6678025B24F3E00296F01 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6677F25B24F3E00296F01 /* Date+Utils.swift */; };
 		4FC6678325B30C4200296F01 /* historial.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FC6678225B30C4200296F01 /* historial.json */; };
 		4FC667CE25B34A2000296F01 /* MyBidsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC667CD25B34A2000296F01 /* MyBidsViewController.swift */; };
+		4FE6340525C5BD2A00D35D39 /* CompleteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6340425C5BD2900D35D39 /* CompleteInfoViewController.swift */; };
+		4FE6340725C5C00A00D35D39 /* user_complete_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FE6340625C5C00A00D35D39 /* user_complete_config.json */; };
 		4FFE071F24E09AC6007029A2 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE071E24E09AC6007029A2 /* MainTabViewController.swift */; };
 		4FFE072124E1C002007029A2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE072024E1C002007029A2 /* HomeViewController.swift */; };
 		6855F339F992D0C98F8CFAF8 /* Pods_Work_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35684CB5C3F91358AF8D48C1 /* Pods_Work_It.framework */; };
@@ -241,6 +243,8 @@
 		4FC6677F25B24F3E00296F01 /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		4FC6678225B30C4200296F01 /* historial.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = historial.json; sourceTree = "<group>"; };
 		4FC667CD25B34A2000296F01 /* MyBidsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBidsViewController.swift; sourceTree = "<group>"; };
+		4FE6340425C5BD2900D35D39 /* CompleteInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteInfoViewController.swift; sourceTree = "<group>"; };
+		4FE6340625C5C00A00D35D39 /* user_complete_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_complete_config.json; sourceTree = "<group>"; };
 		4FFE071E24E09AC6007029A2 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		4FFE072024E1C002007029A2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8117D98E13E794D95279F18C /* Pods-Work It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Work It.release.xcconfig"; path = "Target Support Files/Pods-Work It/Pods-Work It.release.xcconfig"; sourceTree = "<group>"; };
@@ -423,6 +427,7 @@
 				4FAEF3F025570981009CA225 /* user_profile_config.json */,
 				4FAEF4352558302C009CA225 /* user_signup_config.json */,
 				4F2F10FC25A923FA00D0CBD1 /* user_become_config.json */,
+				4FE6340625C5C00A00D35D39 /* user_complete_config.json */,
 			);
 			name = config;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				4F848C3725B1EF8300B9C9C7 /* ForgotPasswordViewController.swift */,
 				4FC667CD25B34A2000296F01 /* MyBidsViewController.swift */,
 				4F42DFE925B6693F002B9BC7 /* LoaderViewController.swift */,
+				4FE6340425C5BD2900D35D39 /* CompleteInfoViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -772,6 +778,7 @@
 				4F7A2A4325A2A61700A62EE3 /* work_start.json in Resources */,
 				4F2F10FD25A923FA00D0CBD1 /* user_become_config.json in Resources */,
 				4F0E7A1D251787A5002A5916 /* Poppins-BlackItalic.ttf in Resources */,
+				4FE6340725C5C00A00D35D39 /* user_complete_config.json in Resources */,
 				4F0E7A1E251787A5002A5916 /* Poppins-Bold.ttf in Resources */,
 				4F0E7A1F251787A5002A5916 /* Poppins-BoldItalic.ttf in Resources */,
 				4F0E7A20251787A5002A5916 /* Poppins-ExtraBold.ttf in Resources */,
@@ -939,6 +946,7 @@
 				D25BFAA723C051D100CBB4DE /* PostJobViewController.swift in Sources */,
 				D266D11A23BF35F90026FE3A /* LoginViewController.swift in Sources */,
 				D2D7694F23BE2CC2001485E1 /* Extensions.swift in Sources */,
+				4FE6340525C5BD2A00D35D39 /* CompleteInfoViewController.swift in Sources */,
 				4FFE071F24E09AC6007029A2 /* MainTabViewController.swift in Sources */,
 				D28BD95A23BF4A3E0012ADDC /* ResetPasswordViewController.swift in Sources */,
 				D2D7695023BE2CC2001485E1 /* Singleton.swift in Sources */,
@@ -1127,17 +1135,17 @@
 				CODE_SIGN_ENTITLEMENTS = "Work It/Work It.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8QR84N5G5A;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Work It/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = workit.workitapp;
@@ -1156,17 +1164,17 @@
 				CODE_SIGN_ENTITLEMENTS = "Work It/Work It.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8QR84N5G5A;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Work It/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = workit.workitapp;

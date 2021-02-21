@@ -120,7 +120,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         
         // 14, 13, 12, 11, 10, 8, 7, 6, 5, 3
     
-        if(notificationType == 15){
+        if(notificationType == 17){
+            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+            let myVC = storyboard.instantiateViewController(withIdentifier: "JobDetailViewController") as! JobDetailViewController
+            myVC.jobId = jobId
+            myVC.modeView = 1
+            self.navigationController?.pushViewController(myVC, animated: true)
+        } else if(notificationType == 15){
             let storyboard  = UIStoryboard(name: "Main", bundle: nil)
             let myVC = storyboard.instantiateViewController(withIdentifier: "EvaluationViewController")
             self.navigationController?.pushViewController(myVC, animated: true)

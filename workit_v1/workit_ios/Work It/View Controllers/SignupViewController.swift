@@ -27,6 +27,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     var categories: [String] = []
     var googleId: String?
     var facebookId: String?
+    var appleId: String?
     
     var fName = ""
     var lName = ""
@@ -51,7 +52,7 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     private var locality = ""
     
     var images = ["camera"]
-
+    var uploadingImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -275,10 +276,10 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             Singleton.shared.showToast(text: "Ingresa un correo valido")
             return false
         } else if(mobileNumber.isEmpty){
-            Singleton.shared.showToast(text: "Ingresa un numero de telefono")
+            Singleton.shared.showToast(text: "Ingresa un número de teléfono")
             return false
-        } else if(mobileNumber.count < 10){
-            Singleton.shared.showToast(text: "Ingresa un numero de telefono valido")
+        } else if(mobileNumber.isValidPhone()){
+            Singleton.shared.showToast(text: "Ingresa un número de teléfono válido")
             return false
         } else if(address.isEmpty){
             Singleton.shared.showToast(text: "Ingresa una dirección")
@@ -327,8 +328,6 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     @IBAction func continueAction(_ sender: Any) {
         
         
-      
-        
        let isWorker = self.segmentControl.selectedSegmentIndex == 1
        let isValidClientData = validateClientData()
       
@@ -362,15 +361,16 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         let address = self.displayData[3]["value"] as! String
         let addressNumber = self.displayData[4]["value"] as! String
         let addressReference = self.displayData[5]["value"] as! String
-        let mobileNumber = self.displayData[6]["value"] as! String
+        let mobileNumber = "+56\(self.displayData[6]["value"] as! String)"
         let email = self.displayData[7]["value"] as! String
         let password = self.displayData[8]["value"] as! String
         let nationality = self.displayData[10]["value"] as! String
     
-        
+
         var param : [String:Any] = [
             "google_handle": self.googleId as Any,
             "facebook_handle": self.facebookId as Any,
+            "apple_handle": self.facebookId as Any,
             "fcm_token": fcmToken! as Any,
             "profile_picture": self.userProfilePicture,
             "email":email,
@@ -386,7 +386,9 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             "id_image2": self.imagePath2,
             "address_reference":addressReference,
             "address_number" : addressNumber,
-            "document_background": self.docuymentUrl
+            "background_document": self.docuymentUrl,
+            "work_images": self.images.filter{ $0 != "camera" }
+            
        ]
         
         
@@ -401,8 +403,6 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             
         }
      
-        
-    
     
        let url = "\(U_BASE)\(U_SIGN_UP)"
        SessionManager.shared.methodForApiCalling(url: url, method: .post, parameter: param, objectClass: Response.self, requestCode: U_SIGN_UP) { (response) in
@@ -452,7 +452,6 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
             if($0.type == "locality"){
                 self.locality = $0.name
             }
-           
         }
         
         self.displayData[3]["value"] = "\(place.formattedAddress ?? "")"
@@ -476,6 +475,11 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
     }
     
     func showCaptureImage(img: UIImage) {
+        
+        ActivityIndicator.show(view: self.view)
+        
+        self.uploadingImage = true
+        
         let image_path = "\(NSDate().timeIntervalSince1970)_\(UUID().uuidString).png"
        
         if(currentImage == 0){
@@ -487,12 +491,23 @@ class SignupViewController: ImagePickerViewController, PickImage, SelectFromPick
         self.tableList.reloadData()
         
         self.uplaodUserImage(imageName: image_path , image: img.pngData()!, type: 1) { [self] val in
-           
+            
+            self.uploadingImage = false
+            
             if(self.currentImage == 0){
                 self.imagePath1 = val
+                debugPrint("IMAGE PATH 1", self.imagePath1)
             } else if(self.currentImage == 1){
                 self.imagePath2 = val
+                debugPrint("IMAGE PATH 2", self.imagePath2)
             }
+            
+            DispatchQueue.main.async {
+                ActivityIndicator.hide()
+            }
+            
+           
+            
             
         }
      
@@ -545,8 +560,6 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
             cell.iconImage.image = UIImage(named: (field["icon"] as! String))
         }
         
-     
-        
         let value : String = field["value"] as! String
         let cellType : String = field["cell"] as! String
         let security: Bool = field["security"] as! Bool
@@ -557,7 +570,7 @@ extension SignupViewController : UITableViewDelegate, UITableViewDataSource, UIS
             cell.borderNotEditable()
         }
         
-        if(cellType == "fieldData" || cellType == "fieldDataButton" || cellType == "fieldDataWithoutIcon"){
+        if(cellType == "fieldData" || cellType == "fieldDataButton" || cellType == "fieldDataWithoutIcon" || cellType == "fieldDataWithPrefix"){
             
             cell.fieldTextField.placeholder = (field["placeholder"] as! String)
             cell.fieldTextField.text = value
@@ -661,6 +674,10 @@ extension SignupViewController : FieldTableViewCellDelegate{
             self.navigationController?.present(myVC, animated: false, completion: nil)
             
         } else if(indexCell.row == 15){
+            
+            if(self.uploadingImage){
+                return
+            }
             
             self.currentImage = tagButton
             let storyboard  = UIStoryboard(name: "signup", bundle: nil)

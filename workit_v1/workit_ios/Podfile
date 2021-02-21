@@ -16,20 +16,18 @@ target 'Work It' do
   pod 'Toaster', :git => 'https://github.com/devxoul/Toaster.git', :branch => 'master'
 
   pod 'SDWebImage'
-  pod 'AccountKit'
   pod 'lottie-ios'
 
   pod 'CHIPageControl', '~> 0.1.3'
   pod 'DateToolsSwift'
   pod 'SwiftPhotoGallery'
 
- 
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'Cosmos'
-  pod 'GoogleSignIn'
+  pod 'GoogleSignIn', '5.0.0'
 
-  pod 'FBSDKCoreKit'
+  pod 'FBSDKCoreKit', '9.0.0'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
   pod 'FirebaseUI'

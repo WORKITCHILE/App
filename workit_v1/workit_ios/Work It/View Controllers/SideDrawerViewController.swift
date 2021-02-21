@@ -32,7 +32,7 @@ class SideDrawerViewController: UIViewController {
         
         self.verifyIcon.isHidden = true
         
-        self.populateTableView()
+       
         setTransparentHeader()
         self.fakeHeader.alpha = 0.0
         
@@ -47,6 +47,18 @@ class SideDrawerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTransparentHeader()
+        self.getProfileData()
+    }
+    
+    func getProfileData(){
+        ActivityIndicator.show(view: self.view)
+        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_PROFILE + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
+            
+            Singleton.shared.userInfo = response!.data!
+            Singleton.saveUserInfo(data:Singleton.shared.userInfo)
+            self.populateTableView()
+            ActivityIndicator.hide()
+        }
     }
     
     func populateTableView(){
@@ -91,7 +103,7 @@ class SideDrawerViewController: UIViewController {
     }
     
     @objc func shareAction(){
-        let urlStr = NSURL(string: "https://itunes.apple.com/us/app/myapp/id1502685083?ls=1&mt=8")
+        let urlStr = NSURL(string: "http://workitapp.cl/")
         let objectsToShare = [urlStr]
         let activityVC = UIActivityViewController(activityItems: objectsToShare as [Any], applicationActivities: nil)
         activityVC.modalPresentationStyle = .overFullScreen
@@ -176,6 +188,37 @@ extension SideDrawerViewController: UITableViewDelegate {
         
         switch arrayMenu?[indexPath.row].action {
             case .open:
+                
+                /* VALIDATION */
+                
+                if( data!["vc"]! == "BecomeWorkerViewController"){
+                    let userInfo = Singleton.shared.userInfo
+                    
+                    if( userInfo.address == "" || userInfo.contact_number == ""){
+                        
+                        /* OPEN COMPLETE DATA CONTAINER*/
+                        
+                        let alert = UIAlertController(title: "Workit", message: "Debes completar algunos datos antes de convertirte en Worker", preferredStyle: .alert)
+                                  
+                        alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in
+                            let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+                            let nav = storyboard.instantiateViewController(withIdentifier: "CompleteDataContainer") as! UINavigationController
+                            nav.modalPresentationStyle = .fullScreen
+                            self.present(nav, animated: true, completion: nil)
+                              
+                        })
+                         
+                        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+                        self.present(alert, animated: true)
+                        
+                       
+                        
+                        return
+                    }
+                }
+               
+                /* ----- */
                 let storyboard  = UIStoryboard(name: data!["storyboard"]!, bundle: nil)
                 let myVC = storyboard.instantiateViewController(withIdentifier: data!["vc"]!)
                 self.navigationController?.pushViewController(myVC, animated: true)

@@ -53,7 +53,7 @@ extension UIViewController {
     }
     
     func uplaodUserImage(imageName: String,image: Data, type: Int,completionHandler: @escaping (String) -> Void) {
-        ActivityIndicator.show(view: self.view)
+       
         var storeImg = StorageReference()
         let lastPathComponent = "\(Int(Date().timeIntervalSince1970))"
         if(type == 1){
@@ -69,7 +69,7 @@ extension UIViewController {
         storeImg.putData(image, metadata:StorageMetadata(dictionary: ["contentType": "image/png"])) { (snapshot, error) in
           
              storeImg.downloadURL(completion: { (url, error) in
-                ActivityIndicator.hide()
+               
                 
                 guard let downloadURL = url else {
                     return

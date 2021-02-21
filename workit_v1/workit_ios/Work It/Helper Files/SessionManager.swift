@@ -19,15 +19,20 @@ class SessionManager: NSObject {
      
         Alamofire.request(url, method: method, parameters: parameter, encoding: JSONEncoding.default, headers: getHeader(reqCode: requestCode)).responseString { dataResponse in
             
-            debugPrint("DATA RESPONSE", dataResponse)
-       
+           
+           
             let statusCode = dataResponse.response?.statusCode
+            
+          
             
             switch dataResponse.result {
                 case .success(_):
                     let object = self.convertDataToObject(response: dataResponse.data, T.self)
                     let errorObject = self.convertDataToObject(response: dataResponse.data, Response.self)
                    
+                    
+                    debugPrint("ERROR OBJECT", errorObject)
+                    
                     if (statusCode == 200 || statusCode == 201) && object != nil {
                         completionHandler(object!)
                     } else if(statusCode == 401 && requestCode == U_CHANGE_USER_ROLE){
@@ -45,7 +50,7 @@ class SessionManager: NSObject {
                     }
                     break
                 case .failure(_):
-                   
+                    
                     let error = dataResponse.error?.localizedDescription
                     self.showAlert(msg: error)
                     break
@@ -62,7 +67,7 @@ class SessionManager: NSObject {
                 topController = presentedViewController
             }
 
-            topController.showAlert(title: "WorkIt", message: msg, action1Name: "Ok", action2Name: nil)
+            topController.showAlert(title: "WorkIt", message: (msg == "") ? "Ha Ocurrido un error, inténtalo más tarde" : msg, action1Name: "Ok", action2Name: nil)
           
         }
     

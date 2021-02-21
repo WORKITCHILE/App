@@ -172,17 +172,26 @@ class JobDetailViewController: UIViewController{
             }
             
            
+            let jobDate = Date(timeIntervalSince1970: TimeInterval((jobData?.job_time)!)).formatWithZoneTime()
+            let now = Date().formatWithZoneTime()
+            
             
             if(self.modeView == 1){
                 self.jobDataProperties.append(["title": "Localización del trabajo", "type":"mapField"])
-                self.jobDataProperties.append(["title": "ContraOferta", "type":"counterOfferField"])
+                if(now <= jobDate){
+                    self.jobDataProperties.append(["title": "ContraOferta", "type":"counterOfferField"])
+                }
             }
             
             if(self.jobData?.user_id == Singleton.shared.userInfo.user_id){
                 self.jobDataProperties.append(["title": "Cancelar", "type":"ButtonField"])
             } else {
                 
-                if((self.jobData?.user_id == Singleton.shared.userInfo.user_id || self.jobData?.is_bid_placed == 1) == false){
+               
+               
+                
+            
+                if(now <= jobDate && (self.jobData?.user_id == Singleton.shared.userInfo.user_id || self.jobData?.is_bid_placed == 1) == false){
                     self.jobDataProperties.append(["title": "Ofertar", "type":"ButtonField"])
                 }
                 
@@ -296,6 +305,7 @@ class JobDetailViewController: UIViewController{
     
      func postBidAction(){
         let userInfo = Singleton.shared.userInfo
+        
         if(userInfo.type == "HIRE"){
             isWorkerValidation()
             return
@@ -329,6 +339,32 @@ class JobDetailViewController: UIViewController{
     }
     
     func isWorkerValidation(){
+        
+        let userInfo = Singleton.shared.userInfo
+        
+        if( userInfo.address == "" || userInfo.contact_number == ""){
+            
+            /* OPEN COMPLETE DATA CONTAINER*/
+            
+            let alert = UIAlertController(title: "Workit", message: "Debes completar algunos datos antes de convertirte en Worker", preferredStyle: .alert)
+                      
+            alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in
+                let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+                let nav = storyboard.instantiateViewController(withIdentifier: "CompleteDataContainer") as! UINavigationController
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+                  
+            })
+             
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+            
+           
+            
+            return
+        }
+        
         let alert = UIAlertController(title: "Workit", message: "Aún no has completado tu perfil worker, ¿quieres hacerlo ahora?", preferredStyle: .alert)
                   
            alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in

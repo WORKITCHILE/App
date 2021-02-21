@@ -53,12 +53,38 @@ class HomeViewController: UIViewController {
             self.topHeight.constant = 30
         } 
         
-      
+        let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
+        
+        
+        let filteredToken = userInfo.fcm_token.filter{ $0 == fcmToken }
+        
+        if(filteredToken.count == 0){
+            sendFcmToken(userId: userInfo.user_id!)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTransparentHeader()
+        
+       
+       
+    }
+    
+    
+    func sendFcmToken(userId: String){
+        DispatchQueue.global(qos: .background).async {
+            let fcmToken = UserDefaults.standard.value(forKey: UD_FCM_TOKEN) as? String
+            let param: [String:Any] = [
+                "user_id": userId,
+                "fcm_token": fcmToken
+                ]
+            
+            SessionManager.shared.methodForApiCalling(url: U_BASE + U_ADD_FCM_TOKEN, method: .post, parameter: param, objectClass: Response.self, requestCode: U_ADD_FCM_TOKEN) { (response) in
+                
+            }
+        }
     }
     
     private func styleSelectButtonClient(button : UIButton, label: UILabel, icon: String){

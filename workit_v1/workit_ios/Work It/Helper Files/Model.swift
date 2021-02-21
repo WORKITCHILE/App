@@ -64,6 +64,7 @@ struct UserInfo: Codable {
     var user_id: String?
     var background_document: String?
     var work_images : [String] = []
+    var fcm_token : [String] = []
     var marketplace : String?
 }
 

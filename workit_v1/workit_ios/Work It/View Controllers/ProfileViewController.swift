@@ -68,11 +68,11 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
               
             }
         }
+        
         self.setNavigationBar()
         self.tableList.delegate = self
         self.tableList.dataSource = self
         self.tableList.separatorColor = UIColor.clear
-        
 
         self.userName.text = "\(userInfo.name!) \(userInfo.father_last_name!)"
         self.userProfilePicture = userInfo.profile_picture ?? ""
@@ -156,12 +156,19 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
         userData[5]["value"] = self.profileData.mother_last_name
         userData[6]["value"] = self.profileData.contact_number
         userData[7]["value"] = self.profileData.nationality
+        
+        if(self.profileData.nationality == ""){
+            userData[7]["editable"] = true
+        }
+        
         userData[8]["value"] = self.profileData.address
         userData[9]["value"] = self.profileData.address_number
         userData[10]["value"] = self.profileData.address_reference
         userData[11]["value"] =  self.profileData.occupation
         userData[12]["value"] =  self.profileData.profile_description
         userData[13]["value"] =  self.profileData.background_document
+        
+      
         self.docuymentUrl = self.profileData.background_document ?? ""
       
         displayData = userData.filter({
@@ -173,6 +180,7 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
         self.tableList.reloadData()
 
     }
+    
     
     func uploadImage(){
         let alert = UIAlertController(title: "Eliger una imagen desde", message: nil, preferredStyle: .actionSheet)
@@ -199,6 +207,7 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
         
       
         let contactNumber = self.displayData[isWorker ? 6 : 5]["value"] as! String
+        let country = self.displayData[isWorker ? 7 : 6]["value"] as! String
         let address = self.displayData[isWorker ? 8 : 7]["value"] as! String
         let addressNumber = self.displayData[isWorker ? 9 : 8]["value"] as! String
         let addressReference = self.displayData[isWorker ? 10 : 9]["value"] as! String
@@ -214,7 +223,8 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
             "profile_picture": self.userProfilePicture,
             "work_images": self.images.filter{ $0 != "camera" },
             "background_document": self.docuymentUrl,
-            "profile_description": ""
+            "profile_description": "",
+            "country": country
         ]
         
         if(isWorker){
@@ -223,9 +233,7 @@ class ProfileViewController: ImagePickerViewController, PickImage, SelectFromPic
             param["occupation"] = occupation
             param["profile_description"] = profileDescription
         }
-        
-        debugPrint("PARAMS", param)
-    
+      
         
         let url = "\(U_BASE)\(U_EDIT_PROFILE)"
         
@@ -437,6 +445,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         if(cell.iconImage != nil){
             cell.iconImage.image = UIImage(named: (field["icon"] as! String))
         }
+        
+        debugPrint("--> ", indexPath.row)
+        
         
         let value : String = field["value"] as! String
         let cellType : String = field["cell"] as! String

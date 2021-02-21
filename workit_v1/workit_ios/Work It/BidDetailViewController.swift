@@ -54,12 +54,17 @@ class BidDetailViewController: UIViewController {
             self.setNavigationBar()
         }
         
+        
+        debugPrint("MODE", mode)
+        
     }
 
     
     func renderJobData(){
         
         data = []
+        
+        debugPrint("RENDER JOB DATA", jobData?.status)
         
         if(!(jobData?.vendor_image == nil && bidData == nil)){
             data.append([ "type": "userRanking" ])
@@ -320,7 +325,8 @@ class BidDetailViewController: UIViewController {
             }
               
         } else if(jobData?.status == "CLOSED") {
-            
+            animation.animation = Animation.named("work_cancel")
+            statusLabel.text = "Trabajo Cancelado"
         } else if(jobData?.status == "ACCEPTED") {
             animation.animation = Animation.named("work_accepted")
             statusLabel.text = "Trabajo aceptado"
@@ -464,7 +470,8 @@ class BidDetailViewController: UIViewController {
           
             
         } else if(jobData?.status == "CLOSED") {
-            
+            animation!.animation = Animation.named("work_cancel")
+            statusLabel.text = "Trabajo Cancelado"
         } else if(jobData?.status == "ACCEPTED") {
             animation!.animation = Animation.named("work_accepted")
             statusLabel.text = "Trabajo aceptado"

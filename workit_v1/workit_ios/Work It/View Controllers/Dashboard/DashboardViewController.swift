@@ -46,16 +46,7 @@ class DashboardViewController: UIViewController {
         
         self.becomeWorkerButton.defaultShadow()
         
-        /*
-        self.collectionView.collectionViewLayout = {
-           let flowLayout = UICollectionViewFlowLayout()
-           flowLayout.scrollDirection = .horizontal
-           return flowLayout
-        }()
-        
-        self.collectionView.layoutIfNeeded()
-        */
-    
+
         if(Singleton.shared.getCategories.count == 0){
            
             CallAPIViewController.shared.getCategory(completionHandler: { response in
@@ -86,6 +77,18 @@ class DashboardViewController: UIViewController {
         
         resizeHeader()
         getMeJobs()
+        getProfileData()
+    }
+    
+    func getProfileData(){
+       
+        SessionManager.shared.methodForApiCalling(url: U_BASE + U_GET_PROFILE + (Singleton.shared.userInfo.user_id ?? ""), method: .get, parameter: nil, objectClass: LoginResponse.self, requestCode: U_GET_PROFILE) { (response) in
+            
+            Singleton.shared.userInfo = response!.data!
+            Singleton.saveUserInfo(data:Singleton.shared.userInfo)
+          
+            self.resizeHeader()
+        }
     }
     
     func getMeJobs(){
@@ -158,6 +161,32 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func becommeWorkerAction(_ sender : AnyObject){
+        
+        let userInfo = Singleton.shared.userInfo
+        
+        if( userInfo.address == "" || userInfo.contact_number == ""){
+            
+            /* OPEN COMPLETE DATA CONTAINER*/
+            
+            let alert = UIAlertController(title: "Workit", message: "Debes completar algunos datos antes de convertirte en Worker", preferredStyle: .alert)
+                      
+            alert.addAction(UIAlertAction(title: "Si", style: .default){ _ in
+                let storyboard  = UIStoryboard(name: "Home", bundle: nil)
+                let nav = storyboard.instantiateViewController(withIdentifier: "CompleteDataContainer") as! UINavigationController
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+                  
+            })
+             
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+            
+           
+            
+            return
+        }
+        
         let storyboard  = UIStoryboard(name: "signup", bundle: nil)
         let myVC = storyboard.instantiateViewController(withIdentifier:"BecomeWorkerViewController")
         self.navigationController?.pushViewController(myVC, animated: true)

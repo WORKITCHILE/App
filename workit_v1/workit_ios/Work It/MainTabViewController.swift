@@ -31,15 +31,17 @@ class MainTabViewController: UITabBarController {
         
         var menuButtonFrame = menuButton.frame
         menuButtonFrame.origin.x = view.bounds.width/2 - menuButtonFrame.size.width/2
-        
-        
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
-            menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 10 - bottomPadding!
+      
+    
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows[0]
+            let bottomPadding = window.safeAreaInsets.bottom
+            menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 10 - bottomPadding
         } else {
             menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 10
         }
+       
+       
         
         self.menuButton.frame = menuButtonFrame
 

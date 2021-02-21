@@ -1,0 +1,53 @@
+{
+    "data":[
+       
+       
+        {
+            "placeholder":"Número de telefono",
+            "workerField":false,
+            "icon":"ic_signup_phone",
+            "value":"",
+            "cell":"fieldDataWithPrefix",
+            "field":"phone",
+            "editable":true
+        },
+        {
+            "placeholder":"Nacionalidad",
+            "workerField":false,
+            "icon":"ic_signup_flag",
+            "value":"",
+            "cell":"fieldData",
+            "field":"nacitionality",
+            "editable":false
+        },
+        {
+            "placeholder":"Dirección",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldDataButton",
+            "field":"address",
+            "editable":true
+        },
+        {
+            "placeholder":"Nº de casa / Departamento (Opcional)",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldDataWithoutIcon",
+            "field":"address_number",
+            "editable":true
+        },
+        {
+            "placeholder":"Referencia (Opcional)",
+            "workerField":false,
+            "icon":"ic_signup_location",
+            "value":"",
+            "cell":"fieldDataWithoutIcon",
+            "field":"address_reference",
+            "editable":true
+        }
+        
+    ]
+}
+
